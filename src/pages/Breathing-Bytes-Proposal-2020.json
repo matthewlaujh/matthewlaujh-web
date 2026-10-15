@@ -1,0 +1,87 @@
+{
+ "id": 24906369,
+ "slug": "Breathing-Bytes-Proposal-2020",
+ "title": "Breathing Bytes Proposal (2020)",
+ "title_no_html": "Breathing Bytes Proposal (2020)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Completed as part of a group project with Goh Sing Hong and Nadia Natasha as part of the BA in Design Communication level 2...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\" class=\"\"><br>\n<br>\n</div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed as part of a group project with <a href=\"https://singhong.cargo.site/\">Goh Sing Hong</a> and <a href=\"https://www.matthewlaujh.com/nedien.myportfolio.com\">Nadia Natasha</a> as part of the BA in Design Communication level 2 programme at LASALLE.<br>—<br>\n<br>\n<i>Breathing Bytes (2020)</i> is a modular, adaptable and interactive installation proposal created in response to <a href=\"https://www.thersa.org/student-design-awards\">RSA Student Design Awards</a> 2020-21 - Brief 04 The Right To Breathe.\n\n\n\t\n\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t<br>\n<br>\nProblem:\n  <br>One of the overlooked causes of air pollution is the use of non-renewable energysources that power data centres required for data storage. Our online consumptionhabits have led to an excessive increase in our carbon footprint.<br>\n\n\t\t\t\t\t<br>\nProcess:\n  <br>From our research, we found that more data centres are being built to accommodateour increasing rate of data consumption, with more than half of them being poweredby pollutant causing, non-renewable sources of energy. To better understand theonline consumption habits of people between the ages of 18-30, we leveraged ourtarget audience’s innate social media habits and conducted a survey on social media,receiving 332 responses.<br>\n\n\t\t\t\t\t<br>\nProposal:\n  <br>Aiming to instil a more mindful lifestyle through a playful experience. Breathing Bytes is a modular and adaptable installation proposed to raise awareness of ouronline consumption habits, due to the negative impact it has on our air quality, by addressing the issues through the collective action of citizens.<br>\n\n\t\t\t\t\n\t\t\t\n\t\t\n\t\n—\n\n\t\t\t\t\n\t\t\t\n\t\t\t\n\t\t\n\t\n\n</h1>\n<br>\n</div>\n</div>",
+ "local_css": "[local-style=\"24906369\"] .container_width {\n}\n\n[local-style=\"24906369\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24906369\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24906369\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24906369\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24906369\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906369\"] small a:hover {\n}\n\n[local-style=\"24906369\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 70,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 2.5,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "137631886",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 137633459,
+   "src": "/img/41fb180f-breathingBytes-1.jpg",
+   "name": "breathingBytes-1.jpg",
+   "width": 2380,
+   "height": 1684,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137633462,
+   "src": "/img/8fb4c242-breathingBytes-2.jpg",
+   "name": "breathingBytes-2.jpg",
+   "width": 2380,
+   "height": 1684,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137633463,
+   "src": "/img/7084ce21-breathingBytes-3.jpg",
+   "name": "breathingBytes-3.jpg",
+   "width": 2380,
+   "height": 1684,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137633465,
+   "src": "/img/9e7b8c83-breathingBytes-4.jpg",
+   "name": "breathingBytes-4.jpg",
+   "width": 2380,
+   "height": 1684,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137633466,
+   "src": "/img/7a7f46f0-breathingBytes-5.jpg",
+   "name": "breathingBytes-5.jpg",
+   "width": 2380,
+   "height": 1684,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137633467,
+   "src": "/img/fd145173-breathingBytes-6.jpg",
+   "name": "breathingBytes-6.jpg",
+   "width": 2380,
+   "height": 1684,
+   "exclude_from_backdrop": false
+  }
+ ]
+}

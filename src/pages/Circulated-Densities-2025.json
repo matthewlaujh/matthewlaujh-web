@@ -1,0 +1,71 @@
+{
+ "id": 37858516,
+ "slug": "Circulated-Densities-2025",
+ "title": "Circulated Densities (2025)",
+ "title_no_html": "Circulated Densities (2025)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Exhibited at ‘ Singapore – A Design Thesis in the Making’ at the Gallery 1, Institute of Contemporary Art Singapore ( 12 Sep –...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><br><br><br>\n<br>\n<br>\n</div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\">\n<br>\n</div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><br><br><br>\n</div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><h1>Exhibited at ‘ <b>Singapore – A Design Thesis in the Making</b>’ at the Gallery 1, Institute of Contemporary Art Singapore ( 12 Sep – 28 Oct 2025)\n<br>—<br>\n<br>\n<i>Circulated Densities (2025)</i> responsive circuit topology visualizing the city's mobility infrastructure through real-time data. A Printed Circuit Board materializes Singapore's systematic approach to urban density management, where algorithmic planning orchestrates human circulation. This living diagram interrogates how designed systems mediate between individual agency and collective movement in hyper-dense urban space.\n\n\n\n\n\n\n\n\n\n\n<br>\n<br>\nDrawing from Singapore's moniker as \"The Little Red Dot,\" the piece takes the form of a circle — an abstracted visualization of the city's shape while remaining rooted in urban planning masterplans with LEDs illuminating each of the 332 subzones. The intensity of light represents the density of each area at a given time through representative data collected from public transit and carpark availability open data sources.</h1><h1>—</h1>\n<br>\n</div>\n</div>",
+ "local_css": "[local-style=\"37858516\"] .container_width {\n}\n\n[local-style=\"37858516\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"37858516\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"37858516\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"37858516\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"37858516\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37858516\"] small a:hover {\n}\n\n[local-style=\"37858516\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 10,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "238731242",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 238786535,
+   "src": "/img/ea1d5ae9-IMG_0144.JPG",
+   "name": "IMG_0144.JPG",
+   "width": 5711,
+   "height": 3807,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 238731242,
+   "src": "/img/f19dbcc5-Sep-27-2025-18-45-39.gif",
+   "name": "Sep-27-2025-18-45-39.gif",
+   "width": 640,
+   "height": 422,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 238786540,
+   "src": "/img/ec72dd52-IMG_0057.JPG",
+   "name": "IMG_0057.JPG",
+   "width": 4030,
+   "height": 2687,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 238786539,
+   "src": "/img/50d75dc4-IMG_0069.JPG",
+   "name": "IMG_0069.JPG",
+   "width": 4026,
+   "height": 2684,
+   "exclude_from_backdrop": false
+  }
+ ]
+}

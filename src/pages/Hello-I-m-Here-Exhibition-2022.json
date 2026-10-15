@@ -1,0 +1,111 @@
+{
+ "id": 25749851,
+ "slug": "Hello-I-m-Here-Exhibition-2022",
+ "title": "Hello, I'm Here Exhibition. (2022)",
+ "title_no_html": "Hello, I'm Here Exhibition. (2022)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Completed as part of the BA in Design Communication level 3 programme at LASALLE. \n\nPart of a series of work exploring...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\" class=\"\"><br><br><br><br><br><br><br><br>\n<br>\n</div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed as part of the BA in Design Communication level 3 programme at LASALLE.&nbsp;<br><br>Part of a series of work exploring communication through light — other works in series include <a href=\"Hello-I-m-Here-Communicators-2024\" rel=\"history\"><i>Hello, I’m Here Communicators (2024)</i></a>. Culminated from research in <i><a href=\"Affective-Communication-Research-2021-2022-Ongoing-Project\" rel=\"history\">Affective Communication Research (2021-2022)</a></i>.<br><br>Watch the <a href=\"https://vimeo.com/702284627\" target=\"_blank\">Concept Reel here</a> and the <a href=\"https://vimeo.com/702284654\" target=\"_blank\">Exhibition View here</a>.\n<br>—<br>\n<br>\nThe global pandemic has made lasting changes in how we work, learn and play, making virtual communication the primary form of human interaction. People spend more time socially interacting digitally through screens, or when physically present, their facial expressions are covered by masks. This has led to people losing touch with how they look and feel when emoting. As emotions are at the core of human wellbeing, they are critical in social interactions and relationships, influencing perception and impacting how people interact intelligently.<br><br>\nAs even the slightest conveyance of emotion can change how people interact and are essential for communication serving as indicators that communication is reciprocated. The project's objective is to use open-source hardware and software to design interfaces and interactions that help audiences get back in touch with and communicate their emotions. <br><br>\nSo, how might creatives in the intersection of design and technology leverage Affective Computing and Affective Presence concepts to design interfaces and interactions capable of integrating the recognition, interpretation and communication of affective states through open-source hardware and software to communicate the perceptions of sense and emotion through the extension of the human faculty?<br>\n<br>\n<i>Hello, I'm Here (2022)</i> explores creative technology applications through an interactive and immersive installation. Utilising machine learning-based facial expression recognition as a means of a future interface that encourages audiences to recognise, interpret, and communicate their emotions. Audiences non-verbally communicate their feelings, which are then abstracted into a series of coloured LEDs, putting them in touch with their emotions as well as understanding the affective state of others, reflecting their collective emotional state allowing invisible, non-tangible feelings of emotions to be visualised and felt.<br>\n</h1><h1>—</h1>\n<br>\n</div>\n</div>",
+ "local_css": "[local-style=\"25749851\"] .container_width {\n}\n\n[local-style=\"25749851\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"25749851\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"25749851\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"25749851\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"25749851\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25749851\"] small a:hover {\n}\n\n[local-style=\"25749851\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 2.5,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "142192304",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 142192303,
+   "src": "/img/83e88415-matthew-helloImHere-1.jpg",
+   "name": "matthew-helloImHere-1.jpg",
+   "width": 1800,
+   "height": 1200,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 142192304,
+   "src": "/img/8a6268c6-matthew-helloImHere-2.jpg",
+   "name": "matthew-helloImHere-2.jpg",
+   "width": 1800,
+   "height": 1200,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 142192305,
+   "src": "/img/678e3980-matthew-helloImHere-3.jpg",
+   "name": "matthew-helloImHere-3.jpg",
+   "width": 1800,
+   "height": 1200,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 142192307,
+   "src": "/img/651338b9-matthew-helloImHere-4.jpg",
+   "name": "matthew-helloImHere-4.jpg",
+   "width": 1800,
+   "height": 1200,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 142192309,
+   "src": "/img/e64444f3-matthew-helloImHere-5.jpg",
+   "name": "matthew-helloImHere-5.jpg",
+   "width": 1800,
+   "height": 1200,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 142192310,
+   "src": "/img/0436a820-matthew-helloImHere-6.jpg",
+   "name": "matthew-helloImHere-6.jpg",
+   "width": 1800,
+   "height": 1200,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 142192311,
+   "src": "/img/df2f38b8-matthew-helloImHere-7.jpg",
+   "name": "matthew-helloImHere-7.jpg",
+   "width": 1800,
+   "height": 1200,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 142192312,
+   "src": "/img/f7699910-matthew-helloImHere-8.jpg",
+   "name": "matthew-helloImHere-8.jpg",
+   "width": 1800,
+   "height": 1200,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 142192313,
+   "src": "/img/9683ccb4-matthew-helloImHere-9.jpg",
+   "name": "matthew-helloImHere-9.jpg",
+   "width": 1800,
+   "height": 1200,
+   "exclude_from_backdrop": false
+  }
+ ]
+}

@@ -1,0 +1,95 @@
+{
+ "id": 24906256,
+ "slug": "Generative-Type-Tool-2020",
+ "title": "Generative Type Tool (2020)",
+ "title_no_html": "Generative Type Tool (2020)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Completed as part of the BA in Design Communication level 2 programme at LASALLE.\n\n\nTry it out! Link here: Generative Type...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed as part of the BA in Design Communication level 2 programme at LASALLE.<br>\n<br>Try it out! Link here: <a href=\"https://editor.p5js.org/matthew.laujh/present/YPwzyiEgU\"><i>Generative Type Tool</i></a><br>—<br>\n<br>\nThis type tool was created as part of a generative type workshop, to be able to explore the letterforms of type. Generating from a base shape, this tool allows the user to be able to manipulate the base shape, toggling between a set of 2D and 3D shapes, the scale, the speed of rotation, the degree of separation, text colour as well as background colour. Different camera axis also allows for different views to create endless posibilities of outcomes.</h1><h1>—</h1><br>\n</div>\n</div>",
+ "local_css": "[local-style=\"24906256\"] .container_width {\n}\n\n[local-style=\"24906256\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24906256\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24906256\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24906256\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24906256\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906256\"] small a:hover {\n}\n\n[local-style=\"24906256\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": false,
+   "slideshow_transition": "fade",
+   "transition_timeout": 2.5,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "137675442",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 137675442,
+   "src": "/img/1b5f6554-generativeTypeTool-AZ.gif",
+   "name": "generativeTypeTool-AZ.gif",
+   "width": 1080,
+   "height": 720,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137675444,
+   "src": "/img/3bc8039e-generativeTypeTool-formShape.gif",
+   "name": "generativeTypeTool-formShape.gif",
+   "width": 1026,
+   "height": 684,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137675445,
+   "src": "/img/2fdc8dcd-generativeTypeTool-scaleShape.gif",
+   "name": "generativeTypeTool-scaleShape.gif",
+   "width": 1080,
+   "height": 720,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137675446,
+   "src": "/img/dd55cb3b-generativeTypeTool-shape.gif",
+   "name": "generativeTypeTool-shape.gif",
+   "width": 1080,
+   "height": 720,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137675447,
+   "src": "/img/e3901d61-generativeTypeTool-axis.gif",
+   "name": "generativeTypeTool-axis.gif",
+   "width": 1080,
+   "height": 720,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137675448,
+   "src": "/img/ea3dcf64-generativeTypeTool-bgColour.gif",
+   "name": "generativeTypeTool-bgColour.gif",
+   "width": 1080,
+   "height": 720,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137675449,
+   "src": "/img/7ecca510-generativeTypeTool-colour.gif",
+   "name": "generativeTypeTool-colour.gif",
+   "width": 1080,
+   "height": 720,
+   "exclude_from_backdrop": false
+  }
+ ]
+}

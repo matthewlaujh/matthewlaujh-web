@@ -1,0 +1,19 @@
+{
+ "id": 24903870,
+ "slug": "Info",
+ "title": "Info",
+ "title_no_html": "Info",
+ "is_homepage": false,
+ "pin": true,
+ "pin_options": {
+  "position": "bottom",
+  "overlay": true,
+  "fixed": true,
+  "exclude_mobile": true
+ },
+ "excerpt": "matt@matthewlaujh.com",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\"><div grid-col=\"6\" grid-pad=\"4\" class=\"\"><h1><a href=\"mailto:matt@matthewlaujh.com\">matt@matthewlaujh.com</a></h1></div><div grid-col=\"6\" grid-pad=\"4\"></div></div>",
+ "local_css": "[local-style=\"24903870\"] .container_width {\n}\n\n[local-style=\"24903870\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24903870\"] .backdrop {\n}\n\n[local-style=\"24903870\"] .page {\n}\n\n[local-style=\"24903870\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24903870\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24903870\"] small a:hover {\n}",
+ "backdrop": null,
+ "images": []
+}

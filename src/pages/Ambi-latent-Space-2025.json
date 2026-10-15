@@ -1,0 +1,103 @@
+{
+ "id": 37410373,
+ "slug": "Ambi-latent-Space-2025",
+ "title": "Ambi(latent) Space (2025)",
+ "title_no_html": "Ambi(latent) Space (2025)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Thesis project for MPS Interactive Telecommunications Program at NYU TISCH.\n\n\n Link to Thesis Presentation here.\n\n\nPart of a series of...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><br><br><br>\n<br>\n<br>\n</div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\">\n<br>\n</div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><br><br><br>\n</div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><h1>Thesis project for MPS Interactive Telecommunications Program at NYU TISCH.<br><br>\n <a href=\"https://vimeo.com/1091961718\" target=\"_blank\"><i>Link to Thesis Presentation here.</i></a><br><br>\nPart of a series of work exploring Machine Learning and Light — other works in series <a href=\"Deconstructed-Ambiance-2025\" rel=\"history\"><i>Deconstructed Ambiance (2025)</i></a> and&nbsp;<a href=\"Deconstructed-Colours-2023\" rel=\"history\"><i>Deconstructed Colours (2023)</i></a>.<br>—<br>\n<br>\n<i>Ambi(latent) Space (2025)</i> is a lighting fixture that represents an approach to integrating machine learning into everyday environments. The fixture acts as both a functional light source and a demonstration of machine learning principles through an intelligent lighting system that, in addition to providing illumination, uses images by processing them through an algorithm that distils complex visual data into colour palettes that turn into responsive lighting environments based on human-centric lighting principles.<br><br>As the ephemerality of light is fleeting but it has the ability to encapsulate memories and evoke emotions through an intangible presence — there are three versions of <i>Ambi(latent) Space</i> on display. The first version displays UMAPs of images used to created colour palettes to shape a space, the second simulates sunlight in a day light circle meant to help shift people's circadian rhythm in changing seasons and the last is a based on the concept of following the sun and office culture and working across timezones.<br><br>The project serves as an exploration of an emerging category of intelligent objects that balance functionality and automation with co-creation between humans and machines. By demonstrating how AI can enhance everyday experiences without requiring massive infrastructure, the project challenges conventional assumptions about the resource requirements of intelligent systems. It suggests a future where machine learning becomes more accessible, sustainable, and integrated into the physical world — enhancing environments through subtle, responsive adaptations rather than overpowering them with technology.</h1><h1>—</h1>\n<br>\n</div>\n</div>",
+ "local_css": "[local-style=\"37410373\"] .container_width {\n}\n\n[local-style=\"37410373\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"37410373\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"37410373\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"37410373\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"37410373\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410373\"] small a:hover {\n}\n\n[local-style=\"37410373\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 10,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "232777087",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 232777094,
+   "src": "/img/9a3df0a1-ambilatentspace-main.jpg",
+   "name": "ambilatentspace-main.jpg",
+   "width": 3000,
+   "height": 2000,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 232777093,
+   "src": "/img/3c20bb77-ambilatentspace-detail.jpg",
+   "name": "ambilatentspace-detail.jpg",
+   "width": 3000,
+   "height": 2000,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 232777087,
+   "src": "/img/0fc605b2-ambilatentspace-1.jpg",
+   "name": "ambilatentspace-1.jpg",
+   "width": 3000,
+   "height": 2000,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 232777088,
+   "src": "/img/a09353cf-ambilatentspace-2.jpg",
+   "name": "ambilatentspace-2.jpg",
+   "width": 3000,
+   "height": 2000,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 232777089,
+   "src": "/img/86e3f18a-ambilatentspace-3.jpg",
+   "name": "ambilatentspace-3.jpg",
+   "width": 3000,
+   "height": 2000,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 232777090,
+   "src": "/img/305b6f1d-ambilatentspace-4.jpg",
+   "name": "ambilatentspace-4.jpg",
+   "width": 3000,
+   "height": 2000,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 232777091,
+   "src": "/img/73c8dab4-ambilatentspace-5.jpg",
+   "name": "ambilatentspace-5.jpg",
+   "width": 3000,
+   "height": 2000,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 232777092,
+   "src": "/img/7f8b0aee-ambilatentspace-6.jpg",
+   "name": "ambilatentspace-6.jpg",
+   "width": 3000,
+   "height": 2000,
+   "exclude_from_backdrop": false
+  }
+ ]
+}

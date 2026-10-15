@@ -1,0 +1,47 @@
+{
+ "id": 37620086,
+ "slug": "Deconstructed-Ambiance-2025",
+ "title": "Deconstructed Ambiance (2025)",
+ "title_no_html": "Deconstructed Ambiance (2025)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Exhibited at ‘\n\n\t\n\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\tBeyond Interface & Prompt Exploring the Language of Technology in...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><br><br><br>\n<br>\n<br>\n</div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\">\n<br>\n</div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><br><br><br>\n</div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><br><br><br><br>\n<br>\n<h1></h1><h1>Exhibited at ‘\n\n\t\n\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\tBeyond Interface &amp; Prompt Exploring the Language of Technology in Contemporary Art’ at the Williamsburg Art &amp; Historical Center, Brooklyn, New York&nbsp; (\n\t\n\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t18 Apr – 17 May 2025)<br><br>\nPart of a series of work exploring Machine Learning and Light — other works in series <a href=\"Ambi-latent-Space-2025\" rel=\"history\"><i>Ambi(latent) Space (2025)</i></a> and <a href=\"https://matthewlaujh.com/Deconstructed-Colours-2023\" rel=\"history\"><i>Deconstructed Colours (2023)</i></a>.<a href=\"Ambi-latent-Space-2025\" rel=\"history\"></a><br>—<br><br><i>Deconstructed Ambiance (2025)</i> is a generative light object that explores the relationship between machine learning concepts of high and low dimensional spaces. Designed to reinterpret light as a representation of latent space.<br><br>In machine learning, a high-dimensional space refers to a space that has many variables or features, while a low-dimensional space has fewer variables or features. In <i>Deconstructed Colours (2023)</i>, the screen’s colours, which are in a high-dimensional space, are translated into a physical representation of a low-dimensional space through the lights.<br><br>The work uses a convoluted method of processing data using various software functions interplaying with various hardware components. An Arduino and LCD screen cycle through random colours to provide the input for the installation. Another Arduino uses its light spectrum sensor to pick up these colours and translate them into separate red, green, and blue values that control the LEDs with varying intensities and a fading animation. The LEDs then reconstruct the visual wavelength of colour through light.<br>\n—</h1><br>\n</div>\n</div>",
+ "local_css": "[local-style=\"37620086\"] .container_width {\n}\n\n[local-style=\"37620086\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"37620086\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"37620086\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"37620086\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"37620086\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37620086\"] small a:hover {\n}\n\n[local-style=\"37620086\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 10,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "234490446",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 234490454,
+   "src": "/img/466ae1a5-deconstructed-ambiance.jpg",
+   "name": "deconstructed-ambiance.jpg",
+   "width": 3650,
+   "height": 2433,
+   "exclude_from_backdrop": false
+  }
+ ]
+}

@@ -1,0 +1,63 @@
+{
+ "id": 25966667,
+ "slug": "The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition",
+ "title": "The LASALLE Show: Faculty of Design BA (Hons) Graduate Exhibition Frontage (2022)",
+ "title_no_html": "The LASALLE Show: Faculty of Design BA (Hons) Graduate Exhibition Frontage (2022)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Exhibited as part of The LASALLE Show at the Institute\nof Contemporary Arts Singapore (20 May–1 June 2022)\n—\n\n\nConceptualized,...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\" class=\"\"><br><br><br><br><br><br><br>\n<br>\n</div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"><h1>Exhibited as part of The LASALLE Show at the Institute\nof Contemporary Arts Singapore (20 May–1 June 2022)<br>—<br>\n<br>Conceptualized, fabricated and installed an LED Installation that serves as first point of interest for visitors visiting the <i>Faculty of Design BA (Hons) Graduate Exhibition at The LASALLE Show Exhibition 2022. <br></i><br>\nWith the theme of the show being proximate, focusing on the return to tangibility both real and perceived between users and objects, through acts of design in close proximity. Designers design practices that bring clarity and closeness to discourses closing the gaps between opposing tensions. <br><br>\nThe installation was built to draw viewers in, when which the text only reveals itself when light is being passed behind it. The lights were programmed to fade at different paces, creating tension between each passing motion revealing parts of the text slowly as viewers take their time to read through it.</h1><h1>—</h1>\n<br>\n</div>\n</div>",
+ "local_css": "[local-style=\"25966667\"] .container_width {\n}\n\n[local-style=\"25966667\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"25966667\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"25966667\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"25966667\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"25966667\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"25966667\"] small a:hover {\n}\n\n[local-style=\"25966667\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 20,
+   "transition_duration": 0,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "173874917",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 173874915,
+   "src": "/img/ca885736-theLasalleShowFacultyOfDesignBaHonsGraduateExhibitionFrontage-1.jpg",
+   "name": "theLasalleShowFacultyOfDesignBaHonsGraduateExhibitionFrontage-1.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 173874917,
+   "src": "/img/d380717b-theLasalleShowFacultyOfDesignBaHonsGraduateExhibitionFrontage-3.jpg",
+   "name": "theLasalleShowFacultyOfDesignBaHonsGraduateExhibitionFrontage-3.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 152131776,
+   "src": "/img/b0debc1e-TLS-FOD-Frontage_Wide.gif",
+   "name": "TLS-FOD-Frontage_Wide.gif",
+   "width": 600,
+   "height": 338,
+   "exclude_from_backdrop": false
+  }
+ ]
+}

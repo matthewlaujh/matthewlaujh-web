@@ -1,0 +1,255 @@
+{
+ "id": 24913744,
+ "slug": "A-Series-of-Explorations-and-Technical-Challenges-2021",
+ "title": "A Series of Explorations and Technical Challenges (2021)",
+ "title_no_html": "A Series of Explorations and Technical Challenges (2021)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Completed as part of the BA in Design Communication level 3 programme at LASALLE.\n—\n\n\n\nA Series of Explorations & Technical...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\" class=\"\"><br><br><br><br><br><br><br><br>\n<br>\n</div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed as part of the BA in Design Communication level 3 programme at LASALLE.<br>—<br>\n<br>\nA Series of Explorations &amp; Technical Challenges” is an archive of various challenges imposed on myself to figure out the technical skill needed behind different physical computing functions.<br>\n<br>\nThis archive showcases each step taken to solve various technical challenges through explorations and iterations to figure things out. These explorations were conducted in order to aid my dissertation and final graduation project. Each exploration includes video and photo documentation of the circuit and the circuit diagram and code used to program it.<br><br>\n\n\t\n\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t<br>\nIt was developed as a guide for myself and others to understand simple\ninteractions through a series of various inputs and outputs. The work\nhas since been maintained and has been used as a guide for other\nstudents to get a start in physical prototyping.\n <br>\n—\n<br></h1><br>\n</div>\n</div>",
+ "local_css": "[local-style=\"24913744\"] .container_width {\n}\n\n[local-style=\"24913744\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24913744\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24913744\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24913744\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24913744\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24913744\"] small a:hover {\n}\n\n[local-style=\"24913744\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 70,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 2.5,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "137631886",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 137677642,
+   "src": "/img/60ce88fa-C1E1-1.jpg",
+   "name": "C1E1-1.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677644,
+   "src": "/img/987a45ae-C1E1-2.jpg",
+   "name": "C1E1-2.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677645,
+   "src": "/img/6df76b46-C1E1-3.jpg",
+   "name": "C1E1-3.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677647,
+   "src": "/img/913a0194-C1E1-4.jpg",
+   "name": "C1E1-4.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677648,
+   "src": "/img/ea6085f5-C1E1-5.jpg",
+   "name": "C1E1-5.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677649,
+   "src": "/img/f3ad84ac-C1E1-6.jpg",
+   "name": "C1E1-6.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677651,
+   "src": "/img/8ebb117f-C1E1-7.jpg",
+   "name": "C1E1-7.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677652,
+   "src": "/img/851fb78b-C1E1-8.jpg",
+   "name": "C1E1-8.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677654,
+   "src": "/img/656c5cc8-C1E1-9.jpg",
+   "name": "C1E1-9.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677656,
+   "src": "/img/8b5e3347-C2E2-1.jpg",
+   "name": "C2E2-1.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677658,
+   "src": "/img/08bf2816-C2E2-2.jpg",
+   "name": "C2E2-2.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677659,
+   "src": "/img/7a13a792-C2E2-3.jpg",
+   "name": "C2E2-3.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677662,
+   "src": "/img/8122c91d-C3E3-1.jpg",
+   "name": "C3E3-1.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677664,
+   "src": "/img/c88a160e-C3E3-2.jpg",
+   "name": "C3E3-2.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677666,
+   "src": "/img/81b2d78a-C3E3-3.jpg",
+   "name": "C3E3-3.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677667,
+   "src": "/img/10fe0b4c-C3E3-4c.jpg",
+   "name": "C3E3-4c.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677669,
+   "src": "/img/493bd66b-C3E3-5b.jpg",
+   "name": "C3E3-5b.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677670,
+   "src": "/img/0ec5c9ac-C4E4-1.jpg",
+   "name": "C4E4-1.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677672,
+   "src": "/img/dff897f9-C4E4-2.jpg",
+   "name": "C4E4-2.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677673,
+   "src": "/img/b4e1a1e0-C5E5-1a.jpg",
+   "name": "C5E5-1a.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677675,
+   "src": "/img/fb528dc1-C5E5-2a.jpg",
+   "name": "C5E5-2a.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677683,
+   "src": "/img/aaedfe20-C5E5-3a.jpg",
+   "name": "C5E5-3a.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677685,
+   "src": "/img/06fc0f9d-C5E5-3b.jpg",
+   "name": "C5E5-3b.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677686,
+   "src": "/img/62dce851-C5E5-3c.jpg",
+   "name": "C5E5-3c.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677688,
+   "src": "/img/0c59536a-C5E5-3d.jpg",
+   "name": "C5E5-3d.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677689,
+   "src": "/img/f84f03c9-C5E5-3e.jpg",
+   "name": "C5E5-3e.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false
+  },
+  {
+   "id": 137677690,
+   "src": "/img/b1c77929-Microsite.png",
+   "name": "Microsite.png",
+   "width": 1500,
+   "height": 938,
+   "exclude_from_backdrop": false
+  }
+ ]
+}
