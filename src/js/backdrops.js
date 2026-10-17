@@ -127,8 +127,13 @@ var VERT = [
 			mouseAngle: 0,
 			mouseOverride: false,
 			mouseCalced: false,
-			mouseDelta: { x: 0, y: 0, sx: 0, sy: 0, cx: 0, cy: 0 }
+			mouseDelta: { x: 0, y: 0, sx: 0, sy: 0, cx: 0, cy: 0 },
+			scrollTarget: 0,      // where the page actually is
+			scrollSmooth: 0,      // where the bands think it is (eased)
+			lastT: 0,
+			speedScale: 1          // 1 normally, lower when the lights are off
 		};
+		this.reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 		this.canvas = document.createElement('canvas');
 		this.canvas.className = 'slitscan_canvas';
@@ -150,6 +155,8 @@ var VERT = [
 		window.addEventListener('resize', this.onResize, { passive: true });
 		window.addEventListener('ml:resize', this.onResize);
 		document.addEventListener('visibilitychange', this.onVisibility);
+		window.addEventListener('ml:lights', this.onLights);
+		this.data.speedScale = document.documentElement.getAttribute('data-lights') === 'off' ? 0.35 : 1;
 
 		if ('IntersectionObserver' in window) {
 			var self = this;
@@ -234,7 +241,7 @@ var VERT = [
 			gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
 			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
 			self.imageLoaded = true;
-			var contents = self.el.closest('.backdrop_viewport');
+			var contents = self.el.closest('.backdrop');
 			if (contents) contents.classList.add('loaded');
 			if (self.inViewport) self.resume();
 		};
@@ -264,12 +271,15 @@ var VERT = [
 			this.canvas.width = Math.floor(width * resolution);
 			this.canvas.height = Math.floor(height * resolution);
 			this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+			if (this.reducedMotion && this.imageLoaded) this.draw();
 		}
 	};
 
-	Slitscan.prototype.updateMotion = function () {
+	Slitscan.prototype.updateMotion = function (dt) {
 		var s = this.settings, d = this.data;
-		var velocity = s.targetSpeed * -0.15;
+		// Cargo advanced the offset once per frame (so 2x faster on 120 Hz
+		// screens); we advance per second, calibrated to its 60 fps look.
+		var velocity = s.targetSpeed * -0.15 * (dt * 60) * d.speedScale;
 
 		if (s.orientation === 'horizontal') {
 			if (d.mouseOverride) {
@@ -341,27 +351,48 @@ var VERT = [
 	};
 
 	Slitscan.prototype.updateScrollOffset = function () {
-		var top = document.documentElement.scrollTop || document.body.scrollTop || 0;
-		var left = document.documentElement.scrollLeft || document.body.scrollLeft || 0;
-		if (top !== 0) this.data.scroll.y = top;
-		if (left !== 0) this.data.scroll.x = left;
+		// Cargo fed raw scrollTop straight into the shader (bands jumped with
+		// every wheel tick). We ease towards it instead: the bands follow the
+		// content with a little inertia, in the direction the content moved.
+		var top = window.pageYOffset || document.documentElement.scrollTop || 0;
+		this.data.scrollTarget = top;
 	};
 
-	Slitscan.prototype.draw = function () {
+	Slitscan.prototype.integrateScroll = function (dt) {
+		var d = this.data;
+		var k = 1 - Math.exp(-dt * 6);
+		d.scrollSmooth += (d.scrollTarget - d.scrollSmooth) * k;
+		if (this.settings.orientation === 'horizontal') d.scroll.x = d.scrollSmooth;
+		else d.scroll.y = d.scrollSmooth;
+	};
+
+	Slitscan.prototype.draw = function (now) {
 		var self = this;
-		this.frame = window.requestAnimationFrame(function () { self.draw(); });
+		var d = this.data;
+		if (!this.reducedMotion) {
+			this.frame = window.requestAnimationFrame(function (t) { self.draw(t); });
+		}
+		now = now || performance.now();
+		var dt = d.lastT ? Math.min((now - d.lastT) / 1000, 0.1) : 1 / 60;
+		d.lastT = now;
 
-		this.updateMotion();
-		if (!this.data.mouseCalced) this.setMouseDelta();
-		this.data.mouseCalced = false;
+		if (!this.reducedMotion) {
+			this.updateMotion(dt);
+			if (!d.mouseCalced) this.setMouseDelta();
+			d.mouseCalced = false;
+			this.integrateScroll(dt);
+		}
 
-		var d = this.data, gl = this.gl;
+		var gl = this.gl;
 		var mx = (d.offset.x + d.mouseDelta.cx + d.scroll.x) / 500;
 		var my = (d.offset.y + d.mouseDelta.cy + d.scroll.y) / 500;
 
 		gl.uniform1f(this.u.mouseX, mx);
 		gl.uniform1f(this.u.mouseY, my);
-		gl.uniform2f(this.u.dimensions, d.stage.w * 10, d.stage.h * 10);
+		// Cargo's JS set dimensions to 10x the stage size, but Pixi's filter
+		// pipeline overwrote the uniform with the render target's pixel size
+		// before drawing — so that is what actually rendered.
+		gl.uniform2f(this.u.dimensions, this.canvas.width, this.canvas.height);
 
 		gl.clear(gl.COLOR_BUFFER_BIT);
 		if (this.imageLoaded) {
@@ -378,8 +409,17 @@ var VERT = [
 		window.cancelAnimationFrame(this.frame);
 		if (this.inViewport && !document.hidden && this.gl) {
 			this.paused = false;
+			this.data.lastT = 0;
 			this.draw();
 		}
+	};
+
+	/* live re-tuning (used by the ?tune panel) */
+	Slitscan.prototype.update = function (key, value) {
+		this.settings[key] = value;
+		this.gl.useProgram(this.prog);
+		this.setShaderValues();
+		if (this.reducedMotion) this.draw();
 	};
 
 	Slitscan.prototype.makeCallbacks = function () {
@@ -388,6 +428,7 @@ var VERT = [
 		this.onScroll = function () { self.updateScrollOffset(); };
 		this.onResize = function () { self.setSize(); };
 		this.onVisibility = function () { if (document.hidden) self.pause(); else self.resume(); };
+		this.onLights = function (e) { self.data.speedScale = e.detail && e.detail.on ? 1 : 0.35; };
 	};
 
 	Slitscan.prototype.destroy = function () {
@@ -398,6 +439,7 @@ var VERT = [
 		window.removeEventListener('resize', this.onResize);
 		window.removeEventListener('ml:resize', this.onResize);
 		document.removeEventListener('visibilitychange', this.onVisibility);
+		window.removeEventListener('ml:lights', this.onLights);
 		if (this.io) this.io.disconnect();
 	};
 
@@ -434,7 +476,7 @@ var VERT = [
 		this.timer = null;
 		this.w = 0; this.h = 0;
 
-		var viewport = el.querySelector('.backdrop_viewport');
+		var viewport = el.querySelector('.backdrop_viewport') || el;
 		this.viewport = viewport;
 		viewport.innerHTML = '';
 
@@ -445,7 +487,7 @@ var VERT = [
 		this.splash.className = 'background_splash';
 		this.overlay = document.createElement('div');
 		this.overlay.className = 'background_overlay';
-		this.overlay.style.backgroundColor = this.s.overlay_color;
+		// overlay colour comes from CSS (var(--overlay)) so lights-off can deepen it
 		viewport.appendChild(this.bg);
 		viewport.appendChild(this.splash);
 		viewport.appendChild(this.overlay);
@@ -480,7 +522,8 @@ var VERT = [
 
 		if (cycling) {
 			if (this.s.arrow_navigation) this.buildArrows();
-			if (this.s.autoplay) this.start();
+			var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (this.s.autoplay && !reduced) this.start();
 			document.addEventListener('visibilitychange', function () {
 				if (document.hidden) self.stop(); else if (self.s.autoplay) self.start();
 			});
@@ -556,12 +599,12 @@ var VERT = [
 		this.timer = setInterval(function () { self.show(self.current + 1); }, ms);
 	};
 	Wallpaper.prototype.stop = function () { clearInterval(this.timer); this.timer = null; };
-	Wallpaper.prototype.restart = function () { if (this.s.autoplay) this.start(); };
+	Wallpaper.prototype.restart = function () { if (this.timer) this.start(); };
 
 	Wallpaper.prototype.buildArrows = function () {
 		var self = this;
 		var nav = document.createElement('div');
-		nav.className = 'backdrop wallpaper_navigation wallpaper-navigation';
+		nav.className = 'wallpaper_navigation wallpaper-navigation';
 		nav.setAttribute('data-auxiliary', '');
 		var inner = document.createElement('div');
 		var prev = document.createElement('div');
@@ -573,7 +616,7 @@ var VERT = [
 		inner.appendChild(prev);
 		inner.appendChild(next);
 		nav.appendChild(inner);
-		this.el.parentElement.appendChild(nav);
+		(this.el.parentElement || document.body).appendChild(nav);
 		this.nav = nav;
 
 		prev.addEventListener('click', function (e) { e.preventDefault(); self.prev(); });
@@ -590,7 +633,7 @@ var VERT = [
 			prev.classList.add('hidden');
 			next.classList.add('hidden');
 		}
-		var pageContainer = this.el.closest('.page_container') || document.body;
+		var pageContainer = document.body;
 		pageContainer.addEventListener('mousemove', showUI);
 		pageContainer.addEventListener('mouseleave', function () {
 			if (!overArrow) hideTimer = setTimeout(hideUI, 250);
@@ -613,8 +656,7 @@ var VERT = [
 		var cfg = {};
 		try { cfg = JSON.parse(cfgEl ? cfgEl.textContent : '{}'); } catch (e) { cfg = {}; }
 		var type = el.getAttribute('data-backdrop');
-		var viewport = el.querySelector('.backdrop_viewport');
-		if (!viewport) return;
+		var viewport = el.querySelector('.backdrop_viewport') || el;
 		try {
 			if (type === 'slitscan') {
 				var canvasHost = document.createElement('div');
@@ -645,11 +687,49 @@ var VERT = [
 		}
 	}
 
+	/* ?tune — live sliders for the slitscan, prints the settings to paste back
+	   into the page JSON */
+	function tunePanel(inst) {
+		if (document.querySelector('.tune-panel')) return;
+		var panel = document.createElement('div');
+		panel.className = 'tune-panel';
+		var fields = [
+			['scanCycles', 'short wave', 1, 20, 1],
+			['scanCyclesLarge', 'long wave', 1, 10, 1],
+			['scanSize', 'scan size', 1, 100, 1],
+			['wiggle', 'wiggle', 0, 100, 1],
+			['targetSpeed', 'speed', 0, 200, 1]
+		];
+		var code = document.createElement('code');
+		function print() {
+			var s = inst.settings;
+			code.textContent = JSON.stringify({ scan_cycles: s.scanCycles, scan_cycles_large: s.scanCyclesLarge, scan_size: s.scanSize, wiggle: s.wiggle, target_speed: s.targetSpeed });
+		}
+		fields.forEach(function (f) {
+			var label = document.createElement('label'); label.textContent = f[1];
+			var input = document.createElement('input');
+			input.type = 'range'; input.min = f[2]; input.max = f[3]; input.step = f[4]; input.value = inst.settings[f[0]];
+			var val = document.createElement('span'); val.textContent = input.value;
+			input.addEventListener('input', function () {
+				val.textContent = input.value;
+				inst.update(f[0], parseFloat(input.value));
+				print();
+			});
+			panel.appendChild(label); panel.appendChild(input); panel.appendChild(val);
+		});
+		panel.appendChild(code);
+		print();
+		document.body.appendChild(panel);
+	}
+
 	window.MLBackdrops = {
 		init: function (root) {
 			root = root || document;
 			var els = root.querySelectorAll('.backdrop[data-backdrop]');
-			for (var i = 0; i < els.length; i++) initBackdrop(els[i]);
+			for (var i = 0; i < els.length; i++) {
+				initBackdrop(els[i]);
+				if (els[i].__instance instanceof Slitscan && /[?&]tune\b/.test(location.search)) tunePanel(els[i].__instance);
+			}
 		}
 	};
 })();

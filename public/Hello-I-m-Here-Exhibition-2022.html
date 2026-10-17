@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" data-predefined-style="true" data-css-presets="true" data-css-preset data-typography-preset>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="index,follow">
 		<title>Hello, I'm Here Exhibition. (2022) - Matthew Lau Portfolio</title>
 		<meta name="description" content="Matthew is a designer and creative technologist delivering print, digital, computational and experiential concepts. He is keen on design research and has a fondness for the academic side of design, where he aspires to inspire others with what design can bring about. Matthew believes design exists to serve a purpose and that it is beyond just creating functional and accessible works but also establishing an emotional connection with audiences.">
@@ -18,416 +18,133 @@
 		<meta property="og:url" content="https://matthewlaujh.com/Hello-I-m-Here-Exhibition-2022">
 		<meta property="og:image" content="https://matthewlaujh.com/img/social.png">
 		<meta property="og:type" content="website">
+		<meta name="theme-color" content="#222222">
 
-		<link rel="shortcut icon" href="/favicon.ico">
-		<link rel="stylesheet" href="/css/cargo-base.css">
-		<link rel="stylesheet" href="/css/stylesheet.css">
+		<link rel="icon" href="/favicon.ico">
+		<link rel="preload" href="/fonts/AustinNewsDeck-Light.otf" as="font" type="font/otf" crossorigin>
 		<link rel="stylesheet" href="/css/site.css">
 		<script src="/js/backdrops.js" defer></script>
 		<script src="/js/site.js" defer></script>
 	</head>
 	<body class="" style="visibility: hidden;">
-		<customhtml></customhtml>
-
-		<div id="site_menu_wrapper" class="mobile_only" data-sitemenu-position="top-right" data-type="page">
-			<a href="/" id="site_menu_button" aria-label="Menu"><svg viewBox="0 0 34 34" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 8h26M4 17h26M4 26h26"/></g></svg></a>
-			<div id="site_menu_panel_container" data-type="page">
-				<div class="site_menu_page_wrapper">
-	<div data-container="page" class="page_container" local-style="24903867" data-id="24903867">
-		<div class="page container container_width clearfix" data-container="content" data-id="24903867">
-			<bodycopy class="bodycopy content content_padding">
-				<div class="page_content clearfix">
-					<projectcontent><div grid-row="" grid-pad="4" grid-gutter="8" grid-responsive="">
-	<div grid-col="7" grid-pad="4"><h1>Matthew Lau</h1><br><h1>Projects:<br><br>Experiential:<br><a href="/Ambi-latent-Space-2025" rel="history">Ambi(latent) Space (2025)</a><br><a href="/Deconstructed-Ambiance-2025" rel="history">Deconstructed Ambiance (2025)</a>
-<br>
-<a href="/Hello-I-m-Here-Communicators-2024" rel="history">Hello I'm Here Communicators (2024)</a><br><a href="/Deconstructed-Colours-2023" rel="history">Deconstructed Colours (2023)<br></a>
-<a href="/Hey-What-s-Up-2022" rel="history">Hey, What’s Up? (2022)</a><br>
-<a href="/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition" rel="history">The LASALLE Show: Faculty of Design BA (Hons) Graduate Exhibition Frontage (2022)</a><br>
-<a href="/Hello-I-m-Here-Exhibition-2022" rel="history" class="active">Hello, I’m Here. (2022)</a><br>
-<a href="/Singapore-Art-Week-2022-The-Oort-Cloud-and-the-Blue-Mountain" rel="history">Singapore Art Week 2022: The Oort Cloud and Blue Mountain, Singapore (2022)</a><br>
-<a href="/Children-s-Biennale-2021-The-Oort-Cloud-and-Blue-Mountain-Germany-2021" rel="history">Children’s Biennale 2021: The Oort Cloud and Blue Mountain, Germany (2021)</a><br>
-<a href="/KINDERBIENNALE-2021-The-Oort-Cloud-and-Blue-Mountain-Netherlands-2021" rel="history">KINDERBIËNNALE 2021: The Oort Cloud and Blue Mountain, Netherlands (2021)</a><br><a href="/Breathing-Bytes-Proposal-2020" rel="history">Breathing Bytes Proposal (2020)</a>
-<br>—<br><br>Computational:<br><a href="/Circulated-Densities-2025" rel="history">Circulated Densities (2025)</a>
-<br><a href="Affective-Communication-Research-2021-2022-Ongoing-Project" rel="history">Affective Commmunication Research (2021-2022)</a> <br>
-<a href="/A-Series-of-Explorations-and-Technical-Challenges-2021" rel="history">A Series of Explorations and Technical Challenges (2021)</a><br><a href="/Archifest-2021-Sea-of-Debris-2021" rel="history">Archifest 2021: Sea of Debris (2021)</a><br>Generative 3D Form Finding Tool (2021)<br>
-<a href="/DJ-Heard-That-2021" rel="history">DJ Heard That?! (2021)</a><br>
-<a href="/Generative-Type-Tool-2020" rel="history">Generative Type Tool (2020)</a>
-<br>—<br><br>Digital:<br><a href="/The-Ascension-Algorithm-2023" rel="history">The Ascension Algorithm (2023)</a><br>
-<a href="/Neuewave-Web-Animations-2021" rel="history">Neuewave Web Animations (2021)</a><br><a href="/Source-of-Happiness-2020" rel="history">Source of Happiness (2020)</a>
-<br>—</h1>
-<br></div>
-	<div grid-col="5" grid-pad="4" class=""><h1>I practice creative technology through a design lens, thriving at the intersection of computational design and emerging technologies. My experience spans from building AI-driven tools and interactive media for global brands to creating installations that translate computational systems into human-centered experiences.<br><br>
-Whether prototyping for clients or developing my artistic practice, I combine technical experimentation with design-led thinking to deliver outcomes that are both innovative and tangible.<br>
-
-
-
-—<br><br>
-<a href="/About" rel="history">Click here for more about me.</a></h1></div>
-</div></projectcontent>
-				</div>
-			</bodycopy>
+		<button id="site_menu_button" type="button" aria-controls="site_menu" aria-expanded="false" aria-label="Menu"><svg viewBox="0 0 34 34" aria-hidden="true" focusable="false"><line x1="4" y1="8" x2="30" y2="8"/><line x1="4" y1="17" x2="30" y2="17"/><line x1="4" y1="26" x2="30" y2="26"/></svg></button>
+		<div class="site">
+			<div class="backdrop" data-backdrop="wallpaper" aria-hidden="true"><script type="application/json">{"settings":{"scale_option":"contain","repeat_image":false,"image_alignment":"image_center_center","margin":25,"pattern_size":75,"limit_size":false,"overlay_color":"rgba(0, 0, 0, 0.5)","bg_color":"rgb(255, 255, 255)","cycle_images":true,"autoplay":true,"slideshow_transition":"fade","transition_timeout":2.5,"transition_duration":0.5,"randomize":false,"arrow_navigation":true,"focus_object":"{}","backdrop_viewport_lock":false,"use_image_focus":"false","image":"142192304","requires_webgl":"false"},"images":[{"id":142192303,"src":"/img/83e88415-matthew-helloImHere-1.jpg","name":"matthew-helloImHere-1.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192304,"src":"/img/8a6268c6-matthew-helloImHere-2.jpg","name":"matthew-helloImHere-2.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192305,"src":"/img/678e3980-matthew-helloImHere-3.jpg","name":"matthew-helloImHere-3.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192307,"src":"/img/651338b9-matthew-helloImHere-4.jpg","name":"matthew-helloImHere-4.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192309,"src":"/img/e64444f3-matthew-helloImHere-5.jpg","name":"matthew-helloImHere-5.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192310,"src":"/img/0436a820-matthew-helloImHere-6.jpg","name":"matthew-helloImHere-6.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192311,"src":"/img/df2f38b8-matthew-helloImHere-7.jpg","name":"matthew-helloImHere-7.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192312,"src":"/img/f7699910-matthew-helloImHere-8.jpg","name":"matthew-helloImHere-8.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192313,"src":"/img/9683ccb4-matthew-helloImHere-9.jpg","name":"matthew-helloImHere-9.jpg","width":1800,"height":1200,"exclude_from_backdrop":false}]}</script></div>
+			<nav class="site-nav" aria-label="Projects">
+		<a class="site-title" href="/">Matthew Lau</a>
+		<p class="nav-heading">Projects</p>
+		<section class="nav-group">
+			<h2>Experiential</h2>
+			<ul>
+				<li><a href="/Ambi-latent-Space-2025">Ambi(latent) Space (2025)</a></li>
+				<li><a href="/Deconstructed-Ambiance-2025">Deconstructed Ambiance (2025)</a></li>
+				<li><a href="/Hello-I-m-Here-Communicators-2024">Hello I'm Here Communicators (2024)</a></li>
+				<li><a href="/Deconstructed-Colours-2023">Deconstructed Colours (2023)</a></li>
+				<li><a href="/Hey-What-s-Up-2022">Hey, What’s Up? (2022)</a></li>
+				<li><a href="/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition">The LASALLE Show: Faculty of Design BA (Hons) Graduate Exhibition Frontage (2022)</a></li>
+				<li><a href="/Hello-I-m-Here-Exhibition-2022" class="active" aria-current="page">Hello, I’m Here. (2022)</a></li>
+				<li><a href="/Singapore-Art-Week-2022-The-Oort-Cloud-and-the-Blue-Mountain">Singapore Art Week 2022: The Oort Cloud and Blue Mountain, Singapore (2022)</a></li>
+				<li><a href="/Children-s-Biennale-2021-The-Oort-Cloud-and-Blue-Mountain-Germany-2021">Children’s Biennale 2021: The Oort Cloud and Blue Mountain, Germany (2021)</a></li>
+				<li><a href="/KINDERBIENNALE-2021-The-Oort-Cloud-and-Blue-Mountain-Netherlands-2021">KINDERBIËNNALE 2021: The Oort Cloud and Blue Mountain, Netherlands (2021)</a></li>
+				<li><a href="/Breathing-Bytes-Proposal-2020">Breathing Bytes Proposal (2020)</a></li>
+			</ul>
+		</section>
+		<section class="nav-group">
+			<h2>Computational</h2>
+			<ul>
+				<li><a href="/Circulated-Densities-2025">Circulated Densities (2025)</a></li>
+				<li><span class="dead" title="Coming soon">Affective Commmunication Research (2021-2022)</span></li>
+				<li><a href="/A-Series-of-Explorations-and-Technical-Challenges-2021">A Series of Explorations and Technical Challenges (2021)</a></li>
+				<li><a href="/Archifest-2021-Sea-of-Debris-2021">Archifest 2021: Sea of Debris (2021)</a></li>
+				<li><a href="/Generative-3D-Form-Finding-Tool-2021">Generative 3D Form Finding Tool (2021)</a></li>
+				<li><a href="/DJ-Heard-That-2021">DJ Heard That?! (2021)</a></li>
+				<li><a href="/Generative-Type-Tool-2020">Generative Type Tool (2020)</a></li>
+			</ul>
+		</section>
+		<section class="nav-group">
+			<h2>Digital</h2>
+			<ul>
+				<li><a href="/The-Ascension-Algorithm-2023">The Ascension Algorithm (2023)</a></li>
+				<li><a href="/Neuewave-Web-Animations-2021">Neuewave Web Animations (2021)</a></li>
+				<li><a href="/Source-of-Happiness-2020">Source of Happiness (2020)</a></li>
+			</ul>
+		</section>
+	</nav>
+			<main class="page">
+		<article>
+			<h1 class="visually-hidden">Hello, I'm Here Exhibition. (2022)</h1>
+			<div class="prose">
+<p>Completed as part of the BA in Design Communication level 3 programme at LASALLE.&nbsp;</p>
+<p>Part of a series of work exploring communication through light — other works in series include <a href="/Hello-I-m-Here-Communicators-2024"><i>Hello, I’m Here Communicators (2024)</i></a>. Culminated from research in <i>Affective Communication Research (2021-2022)</i>.</p>
+<p>Watch the <a href="https://vimeo.com/702284627" target="_blank" rel="noopener">Concept Reel here</a> and the <a href="https://vimeo.com/702284654" target="_blank" rel="noopener">Exhibition View here</a>.</p>
+<hr>
+<p>The global pandemic has made lasting changes in how we work, learn and play, making virtual communication the primary form of human interaction. People spend more time socially interacting digitally through screens, or when physically present, their facial expressions are covered by masks. This has led to people losing touch with how they look and feel when emoting. As emotions are at the core of human wellbeing, they are critical in social interactions and relationships, influencing perception and impacting how people interact intelligently.</p>
+<p>As even the slightest conveyance of emotion can change how people interact and are essential for communication serving as indicators that communication is reciprocated. The project's objective is to use open-source hardware and software to design interfaces and interactions that help audiences get back in touch with and communicate their emotions.</p>
+<p>So, how might creatives in the intersection of design and technology leverage Affective Computing and Affective Presence concepts to design interfaces and interactions capable of integrating the recognition, interpretation and communication of affective states through open-source hardware and software to communicate the perceptions of sense and emotion through the extension of the human faculty?</p>
+<p><i>Hello, I'm Here (2022)</i> explores creative technology applications through an interactive and immersive installation. Utilising machine learning-based facial expression recognition as a means of a future interface that encourages audiences to recognise, interpret, and communicate their emotions. Audiences non-verbally communicate their feelings, which are then abstracted into a series of coloured LEDs, putting them in touch with their emotions as well as understanding the affective state of others, reflecting their collective emotional state allowing invisible, non-tangible feelings of emotions to be visualised and felt.</p>
+<hr>
+			</div>
+		</article>
+	</main>
+			<footer class="site-footer">
+		<a href="mailto:matt@matthewlaujh.com">matt@matthewlaujh.com</a>
+		<span class="studio-clock" aria-live="off"><span class="dot" aria-hidden="true"></span><span class="clock-text">Studio · Singapore</span></span>
+	</footer>
 		</div>
-		<div class="page_background"></div>
-		<style class="local-css" data-target="24903867">
-[local-style="24903867"] .container_width {
-}
-
-[local-style="24903867"] body {
-	background-color: initial /*!variable_defaults*/;
-}
-
-[local-style="24903867"] .backdrop {
-}
-
-[local-style="24903867"] .page {
-	min-height: 100vh /*!page_height_100vh*/;
-}
-
-[local-style="24903867"] .page_background {
-	background-color: initial /*!page_container_bgcolor*/;
-}
-
-[local-style="24903867"] .content_padding {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] bodycopy {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] bodycopy a {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] bodycopy a:hover {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] h1 {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] h1 a {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] h1 a:hover {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] h2 {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] h2 a {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] h2 a:hover {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] small {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] small a {
-}
-
-[data-predefined-style="true"] [local-style="24903867"] small a:hover {
-}
-		</style>
-		<div data-backdrop="slitscan" class="backdrop" data-id="24903867">
-			<div class="backdrop_viewport"></div>
-			<script type="application/json">{"settings":{"orientation":"vertical","scan_size":100,"scan_cycles":8,"scan_cycles_large":1,"wiggle":10,"target_speed":50,"color":"","hex":"#333","alpha":"0","mouse_interaction":true,"scroll_interaction":true,"backdrop_viewport_lock":false,"image":"137638384","requires_webgl":"true"},"image":{"src":"/img/4a927375-webgl-bg.jpg","width":2048,"height":2048}}</script>
+		<div id="site_menu" role="dialog" aria-label="Menu">
+		<div class="backdrop" data-backdrop="slitscan" aria-hidden="true"><script type="application/json">{"settings":{"orientation":"vertical","scan_size":100,"scan_cycles":8,"scan_cycles_large":1,"wiggle":10,"target_speed":50,"color":"","hex":"#333","alpha":"0","mouse_interaction":true,"scroll_interaction":true,"backdrop_viewport_lock":false,"image":"137638384","requires_webgl":"true"},"image":{"src":"/img/4a927375-webgl-bg.jpg","width":2048,"height":2048}}</script></div>
+		<div class="menu-inner">
+			<nav class="site-nav" aria-label="Projects">
+		<a class="site-title" href="/">Matthew Lau</a>
+		<p class="nav-heading">Projects</p>
+		<section class="nav-group">
+			<h2>Experiential</h2>
+			<ul>
+				<li><a href="/Ambi-latent-Space-2025">Ambi(latent) Space (2025)</a></li>
+				<li><a href="/Deconstructed-Ambiance-2025">Deconstructed Ambiance (2025)</a></li>
+				<li><a href="/Hello-I-m-Here-Communicators-2024">Hello I'm Here Communicators (2024)</a></li>
+				<li><a href="/Deconstructed-Colours-2023">Deconstructed Colours (2023)</a></li>
+				<li><a href="/Hey-What-s-Up-2022">Hey, What’s Up? (2022)</a></li>
+				<li><a href="/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition">The LASALLE Show: Faculty of Design BA (Hons) Graduate Exhibition Frontage (2022)</a></li>
+				<li><a href="/Hello-I-m-Here-Exhibition-2022" class="active" aria-current="page">Hello, I’m Here. (2022)</a></li>
+				<li><a href="/Singapore-Art-Week-2022-The-Oort-Cloud-and-the-Blue-Mountain">Singapore Art Week 2022: The Oort Cloud and Blue Mountain, Singapore (2022)</a></li>
+				<li><a href="/Children-s-Biennale-2021-The-Oort-Cloud-and-Blue-Mountain-Germany-2021">Children’s Biennale 2021: The Oort Cloud and Blue Mountain, Germany (2021)</a></li>
+				<li><a href="/KINDERBIENNALE-2021-The-Oort-Cloud-and-Blue-Mountain-Netherlands-2021">KINDERBIËNNALE 2021: The Oort Cloud and Blue Mountain, Netherlands (2021)</a></li>
+				<li><a href="/Breathing-Bytes-Proposal-2020">Breathing Bytes Proposal (2020)</a></li>
+			</ul>
+		</section>
+		<section class="nav-group">
+			<h2>Computational</h2>
+			<ul>
+				<li><a href="/Circulated-Densities-2025">Circulated Densities (2025)</a></li>
+				<li><span class="dead" title="Coming soon">Affective Commmunication Research (2021-2022)</span></li>
+				<li><a href="/A-Series-of-Explorations-and-Technical-Challenges-2021">A Series of Explorations and Technical Challenges (2021)</a></li>
+				<li><a href="/Archifest-2021-Sea-of-Debris-2021">Archifest 2021: Sea of Debris (2021)</a></li>
+				<li><a href="/Generative-3D-Form-Finding-Tool-2021">Generative 3D Form Finding Tool (2021)</a></li>
+				<li><a href="/DJ-Heard-That-2021">DJ Heard That?! (2021)</a></li>
+				<li><a href="/Generative-Type-Tool-2020">Generative Type Tool (2020)</a></li>
+			</ul>
+		</section>
+		<section class="nav-group">
+			<h2>Digital</h2>
+			<ul>
+				<li><a href="/The-Ascension-Algorithm-2023">The Ascension Algorithm (2023)</a></li>
+				<li><a href="/Neuewave-Web-Animations-2021">Neuewave Web Animations (2021)</a></li>
+				<li><a href="/Source-of-Happiness-2020">Source of Happiness (2020)</a></li>
+			</ul>
+		</section>
+	</nav>
+			<div class="menu-intro"><div class="prose">
+<p>I practice creative technology through a design lens, thriving at the intersection of computational design and emerging technologies. My experience spans from building AI-driven tools and interactive media for global brands to creating installations that translate computational systems into human-centered experiences.</p>
+<p>Whether prototyping for clients or developing my artistic practice, I combine technical experimentation with design-led thinking to deliver outcomes that are both innovative and tangible.</p>
+<hr>
+<p><a href="/About">Click here for more about me.</a></p>
+</div></div>
+			<footer class="site-footer site-footer--inline">
+		<a href="mailto:matt@matthewlaujh.com">matt@matthewlaujh.com</a>
+		<span class="studio-clock" aria-live="off"><span class="dot" aria-hidden="true"></span><span class="clock-text">Studio · Singapore</span></span>
+	</footer>
 		</div>
 	</div>
-					<div id="site_menu_page_overlay"></div>
-				</div>
-			</div>
-		</div>
-
-		<div class="main_container">
-
-			<div data-position="top" class="pinned pinned_top">
-	<div data-container="page" class="page_container overlay fixed exclude_mobile" local-style="24903869" data-id="24903869">
-		<div class="page container container_width clearfix" data-container="content" data-id="24903869">
-			<bodycopy class="bodycopy content content_padding">
-				<div class="page_content clearfix">
-					<projectcontent><div grid-row="" grid-pad="4" grid-gutter="8" grid-responsive="">
-	<div grid-col="7" grid-pad="4"><h1><a href="/" rel="history">Matthew Lau</a></h1><h1></h1>
-
-<br><h1>Projects:<br><br>Experiential:<br>
-<a href="/Ambi-latent-Space-2025" rel="history">Ambi(latent) Space (2025)</a><br><a href="/Deconstructed-Ambiance-2025" rel="history">Deconstructed Ambiance (2025)</a>
-<br><a href="/Hello-I-m-Here-Communicators-2024" rel="history">Hello I'm Here Communicators (2024)</a>
-<br>
-<a href="/Deconstructed-Colours-2023" rel="history">Deconstructed Colours (2023)</a><br>
-<a href="/Hey-What-s-Up-2022" rel="history">Hey, What’s Up? (2022)</a><br>
-<a href="/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition" rel="history">The LASALLE Show: Faculty of Design BA (Hons) Graduate Exhibition Frontage (2022)</a><br>
-<a href="/Hello-I-m-Here-Exhibition-2022" rel="history" class="active">Hello, I’m Here. (2022)</a><br>
-<a href="/Singapore-Art-Week-2022-The-Oort-Cloud-and-the-Blue-Mountain" rel="history">Singapore Art Week 2022: The Oort Cloud and Blue Mountain, Singapore (2022)</a><br>
-<a href="/Children-s-Biennale-2021-The-Oort-Cloud-and-Blue-Mountain-Germany-2021" rel="history">Children’s Biennale 2021: The Oort Cloud and Blue Mountain, Germany (2021)</a><br>
-<a href="/KINDERBIENNALE-2021-The-Oort-Cloud-and-Blue-Mountain-Netherlands-2021" rel="history">KINDERBIËNNALE 2021: The Oort Cloud and Blue Mountain, Netherlands (2021)</a><br><a href="/Breathing-Bytes-Proposal-2020" rel="history">Breathing Bytes Proposal (2020)</a>
-<br>—<br><br>Computational:<br>
-
-
-
-
-
-
-
-
-
-
-
-<a href="/Circulated-Densities-2025" rel="history">Circulated Densities (2025)</a><br><a href="Affective-Communication-Research-2021-2022-Ongoing-Project" rel="history">Affective Commmunication Research (2021-2022)</a> <br>
-<a href="/A-Series-of-Explorations-and-Technical-Challenges-2021" rel="history">A Series of Explorations and Technical Challenges (2021)</a><br><a href="/Archifest-2021-Sea-of-Debris-2021" rel="history">Archifest 2021: Sea of Debris (2021)</a><br><a href="/Generative-3D-Form-Finding-Tool-2021" rel="history">Generative 3D Form Finding Tool (2021)<br></a>
-<a href="/DJ-Heard-That-2021" rel="history">DJ Heard That?! (2021)</a><br>
-<a href="/Generative-Type-Tool-2020" rel="history">Generative Type Tool (2020)</a>
-<br>—<br><br>Digital:<br><a href="/The-Ascension-Algorithm-2023" rel="history">The Ascension Algorithm (2023)</a><br>
-<a href="/Neuewave-Web-Animations-2021" rel="history">Neuewave Web Animations (2021)</a><br><a href="/Source-of-Happiness-2020" rel="history">Source of Happiness (2020)</a>
-<br>—
-<br>
-</h1>
-
-</div>
-	<div grid-col="5" grid-pad="4"><h1></h1><h1>
-	</h1><br>
-</div>
-</div></projectcontent>
-				</div>
-			</bodycopy>
-		</div>
-		<div class="page_background"></div>
-		<style class="local-css" data-target="24903869">
-[local-style="24903869"] .container_width {
-}
-
-[local-style="24903869"] body {
-	background-color: initial /*!variable_defaults*/;
-}
-
-[local-style="24903869"] .backdrop {
-}
-
-[local-style="24903869"] .page {
-	min-height: 100vh /*!page_height_100vh*/;
-}
-
-[local-style="24903869"] .page_background {
-	background-color: initial /*!page_container_bgcolor*/;
-}
-
-[local-style="24903869"] .content_padding {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] bodycopy {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] bodycopy a {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] bodycopy a:hover {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] h1 {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] h1 a {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] h1 a:hover {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] h2 {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] h2 a {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] h2 a:hover {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] small {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] small a {
-}
-
-[data-predefined-style="true"] [local-style="24903869"] small a:hover {
-}
-		</style>
-	</div>
-			</div>
-
-			<div class="content_container">
-				<div data-view="Content">
-	<div data-container="page" class="page_container" local-style="25749851" data-id="25749851">
-		<div class="page container container_width clearfix" data-container="content" data-id="25749851">
-			<bodycopy class="bodycopy content content_padding">
-				<div class="page_content clearfix">
-					<projectcontent><div grid-row="" grid-pad="4" grid-gutter="8" grid-responsive="">
-	<div grid-col="2" grid-pad="4"></div>
-	<div grid-col="5" grid-pad="4"></div>
-	<div grid-col="5" grid-pad="4"></div>
-</div><div grid-row="" grid-pad="4" grid-gutter="8">
-	<div grid-col="2" grid-pad="4"></div>
-	<div grid-col="5" grid-pad="4"></div>
-	<div grid-col="5" grid-pad="4"></div>
-</div>
-<div grid-row="" grid-pad="4" grid-gutter="8" grid-responsive="">
-	<div grid-col="2" grid-pad="4"></div>
-	<div grid-col="5" grid-pad="4" class=""><br><br><br><br><br><br><br><br>
-<br>
-</div>
-	<div grid-col="5" grid-pad="4">
-<h1>Completed as part of the BA in Design Communication level 3 programme at LASALLE.&nbsp;<br><br>Part of a series of work exploring communication through light — other works in series include <a href="/Hello-I-m-Here-Communicators-2024" rel="history"><i>Hello, I’m Here Communicators (2024)</i></a>. Culminated from research in <i><a href="Affective-Communication-Research-2021-2022-Ongoing-Project" rel="history">Affective Communication Research (2021-2022)</a></i>.<br><br>Watch the <a href="https://vimeo.com/702284627" target="_blank">Concept Reel here</a> and the <a href="https://vimeo.com/702284654" target="_blank">Exhibition View here</a>.
-<br>—<br>
-<br>
-The global pandemic has made lasting changes in how we work, learn and play, making virtual communication the primary form of human interaction. People spend more time socially interacting digitally through screens, or when physically present, their facial expressions are covered by masks. This has led to people losing touch with how they look and feel when emoting. As emotions are at the core of human wellbeing, they are critical in social interactions and relationships, influencing perception and impacting how people interact intelligently.<br><br>
-As even the slightest conveyance of emotion can change how people interact and are essential for communication serving as indicators that communication is reciprocated. The project's objective is to use open-source hardware and software to design interfaces and interactions that help audiences get back in touch with and communicate their emotions. <br><br>
-So, how might creatives in the intersection of design and technology leverage Affective Computing and Affective Presence concepts to design interfaces and interactions capable of integrating the recognition, interpretation and communication of affective states through open-source hardware and software to communicate the perceptions of sense and emotion through the extension of the human faculty?<br>
-<br>
-<i>Hello, I'm Here (2022)</i> explores creative technology applications through an interactive and immersive installation. Utilising machine learning-based facial expression recognition as a means of a future interface that encourages audiences to recognise, interpret, and communicate their emotions. Audiences non-verbally communicate their feelings, which are then abstracted into a series of coloured LEDs, putting them in touch with their emotions as well as understanding the affective state of others, reflecting their collective emotional state allowing invisible, non-tangible feelings of emotions to be visualised and felt.<br>
-</h1><h1>—</h1>
-<br>
-</div>
-</div></projectcontent>
-				</div>
-			</bodycopy>
-		</div>
-		<div class="page_background"></div>
-		<style class="local-css" data-target="25749851">
-[local-style="25749851"] .container_width {
-}
-
-[local-style="25749851"] body {
-	background-color: initial /*!variable_defaults*/;
-}
-
-[local-style="25749851"] .backdrop {
-	width: 100% /*!background_cover*/;
-}
-
-[local-style="25749851"] .page {
-	min-height: 100vh /*!page_height_100vh*/;
-}
-
-[local-style="25749851"] .page_background {
-	background-color: initial /*!page_container_bgcolor*/;
-}
-
-[local-style="25749851"] .content_padding {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] bodycopy {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] bodycopy a {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] bodycopy a:hover {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] h1 {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] h1 a {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] h1 a:hover {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] h2 {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] h2 a {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] h2 a:hover {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] small {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] small a {
-}
-
-[data-predefined-style="true"] [local-style="25749851"] small a:hover {
-}
-
-[local-style="25749851"] .container {
-	align-items: flex-end /*!vertical_bottom*/;
-	-webkit-align-items: flex-end /*!vertical_bottom*/;
-	margin-left: 0 /*!content_left*/;
-}
-		</style>
-		<div data-backdrop="wallpaper" class="backdrop" data-id="25749851">
-			<div class="backdrop_viewport"></div>
-			<script type="application/json">{"settings":{"scale_option":"contain","repeat_image":false,"image_alignment":"image_center_center","margin":25,"pattern_size":75,"limit_size":false,"overlay_color":"rgba(0, 0, 0, 0.5)","bg_color":"rgb(255, 255, 255)","cycle_images":true,"autoplay":true,"slideshow_transition":"fade","transition_timeout":2.5,"transition_duration":0.5,"randomize":false,"arrow_navigation":true,"focus_object":"{}","backdrop_viewport_lock":false,"use_image_focus":"false","image":"142192304","requires_webgl":"false"},"images":[{"id":142192303,"src":"/img/83e88415-matthew-helloImHere-1.jpg","name":"matthew-helloImHere-1.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192304,"src":"/img/8a6268c6-matthew-helloImHere-2.jpg","name":"matthew-helloImHere-2.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192305,"src":"/img/678e3980-matthew-helloImHere-3.jpg","name":"matthew-helloImHere-3.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192307,"src":"/img/651338b9-matthew-helloImHere-4.jpg","name":"matthew-helloImHere-4.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192309,"src":"/img/e64444f3-matthew-helloImHere-5.jpg","name":"matthew-helloImHere-5.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192310,"src":"/img/0436a820-matthew-helloImHere-6.jpg","name":"matthew-helloImHere-6.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192311,"src":"/img/df2f38b8-matthew-helloImHere-7.jpg","name":"matthew-helloImHere-7.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192312,"src":"/img/f7699910-matthew-helloImHere-8.jpg","name":"matthew-helloImHere-8.jpg","width":1800,"height":1200,"exclude_from_backdrop":false},{"id":142192313,"src":"/img/9683ccb4-matthew-helloImHere-9.jpg","name":"matthew-helloImHere-9.jpg","width":1800,"height":1200,"exclude_from_backdrop":false}]}</script>
-		</div>
-	</div>
-				</div>
-			</div>
-
-			<div data-position="bottom" class="pinned pinned_bottom">
-	<div data-container="page" class="page_container overlay fixed exclude_mobile" local-style="24903870" data-id="24903870">
-		<div class="page container container_width clearfix" data-container="content" data-id="24903870">
-			<bodycopy class="bodycopy content content_padding">
-				<div class="page_content clearfix">
-					<projectcontent><div grid-row="" grid-pad="4" grid-gutter="8" grid-responsive=""><div grid-col="6" grid-pad="4" class=""><h1><a href="mailto:matt@matthewlaujh.com">matt@matthewlaujh.com</a></h1></div><div grid-col="6" grid-pad="4"></div></div></projectcontent>
-				</div>
-			</bodycopy>
-		</div>
-		<div class="page_background"></div>
-		<style class="local-css" data-target="24903870">
-[local-style="24903870"] .container_width {
-}
-
-[local-style="24903870"] body {
-	background-color: initial /*!variable_defaults*/;
-}
-
-[local-style="24903870"] .backdrop {
-}
-
-[local-style="24903870"] .page {
-}
-
-[local-style="24903870"] .page_background {
-	background-color: initial /*!page_container_bgcolor*/;
-}
-
-[local-style="24903870"] .content_padding {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] bodycopy {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] bodycopy a {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] bodycopy a:hover {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] h1 {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] h1 a {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] h1 a:hover {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] h2 {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] h2 a {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] h2 a:hover {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] small {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] small a {
-}
-
-[data-predefined-style="true"] [local-style="24903870"] small a:hover {
-}
-		</style>
-	</div>
-			</div>
-		</div>
 	</body>
 </html>

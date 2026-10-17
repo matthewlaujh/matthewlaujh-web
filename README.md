@@ -9,10 +9,9 @@ src/
   pages/<slug>.json    one file per page: title, content (Cargo HTML), local CSS, backdrop, images
   pinned/nav.json      the pinned-top "Nav" page (project list, desktop only)
   pinned/info.json     the pinned-bottom "Info" page (email, desktop only)
-  css/cargo-base.css   Cargo's engine stylesheet exactly as it was served with the site
-  css/stylesheet.css   the site's own Cargo stylesheet (fonts, type, layout presets)
-  css/site.css         glue: backdrop/wallpaper/menu styles that Cargo injected from JS
-  js/site.js           viewport base unit (Cargo formula), mobile switch, mobile menu
+  lib/convert.js       Cargo grid/<br> markup -> semantic HTML (p, h2, ul, hr) + nav model
+  css/site.css         the whole stylesheet: fonts, tokens, layout, backdrops, menu, lights-off
+  js/site.js           viewport base unit (Cargo formula), mobile menu, studio clock, lights-off, widow fix
   js/backdrops.js      WebGL slit-scan backdrop + wallpaper slideshow, no dependencies
   fonts/               Austin News Deck + Atlas Grotesk (your own uploads from Cargo)
   img/                 images (see "Images" below)
@@ -53,6 +52,29 @@ take the Cargo site down — the script reads from `freight.cargo.site`.
 3. Build settings: Framework preset **None**, build command **`node build.js`** (or leave empty —
    `public/` is committed), build output directory **`public`**.
 4. Add the custom domain `matthewlaujh.com`, then move DNS from Cargo to Cloudflare.
+
+## v2 — changes from the Cargo baseline
+
+- **Semantic markup**: Cargo's `<div grid-row><h1>…<br><br>…` is converted at build time into
+  `<nav>`/`<main>`/`<article>` with real `<p>`, `<h2>`, `<ul>`, `<hr>`. The nav is generated from
+  `src/pinned/nav.json` once (Cargo rendered it twice on the home page, on top of itself).
+- **Type**: tokenised 1.2-ratio scale (`--fs-meta .85 · small 1 · body 1.2 · label 1.45 rem`),
+  line-height 1.3, paragraph gap 0.55em, `text-wrap: pretty` with a JS widow fallback.
+  The rem base still follows Cargo's viewport formula, so sizes track the old site.
+- **Colour / states**: tokens in `:root`; hover underline on links, focus outlines, rules at 34%.
+- **Slit-scan backdrop**: time-based motion (Cargo advanced per frame → 2× speed on 120 Hz);
+  the `dimensions` uniform now uses the value Pixi actually rendered with (the canvas pixel size),
+  which restores the multi-band look; scroll coupling eased with inertia; pauses off-screen,
+  under `prefers-reduced-motion`, and when the tab is hidden; `?tune` opens live sliders that print
+  settings to paste into the page JSON.
+- **Wallpaper**: no autoplay under reduced motion; overlay colour is a CSS token.
+- **Studio clock** in the footer (Mon–Fri 09:00–19:00 Asia/Singapore) with a clockwise-filling dot.
+- **Lights-off** outside those hours: darker palette, backdrop dimmed and slowed (0.35×); the
+  first click / key / scroll / tap turns the lights on for the session. `?lights=off|on` to test.
+- **Mobile**: ☰ toggles (and closes) the full-screen menu, which now carries the nav, the intro
+  and the footer.
+- **Dropped**: Cargo's engine CSS, grid attributes, `data-css-preset` scaffolding, dead nav links
+  rendered as plain text.
 
 ## What was ported, and how
 
