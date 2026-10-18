@@ -253,15 +253,19 @@ function fieldMain() {
 		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" data-kind="${k}" data-cat="${esc(w.category)}" data-year="${String(w.year).slice(0, 4)}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label"><i class="k${kcls(k)}" aria-hidden="true"></i>${esc(w.title)}, ${w.year}</span></a>`;
 	});
 	const marks = nav.groups.map(g => `\t\t\t<span class="cluster" data-cat="${esc(g.label)}">${esc(g.label)}</span>`).join('\n');
-	const side = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${works.filter(x => x.category === g.label).map(w => `\t\t\t<a href="${url(w.slug)}" data-i="${works.indexOf(w)}"><i class="k${kcls((w.meta || {}).kind)}" aria-hidden="true"></i>${esc(w.title)}<small>${w.year}</small></a>`).join('\n')}`).join('\n');
+	/* the timeline: one lane per category, one column per year, newest first */
+	const yrs = [...new Set(works.map(w => +String(w.year).slice(0, 4)))].sort((a, b) => b - a);
+	const lanes = nav.groups.map(g => `\t\t\t<div class="lane"><span class="lane-label">${esc(g.label)}</span>${yrs.map(y => `<div class="cell">${works.filter(w => w.category === g.label && +String(w.year).slice(0, 4) === y).map(w => `<a href="${url(w.slug)}" data-i="${works.indexOf(w)}" title="${esc(w.title)}"><i class="k${kcls((w.meta || {}).kind)}" aria-hidden="true"></i>${esc(w.title)}</a>`).join('')}</div>`).join('')}</div>`).join('\n');
+	const axis = `\t\t\t<div class="axis"><span class="lane-label"></span>${yrs.map(y => `<span>${y}</span>`).join('')}</div>`;
 	return `<main class="field-page">
 		<h1 class="visually-hidden">All projects</h1>
 		<div class="field" id="field" data-cats="${esc(nav.groups.map(g => g.label).join('|'))}">
 ${marks}
 ${tiles.join('\n')}
 		</div>
-		<nav class="field-side" aria-label="Projects">
-${side}
+		<nav class="field-time" aria-label="Projects by year" style="--n:${yrs.length}">
+${axis}
+${lanes}
 		</nav>
 		<p class="hint">Projects sit near their kind. Hover a title, or wander. Click to open.</p>
 		<p class="count"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>

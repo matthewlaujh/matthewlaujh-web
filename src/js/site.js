@@ -159,7 +159,7 @@
 		if (!f) return;
 		var tiles = [].slice.call(f.querySelectorAll('a'));
 		var marks = [].slice.call(f.querySelectorAll('.cluster'));
-		var side = [].slice.call(document.querySelectorAll('.field-side a'));
+		var side = [].slice.call(document.querySelectorAll('.field-time a'));
 		var mobile = window.matchMedia('(max-width: 800px)');
 		var px = 0, py = 0, tx = 0, ty = 0, raf = null;
 		var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -176,16 +176,16 @@
 
 		/* ---- the map: clusters by category, kind as a drift, no overlaps ---- */
 		var cats = (f.getAttribute('data-cats') || '').split('|');
-		var centres = [[0.24, 0.42], [0.64, 0.74], [0.74, 0.18]];      // per category, as fractions of the free area
+		var centres = [[0.2, 0.4], [0.55, 0.72], [0.82, 0.22]];      // per category, as fractions of the free area
 		var drift = { art: [-1, 1], both: [0, 0], design: [1, -1] };
 		function layout() {
 			if (mobile.matches) { tiles.forEach(function (t) { t.style.cssText = ''; }); return; }
 			var seed = 11; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
 			var pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 28;
-			var sideEl = document.querySelector('.field-side'), sideW = sideEl ? sideEl.getBoundingClientRect().right : pad;
-			var x0 = sideW + 40, x1 = innerWidth - pad, y0 = 80, y1 = innerHeight - 130;
+			var timeEl = document.querySelector('.field-time'), timeB = timeEl ? timeEl.getBoundingClientRect().bottom : 80;
+			var x0 = pad + 20, x1 = innerWidth - pad - 20, y0 = timeB + 50, y1 = innerHeight - 130;
 			var W = x1 - x0, H = y1 - y0;
-			var tw = Math.max(84, Math.min(190, W * 0.13));                 // tile width scales with the free area
+			var tw = Math.max(84, Math.min(190, W * 0.11));                 // tile width scales with the free area
 			var years = tiles.map(function (t) { return +t.getAttribute('data-year') || 0; });
 			var ymin = Math.min.apply(null, years), ymax = Math.max.apply(null, years);
 			var nodes = tiles.map(function (t) {
@@ -309,7 +309,7 @@
 			var bd = backdropInstance();
 			if (bd && bd.show) { bd.settings.fade = 0.7; bd.show(+el.getAttribute('data-i')); setBackdropSpeed(2.2); }
 			f.classList.add('leaving');
-			var sideEl = document.querySelector('.field-side'); if (sideEl) sideEl.classList.add('leaving');
+			var sideEl = document.querySelector('.field-time'); if (sideEl) sideEl.classList.add('leaving');
 			if (d.animate) {
 				d.animate([
 					{ left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', opacity: 1, filter: 'blur(0px)' },
@@ -415,7 +415,8 @@
 			.then(function (text) { return leaving.then(function () { return text; }); })
 			.then(function (text) {
 				var doc = new DOMParser().parseFromString(text, 'text/html');
-				if (!opts.pop) history.pushState({ ml: 1 }, '', href);
+				if (!doc.documentElement.getAttribute('data-page') || !doc.body.querySelector('main')) throw new Error('not a site page');
+				if (!opts.pop) { try { history.pushState({ ml: 1 }, '', href); } catch (x) {} }
 				swap(doc);
 				navigating = false;
 			})
@@ -484,7 +485,7 @@
 			navigate(a.href);
 		});
 		addEventListener('popstate', function () { navigate(location.href, { pop: true }); });
-		history.replaceState({ ml: 1 }, '', location.href);
+		try { history.replaceState({ ml: 1 }, '', location.href); } catch (x) {}
 	}
 
 	/* ---------------- init ---------------- */
