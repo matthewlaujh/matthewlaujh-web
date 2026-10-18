@@ -125,10 +125,10 @@ function barHTML(page) {
 		: `<a class="site-title back" href="${url(site.homepage)}" aria-label="Home"><span>←</span> <i class="nm">${nav.title}</i></a>`;
 	return `<header class="bar">
 		<div class="bar-left">${left}</div>
-		<button class="bar-title" id="bar_title" type="button" aria-expanded="false" aria-controls="dropdown">${mid}${midYear ? ` <b>${midYear}</b>` : ''} <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M1 3l4 4 4-4"/></svg></button>
+		${isHome ? '<span></span>' : `<button class="bar-title" id="bar_title" type="button" aria-expanded="false" aria-controls="dropdown">${mid}${midYear ? ` <b>${midYear}</b>` : ''} <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M1 3l4 4 4-4"/></svg></button>`}
 		<div class="bar-right"></div>
 	</header>
-	${dropdownHTML(page.slug)}`;
+	${isHome ? '' : dropdownHTML(page.slug)}`;
 }
 
 function footerHTML() {
