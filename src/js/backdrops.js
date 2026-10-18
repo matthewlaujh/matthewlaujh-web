@@ -664,7 +664,7 @@ var VERT = [
 	var DFRAG = [
 		'precision highp float;',
 		'varying vec2 vUv;',
-		'uniform sampler2D uPrev;', 'uniform sampler2D uSrc;',
+		'uniform sampler2D uPrev;', 'uniform sampler2D uSrc;', 'uniform sampler2D uSrc2;', 'uniform float uMix;', 'uniform vec2 uImg2;',
 		'uniform vec2 uRes;', 'uniform vec2 uImg;', 'uniform float uTime;',
 		'uniform vec2 uMouse;', 'uniform float uStrength;', 'uniform float uBlend;', 'uniform float uSeed;',
 		'uniform float uReset;',
@@ -674,7 +674,7 @@ var VERT = [
 		'float fbm(vec2 p){ float v = 0.0, a = 0.5; for (int i = 0; i < 4; i++) { v += a * noise(p); p = p * 2.03 + 17.1; a *= 0.5; } return v; }',
 		'vec2 curl(vec2 p){ float e = 0.02; float n1 = fbm(p + vec2(0.0, e)), n2 = fbm(p - vec2(0.0, e)), n3 = fbm(p + vec2(e, 0.0)), n4 = fbm(p - vec2(e, 0.0));',
 		'  return vec2(n1 - n2, -(n3 - n4)) / (2.0 * e); }',
-		'vec2 coverUv(vec2 uv){ float ra = uRes.x / uRes.y, ia = uImg.x / uImg.y; vec2 s = vec2(1.0);',
+		'vec2 coverUv(vec2 uv, vec2 img){ float ra = uRes.x / uRes.y, ia = img.x / img.y; vec2 s = vec2(1.0);',
 		'  if (ra > ia) s.y = ia / ra; else s.x = ra / ia; return (uv - 0.5) * s + 0.5; }',
 		'void main(){',
 		'  vec2 uv = vUv; vec2 asp = vec2(uRes.x / uRes.y, 1.0);',
@@ -686,7 +686,7 @@ var VERT = [
 		'  vec3 prev = texture2D(uPrev, q).rgb * 0.4',
 		'    + texture2D(uPrev, q + vec2(px.x, 0.0)).rgb * 0.15 + texture2D(uPrev, q - vec2(px.x, 0.0)).rgb * 0.15',
 		'    + texture2D(uPrev, q + vec2(0.0, px.y)).rgb * 0.15 + texture2D(uPrev, q - vec2(0.0, px.y)).rgb * 0.15;',
-		'  vec3 src = texture2D(uSrc, coverUv(uv)).rgb;',
+		'  vec3 src = mix(texture2D(uSrc, coverUv(uv, uImg)).rgb, texture2D(uSrc2, coverUv(uv, uImg2)).rgb, uMix);',
 		'  float k = uBlend + uReset;',
 		'  vec3 col = mix(prev, src, k);',
 		'  gl_FragColor = vec4(col, 1.0);',
@@ -731,10 +731,14 @@ var VERT = [
 		this.buf = buf;
 		this.u = {};
 		var self = this;
-		['uPrev', 'uSrc', 'uRes', 'uImg', 'uTime', 'uMouse', 'uStrength', 'uBlend', 'uSeed', 'uReset'].forEach(function (n) { self.u[n] = gl.getUniformLocation(self.stepProg, n); });
+		['uPrev', 'uSrc', 'uSrc2', 'uMix', 'uImg2', 'uRes', 'uImg', 'uTime', 'uMouse', 'uStrength', 'uBlend', 'uSeed', 'uReset'].forEach(function (n) { self.u[n] = gl.getUniformLocation(self.stepProg, n); });
 		this.uShow = gl.getUniformLocation(this.showProg, 'uTex');
+		gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
 		this.src = this.texture(); this.srcW = 2; this.srcH = 2;
-		gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 2, 2, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array(12));
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 2, 2, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array(12));
+		this.src2 = this.texture(); this.src2W = 2; this.src2H = 2;
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 2, 2, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array(12));
+		this.mix = 0; this.mixTarget = 0; this.fading = false;
 	};
 	Diffuse.prototype.texture = function () {
 		var gl = this.gl, t = gl.createTexture();
@@ -769,15 +773,31 @@ var VERT = [
 		var img = new Image(); img.crossOrigin = 'anonymous';
 		img.onload = function () {
 			if (self.destroyed) return;
+			if (self.pending !== img) return; // a newer request superseded this one
 			var gl = self.gl;
-			gl.bindTexture(gl.TEXTURE_2D, self.src);
 			gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+			if (first) {
+				gl.bindTexture(gl.TEXTURE_2D, self.src);
+				gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+				self.srcW = img.naturalWidth; self.srcH = img.naturalHeight;
+				self.reset = 1; self.el.classList.add('loaded'); self.start();
+				return;
+			}
+			// bake whatever the current blend is into src, then fade src -> src2
+			if (self.mix > 0) { self.commitFade(); }
+			gl.bindTexture(gl.TEXTURE_2D, self.src2);
 			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
-			self.srcW = img.naturalWidth; self.srcH = img.naturalHeight;
-			if (first) { self.reset = 1; self.el.classList.add('loaded'); self.start(); }
-			else self.reset = Math.max(self.reset, 0.08); // let the new image bleed in quickly, then settle
+			self.src2W = img.naturalWidth; self.src2H = img.naturalHeight;
+			self.mix = 0; self.fading = true; self.start();
 		};
+		this.pending = img;
 		img.src = im.src;
+	};
+	/* the fade finished (or was interrupted): src2 becomes src */
+	Diffuse.prototype.commitFade = function () {
+		var t = this.src; this.src = this.src2; this.src2 = t;
+		var w = this.srcW, h = this.srcH; this.srcW = this.src2W; this.srcH = this.src2H; this.src2W = w; this.src2H = h;
+		this.mix = 0; this.fading = false;
 	};
 	/* swap the source image (scroll cycling / API) */
 	Diffuse.prototype.show = function (i) {
@@ -813,6 +833,10 @@ var VERT = [
 		var aPos = gl.getAttribLocation(this.stepProg, 'aPos'); gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
 		gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.a.t); gl.uniform1i(this.u.uPrev, 0);
 		gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, this.src); gl.uniform1i(this.u.uSrc, 1);
+		gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, this.src2); gl.uniform1i(this.u.uSrc2, 2);
+		if (this.fading) { this.mix = Math.min(1, this.mix + dt / (s.fade || 1.6)); }
+		var e = this.mix * this.mix * (3 - 2 * this.mix); // ease in-out
+		gl.uniform1f(this.u.uMix, e); gl.uniform2f(this.u.uImg2, this.src2W, this.src2H);
 		gl.uniform2f(this.u.uRes, this.w, this.h); gl.uniform2f(this.u.uImg, this.srcW, this.srcH);
 		gl.uniform1f(this.u.uTime, this.time); gl.uniform2f(this.u.uMouse, this.mouse[0], this.mouse[1]);
 		gl.uniform1f(this.u.uStrength, (s.strength == null ? 0.7 : s.strength) * this.data.speedScale);
@@ -828,6 +852,7 @@ var VERT = [
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 		var t = this.a; this.a = this.b; this.b = t;
 		this.reset = this.reset > 0.02 ? this.reset * 0.9 : 0;
+		if (this.fading && this.mix >= 1) this.commitFade();
 	};
 	Diffuse.prototype.destroy = function () {
 		this.destroyed = true; this.pause();

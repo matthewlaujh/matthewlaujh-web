@@ -105,7 +105,7 @@
 				im.src = src;
 				/* the backdrop takes on the hovered project too */
 				var bd = backdropInstance();
-				if (bd && bd.show && a.hasAttribute('data-i')) { bd.show(+a.getAttribute('data-i')); bd.reset = Math.max(bd.reset || 0, 0.12); }
+				if (bd && bd.show && a.hasAttribute('data-i')) bd.show(+a.getAttribute('data-i'));
 				if (im.complete && im.naturalWidth) c.classList.add('on');
 				setBackdropSpeed(2.2);
 				if (!raf) raf = requestAnimationFrame(loop);
