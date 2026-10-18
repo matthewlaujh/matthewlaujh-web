@@ -36,6 +36,19 @@
  },
  "images": [
   {
+   "id": 137675446,
+   "src": "/img/dd55cb3b-generativeTypeTool-shape.webm",
+   "name": "generativeTypeTool-shape.gif",
+   "width": 1080,
+   "height": 720,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/dd55cb3b-generativeTypeTool-shape.gif",
+   "mp4": "/img/dd55cb3b-generativeTypeTool-shape.mp4",
+   "poster": "/img/dd55cb3b-generativeTypeTool-shape-poster.jpg",
+   "thumb": "/img/dd55cb3b-generativeTypeTool-shape-s.webp",
+   "poster_time": 16.5
+  },
+  {
    "id": 137675442,
    "src": "/img/1b5f6554-generativeTypeTool-AZ.webm",
    "name": "generativeTypeTool-AZ.gif",
@@ -70,18 +83,6 @@
    "mp4": "/img/2fdc8dcd-generativeTypeTool-scaleShape.mp4",
    "poster": "/img/2fdc8dcd-generativeTypeTool-scaleShape-poster.jpg",
    "thumb": "/img/2fdc8dcd-generativeTypeTool-scaleShape-s.webp"
-  },
-  {
-   "id": 137675446,
-   "src": "/img/dd55cb3b-generativeTypeTool-shape.webm",
-   "name": "generativeTypeTool-shape.gif",
-   "width": 1080,
-   "height": 720,
-   "exclude_from_backdrop": false,
-   "original": "/img-original/dd55cb3b-generativeTypeTool-shape.gif",
-   "mp4": "/img/dd55cb3b-generativeTypeTool-shape.mp4",
-   "poster": "/img/dd55cb3b-generativeTypeTool-shape-poster.jpg",
-   "thumb": "/img/dd55cb3b-generativeTypeTool-shape-s.webp"
   },
   {
    "id": 137675447,

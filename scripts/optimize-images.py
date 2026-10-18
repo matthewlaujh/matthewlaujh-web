@@ -38,6 +38,14 @@ def save_webp(im, dst, max_w):
 
 mapping = {}   # original filename -> {src, thumb, [mp4, poster], width, height}
 
+# a page can ask for its poster from a particular second of a gif ("poster_time")
+poster_at = {}
+for f in os.listdir(PAGES):
+    try:
+        for im in json.load(open(os.path.join(PAGES, f))).get('images', []):
+            if im.get('poster_time') is not None: poster_at[os.path.basename(im.get('original') or im['src']).rsplit('.', 1)[0]] = float(im['poster_time'])
+    except Exception: pass
+
 for f in sorted(os.listdir(ORIG)):
     src = os.path.join(ORIG, f)
     base, ext = os.path.splitext(f)
@@ -67,9 +75,14 @@ for f in sorted(os.listdir(ORIG)):
             subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-vf', vf, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '32', '-row-mt', '1', '-an', webm], check=True)
         if not newer(mp4, src):
             subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-vf', vf, '-c:v', 'libx264', '-preset', 'slow', '-crf', '23', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an', mp4], check=True)
-        if not newer(poster, src):
-            im.seek(min(5, getattr(im, 'n_frames', 1) - 1)); fr = im.convert('RGB')
-            fr.save(poster, 'JPEG', quality=84, optimize=True, progressive=True)
+        if not newer(poster, src) or base in poster_at:
+            if base in poster_at:
+                # pull the frame from the mp4 at that time
+                subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-ss', str(poster_at[base]), '-i', mp4, '-frames:v', '1', '-q:v', '2', poster], check=True)
+                fr = Image.open(poster).convert('RGB')
+            else:
+                im.seek(min(5, getattr(im, 'n_frames', 1) - 1)); fr = im.convert('RGB')
+                fr.save(poster, 'JPEG', quality=84, optimize=True, progressive=True)
             save_webp(fr, thumb, THUMB_W)
         mapping[f] = {'src': '/img/' + base + '.webm', 'mp4': '/img/' + base + '.mp4', 'poster': '/img/' + base + '-poster.jpg', 'thumb': '/img/' + base + '-s.webp', 'width': ew, 'height': eh}
     else:
