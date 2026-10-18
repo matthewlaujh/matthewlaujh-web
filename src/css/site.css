@@ -67,7 +67,7 @@ html[data-lights="off"] .backdrop canvas { filter: saturate(.6); }
 	position: sticky; top: 0; z-index: 20;
 	display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
 	height: var(--bar-h); padding: 0 var(--pad);
-	mix-blend-mode: difference; color: #fff;
+	color: #fff;
 }
 .bar .back span { display: inline-block; transition: transform .25s var(--ease); }
 .bar .back:hover span { transform: translateX(-4px); }
@@ -106,7 +106,7 @@ html[data-lights="off"] .backdrop canvas { filter: saturate(.6); }
 	position: fixed; left: 0; right: 0; bottom: 0; z-index: 15;
 	display: flex; justify-content: space-between; align-items: center; gap: 16px;
 	padding: 14px var(--pad); color: #fff;
-	mix-blend-mode: difference; pointer-events: none;
+	pointer-events: none;
 }
 .site-footer a, .site-footer .studio-clock { pointer-events: auto; }
 .rights { opacity: .7; }

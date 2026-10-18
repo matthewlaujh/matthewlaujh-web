@@ -129,11 +129,18 @@
 			if (c.classList.contains('on') || Math.abs(mx - x) + Math.abs(my - y) > 0.5) raf = requestAnimationFrame(loop);
 		}
 		var links = document.querySelectorAll('.marquee a[data-img]');
+		/* warm the cache so the first hover on each title is instant */
+		var warm = function () { for (var k = 0; k < links.length; k++) { var pre = new Image(); pre.src = links[k].getAttribute('data-img'); } };
+		if ('requestIdleCallback' in window) requestIdleCallback(warm); else setTimeout(warm, 800);
 		for (var i = 0; i < links.length; i++) (function (a) {
 			a.addEventListener('mouseenter', function () {
-				im.src = a.getAttribute('data-img');
+				var src = a.getAttribute('data-img');
 				cap.innerHTML = '<span>' + a.getAttribute('data-title') + '</span><span>' + a.getAttribute('data-year') + '</span>';
-				c.classList.add('on'); setBackdropSpeed(2.2);
+				c.classList.remove('on');
+				im.onload = function () { if (im.src.indexOf(src) >= 0 && a.matches(':hover')) c.classList.add('on'); };
+				im.src = src;
+				if (im.complete && im.naturalWidth) c.classList.add('on');
+				setBackdropSpeed(2.2);
 				if (!raf) raf = requestAnimationFrame(loop);
 			});
 			a.addEventListener('mouseleave', function () { c.classList.remove('on'); setBackdropSpeed(1); });

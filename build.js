@@ -90,6 +90,13 @@ const years = works.map(w => parseInt(w.year, 10)).filter(Boolean);
 const yearRange = Math.min(...years) + '–' + Math.max(...years);
 
 /* ------------------------------------------------------------- fragments */
+/* the hover preview wants a small still: first non-GIF image, else the GIF's poster JPG */
+function hoverImage(w) {
+	const still = w.images.find(im => !/\.gif$/i.test(im.src));
+	if (still) return still.src;
+	return w.cover.src.replace(/\.gif$/i, '-poster.jpg');
+}
+
 function splitTitle(t) {
 	// each letter gets its own span so the hover wave / rise can stagger
 	return t.split(' ').map((word, wi) => `<span class="w">${[...word].map((c, k) => `<span class="ch" style="--d:${(wi * 6 + k) * 18}ms">${esc(c)}</span>`).join('')}</span>`).join(' ');
@@ -158,7 +165,7 @@ function homeMain() {
 	const list = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${g.items.map(it => {
 		if (it.href && workBySlug[it.href]) {
 			const w = workBySlug[it.href];
-			return `\t\t\t<a href="${url(w.slug)}" data-img="${w.cover.src}" data-title="${esc(w.title)}" data-year="${w.year}">${splitTitle(w.title)}<small>${w.year}</small></a>`;
+			return `\t\t\t<a href="${url(w.slug)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}">${splitTitle(w.title)}<small>${w.year}</small></a>`;
 		}
 		return `\t\t\t<span class="dead" title="Coming soon">${splitTitle(it.text.replace(/\s*\(.*\)$/, ''))}<small>${(it.text.match(/\((.*)\)/) || [])[1] || ''}</small></span>`;
 	}).join('\n')}`).join('\n');
