@@ -65,7 +65,9 @@ html[data-page="about"][data-to]:not([data-to="about"]), html[data-page="about"]
 html[data-page="about"] main { animation: pagein .7s .15s var(--ease) both; }
 html.leaving .home { opacity: 0; transform: translateY(-10px); transition: opacity .55s var(--ease), transform .6s var(--ease); }
 html.leaving .project, html.leaving .about { opacity: 0; transition: opacity .4s var(--ease); }
-html.leaving .bar-title { opacity: 0; transform: translateY(-10px); transition: opacity .35s, transform .4s var(--ease); }
+html.leaving[data-to][data-page] .bar-title { animation: barout .6s var(--ease) both; pointer-events: none; }
+html.leaving[data-to="home"][data-page] .bar-title { animation-duration: .8s; }
+@keyframes barout { to { opacity: 0; transform: translateY(-12px); } }
 .backdrop.off { opacity: 0 !important; transition: opacity .9s ease !important; }
 .veil--off { background: transparent; }
 main { animation: pagein .5s var(--ease) both; }
@@ -294,8 +296,10 @@ html:not([data-page="home"]) .bar-title { animation: barin .7s .45s var(--ease) 
 /* between two capsule pages the name stays as it is; only the title changes */
 html[data-from]:not([data-from="home"]) .bar .site-title, html[data-from]:not([data-from="home"]) .bar .back span { animation: none; }
 /* leaving for home: the capsule and arrow fold away before the swap */
-html.leaving[data-to="home"] .bar .site-title { animation: capsule .9s .1s var(--ease) reverse both; }
-html.leaving[data-to="home"] .bar .back span { animation: arrow .7s var(--ease) reverse both; }
+html.leaving[data-to="home"][data-page] .bar .site-title { animation: capsule-out 1s .2s var(--ease) forwards; }
+html.leaving[data-to="home"][data-page] .bar .back span { animation: arrow-out .8s var(--ease) forwards; }
+@keyframes capsule-out { to { background-color: transparent; border-color: transparent; transform: translateX(-15px); } }
+@keyframes arrow-out { to { opacity: 0; max-width: 0; margin-right: -6px; transform: translateX(6px); } }
 @keyframes barin { from { opacity: 0; transform: translateY(-10px); } }
 @keyframes capsule { from { background-color: transparent; border-color: transparent; transform: translateX(-15px); } }
 @keyframes arrow { from { opacity: 0; max-width: 0; margin-right: -6px; transform: translateX(6px); } to { opacity: 1; max-width: 24px; margin-right: 0; transform: none; } }

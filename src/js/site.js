@@ -436,10 +436,12 @@
 		html.setAttribute('data-to', to);
 		var dd = document.getElementById('dropdown'), sc = document.getElementById('scrim');
 		if (dd) dd.classList.remove('on'); if (sc) sc.classList.remove('on');
-		if (page === 'home') { if (!html.classList.contains('leaving')) { html.classList.add('leaving'); ms = 500; } }
-		else if (page === 'project' || page === 'about') { html.classList.add('leaving'); ms = to === 'project' ? 900 : 450; }
-		if (to === 'home' && page !== 'home') ms = Math.max(ms, 1000);   // the capsule folds away at the same pace it arrived
+		var fresh = !html.classList.contains('leaving');
+		html.classList.add('leaving');
+		if (page === 'home') { if (fresh) ms = 500; }
+		else if (page === 'project' || page === 'about') ms = to === 'project' ? 900 : 500;
 		else if (page === 'field') { var f = document.getElementById('field'); if (f && !f.classList.contains('leaving')) { f.classList.add('leaving'); ms = 500; } }
+		if (to === 'home' && page !== 'home') ms = Math.max(ms, 1250);   // the capsule folds away at the pace it arrived
 		/* to or from the white page: let the background cross over first */
 		if (to === 'about' || page === 'about') {
 			ms = Math.max(ms, 950);
