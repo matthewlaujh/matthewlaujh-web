@@ -44,6 +44,18 @@
 					"bullets": []
 				},
 				{
+					"dates": "2022–",
+					"role": "Independent art practice",
+					"org": "",
+					"place": "New York · Singapore",
+					"note": "",
+					"bullets": [
+						"Interactive light installations exploring human–machine relationships, exhibited in group shows in New York (<a href=\"Deconstructed-Ambiance-2025\"><i>Deconstructed Ambiance</i></a>) and Singapore (<a href=\"Deconstructed-Colours-2023\"><i>Deconstructed Colours</i></a>).",
+						"Custom hardware and software integrating machine learning, microcontrollers and real-time data for objects such as <a href=\"Circulated-Densities-2025\"><i>Circulated Densities</i></a>."
+					],
+					"kind": "art"
+				},
+				{
 					"dates": "2023–2024",
 					"role": "Creative Technologist",
 					"org": "Accenture Song",
@@ -120,7 +132,8 @@
 					"org": "Techno Terra: Archive of the Future",
 					"org_url": "",
 					"place": "Gallery 1, Institute of Contemporary Arts Singapore",
-					"note": "4 Sep – 24 Oct 2026."
+					"note": "4 Sep – 24 Oct 2026.",
+					"kind": "art"
 				},
 				{
 					"dates": "2025",
@@ -128,7 +141,8 @@
 					"org": "Singapore: A Design Thesis in the Making",
 					"org_url": "https://www.lasalle.edu.sg/events/singapore-design-thesis-making?source=ica-events",
 					"place": "Gallery 1, Institute of Contemporary Arts Singapore",
-					"note": "12 Sep – 28 Oct 2025."
+					"note": "12 Sep – 28 Oct 2025.",
+					"kind": "art"
 				},
 				{
 					"dates": "2025",
@@ -136,7 +150,8 @@
 					"org": "Beyond Interface & Prompt: Exploring the Language of Technology in Contemporary Art",
 					"org_url": "https://www.wahcenter.net/2025/04/beyond-interface-prompt-exploring-the-language-of-technology-in-contemporary-art/",
 					"place": "Williamsburg Art & Historical Center, Brooklyn, New York",
-					"note": "18 Apr – 17 May 2025."
+					"note": "18 Apr – 17 May 2025.",
+					"kind": "art"
 				},
 				{
 					"dates": "2023",
@@ -144,23 +159,8 @@
 					"org": "Threads: A Critical Craft Collective Experiment, Draft #2",
 					"org_url": "https://www.lasalle.edu.sg/events/threads-critical-craft-collective-experiment-draft-2",
 					"place": "Earl Lu Gallery, Institute of Contemporary Arts Singapore",
-					"note": "13 – 25 Mar 2023."
-				}
-			]
-		},
-		{
-			"title": "Practice",
-			"entries": [
-				{
-					"dates": "2022–",
-					"role": "Independent art practice",
-					"org": "",
-					"place": "New York · Singapore",
-					"note": "",
-					"bullets": [
-						"Interactive light installations exploring human–machine relationships, exhibited in group shows in New York (<a href=\"Deconstructed-Ambiance-2025\"><i>Deconstructed Ambiance</i></a>) and Singapore (<a href=\"Deconstructed-Colours-2023\"><i>Deconstructed Colours</i></a>).",
-						"Custom hardware and software integrating machine learning, microcontrollers and real-time data for objects such as <a href=\"Circulated-Densities-2025\"><i>Circulated Densities</i></a>."
-					]
+					"note": "13 – 25 Mar 2023.",
+					"kind": "art"
 				}
 			]
 		}
@@ -204,21 +204,9 @@
 		]
 	],
 	"lede_title": "About me",
-	"tracks": {
-		"design": {
-			"label": "Design & technology",
-			"sections": [
-				"Experience",
-				"Education"
-			],
-			"skills": true
-		},
-		"art": {
-			"label": "Art practice",
-			"sections": [
-				"Practice",
-				"Group exhibitions"
-			]
-		}
-	}
+	"section_order": [
+		"Experience",
+		"Education",
+		"Group exhibitions"
+	]
 }
