@@ -76,6 +76,21 @@
 		addEventListener('resize', function () { step = Math.max(240, innerHeight * 0.45); });
 	}
 
+	/* ease the backdrop speed from `from` to `to` over `ms` (after a short hold at `from`) */
+	var settleRaf = null;
+	function settle(from, to, ms) {
+		if (settleRaf) cancelAnimationFrame(settleRaf);
+		setBackdropSpeed(from);
+		if (!ms) return;
+		var t0 = performance.now(), hold = 500;
+		(function step(now) {
+			var k = Math.max(0, Math.min(1, (now - t0 - hold) / ms));
+			var e = k * k * (3 - 2 * k);
+			setBackdropSpeed(from + (to - from) * e);
+			if (k < 1) settleRaf = requestAnimationFrame(step); else settleRaf = null;
+		})(t0);
+	}
+
 	/* ---------------- home: hovered row -> thumb loads, backdrop takes the project ---------------- */
 	function setupHome() {
 		var links = document.querySelectorAll('.marquee a[data-img]');
@@ -88,11 +103,12 @@
 				if (thumb && !thumb.src) thumb.src = thumb.getAttribute('data-src');
 				var bd = backdropInstance();
 				if (bd && bd.show && a.hasAttribute('data-i')) bd.show(+a.getAttribute('data-i'));
-				setBackdropSpeed(2.2);
+				/* a new project: the flow picks up, then settles the longer you stay */
+				settle(2.2, 0.35, 2600);
 			}
 			item.addEventListener('mouseenter', enter);
 			a.addEventListener('focus', enter);
-			item.addEventListener('mouseleave', function () { setBackdropSpeed(1); });
+			item.addEventListener('mouseleave', function () { settle(1, 1, 0); });
 		})(links[i]);
 	}
 

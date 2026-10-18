@@ -189,7 +189,7 @@ function homeMain() {
 		if (it.href && workBySlug[it.href]) {
 			const w = workBySlug[it.href];
 			const m = w.meta || {};
-			const facts = [w.category, m.techniques, m.client].filter(Boolean).map(esc).join('<span class="sep"> · </span>');
+			const facts = [['Category', w.category], ['Techniques', m.techniques], [m.client_label || 'Client', m.client]].filter(x => x[1]).map(([k, v]) => `<span class="fact"><b>${esc(k)}</b>${esc(v)}</span>`).join('');
 			return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}">${splitTitle(w.title)}<small>${w.year}</small></a><div class="more"><div><div class="more-in"><img class="thumb" alt="" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></div></div></div></div>`;
 		}
 		return `\t\t\t<span class="dead" title="Coming soon">${splitTitle(it.text.replace(/\s*\(.*\)$/, ''))}<small>${(it.text.match(/\((.*)\)/) || [])[1] || ''}</small></span>`;
