@@ -55,7 +55,7 @@ ul { padding: 0; list-style: none; }
 .backdrop.loaded { opacity: 1; }
 /* project pages: the blurred cover is on screen from the first paint and gives
    way to the diffusion once the shader has warmed up */
-.poster { position: fixed; inset: 0; z-index: 0; background: #000 center / cover no-repeat; filter: blur(18px) saturate(1.3) brightness(.8); transform: scale(1.08); transition: opacity 1.4s ease; }
+.poster { position: fixed; inset: 0; z-index: 0; background: #000 center / cover no-repeat; filter: blur(18px) brightness(.9); transform: scale(1.08); transition: opacity 1.4s ease; }
 .backdrop.loaded ~ .poster { opacity: 0; }
 html[data-page="project"] .backdrop { opacity: 1; }
 /* pages are swapped in place under one renderer: leaving states */
@@ -283,7 +283,7 @@ html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-t
 html[data-page="project"] .bar-title, html[data-page="about"] .bar-title, html[data-page="field"] .bar-title {
 	pointer-events: auto;
 	background: rgba(24, 24, 26, .32);
-	-webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5);
+	-webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
 	border: 1px solid rgba(255, 255, 255, .1); border-radius: 999px;
 	padding: 8px 14px;
 	transition: background-color .35s, color .35s, border-color .35s;
@@ -307,7 +307,7 @@ html.leaving[data-to="home"][data-page] .bar .back span { animation: arrow-out .
 /* every page: the rights line is a glass pill too */
 .site-footer > * {
 	background: rgba(24, 24, 26, .32);
-	-webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5);
+	-webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
 	border: 1px solid rgba(255, 255, 255, .1); border-radius: 999px;
 	padding: 8px 14px; opacity: 1;
 	transition: background-color .35s, color .35s, border-color .35s;
