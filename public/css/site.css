@@ -275,6 +275,11 @@ html[data-page="about"] .studio-clock, html[data-page="about"] .rights { opacity
 .about .entry li + li { margin-top: 4px; }
 .about .entry .dates, .about .entry .main { min-width: 0; }
 .about .entry .main > * { grid-column: 2; }
+.about .skills dl { margin: 0; }
+.about .skills dl > div { display: grid; grid-template-columns: 6.5em 1fr; gap: 6px 16px; padding: 10px 0; border-bottom: 1px solid rgba(0, 0, 0, .1); font: 300 13px/1.5 var(--sans); }
+.about .skills dl > div:last-child { border-bottom: 0; }
+.about .skills dt { color: rgba(0, 0, 0, .5); }
+.about .skills dd { color: rgba(0, 0, 0, .75); }
 
 /* ------------------------------------------------------------- mobile */
 @media (max-width: 800px) {
@@ -299,7 +304,7 @@ html[data-page="about"] .studio-clock, html[data-page="about"] .rights { opacity
 	.field-page .count { position: static; padding: 0 var(--pad) 90px; }
 	.about { grid-template-columns: 1fr; gap: 40px; }
 	.about .side { position: static; }
-	.about .entry { grid-template-columns: 1fr; gap: 2px; }
+	.about .entry, .about .skills dl > div { grid-template-columns: 1fr; gap: 2px; }
 	.site-footer { font-size: 11px; justify-content: flex-end; padding: 10px var(--pad); }
 	.site-footer .studio-clock { display: none; }
 	.bar-left .site-title { white-space: nowrap; }

@@ -261,11 +261,14 @@ function aboutMain(page) {
 			<div class="contact">
 				<a href="mailto:${a.contact.email}">${a.contact.email}</a>
 				<a href="${a.contact.resume}" target="_blank" rel="noopener">Resume (PDF)</a>
+				${a.contact.github ? `<a href="${a.contact.github}" target="_blank" rel="noopener">GitHub</a>` : ''}
+				${a.contact.linkedin ? `<a href="${a.contact.linkedin}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
 				<span>${esc(a.contact.location)}</span>
 			</div>
 		</aside>
 		<div class="cv">
 ${a.sections.map(sec => `			<section>\n				<h2>${esc(sec.title)}</h2>\n${sec.entries.map(entry).join('\n')}\n			</section>`).join('\n')}
+			${a.skills ? `<section class="skills"><h2>Skills</h2><dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : ''}
 		</div>
 	</main>`;
 }

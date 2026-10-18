@@ -12,7 +12,9 @@
 	"contact": {
 		"email": "matt@matthewlaujh.com",
 		"location": "Singapore",
-		"resume": "https://drive.google.com/file/d/1YFxZXSN7O88sWf69UPYSCf8IUVSDwFhy/view?usp=sharing"
+		"resume": "https://drive.google.com/file/d/1YFxZXSN7O88sWf69UPYSCf8IUVSDwFhy/view?usp=sharing",
+		"github": "https://github.com/matthewlaujh",
+		"linkedin": "https://linkedin.com/in/matthewlaujh"
 	},
 	"sections": [
 		{
@@ -96,7 +98,7 @@
 					"role": "Designer",
 					"org": "Neuewave",
 					"place": "Singapore",
-					"note": "May – Oct 2021.",
+					"note": "May – Aug 2021.",
 					"bullets": [
 						"Assisted the artists with <i>The Oort Cloud and Blue Mountain</i>, exhibited at <a href=\"Singapore-Art-Week-2022-The-Oort-Cloud-and-the-Blue-Mountain\">Singapore Art Week 2022</a> and the Children's Biennale 2021 (<a href=\"Children-s-Biennale-2021-The-Oort-Cloud-and-Blue-Mountain-Germany-2021\">Germany</a>, <a href=\"KINDERBIENNALE-2021-The-Oort-Cloud-and-Blue-Mountain-Netherlands-2021\">Netherlands</a>).",
 						"Assisted with <a href=\"Archifest-2021-Sea-of-Debris-2021\"><i>Sea of Debris</i></a> for Archifest 2021, a kinetic object using sensors and motors to raise awareness of ocean waste."
@@ -104,9 +106,9 @@
 				},
 				{
 					"dates": "2022–",
-					"role": "Independent art practice",
-					"org": "",
-					"place": "",
+					"role": "Artist",
+					"org": "Independent art practice",
+					"place": "New York · Singapore",
 					"note": "",
 					"bullets": [
 						"Interactive light installations exploring human–machine relationships, exhibited in group shows in New York (<a href=\"Deconstructed-Ambiance-2025\"><i>Deconstructed Ambiance</i></a>) and Singapore (<a href=\"Deconstructed-Colours-2023\"><i>Deconstructed Colours</i></a>).",
@@ -144,5 +146,43 @@
 				}
 			]
 		}
+	],
+	"skills": [
+		[
+			"AI / ML",
+			"TensorFlow, PyTorch, TensorFlow Lite, TinyML, Edge ML, Computer Vision, Generative AI APIs, Google AI Studio, ComfyUI"
+		],
+		[
+			"Programming",
+			"JavaScript, Python, C++, Arduino, Processing, GLSL"
+		],
+		[
+			"Web / Interactive",
+			"Node.js, HTML/CSS, React, p5.js, Three.js, Web APIs, TouchDesigner, Max/MSP"
+		],
+		[
+			"Networking / Protocols",
+			"MQTT, TCP/UDP, HTTP/HTTPS, WebSockets, OSC, Serial"
+		],
+		[
+			"Hardware",
+			"Arduino, ESP32, Raspberry Pi, PCB design, Soldering, IoT systems, Sensors, Motors, Prototyping"
+		],
+		[
+			"Installation / AV",
+			"Projection mapping, Pixel mapping, DMX lighting control, MadMapper"
+		],
+		[
+			"Cloud / Data",
+			"AWS, Google Cloud, Microsoft Azure, Firebase, APIs, Real-time data processing & visualisation"
+		],
+		[
+			"Design tools",
+			"Adobe Creative Suite (Photoshop, Illustrator, InDesign, After Effects, Premiere Pro), Figma, Rhino3D, Keyshot, Fusion 360, KiCad"
+		],
+		[
+			"Fabrication",
+			"3D printing, Laser cutting"
+		]
 	]
 }
