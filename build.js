@@ -128,7 +128,7 @@ function dropdownHTML(current) {
 	<div class="dropdown" id="dropdown" aria-label="Projects">
 ${groups}
 		<div class="foot">
-			<a href="${url(FIELD_SLUG)}"${current === FIELD_SLUG ? ' aria-current="page"' : ''}>All projects in space →</a>
+			<a href="${url(FIELD_SLUG)}"${current === FIELD_SLUG ? ' aria-current="page"' : ''}>Works in space →</a>
 			<span><a href="${url('About')}"${current === 'About' ? ' aria-current="page"' : ''}>About</a> &nbsp;&nbsp; <a href="mailto:${email}">Email</a> &nbsp;&nbsp; <a href="${url(site.homepage)}">Home</a></span>
 		</div>
 	</div>`;
@@ -139,7 +139,7 @@ function barHTML(page) {
 	const w = workBySlug[page.slug];
 	let mid = 'Projects', midYear = '';
 	if (w) { mid = esc(w.title); midYear = w.year; }
-	else if (page.slug === FIELD_SLUG) mid = 'All projects';
+	else if (page.slug === FIELD_SLUG) mid = 'Works in space';
 	else if (page.slug === 'About') mid = 'About';
 	const left = isHome
 		? `<a class="site-title" href="${url(site.homepage)}">${nav.title}</a>`
@@ -258,7 +258,7 @@ function fieldMain() {
 	const lanes = nav.groups.map(g => `\t\t\t<div class="lane"><span class="lane-label">${esc(g.label)}</span>${yrs.map(y => `<div class="cell">${works.filter(w => w.category === g.label && +String(w.year).slice(0, 4) === y).map(w => `<a href="${url(w.slug)}" data-i="${works.indexOf(w)}" title="${esc(w.title)}"><i class="k${kcls((w.meta || {}).kind)}" aria-hidden="true"></i>${esc(w.title)}</a>`).join('')}</div>`).join('')}</div>`).join('\n');
 	const axis = `\t\t\t<div class="axis"><span class="lane-label"></span>${yrs.map(y => `<span>${y}</span>`).join('')}</div>`;
 	return `<main class="field-page">
-		<h1 class="visually-hidden">All projects</h1>
+		<h1 class="visually-hidden">Works in space</h1>
 		<div class="field" id="field" data-cats="${esc(nav.groups.map(g => g.label).join('|'))}">
 ${marks}
 ${tiles.join('\n')}
@@ -377,7 +377,7 @@ for (const dir of ['css', 'js', 'fonts', 'img']) {
 fs.copyFileSync(path.join(SRC, 'favicon.ico'), path.join(OUT, 'favicon.ico'));
 
 let count = 0;
-const all = pages.concat([{ slug: FIELD_SLUG, title_no_html: 'All projects', content: '' }]);
+const all = pages.concat([{ slug: FIELD_SLUG, title_no_html: 'Works in space', content: '' }]);
 for (const page of all) {
 	const html = render(page);
 	if (page.slug === site.homepage) fs.writeFileSync(path.join(OUT, 'index.html'), html);

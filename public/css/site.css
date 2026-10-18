@@ -59,6 +59,10 @@ ul { padding: 0; list-style: none; }
 .backdrop.loaded ~ .poster { opacity: 0; }
 html[data-page="project"] .backdrop { opacity: 1; }
 /* pages are swapped in place under one renderer: leaving states */
+html, body { transition: background-color .9s ease; }
+html[data-to="about"], html[data-to="about"] body { background: var(--paper); }
+html[data-page="about"][data-to]:not([data-to="about"]), html[data-page="about"][data-to]:not([data-to="about"]) body { background: var(--dark); }
+html[data-page="about"] main { animation: pagein .7s .15s var(--ease) both; }
 html.leaving .home { opacity: 0; transform: translateY(-10px); transition: opacity .55s var(--ease), transform .6s var(--ease); }
 html.leaving .project, html.leaving .about { opacity: 0; transition: opacity .4s var(--ease); }
 html.leaving .bar-title { opacity: 0; transform: translateY(-10px); transition: opacity .35s, transform .4s var(--ease); }
@@ -271,9 +275,9 @@ html[data-page="about"], html[data-page="about"] body { background: var(--paper)
 /* ---------------------------------------------- glass bar + footer (project, about) */
 /* iOS/macOS-style frosted panels instead of the blend trick: dark glass over
    the hero, light glass once the white body is under them (JS sets data-glass). */
-html[data-page="project"] .bar, html[data-page="about"] .bar { mix-blend-mode: normal; color: #fff; pointer-events: none; }
-html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title,
-html[data-page="project"] .bar-title, html[data-page="about"] .bar-title {
+html[data-page="project"] .bar, html[data-page="about"] .bar, html[data-page="field"] .bar { mix-blend-mode: normal; color: #fff; pointer-events: none; }
+html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title, html[data-page="field"] .bar .site-title,
+html[data-page="project"] .bar-title, html[data-page="about"] .bar-title, html[data-page="field"] .bar-title {
 	pointer-events: auto;
 	background: rgba(24, 24, 26, .32);
 	-webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5);
@@ -281,12 +285,17 @@ html[data-page="project"] .bar-title, html[data-page="about"] .bar-title {
 	padding: 8px 14px;
 	transition: background-color .35s, color .35s, border-color .35s;
 }
-html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title { display: inline-flex; align-items: center; gap: 6px; }
+html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title, html[data-page="field"] .bar .site-title { display: inline-flex; align-items: center; gap: 6px; }
 /* arriving on a project or About: the name slides into its capsule, the arrow
    follows, and the title button rises */
-html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title { animation: capsule .9s .1s var(--ease) both; }
-html[data-page="project"] .bar .back span, html[data-page="about"] .bar .back span { overflow: hidden; animation: arrow .7s .3s var(--ease) both; }
-html[data-page="project"] .bar-title, html[data-page="about"] .bar-title { animation: barin .7s .45s var(--ease) backwards; }
+html:not([data-page="home"]) .bar .site-title { animation: capsule .9s .1s var(--ease) both; }
+html:not([data-page="home"]) .bar .back span { overflow: hidden; animation: arrow .7s .3s var(--ease) both; }
+html:not([data-page="home"]) .bar-title { animation: barin .7s .45s var(--ease) backwards; }
+/* between two capsule pages the name stays as it is; only the title changes */
+html[data-from]:not([data-from="home"]) .bar .site-title, html[data-from]:not([data-from="home"]) .bar .back span { animation: none; }
+/* leaving for home: the capsule and arrow fold away before the swap */
+html.leaving[data-to="home"] .bar .site-title { animation: capsule .5s var(--ease) reverse both; }
+html.leaving[data-to="home"] .bar .back span { animation: arrow .45s var(--ease) reverse both; }
 @keyframes barin { from { opacity: 0; transform: translateY(-10px); } }
 @keyframes capsule { from { background-color: transparent; border-color: transparent; transform: translateX(-15px); } }
 @keyframes arrow { from { opacity: 0; max-width: 0; margin-right: -6px; transform: translateX(6px); } to { opacity: 1; max-width: 24px; margin-right: 0; transform: none; } }

@@ -406,11 +406,15 @@
 	   one plays its leave, then bar + main are swapped and the backdrop is pointed
 	   at the new page's images (a crossfade, not a restart). */
 	var navigating = false;
+	function kindOf(href) {
+		var m = href.replace(/[?#].*$/, '').replace(/\.html$/, '').split('/').pop();
+		return m === 'About' ? 'about' : m === 'All-Projects' ? 'field' : (m === '' || m === 'index' || m === 'Front-Page') ? 'home' : 'project';
+	}
 	function navigate(href, opts) {
 		opts = opts || {};
 		if (navigating) return;
 		navigating = true;
-		var leaving = leave();
+		var leaving = leave(kindOf(href));
 		fetch(href, { credentials: 'same-origin' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
 			.then(function (text) { return leaving.then(function () { return text; }); })
 			.then(function (text) {
@@ -423,16 +427,26 @@
 			.catch(function () { location.href = href; });
 	}
 	/* the current page's exit, as a promise */
-	function leave() {
+	function leave(to) {
 		var ms = 0;
+		html.setAttribute('data-to', to);
+		var dd = document.getElementById('dropdown'), sc = document.getElementById('scrim');
+		if (dd) dd.classList.remove('on'); if (sc) sc.classList.remove('on');
 		if (page === 'home') { if (!html.classList.contains('leaving')) { html.classList.add('leaving'); ms = 500; } }
-		else if (page === 'project' || page === 'about') { html.classList.add('leaving'); ms = 420; }
+		else if (page === 'project' || page === 'about') { html.classList.add('leaving'); ms = 450; }
 		else if (page === 'field') { var f = document.getElementById('field'); if (f && !f.classList.contains('leaving')) { f.classList.add('leaving'); ms = 500; } }
+		/* to or from the white page: let the background cross over first */
+		if (to === 'about' || page === 'about') {
+			ms = Math.max(ms, 950);
+			var bd = document.querySelector('.backdrop'); if (bd && to === 'about') bd.classList.add('off');
+		}
 		return new Promise(function (res) { setTimeout(res, ms); });
 	}
 	function swap(doc) {
 		var nb = doc.body, kind = doc.documentElement.getAttribute('data-page');
 		document.title = doc.title;
+		html.setAttribute('data-from', page);
+		html.removeAttribute('data-to');
 		html.setAttribute('data-page', kind);
 		html.removeAttribute('data-glass');
 		html.classList.remove('leaving');
