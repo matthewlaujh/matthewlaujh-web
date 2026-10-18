@@ -165,6 +165,18 @@
 		var marks = [].slice.call(f.querySelectorAll('.cluster'));
 		var side = [].slice.call(document.querySelectorAll('.field-side a'));
 		var mobile = window.matchMedia('(max-width: 800px)');
+		var px = 0, py = 0, tx = 0, ty = 0, raf = null;
+		var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		svg.setAttribute('class', 'links'); svg.setAttribute('aria-hidden', 'true');
+		f.insertBefore(svg, f.firstChild);
+		var edges = [];
+		function drawEdges() {
+			for (var i = 0; i < edges.length; i++) {
+				var e = edges[i];
+				e.el.setAttribute('x1', e.a.x + px * e.a.z); e.el.setAttribute('y1', e.a.y + py * e.a.z);
+				e.el.setAttribute('x2', e.b.x + px * e.b.z); e.el.setAttribute('y2', e.b.y + py * e.b.z);
+			}
+		}
 
 		/* ---- the map: clusters by category, kind as a drift, no overlaps ---- */
 		var cats = (f.getAttribute('data-cats') || '').split('|');
@@ -213,6 +225,36 @@
 			nodes.forEach(function (n) {
 				n.el.style.cssText = 'left:' + n.x.toFixed(1) + 'px;top:' + n.y.toFixed(1) + 'px;width:' + n.w.toFixed(1) + 'px;--z:' + n.z.toFixed(2);
 			});
+			/* the graph: each tile joins its two nearest neighbours in its cluster,
+			   and each pair of clusters is bridged once at its closest point */
+			svg.setAttribute('viewBox', '0 0 ' + innerWidth + ' ' + innerHeight);
+			while (svg.firstChild) svg.removeChild(svg.firstChild);
+			edges = [];
+			var seen = {};
+			function link(a, b, bridge) {
+				var key = Math.min(a.i, b.i) + '-' + Math.max(a.i, b.i);
+				if (seen[key]) return; seen[key] = 1;
+				var l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+				if (bridge) l.setAttribute('class', 'bridge');
+				svg.appendChild(l); edges.push({ a: a, b: b, el: l });
+			}
+			var d2 = function (a, b) { return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y); };
+			nodes.forEach(function (n, i) { n.i = i; });
+			nodes.forEach(function (n) {
+				nodes.filter(function (o) { return o !== n && o.ci === n.ci; })
+					.sort(function (p, q) { return d2(n, p) - d2(n, q); }).slice(0, 2)
+					.forEach(function (o) { link(n, o); });
+			});
+			for (var c1 = 0; c1 < cats.length; c1++) for (var c2 = c1 + 1; c2 < cats.length; c2++) {
+				var best = null;
+				nodes.forEach(function (n) { if (n.ci !== c1) return; nodes.forEach(function (o) { if (o.ci !== c2) return; var d = d2(n, o); if (!best || d < best.d) best = { d: d, a: n, b: o }; }); });
+				if (best) link(best.a, best.b, true);
+			}
+			tiles.forEach(function (t) {
+				t.addEventListener('mouseenter', function () { edges.forEach(function (e) { e.el.classList.toggle('on', e.a.el === t || e.b.el === t); }); });
+				t.addEventListener('mouseleave', function () { edges.forEach(function (e) { e.el.classList.remove('on'); }); });
+			});
+			drawEdges();
 			// cluster labels: above the topmost tile of each cluster, centred on it
 			marks.forEach(function (m) {
 				var ci = cats.indexOf(m.getAttribute('data-cat')), ns = nodes.filter(function (n) { return n.ci === ci; });
@@ -227,10 +269,10 @@
 		}
 		layout();
 		var rt; addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
-		var px = 0, py = 0, tx = 0, ty = 0, raf = null;
 		function loop() {
 			px += (tx - px) * 0.06; py += (ty - py) * 0.06;
 			f.style.setProperty('--px', px + 'px'); f.style.setProperty('--py', py + 'px');
+			drawEdges();
 			raf = (Math.abs(tx - px) + Math.abs(ty - py) > 0.05) ? requestAnimationFrame(loop) : null;
 		}
 		if (!reduced) addEventListener('mousemove', function (e) {
