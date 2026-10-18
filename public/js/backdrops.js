@@ -646,6 +646,195 @@ var VERT = [
 		showUI();
 	};
 
+
+	/* ======================================================================
+	   DIFFUSE — a project image, slowly diffusing.
+	   Feedback shader: each frame re-samples the previous frame through a
+	   drifting curl-noise flow field with a small blur, and bleeds a little of
+	   the source image back in. The picture never settles; it smears, pools and
+	   re-forms. Swapping the source (scroll, or random on load) lets the new
+	   image bleed through the old one instead of cutting.
+	   settings: { random, scroll, strength (0-1), speed, blend }
+	   images:   [{ src, width, height }, ...]
+	   ====================================================================== */
+	var DVERT = [
+		'attribute vec2 aPos;', 'varying vec2 vUv;',
+		'void main(){ vUv = aPos * 0.5 + 0.5; gl_Position = vec4(aPos, 0.0, 1.0); }'
+	].join('\n');
+	var DFRAG = [
+		'precision highp float;',
+		'varying vec2 vUv;',
+		'uniform sampler2D uPrev;', 'uniform sampler2D uSrc;',
+		'uniform vec2 uRes;', 'uniform vec2 uImg;', 'uniform float uTime;',
+		'uniform vec2 uMouse;', 'uniform float uStrength;', 'uniform float uBlend;', 'uniform float uSeed;',
+		'uniform float uReset;',
+		'vec3 hash3(vec2 p){ vec3 q = vec3(dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)), dot(p,vec2(419.2,371.9))); return fract(sin(q)*43758.5453); }',
+		'float noise(vec2 p){ vec2 i = floor(p), f = fract(p); vec2 u = f*f*(3.0-2.0*f);',
+		'  return mix(mix(hash3(i).x, hash3(i+vec2(1,0)).x, u.x), mix(hash3(i+vec2(0,1)).x, hash3(i+vec2(1,1)).x, u.x), u.y); }',
+		'float fbm(vec2 p){ float v = 0.0, a = 0.5; for (int i = 0; i < 4; i++) { v += a * noise(p); p = p * 2.03 + 17.1; a *= 0.5; } return v; }',
+		'vec2 curl(vec2 p){ float e = 0.02; float n1 = fbm(p + vec2(0.0, e)), n2 = fbm(p - vec2(0.0, e)), n3 = fbm(p + vec2(e, 0.0)), n4 = fbm(p - vec2(e, 0.0));',
+		'  return vec2(n1 - n2, -(n3 - n4)) / (2.0 * e); }',
+		'vec2 coverUv(vec2 uv){ float ra = uRes.x / uRes.y, ia = uImg.x / uImg.y; vec2 s = vec2(1.0);',
+		'  if (ra > ia) s.y = ia / ra; else s.x = ra / ia; return (uv - 0.5) * s + 0.5; }',
+		'void main(){',
+		'  vec2 uv = vUv; vec2 asp = vec2(uRes.x / uRes.y, 1.0);',
+		'  vec2 p = uv * asp * 1.6 + uSeed * 7.0;',
+		'  vec2 flow = curl(p + uTime * 0.05) * 0.0032 * uStrength;',
+		'  flow += (uMouse - 0.5) * 0.0015 * uStrength;',
+		'  vec2 px = 1.0 / uRes;',
+		'  vec2 q = uv + flow;',
+		'  vec3 prev = texture2D(uPrev, q).rgb * 0.4',
+		'    + texture2D(uPrev, q + vec2(px.x, 0.0)).rgb * 0.15 + texture2D(uPrev, q - vec2(px.x, 0.0)).rgb * 0.15',
+		'    + texture2D(uPrev, q + vec2(0.0, px.y)).rgb * 0.15 + texture2D(uPrev, q - vec2(0.0, px.y)).rgb * 0.15;',
+		'  vec3 src = texture2D(uSrc, coverUv(uv)).rgb;',
+		'  float k = uBlend + uReset;',
+		'  vec3 col = mix(prev, src, k);',
+		'  gl_FragColor = vec4(col, 1.0);',
+		'}'
+	].join('\n');
+	var DSHOW = [
+		'precision mediump float;', 'varying vec2 vUv;', 'uniform sampler2D uTex;',
+		'void main(){ gl_FragColor = vec4(texture2D(uTex, vUv).rgb, 1.0); }'
+	].join('\n');
+
+	function Diffuse(el, settings, images) {
+		this.el = el; this.images = images || []; this.settings = settings || {};
+		this.data = { speedScale: 1 };
+		this.index = 0; this.time = 0; this.last = 0; this.mouse = [0.5, 0.5]; this.reset = 0;
+		this.seed = Math.random();
+		this.canvas = document.createElement('canvas');
+		this.canvas.className = 'diffuse_canvas';
+		el.appendChild(this.canvas);
+		var gl = this.canvas.getContext('webgl', { antialias: false, alpha: false, preserveDrawingBuffer: false });
+		if (!gl) { el.classList.add('no-webgl'); return; }
+		this.gl = gl;
+		this.reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		this.build();
+		this.setSize();
+		this.bind();
+		if (this.settings.random && this.images.length > 1) this.index = Math.floor(Math.random() * this.images.length);
+		this.load(this.index, true);
+	}
+	Diffuse.prototype.program = function (vs, fs) {
+		var gl = this.gl;
+		function sh(t, src) { var s = gl.createShader(t); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
+		var p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p);
+		if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+		return p;
+	};
+	Diffuse.prototype.build = function () {
+		var gl = this.gl;
+		this.stepProg = this.program(DVERT, DFRAG);
+		this.showProg = this.program(DVERT, DSHOW);
+		var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+		this.buf = buf;
+		this.u = {};
+		var self = this;
+		['uPrev', 'uSrc', 'uRes', 'uImg', 'uTime', 'uMouse', 'uStrength', 'uBlend', 'uSeed', 'uReset'].forEach(function (n) { self.u[n] = gl.getUniformLocation(self.stepProg, n); });
+		this.uShow = gl.getUniformLocation(this.showProg, 'uTex');
+		this.src = this.texture(); this.srcW = 2; this.srcH = 2;
+		gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 2, 2, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array(12));
+	};
+	Diffuse.prototype.texture = function () {
+		var gl = this.gl, t = gl.createTexture();
+		gl.bindTexture(gl.TEXTURE_2D, t);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+		return t;
+	};
+	Diffuse.prototype.fbo = function (w, h) {
+		var gl = this.gl, t = this.texture();
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, w, h, 0, gl.RGB, gl.UNSIGNED_BYTE, null);
+		var f = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, f);
+		gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0);
+		gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+		return { f: f, t: t };
+	};
+	Diffuse.prototype.setSize = function () {
+		var gl = this.gl, r = this.el.getBoundingClientRect();
+		var scale = Math.min(1, 1100 / Math.max(1, r.width)); // simulate at ~1100px wide max, it is a blur anyway
+		var w = Math.max(2, Math.floor(r.width * scale)), h = Math.max(2, Math.floor(r.height * scale));
+		if (w === this.w && h === this.h) return;
+		this.w = w; this.h = h;
+		this.canvas.width = w; this.canvas.height = h;
+		this.a = this.fbo(w, h); this.b = this.fbo(w, h);
+		this.reset = 1; // fill from the source on the next frames
+	};
+	Diffuse.prototype.load = function (i, first) {
+		var self = this, im = this.images[i];
+		if (!im) return;
+		var img = new Image(); img.crossOrigin = 'anonymous';
+		img.onload = function () {
+			if (self.destroyed) return;
+			var gl = self.gl;
+			gl.bindTexture(gl.TEXTURE_2D, self.src);
+			gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+			self.srcW = img.naturalWidth; self.srcH = img.naturalHeight;
+			if (first) { self.reset = 1; self.el.classList.add('loaded'); self.start(); }
+			else self.reset = 0.08; // let the new image bleed in quickly, then settle
+		};
+		img.src = im.src;
+	};
+	/* swap the source image (scroll cycling / API) */
+	Diffuse.prototype.show = function (i) {
+		if (!this.images.length) return;
+		i = ((i % this.images.length) + this.images.length) % this.images.length;
+		if (i === this.index) return;
+		this.index = i;
+		this.load(i, false);
+	};
+	Diffuse.prototype.bind = function () {
+		var self = this;
+		this.onMove = function (e) { self.mouse = [e.clientX / innerWidth, 1 - e.clientY / innerHeight]; };
+		this.onResize = function () { self.setSize(); };
+		this.onVis = function () { if (document.hidden) self.pause(); else self.start(); };
+		window.addEventListener('pointermove', this.onMove, { passive: true });
+		window.addEventListener('resize', this.onResize);
+		document.addEventListener('visibilitychange', this.onVis);
+	};
+	Diffuse.prototype.start = function () {
+		if (this.raf || this.destroyed) return;
+		var self = this; this.last = performance.now();
+		var tick = function (now) { self.raf = null; self.frame(now); if (!self.reduced || self.reset > 0) self.raf = requestAnimationFrame(tick); };
+		this.raf = requestAnimationFrame(tick);
+	};
+	Diffuse.prototype.pause = function () { if (this.raf) cancelAnimationFrame(this.raf); this.raf = null; };
+	Diffuse.prototype.frame = function (now) {
+		var gl = this.gl, s = this.settings;
+		var dt = Math.min(0.05, (now - this.last) / 1000); this.last = now;
+		this.time += dt * (s.speed || 1) * this.data.speedScale;
+		// simulate into b from a
+		gl.useProgram(this.stepProg);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.buf);
+		var aPos = gl.getAttribLocation(this.stepProg, 'aPos'); gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+		gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.a.t); gl.uniform1i(this.u.uPrev, 0);
+		gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, this.src); gl.uniform1i(this.u.uSrc, 1);
+		gl.uniform2f(this.u.uRes, this.w, this.h); gl.uniform2f(this.u.uImg, this.srcW, this.srcH);
+		gl.uniform1f(this.u.uTime, this.time); gl.uniform2f(this.u.uMouse, this.mouse[0], this.mouse[1]);
+		gl.uniform1f(this.u.uStrength, (s.strength == null ? 0.7 : s.strength) * this.data.speedScale);
+		gl.uniform1f(this.u.uBlend, s.blend == null ? 0.012 : s.blend);
+		gl.uniform1f(this.u.uSeed, this.seed); gl.uniform1f(this.u.uReset, this.reset);
+		gl.bindFramebuffer(gl.FRAMEBUFFER, this.b.f); gl.viewport(0, 0, this.w, this.h);
+		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+		// show b
+		gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, this.w, this.h);
+		gl.useProgram(this.showProg);
+		var aPos2 = gl.getAttribLocation(this.showProg, 'aPos'); gl.enableVertexAttribArray(aPos2); gl.vertexAttribPointer(aPos2, 2, gl.FLOAT, false, 0, 0);
+		gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.b.t); gl.uniform1i(this.uShow, 0);
+		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+		var t = this.a; this.a = this.b; this.b = t;
+		this.reset = this.reset > 0.02 ? this.reset * 0.9 : 0;
+	};
+	Diffuse.prototype.destroy = function () {
+		this.destroyed = true; this.pause();
+		window.removeEventListener('pointermove', this.onMove); window.removeEventListener('resize', this.onResize);
+		document.removeEventListener('visibilitychange', this.onVis);
+	};
+
 	/* ======================================================================
 	   INIT
 	   ====================================================================== */
@@ -682,6 +871,8 @@ var VERT = [
 				});
 			} else if (type === 'wallpaper') {
 				el.__instance = new Wallpaper(el, cfg.settings || {}, cfg.images || []);
+			} else if (type === 'diffuse') {
+				el.__instance = new Diffuse(viewport, cfg.settings || {}, cfg.images || []);
 			}
 		} catch (e) {
 			if (window.console) console.warn('backdrop failed', e);

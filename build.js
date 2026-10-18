@@ -162,6 +162,18 @@ function slitHTML(image, opts) {
 	return `<div class="backdrop" data-backdrop="slitscan"${opts && opts.random ? ' data-random' : ''} aria-hidden="true"><script type="application/json">${json(cfg)}</script></div><div class="veil${opts && opts.light ? ' veil--light' : ''}" aria-hidden="true"></div>`;
 }
 
+/* the diffusion backdrop: one or more images, optionally random on load and
+   cycled on scroll (site.js drives the cycling) */
+function diffuseHTML(images, opts) {
+	const settings = Object.assign({ random: false, scroll: false, strength: 0.7, speed: 1, blend: 0.012 }, opts && opts.settings || {});
+	const cfg = { settings, images: images.map(im => ({ src: im.src, width: im.width, height: im.height })) };
+	return `<div class="backdrop" data-backdrop="diffuse" aria-hidden="true"><script type="application/json">${json(cfg)}</script></div><div class="veil${opts && opts.light ? ' veil--light' : ''}" aria-hidden="true"></div>`;
+}
+/* every project's cover as a small still, for the home / field backdrop */
+function coverStills() {
+	return works.map(w => { const im = w.images.find(i => !i.video) || w.cover; return { src: im.thumb, width: im.width, height: im.height }; });
+}
+
 function introHTML(currentSlug) {
 	const cols = convert.textColumn(home.content);
 	const intro = cols[cols.length - 1];
@@ -305,9 +317,9 @@ function render(page) {
 	const ogImage = w ? `${site.url}${w.cover.video ? w.page.images[0].poster : w.page.images[0].src}` : `${site.url}${site.social_image}`;
 
 	let kind, backdrop, main;
-	if (isHome) { kind = 'home'; backdrop = slitHTML(home.backdrop.image); main = homeMain(); }
-	else if (w) { kind = 'project'; backdrop = slitHTML(Object.assign({}, w.page.images[0], { src: w.cover.video ? w.page.images[0].poster : w.page.images[0].src }), { random: true, light: true, settings: { scan_cycles: 3, wiggle: 6, target_speed: 30, flip_y: true } }); main = projectMain(w); }
-	else if (page.slug === FIELD_SLUG) { kind = 'field'; backdrop = slitHTML(home.backdrop.image); main = fieldMain(); }
+	if (isHome) { kind = 'home'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: true } }); main = homeMain(); }
+	else if (w) { kind = 'project'; backdrop = diffuseHTML([{ src: w.cover.video ? w.cover.poster : w.cover.src, width: w.cover.width, height: w.cover.height }], { light: true, settings: { strength: 0.55 } }); main = projectMain(w); }
+	else if (page.slug === FIELD_SLUG) { kind = 'field'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: false, strength: 0.5 } }); main = fieldMain(); }
 	else { kind = 'about'; backdrop = ''; main = aboutMain(page); }
 
 	return `<!DOCTYPE html>

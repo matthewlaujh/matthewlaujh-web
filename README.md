@@ -6,10 +6,11 @@ Cloudflare Pages. `build.js` turns the page data in `src/` into plain HTML in `p
 ## v3 — "Marquee"
 
 - **Home** (`/`): the project list as a large serif title list (3/4) with the intro beside it (1/4),
-  over the slit-scan. Hovering a title italicises it letter by letter and the project's cover
+  over a diffusion backdrop: a random project cover on load, slowly smeared through a curl-noise flow
+  field; scrolling bleeds the next cover in. (`backdrops.js` `Diffuse`; the old slit-scan is still in
+  the file, unused.) Hovering a title italicises it letter by letter and the project's cover
   follows the cursor; the slit-scan speeds up while you hover.
-- **Project** (`/<slug>`): lands on a slit-scan of the project's own hero image (settings randomised
-  on every load, inside a calm band), title + year, one-liner, category · school/client. Scroll:
+- **Project** (`/<slug>`): lands on a diffusion of the project's own cover, title + year, one-liner, category · school/client. Scroll:
   the text column (year, category, techniques, school/client, then the full text) and the plates
   on white. ← / → neighbours at the end.
 - **All projects** (`/All-Projects`): every cover floating in space with mouse parallax; the list on

@@ -59,6 +59,23 @@
 		sc.textContent = JSON.stringify(cfg);
 	}
 
+	/* ---------------- diffusion backdrop: cycle the source image on scroll ---------------- */
+	function setupDiffuseScroll() {
+		var el = document.querySelector('.backdrop[data-backdrop="diffuse"]');
+		var inst = el && el.__instance;
+		if (!inst || !inst.images || inst.images.length < 2) return;
+		var cfg = {};
+		try { cfg = JSON.parse(el.querySelector('script').textContent).settings || {}; } catch (e) {}
+		if (!cfg.scroll) return;
+		var base = inst.index, step = Math.max(240, innerHeight * 0.45), last = -1;
+		function onScroll() {
+			var k = Math.floor(scrollY / step);
+			if (k !== last) { last = k; inst.show(base + k); }
+		}
+		addEventListener('scroll', onScroll, { passive: true });
+		addEventListener('resize', function () { step = Math.max(240, innerHeight * 0.45); });
+	}
+
 	/* ---------------- home: cover follows the cursor over a title ---------------- */
 	function setupHome() {
 		var c = document.getElementById('cursor_image');
@@ -203,6 +220,7 @@
 		fixWidows();
 		randomiseBackdrop();
 		if (window.MLBackdrops) window.MLBackdrops.init(document);
+		setupDiffuseScroll();
 		if (page === 'home') setupHome();
 		if (page === 'project') setupProject();
 		if (page === 'field') setupField();
