@@ -188,7 +188,7 @@ function homeMain() {
 	const list = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${g.items.map(it => {
 		if (it.href && workBySlug[it.href]) {
 			const w = workBySlug[it.href];
-			return `\t\t\t<a href="${url(w.slug)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}">${splitTitle(w.title)}<small>${w.year}</small></a>`;
+			return `\t\t\t<a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}">${splitTitle(w.title)}<small>${w.year}</small></a>`;
 		}
 		return `\t\t\t<span class="dead" title="Coming soon">${splitTitle(it.text.replace(/\s*\(.*\)$/, ''))}<small>${(it.text.match(/\((.*)\)/) || [])[1] || ''}</small></span>`;
 	}).join('\n')}`).join('\n');

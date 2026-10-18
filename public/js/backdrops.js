@@ -775,7 +775,7 @@ var VERT = [
 			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
 			self.srcW = img.naturalWidth; self.srcH = img.naturalHeight;
 			if (first) { self.reset = 1; self.el.classList.add('loaded'); self.start(); }
-			else self.reset = 0.08; // let the new image bleed in quickly, then settle
+			else self.reset = Math.max(self.reset, 0.08); // let the new image bleed in quickly, then settle
 		};
 		img.src = im.src;
 	};

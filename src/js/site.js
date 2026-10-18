@@ -67,10 +67,10 @@
 		var cfg = {};
 		try { cfg = JSON.parse(el.querySelector('script').textContent).settings || {}; } catch (e) {}
 		if (!cfg.scroll) return;
-		var base = inst.index, step = Math.max(240, innerHeight * 0.45), last = -1;
+		var step = Math.max(240, innerHeight * 0.45), last = Math.floor(scrollY / step);
 		function onScroll() {
 			var k = Math.floor(scrollY / step);
-			if (k !== last) { last = k; inst.show(base + k); }
+			if (k !== last) { inst.show(inst.index + (k > last ? 1 : -1)); last = k; }
 		}
 		addEventListener('scroll', onScroll, { passive: true });
 		addEventListener('resize', function () { step = Math.max(240, innerHeight * 0.45); });
@@ -103,6 +103,9 @@
 				c.classList.remove('on');
 				im.onload = function () { if (im.src.indexOf(src) >= 0 && a.matches(':hover')) c.classList.add('on'); };
 				im.src = src;
+				/* the backdrop takes on the hovered project too */
+				var bd = backdropInstance();
+				if (bd && bd.show && a.hasAttribute('data-i')) { bd.show(+a.getAttribute('data-i')); bd.reset = Math.max(bd.reset || 0, 0.12); }
 				if (im.complete && im.naturalWidth) c.classList.add('on');
 				setBackdropSpeed(2.2);
 				if (!raf) raf = requestAnimationFrame(loop);
