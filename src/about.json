@@ -91,6 +91,26 @@
 						"Assisted the artists with <i>The Oort Cloud and Blue Mountain</i>, shown at the <a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\">Children's Biennale 2021 (Dresden and Groningen) and Singapore Art Week 2022</a>.",
 						"Assisted with <a href=\"Archifest-2021-Sea-of-Debris-2021\"><i>Sea of Debris</i></a> for Archifest 2021, a kinetic object using sensors and motors to raise awareness of ocean waste."
 					]
+				},
+				{
+					"dates": "2019–2020",
+					"role": "Graphic Designer",
+					"org": "BUREAU",
+					"place": "Singapore",
+					"note": "Contract, Oct 2019 – Mar 2020.",
+					"bullets": [
+						"Developed visual identity systems and integrated campaigns for multinational clients including Facebook, BASF and Hotel Properties Limited, keeping brands consistent across print and digital."
+					]
+				},
+				{
+					"dates": "2016–2017",
+					"role": "Junior Graphic Designer",
+					"org": "Studio Swell",
+					"place": "Singapore",
+					"note": "Internship, Nov 2016 – Jan 2017. Contract, May – Sep 2017.",
+					"bullets": [
+						"Designed editorial layouts, brand identities and visual communication systems for arts organisations including LASALLE College of the Arts and Esplanade – Theatres on the Bay, across print, digital and environmental graphics."
+					]
 				}
 			]
 		},
@@ -122,6 +142,16 @@
 						"Developed a practice bridging graphic and computational design through generative systems (<a href=\"Generative-Type-Tool-2020\"><i>Generative Type Tool</i></a>), physical controllers for visual composition (<a href=\"DJ-Heard-That-2021\"><i>DJ Heard That?!</i></a>) and proposals on digital consumption's environmental impact (<a href=\"Breathing-Bytes-Proposal-2020\"><i>Breathing Bytes</i></a>)."
 					],
 					"kind": "both"
+				},
+				{
+					"dates": "2014–2017",
+					"role": "Diploma in Design Communication, with Distinction",
+					"org": "LASALLE College of the Arts",
+					"org_url": "https://www.lasalle.edu.sg",
+					"place": "Singapore",
+					"note": "A foundation in design communication and core design principles, and in how design shapes cultural and social contexts.",
+					"bullets": [],
+					"kind": "design"
 				}
 			]
 		},
@@ -186,7 +216,7 @@
 					"org": "Singapore Art Week 2022",
 					"place": "Tanjong Pagar Distripark, Singapore",
 					"note": "",
-					"kind": "both"
+					"kind": "art"
 				},
 				{
 					"dates": "2022",
@@ -210,7 +240,7 @@
 					"org": "Kinderbiënnale 2021",
 					"place": "Groninger Museum, Groningen, Netherlands",
 					"note": "",
-					"kind": "both"
+					"kind": "art"
 				},
 				{
 					"dates": "2021–2022",
@@ -218,7 +248,7 @@
 					"org": "Children's Biennale 2021",
 					"place": "Japanisches Palais, Staatliche Kunstsammlungen Dresden, Germany",
 					"note": "",
-					"kind": "both"
+					"kind": "art"
 				}
 			]
 		}

@@ -201,6 +201,7 @@ function homeMain() {
 		<nav class="marquee" aria-label="Projects">
 			<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
 ${list}
+			<a class="space" href="${url(FIELD_SLUG)}">All works in space<small>${works.length}</small></a>
 		</nav>
 		<aside class="home-aside">
 			${introHTML(site.homepage)}
@@ -243,22 +244,38 @@ ${w.images.map((im, i) => `\t\t\t\t<figure>${mediaHTML(im, ` loading="${i ? 'laz
 }
 
 function fieldMain() {
-	let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
-	const tiles = works.map((w, i) => {
-		const x = 30 + rnd() * 62, y = 8 + rnd() * 76, wv = 11 + rnd() * 9, z = (0.4 + rnd() * 1.2).toFixed(2);
-		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" style="--x:${x.toFixed(1)}vw;--y:${y.toFixed(1)}vh;--w:${wv.toFixed(1)}vw;--z:${z}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label">${esc(w.title)}, ${w.year}</span></a>`;
-	}).join('\n');
-	const side = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${works.filter(x => x.category === g.label).map(w => `\t\t\t<a href="${url(w.slug)}" data-i="${works.indexOf(w)}">${esc(w.title)}<small>${w.year}</small></a>`).join('\n')}`).join('\n');
+	/* A UMAP-ish scatter: one cluster per category, art drifts to the lower left of
+	   its cluster and design to the upper right, with a seeded jitter so the map is
+	   the same on every visit. */
+	let seed = 11; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+	const centres = { Experiential: [50, 40], Computational: [76, 68], Digital: [80, 20] };
+	const kindShift = { art: [-1, 1], both: [0, 0], design: [1, -1] };
+	const groups = nav.groups.map(g => works.filter(x => x.category === g.label));
+	const tiles = [];
+	groups.forEach((g, gi) => {
+		const c = centres[nav.groups[gi].label] || [60, 50];
+		g.forEach((w, j) => {
+			const k = (w.meta || {}).kind || 'design', ks = kindShift[k];
+			const ang = j * 2.39996 + rnd() * 0.6, rad = 2 + Math.sqrt(j + 1) * 4.8;
+			const x = Math.min(90, Math.max(38, c[0] + Math.cos(ang) * rad * 1.3 + ks[0] * 4 + (rnd() - 0.5) * 3));
+			const y = Math.min(84, Math.max(14, c[1] + Math.sin(ang) * rad * 0.9 + ks[1] * 6 + (rnd() - 0.5) * 4));
+			const wv = 7.5 + rnd() * 4.5, z = (0.4 + rnd() * 1.2).toFixed(2), i = works.indexOf(w);
+			tiles.push(`\t\t\t<a href="${url(w.slug)}" data-i="${i}" data-kind="${k}" style="--x:${x.toFixed(1)}vw;--y:${y.toFixed(1)}vh;--w:${wv.toFixed(1)}vw;--z:${z}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label"><i class="k${kcls(k)}" aria-hidden="true"></i>${esc(w.title)}, ${w.year}</span></a>`);
+		});
+	});
+	const marks = nav.groups.map(g => { const c = centres[g.label] || [60, 50]; return `\t\t\t<span class="cluster" style="--x:${c[0]}vw;--y:${c[1] - 17}vh">${esc(g.label)}</span>`; }).join('\n');
+	const side = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${works.filter(x => x.category === g.label).map(w => `\t\t\t<a href="${url(w.slug)}" data-i="${works.indexOf(w)}"><i class="k${kcls((w.meta || {}).kind)}" aria-hidden="true"></i>${esc(w.title)}<small>${w.year}</small></a>`).join('\n')}`).join('\n');
 	return `<main class="field-page">
 		<h1 class="visually-hidden">All projects</h1>
 		<div class="field" id="field">
-${tiles}
+${marks}
+${tiles.join('\n')}
 		</div>
 		<nav class="field-side" aria-label="Projects">
 ${side}
 		</nav>
-		<p class="hint">Hover a title, or wander. Click to open.</p>
-		<p class="count">${works.length} projects, ${yearRange}</p>
+		<p class="hint">Projects sit near their kind. Hover a title, or wander. Click to open.</p>
+		<p class="count"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
 	</main>`;
 }
 
@@ -282,7 +299,7 @@ function aboutMain(page) {
 	const skills = a.skills ? `<section class="skills"><h2>Skills</h2><dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : '';
 	return `<main class="about">
 		<h1 class="visually-hidden">${esc(page.title_no_html)}</h1>
-		<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span></p>
+		<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
 		<div class="contact">
 			<a href="mailto:${a.contact.email}">${a.contact.email}</a>
 			<a href="${a.contact.resume}" target="_blank" rel="noopener">Resume (PDF)</a>
@@ -347,9 +364,9 @@ function render(page) {
 		<link rel="stylesheet" href="${asset('/css/site.css')}">
 		<script src="${asset('/js/backdrops.js')}" defer></script>
 		<script src="${asset('/js/site.js')}" defer></script>
-	</head>
+${kind === 'project' ? `		<script>try{if(sessionStorage.getItem('flip')==='${page.slug}')document.documentElement.classList.add('from-field')}catch(e){}</script>\n` : ''}	</head>
 	<body>
-		${backdrop}
+${w ? `		<div class="enter" aria-hidden="true"><img src="${w.cover.video ? w.cover.poster : w.cover.thumb}" alt=""></div>\n` : ''}		${backdrop}
 		${barHTML(page)}
 		${main}
 		${footerHTML()}

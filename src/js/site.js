@@ -114,6 +114,16 @@
 
 	/* ---------------- project: plate reveal, slit-scan calms as it's covered ---------------- */
 	function setupProject() {
+		var enter = document.querySelector('.enter');
+		if (enter) {
+			if (document.documentElement.classList.contains('from-field') && !reduced) {
+				try { sessionStorage.removeItem('flip'); } catch (x) {}
+				setTimeout(function () {
+					enter.classList.add('out');
+					setTimeout(function () { enter.remove(); }, 1600);
+				}, 350);
+			} else enter.remove();
+		}
 		var figs = document.querySelectorAll('.plates figure');
 		if (!figs.length) return;
 		if ('IntersectionObserver' in window && !reduced) {
@@ -164,7 +174,9 @@
 			t.addEventListener('mouseenter', function () { side.forEach(function (a) { a.classList.toggle('on', a.getAttribute('data-i') === t.getAttribute('data-i')); }); });
 			t.addEventListener('mouseleave', function () { side.forEach(function (a) { a.classList.remove('on'); }); });
 		});
-		/* click: the cover grows to fill the window, then the project page loads */
+		/* click: the cover grows to fill the window while the rest of the field
+		   recedes, then the project page opens behind the same image and lets it
+		   dissolve into the diffusion (see setupProject) */
 		function go(e, el) {
 			if (reduced || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
 			e.preventDefault();
@@ -175,10 +187,18 @@
 			d.innerHTML = '<img src="' + img.src + '" alt="">';
 			document.body.appendChild(d);
 			var href = el.getAttribute('href');
+			try { sessionStorage.setItem('flip', href.replace(/\.html$/, '')); } catch (x) {}
+			f.classList.add('leaving');
+			var side = document.querySelector('.field-side'); if (side) side.classList.add('leaving');
 			if (d.animate) {
-				d.animate([{}, { left: '0px', top: '0px', width: innerWidth + 'px', height: innerHeight + 'px' }], { duration: 700, easing: 'cubic-bezier(.3,0,.2,1)', fill: 'forwards' }).onfinish = function () { location.href = href; };
+				d.animate([{ borderRadius: '2px' }, { left: '0px', top: '0px', width: innerWidth + 'px', height: innerHeight + 'px', borderRadius: '0px' }], { duration: 900, easing: 'cubic-bezier(.65,0,.15,1)', fill: 'forwards' }).onfinish = function () { location.href = href; };
 			} else location.href = href;
 		}
+		addEventListener('pageshow', function (e) {
+			if (!e.persisted) return;
+			[].forEach.call(document.querySelectorAll('.flip'), function (d) { d.remove(); });
+			f.classList.remove('leaving'); var sd = document.querySelector('.field-side'); if (sd) sd.classList.remove('leaving');
+		});
 		tiles.forEach(function (t) { t.addEventListener('click', function (e) { go(e, t); }); });
 		side.forEach(function (a) { a.addEventListener('click', function (e) { go(e, tiles[+a.getAttribute('data-i')]); }); });
 	}

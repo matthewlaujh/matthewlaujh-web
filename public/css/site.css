@@ -212,7 +212,7 @@ html[data-page="field"], html[data-page="field"] body { height: 100%; overflow: 
 .field { position: fixed; inset: 0; z-index: 1; overflow: hidden; }
 .field a {
 	position: absolute; width: var(--w);
-	transform: translate(var(--x), var(--y)) translate(calc(var(--px, 0px) * var(--z)), calc(var(--py, 0px) * var(--z)));
+	transform: translate(var(--x), var(--y)) translate(calc(var(--px, 0px) * var(--z)), calc(var(--py, 0px) * var(--z))) translate(-50%, -50%);
 	transition: filter .5s, opacity .5s; will-change: transform;
 }
 .field a img { width: 100%; outline: 1px solid rgba(255, 255, 255, .06); outline-offset: -1px; }
@@ -227,9 +227,29 @@ html[data-page="field"], html[data-page="field"] body { height: 100%; overflow: 
 .field-side a:hover, .field-side a.on { color: #fff; padding-left: 12px; }
 .field-page .hint, .field-page .count { position: fixed; bottom: 44px; z-index: 5; color: rgba(255, 255, 255, .45); }
 .field-page .hint { left: var(--pad); }
-.field-page .count { right: var(--pad); font-variant-numeric: tabular-nums; }
-.flip { position: fixed; z-index: 50; pointer-events: none; background: #000; }
+.field-page .count { right: var(--pad); bottom: 90px; font-variant-numeric: tabular-nums; }
+.field .cluster { position: absolute; transform: translate(var(--x), var(--y)) translate(calc(var(--px, 0px) * .3), calc(var(--py, 0px) * .3)) translate(-50%, -50%); font: 300 12px/1 var(--sans); letter-spacing: .04em; color: rgba(255, 255, 255, .55); pointer-events: none; white-space: nowrap; z-index: 2; mix-blend-mode: difference; }
+.field a .label .k, .field-side a .k, .field-page .count .k { --ink: rgba(255, 255, 255, .85); width: 6px; height: 6px; margin-right: 8px; vertical-align: middle; position: relative; top: -1px; }
+.field.leaving a, .field.leaving .cluster { filter: brightness(.3) blur(3px); transition: filter .9s var(--ease); }
+.field-side.leaving, .field-page .hint, .field-page .count { transition: opacity .6s; }
+.field-side.leaving, html[data-page="field"] .field.leaving ~ .hint, html[data-page="field"] .field.leaving ~ .count { opacity: 0; }
+.field-page .count { display: flex; gap: 16px; }
+.field-page .count span { display: inline-flex; align-items: center; gap: 7px; }
+.field-page .count .k { --ink: rgba(255, 255, 255, .6); margin: 0; top: 0; }
+.flip { position: fixed; z-index: 50; pointer-events: none; background: #000; overflow: hidden; }
 .flip img { width: 100%; height: 100%; object-fit: cover; }
+/* project page opened from the field: the same cover sits over the page, then
+   dissolves into the diffusion behind it */
+.enter { position: fixed; inset: 0; z-index: 40; pointer-events: none; background: #000; display: none; }
+.enter img { width: 100%; height: 100%; object-fit: cover; }
+html.from-field .enter { display: block; }
+.enter.out { opacity: 0; transition: opacity 1.5s var(--ease); }
+.enter.out img { transform: scale(1.04); filter: blur(6px); transition: transform 1.6s var(--ease), filter 1.5s var(--ease); }
+html.from-field .project .hero .ch { animation-delay: calc(var(--d) + .7s); }
+html.from-field .project .hero h1 small { animation-delay: 1.2s; }
+html.from-field .project .hero .line { animation-delay: 1.3s; }
+html.from-field .project .hero .facts { animation-delay: 1.45s; }
+html.from-field .project .hero .scroll-cue { animation-delay: 1.7s; }
 
 /* -------------------------------------------------------------- about */
 html[data-page="about"], html[data-page="about"] body { background: var(--paper); color: var(--ink); }
@@ -276,6 +296,9 @@ html[data-glass="light"] .rights { opacity: 1; color: rgba(0, 0, 0, .7); }
 .marquee .legend { display: flex; gap: 18px; font: 300 12px/1.4 var(--sans); color: var(--fg-dim); margin-bottom: 22px; }
 .marquee .legend span { display: inline-flex; align-items: center; gap: 8px; }
 .marquee .legend .k { margin: 0; top: 0; }
+.marquee .space { display: inline-block; margin-top: 40px; font: 300 15px/1.3 var(--sans); color: rgba(255, 255, 255, .7); border-bottom: 1px solid rgba(255, 255, 255, .25); padding-bottom: 2px; transition: color .2s, border-color .2s; }
+.marquee .space:hover { color: #fff; border-color: #fff; }
+.marquee .space small { font-size: 11px; margin-left: .6em; }
 .about .entry .place { margin-top: 0; }
 .k--both { background: linear-gradient(90deg, var(--ink) 50%, transparent 50%); border: 1px solid var(--ink); box-sizing: border-box; }
 .about .legend { font: 300 12px/1.4 var(--sans); color: rgba(0, 0, 0, .5); display: flex; gap: 18px; margin: 0 0 40px; }
@@ -328,7 +351,7 @@ html[data-glass="light"] .rights { opacity: 1; color: rgba(0, 0, 0, .7); }
 	.field { position: relative; inset: auto; padding: 20px var(--pad) 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 	.field a { position: static; transform: none !important; width: auto; }
 	.field a .label { position: static; opacity: 1; transform: none; white-space: normal; margin-top: 6px; }
-	.field-side, .field-page .hint { display: none; }
+	.field-side, .field-page .hint, .field .cluster { display: none; }
 	.field-page .count { position: static; padding: 0 var(--pad) 90px; }
 	.about .heads, .about .pair { grid-template-columns: 1fr; gap: 40px; }
 	.about .cv .pair section + section { margin-top: 44px; }
