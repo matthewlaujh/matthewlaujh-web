@@ -152,7 +152,6 @@ function barHTML(page) {
 
 function footerHTML() {
 	return `<footer class="site-footer">
-		<span class="studio-clock" aria-live="off"><span class="dot" aria-hidden="true"></span><span class="clock-text">Studio · Singapore</span></span>
 		<span class="rights">© ${YEAR} Matthew Lau. All rights reserved.</span>
 	</footer>`;
 }

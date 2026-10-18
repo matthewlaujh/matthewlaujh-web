@@ -1,6 +1,6 @@
 /*
  * matthewlaujh.com — site behaviour (v3)
- *   dropdown bar · studio clock · lights-off · home cursor image ·
+ *   dropdown bar · home cursor image ·
  *   project page (random slit-scan, letter rise, plate reveal) ·
  *   all-projects field (parallax, focus, expand-into-page)
  * No dependencies. backdrops.js provides window.MLBackdrops.
@@ -33,59 +33,6 @@
 		document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false); });
 	}
 
-	/* ---------------- studio clock + lights ---------------- */
-	var TZ = 'Asia/Singapore';
-	var OPEN = 9, CLOSE = 19; // Mon–Fri 09:00–19:00
-	var lightsForced = params.get('lights'); // 'on' | 'off' | null
-	var lightsOn = null;
-
-	function sgNow() {
-		var fmt = new Intl.DateTimeFormat('en-GB', { timeZone: TZ, hour12: false, weekday: 'short', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-		var parts = {};
-		fmt.formatToParts(new Date()).forEach(function (p) { parts[p.type] = p.value; });
-		var days = { Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 0 };
-		return { day: days[parts.weekday], h: parseInt(parts.hour, 10) % 24, m: parseInt(parts.minute, 10), s: parseInt(parts.second, 10) };
-	}
-	function studioState() {
-		var n = sgNow();
-		var weekday = n.day >= 1 && n.day <= 5;
-		var mins = n.h * 60 + n.m + n.s / 60;
-		var open = weekday && mins >= OPEN * 60 && mins < CLOSE * 60;
-		var fill = open ? (mins - OPEN * 60) / ((CLOSE - OPEN) * 60) : 0;
-		var label;
-		if (open) label = 'Studio open · Singapore';
-		else {
-			var nextDay = (weekday && mins < OPEN * 60) ? 'today' : (n.day >= 1 && n.day <= 4) ? 'tomorrow' : 'Monday';
-			label = 'Studio closed · opens ' + (nextDay === 'today' ? '09:00' : nextDay + ' 09:00');
-		}
-		return { open: open, fill: fill, label: label };
-	}
-	function renderClock() {
-		var els = document.querySelectorAll('.studio-clock');
-		if (!els.length) return;
-		var st = studioState();
-		for (var i = 0; i < els.length; i++) {
-			var el = els[i], dot = el.querySelector('.dot'), txt = el.querySelector('.clock-text');
-			if (dot) dot.style.setProperty('--fill', (st.fill * 100).toFixed(2) + '%');
-			if (txt && txt.textContent !== st.label) txt.textContent = st.label;
-			el.setAttribute('data-open', st.open ? 'true' : 'false');
-		}
-	}
-	function setLights(on) {
-		if (lightsOn === on) return;
-		lightsOn = on;
-		if (on) html.removeAttribute('data-lights'); else html.setAttribute('data-lights', 'off');
-		window.dispatchEvent(new CustomEvent('ml:lights', { detail: { on: on } }));
-	}
-	function setupLights() {
-		var on = lightsForced ? lightsForced === 'on' : studioState().open;
-		setLights(on);
-		if (on) return;
-		var evs = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
-		var turnOn = function () { setLights(true); evs.forEach(function (ev) { window.removeEventListener(ev, turnOn); }); };
-		evs.forEach(function (ev) { window.addEventListener(ev, turnOn, { passive: true }); });
-	}
-
 	/* ---------------- backdrop helpers ---------------- */
 	function backdropInstance() {
 		var el = document.querySelector('.backdrop');
@@ -93,7 +40,7 @@
 	}
 	function setBackdropSpeed(s) {
 		var inst = backdropInstance();
-		if (inst && inst.data) inst.data.speedScale = (lightsOn === false ? 0.35 : 1) * s;
+		if (inst && inst.data) inst.data.speedScale = s;
 	}
 	/* project pages: randomise the slit-scan within a calm band on every load */
 	function randomiseBackdrop() {
@@ -253,9 +200,6 @@
 	/* ---------------- init ---------------- */
 	function init() {
 		setupDropdown();
-		setupLights();
-		renderClock();
-		setInterval(renderClock, 15000);
 		fixWidows();
 		randomiseBackdrop();
 		if (window.MLBackdrops) window.MLBackdrops.init(document);
