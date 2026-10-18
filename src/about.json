@@ -1,0 +1,130 @@
+{
+	"lede": [
+		"I practice creative technology through a design lens, thriving at the intersection of computational design and emerging technologies. My experience spans from building AI-driven tools and interactive media for global brands to creating installations that translate computational systems into human-centered experiences.",
+		"Whether prototyping for clients or developing my artistic practice, I combine technical experimentation with design-led thinking to deliver outcomes that are both innovative and tangible."
+	],
+	"statement_title": "Artist statement",
+	"statement": [
+		"My work explores human-machine relationships through interactive light installations. Light functions as a medium of expression that connects across different forms of understanding. Through responsive lighting environments, I transform abstract computational concepts into sensory experiences that can be felt and understood intuitively.",
+		"By making visible what typically remains hidden — the algorithms, processes, and machine learning principles that increasingly shape our world — I challenge the notion of artificial intelligence as an inscrutable \"black box.\" My installations invite viewers to develop more intuitive understandings of the systems that surround us.",
+		"Central to my practice is the belief that technology should enhance human connection rather than diminish it. By investigating the potential of human-machine co-creation, my work examines how technology can serve not just as a tool but as a creative collaborator, establishing a dialogue where both human intention and computational processes contribute to the final experience."
+	],
+	"contact": {
+		"email": "matt@matthewlaujh.com",
+		"location": "Singapore",
+		"resume": "https://drive.google.com/file/d/1YFxZXSN7O88sWf69UPYSCf8IUVSDwFhy/view?usp=sharing"
+	},
+	"sections": [
+		{
+			"title": "Education",
+			"entries": [
+				{
+					"dates": "2023–2025",
+					"role": "Master of Professional Studies, Interactive Telecommunications",
+					"org": "New York University, Tisch School of the Arts, ITP",
+					"org_url": "https://itp.nyu.edu/itp/",
+					"place": "New York",
+					"note": "Thesis: <a href=\"Ambi-latent-Space-2025\"><i>Ambi(latent) Space</i></a> — Edge Machine Learning for Adaptive Lighting Systems. IMDA SG Digital Postgraduate (Media) Scholarship.",
+					"bullets": [
+						"Built a lighting fixture with embedded TinyML models that actively controls light quality based on productive lighting principles while balancing human preferences through real-time environmental data and human input.",
+						"Cultivated a practice bridging design, making and critical thinking: custom electronics and networked systems (<a href=\"Hello-I-m-Here-Communicators-2024\"><i>Hello I'm Here Communicators</i></a>), generative AI (<a href=\"The-Ascension-Algorithm-2023\"><i>The Ascension Algorithm</i></a>) and interactive light installations, alongside the curation and preservation of new media art, generative algorithms and data-driven practice."
+					]
+				},
+				{
+					"dates": "2020–2022",
+					"role": "BA (Hons) Design Communication, First Class Honours",
+					"org": "LASALLE College of the Arts",
+					"org_url": "https://www.lasalle.edu.sg/programmes/ba-hons/design-communication",
+					"place": "Singapore",
+					"note": "Dissertation: <a href=\"Hello-I-m-Here-Exhibition-2022\"><i>Hello, I'm Here</i></a> — Affective Computing Light Installation. LASALLE Scholarship.",
+					"bullets": [
+						"Designed an interactive installation using machine-learning facial expression recognition and electronics to translate human emotions into coloured LED visualisations.",
+						"Developed a practice bridging graphic and computational design through generative systems (<a href=\"Generative-Type-Tool-2020\"><i>Generative Type Tool</i></a>), physical controllers for visual composition (<a href=\"DJ-Heard-That-2021\"><i>DJ Heard That?!</i></a>) and proposals on digital consumption's environmental impact (<a href=\"Breathing-Bytes-Proposal-2020\"><i>Breathing Bytes</i></a>)."
+					]
+				}
+			]
+		},
+		{
+			"title": "Experience",
+			"entries": [
+				{
+					"dates": "2023–2024",
+					"role": "Creative Technologist",
+					"org": "Accenture Song",
+					"org_url": "https://www.accenture.com/sg-en/about/accenture-song-index",
+					"place": "New York · Singapore",
+					"note": "New York, Nov 2023 – Oct 2024; Singapore, Jun – Aug 2023.",
+					"bullets": [
+						"Architected and prototyped multi-modal AI solutions for global enterprise clients, shaping new ways for brands to explore generative AI in marketing and operations.",
+						"Led technical evaluation of emerging AI tools and platforms, with assessment frameworks and capability demonstrations for senior leaders and clients.",
+						"Coordinated cross-functional teams and external vendors to turn experimental AI concepts into usable prototypes."
+					]
+				},
+				{
+					"dates": "2022",
+					"role": "Technology & Creative Intern",
+					"org": "R/GA",
+					"org_url": "https://rga.com",
+					"place": "Singapore",
+					"note": "Jul – Dec 2022.",
+					"bullets": [
+						"Built machine-learning and generative AI tools integrated into pitch strategies for Shangri-La Hotels and Resorts.",
+						"Developed AR experiences for Samsung campaigns.",
+						"Prototyped creative-coding concepts for client work and internal R&amp;D (<a href=\"Hey-What-s-Up-2022\"><i>Hey, What's Up?</i></a>)."
+					]
+				},
+				{
+					"dates": "2021",
+					"role": "Designer",
+					"org": "Neuewave",
+					"place": "Singapore",
+					"note": "May – Oct 2021.",
+					"bullets": [
+						"Assisted the artists with <i>The Oort Cloud and Blue Mountain</i>, exhibited at <a href=\"Singapore-Art-Week-2022-The-Oort-Cloud-and-the-Blue-Mountain\">Singapore Art Week 2022</a> and the Children's Biennale 2021 (<a href=\"Children-s-Biennale-2021-The-Oort-Cloud-and-Blue-Mountain-Germany-2021\">Germany</a>, <a href=\"KINDERBIENNALE-2021-The-Oort-Cloud-and-Blue-Mountain-Netherlands-2021\">Netherlands</a>).",
+						"Assisted with <a href=\"Archifest-2021-Sea-of-Debris-2021\"><i>Sea of Debris</i></a> for Archifest 2021, a kinetic object using sensors and motors to raise awareness of ocean waste."
+					]
+				},
+				{
+					"dates": "2022–",
+					"role": "Independent art practice",
+					"org": "",
+					"place": "",
+					"note": "",
+					"bullets": [
+						"Interactive light installations exploring human–machine relationships, exhibited in group shows in New York (<a href=\"Deconstructed-Ambiance-2025\"><i>Deconstructed Ambiance</i></a>) and Singapore (<a href=\"Deconstructed-Colours-2023\"><i>Deconstructed Colours</i></a>).",
+						"Custom hardware and software integrating machine learning, microcontrollers and real-time data for objects such as <a href=\"Circulated-Densities-2025\"><i>Circulated Densities</i></a>."
+					]
+				}
+			]
+		},
+		{
+			"title": "Group exhibitions",
+			"entries": [
+				{
+					"dates": "2025",
+					"role": "<a href=\"Circulated-Densities-2025\"><i>Circulated Densities</i></a>",
+					"org": "Singapore: A Design Thesis in the Making",
+					"org_url": "https://www.lasalle.edu.sg/events/singapore-design-thesis-making?source=ica-events",
+					"place": "Gallery 1, Institute of Contemporary Arts Singapore",
+					"note": "12 Sep – 28 Oct 2025."
+				},
+				{
+					"dates": "2025",
+					"role": "<a href=\"Deconstructed-Ambiance-2025\"><i>Deconstructed Ambiance</i></a>",
+					"org": "Beyond Interface & Prompt: Exploring the Language of Technology in Contemporary Art",
+					"org_url": "https://www.wahcenter.net/2025/04/beyond-interface-prompt-exploring-the-language-of-technology-in-contemporary-art/",
+					"place": "Williamsburg Art & Historical Center, Brooklyn, New York",
+					"note": "18 Apr – 17 May 2025."
+				},
+				{
+					"dates": "2023",
+					"role": "<a href=\"Deconstructed-Colours-2023\"><i>Deconstructed Colours</i></a>",
+					"org": "Threads: A Critical Craft Collective Experiment, Draft #2",
+					"org_url": "https://www.lasalle.edu.sg/events/threads-critical-craft-collective-experiment-draft-2",
+					"place": "Earl Lu Gallery, Institute of Contemporary Arts Singapore",
+					"note": "13 – 25 Mar 2023."
+				}
+			]
+		}
+	]
+}

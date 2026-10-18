@@ -242,13 +242,31 @@ ${side}
 }
 
 function aboutMain(page) {
+	const a = readJSON(path.join(SRC, 'about.json'));
+	const L = h => fixLinks(h, page.slug);
+	const entry = e => `				<div class="entry">
+					<div class="dates">${e.dates}</div>
+					<div class="main">
+						<div class="role">${L(e.role)}</div>
+						${e.org ? `<div class="org">${e.org_url ? `<a href="${e.org_url}" target="_blank" rel="noopener">${esc(e.org)}</a>` : esc(e.org)}${e.place ? ` — ${esc(e.place)}` : ''}</div>` : ''}
+						${e.note ? `<div class="note">${L(e.note)}</div>` : ''}
+						${e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${L(b)}</li>`).join('')}</ul>` : ''}
+					</div>
+				</div>`;
 	return `<main class="about">
-		<article>
-			<h1 class="visually-hidden">${esc(page.title_no_html)}</h1>
-			<div class="prose">
-${fixLinks(convert.prose(page.content), page.slug)}
+		<h1 class="visually-hidden">${esc(page.title_no_html)}</h1>
+		<aside class="side">
+			<div class="lede">${a.lede.map(p => `<p>${p}</p>`).join('')}</div>
+			<div class="statement"><h2>${esc(a.statement_title)}</h2>${a.statement.map(p => `<p>${p}</p>`).join('')}</div>
+			<div class="contact">
+				<a href="mailto:${a.contact.email}">${a.contact.email}</a>
+				<a href="${a.contact.resume}" target="_blank" rel="noopener">Resume (PDF)</a>
+				<span>${esc(a.contact.location)}</span>
 			</div>
-		</article>
+		</aside>
+		<div class="cv">
+${a.sections.map(sec => `			<section>\n				<h2>${esc(sec.title)}</h2>\n${sec.entries.map(entry).join('\n')}\n			</section>`).join('\n')}
+		</div>
 	</main>`;
 }
 
