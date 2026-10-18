@@ -203,9 +203,9 @@ ${list}
 			${introHTML(site.homepage)}
 			<a class="more" href="${url('About')}">More about me</a>
 			<p class="contact"><a href="mailto:${email}">${email}</a><br>Singapore</p>
+			<div class="preview" id="cursor_image" aria-hidden="true"><img alt=""><div class="cap"></div></div>
 		</aside>
-	</main>
-	<div class="cursor-image" id="cursor_image" aria-hidden="true"><img alt=""><div class="cap"></div></div>`;
+	</main>`;
 }
 
 function projectMain(w) {

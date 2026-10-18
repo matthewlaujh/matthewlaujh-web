@@ -76,22 +76,11 @@
 		addEventListener('resize', function () { step = Math.max(240, innerHeight * 0.45); });
 	}
 
-	/* ---------------- home: cover follows the cursor over a title ---------------- */
+	/* ---------------- home: the hovered cover shows in the aside ---------------- */
 	function setupHome() {
 		var c = document.getElementById('cursor_image');
 		if (!c) return;
 		var im = c.querySelector('img'), cap = c.querySelector('.cap');
-		var mx = innerWidth / 2, my = innerHeight / 2, x = mx, y = my, vx = 0, vy = 0, raf = null;
-		addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; if (!raf) raf = requestAnimationFrame(loop); });
-		function loop() {
-			raf = null;
-			var nx = x + (mx - x) * 0.12, ny = y + (my - y) * 0.12;
-			vx = nx - x; vy = ny - y; x = nx; y = ny;
-			var w = c.offsetWidth, h = c.offsetHeight;
-			var px = Math.min(x + 24, innerWidth - w - 24), py = Math.min(y + 24, innerHeight - h - 40);
-			c.style.transform = 'translate(' + px + 'px,' + py + 'px) rotate(' + Math.max(-6, Math.min(6, vx * 0.25)) + 'deg) skewY(' + Math.max(-4, Math.min(4, vy * 0.15)) + 'deg)';
-			if (c.classList.contains('on') || Math.abs(mx - x) + Math.abs(my - y) > 0.5) raf = requestAnimationFrame(loop);
-		}
 		var links = document.querySelectorAll('.marquee a[data-img]');
 		/* warm the cache so the first hover on each title is instant */
 		var warm = function () { for (var k = 0; k < links.length; k++) { var pre = new Image(); pre.src = links[k].getAttribute('data-img'); } };
@@ -108,7 +97,6 @@
 				if (bd && bd.show && a.hasAttribute('data-i')) bd.show(+a.getAttribute('data-i'));
 				if (im.complete && im.naturalWidth) c.classList.add('on');
 				setBackdropSpeed(2.2);
-				if (!raf) raf = requestAnimationFrame(loop);
 			});
 			a.addEventListener('mouseleave', function () { c.classList.remove('on'); setBackdropSpeed(1); });
 		})(links[i]);

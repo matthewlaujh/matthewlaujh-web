@@ -145,10 +145,11 @@ ul { padding: 0; list-style: none; }
 .home-aside .contact { margin-top: 28px; color: var(--fg-dim); line-height: 1.6; }
 .home-aside .contact a:hover { color: #fff; }
 
-.cursor-image { position: fixed; left: 0; top: 0; z-index: 3; width: 22vw; pointer-events: none; opacity: 0; transition: opacity .25s; will-change: transform; }
-.cursor-image.on { opacity: 1; }
-.cursor-image img { width: 100%; box-shadow: 0 30px 80px rgba(0, 0, 0, .6); }
-.cursor-image .cap { position: absolute; left: 0; right: 0; bottom: -20px; display: flex; justify-content: space-between; font-size: 11px; color: var(--fg-dim); }
+/* the hovered project's cover, in the aside under the contact (never over the list) */
+.home-aside .preview { margin-top: 36px; opacity: 0; transform: translateY(6px); transition: opacity .35s, transform .5s var(--ease); pointer-events: none; }
+.home-aside .preview.on { opacity: 1; transform: none; }
+.home-aside .preview img { width: 100%; height: auto; box-shadow: 0 24px 60px rgba(0, 0, 0, .45); }
+.home-aside .preview .cap { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; font-size: 11px; color: var(--fg-dim); }
 
 /* ------------------------------------------------------------ project */
 .project .hero {
@@ -298,7 +299,7 @@ html[data-page="project"] .rights, html[data-page="about"] .rights { opacity: 1;
 	.home-aside { position: static; padding-top: 0; margin-top: 0; }
 	.marquee a:hover { padding-left: 0; }
 	.marquee .more .line, .marquee .more .facts { padding-left: 0; }
-	.cursor-image { display: none; }
+	.home-aside .preview { display: none; }
 	.project .hero { padding-bottom: 110px; }
 	.project .hero .scroll-cue { bottom: 110px; }
 	.project .body { grid-template-columns: 1fr; gap: 32px; }
