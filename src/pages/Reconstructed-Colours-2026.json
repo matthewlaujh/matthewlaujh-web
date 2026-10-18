@@ -1,0 +1,53 @@
+{
+ "id": 0,
+ "slug": "Reconstructed-Colours-2026",
+ "title": "Reconstructed Colours (2026)",
+ "title_no_html": "Reconstructed Colours (2026)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Exhibited at ‘Techno Terra: Archive of the Future’ at Gallery 1, Institute of Contemporary Arts Singapore...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\"><h1>Exhibited at ‘Techno Terra: Archive of the Future’ at Gallery 1, Institute of Contemporary Arts Singapore, LASALLE College of the Arts (4 Sep – 24 Oct 2026)<br><br>Part of a series of work exploring Machine Learning and Light — other works in series <a href=\"Ambi-latent-Space-2025\" rel=\"history\"><i>Ambi(latent) Space (2025)</i></a>, <a href=\"Deconstructed-Ambiance-2025\" rel=\"history\"><i>Deconstructed Ambiance (2025)</i></a> and <a href=\"Deconstructed-Colours-2023\" rel=\"history\"><i>Deconstructed Colours (2023)</i></a>.<br><br>—<br><br><i>Reconstructed Colours (2026)</i> is a suspended generative light object that returns to the latent space of <i>Deconstructed Colours</i> and rebuilds it. A bare strip of light hangs from the ceiling on its own wiring, its colour field reassembled from the same machine-learning principles — high and low dimensional spaces, diffusion and algorithmic plots — this time read back into the room as a single line of light and the glow it leaves on the floor.<br><br>Where the earlier work took colour apart to make a latent space tangible, this one puts it back together: the fixture continuously reconstructs palettes from its inputs, so the colour of the room is never fixed, only recomposed.</h1></div>\n</div>",
+ "local_css": "",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 10,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "173874832",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 0,
+   "src": "/img/92248648-reconstructedColours-1.jpg",
+   "name": "reconstructedColours-1.jpg",
+   "width": 2576,
+   "height": 1717,
+   "exclude_from_backdrop": false
+  }
+ ],
+ "meta": {
+  "line": "A suspended line of light that reconstructs colour from a latent space.",
+  "techniques": "Machine learning, generative light, custom LED fixture",
+  "client_label": "Exhibited at",
+  "client": "Gallery 1, ICA Singapore"
+ }
+}

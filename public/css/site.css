@@ -186,7 +186,7 @@ html[data-lights="off"] .backdrop canvas { filter: saturate(.6); }
 .project .plates img { width: 100%; transform: scale(1.06); transition: transform 1.4s var(--ease); }
 .project .plates figure.seen img { transform: none; }
 .project .plates figcaption { position: absolute; left: 12px; bottom: 10px; font-size: 11px; color: #fff; mix-blend-mode: difference; }
-.prevnext { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--ink-rule); padding-top: 14px; color: var(--ink-dim); }
+.prevnext { grid-column: 1 / -1; margin-top: 24px; display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--ink-rule); padding-top: 14px; color: var(--ink-dim); }
 .prevnext a:hover { color: var(--ink); }
 .prevnext a span { display: inline-block; transition: transform .25s var(--ease); }
 .prevnext a:first-child:hover span { transform: translateX(-4px); }
