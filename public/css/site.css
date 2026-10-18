@@ -72,6 +72,11 @@ html.leaving[data-to="home"][data-page] .bar-title { animation-duration: .8s; }
 .veil--off { background: transparent; }
 main { animation: pagein .5s var(--ease) both; }
 @keyframes pagein { from { opacity: 0; } }
+/* home arrives as a cascade: legend, headings and rows one beat apart, the intro after */
+main.home { animation: none; }
+.marquee > * { animation: cascade .8s calc(80ms + var(--i, 0) * 28ms) var(--ease) both; }
+.home-aside { animation: cascade 1s .45s var(--ease) both; }
+@keyframes cascade { from { opacity: 0; transform: translateY(14px); } }
 .backdrop canvas, .backdrop .slitscan_canvas { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; }
 /* the veil deepens over pale covers (--lum is set by the diffusion as it loads an image) */
 .veil { position: fixed; inset: 0; z-index: 0; background: rgba(0, 0, 0, calc(.45 + var(--lum, 0) * .3)); pointer-events: none; transition: background-color 1.2s; }

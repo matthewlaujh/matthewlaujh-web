@@ -102,6 +102,9 @@
 	function setupHome() {
 		var links = document.querySelectorAll('.marquee a[data-img]');
 		if (!links.length) return;
+		/* the list arrives as a cascade: each row a beat after the last */
+		var rows = document.querySelectorAll('.marquee > *');
+		for (var r = 0; r < rows.length; r++) rows[r].style.setProperty('--i', r);
 		var warm = function () { for (var k = 0; k < links.length; k++) { var pre = new Image(); pre.src = links[k].getAttribute('data-img'); } };
 		if ('requestIdleCallback' in window) requestIdleCallback(warm); else setTimeout(warm, 800);
 		for (var i = 0; i < links.length; i++) (function (a) {
