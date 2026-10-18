@@ -133,7 +133,7 @@ ul { padding: 0; list-style: none; }
 .marquee .more > div { overflow: hidden; min-height: 0; }
 .marquee .more-in { display: flex; gap: 28px; align-items: flex-start; padding: 4px 0 12px .4em; }
 .marquee .more .text { flex: 1 1 auto; min-width: 0; max-width: 52ch; }
-.marquee .more .thumb { flex: none; width: clamp(140px, 16vw, 220px); height: auto; opacity: 0; transform: translateY(6px); transition: opacity .35s .1s, transform .5s var(--ease) .1s; box-shadow: 0 16px 40px rgba(0, 0, 0, .45); }
+.marquee .more .thumb { flex: none; width: clamp(140px, 16vw, 220px); height: auto; opacity: 0; transform: translateY(6px); transition: opacity .35s .1s, transform .5s var(--ease) .1s; }
 .marquee .item:hover .more .thumb, .marquee .item:focus-within .more .thumb { opacity: 1; transform: none; }
 .marquee .item:hover .more, .marquee .item:focus-within .more { grid-template-rows: 1fr; }
 .marquee .more .line { font: 300 15px/1.4 var(--serif); color: rgba(255, 255, 255, .85); max-width: 46ch; padding: 2px 0 0; opacity: 0; transform: translateY(-4px); transition: opacity .3s .1s, transform .4s var(--ease) .1s; }
@@ -196,7 +196,7 @@ html[data-page="field"], html[data-page="field"] body { height: 100%; overflow: 
 	transform: translate(var(--x), var(--y)) translate(calc(var(--px, 0px) * var(--z)), calc(var(--py, 0px) * var(--z)));
 	transition: filter .5s, opacity .5s; will-change: transform;
 }
-.field a img { width: 100%; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); }
+.field a img { width: 100%; outline: 1px solid rgba(255, 255, 255, .06); outline-offset: -1px; }
 .field a .label { position: absolute; left: 0; top: 100%; margin-top: 8px; white-space: nowrap; opacity: 0; transform: translateY(-4px); transition: .25s; }
 .field.focus a { filter: brightness(.25) blur(2px); }
 .field.focus a.on { filter: none; z-index: 3; }
