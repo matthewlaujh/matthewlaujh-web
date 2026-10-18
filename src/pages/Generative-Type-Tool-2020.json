@@ -124,6 +124,7 @@
   "line": "A browser tool for growing letterforms from 2D and 3D shapes.",
   "techniques": "Creative coding, generative type, WebGL",
   "client_label": "School",
-  "client": "LASALLE College of the Arts"
+  "client": "LASALLE College of the Arts",
+  "kind": "design"
  }
 }

@@ -90,6 +90,7 @@
   "line": "A generative-AI film after Cortázar’s instructions for climbing a staircase.",
   "techniques": "Generative AI, video, sound",
   "client_label": "School",
-  "client": "NYU ITP, with Jasmine Nackash"
+  "client": "NYU ITP, with Jasmine Nackash",
+  "kind": "design"
  }
 }

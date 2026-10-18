@@ -109,6 +109,8 @@ function mediaHTML(im, attrs) {
 	return `<video autoplay muted loop playsinline preload="metadata" poster="${im.poster}" width="${im.width}" height="${im.height}" aria-label=""><source src="${im.src}" type="video/webm"><source src="${im.mp4}" type="video/mp4"></video>`;
 }
 
+const kcls = k => k === 'art' ? ' k--art' : k === 'both' ? ' k--both' : '';
+
 function splitTitle(t) {
 	// each letter gets its own span so the hover wave / rise can stagger
 	return t.split(' ').map((word, wi) => `<span class="w">${[...word].map((c, k) => `<span class="ch" style="--d:${(wi * 6 + k) * 18}ms">${esc(c)}</span>`).join('')}</span>`).join(' ');
@@ -118,7 +120,7 @@ function dropdownHTML(current) {
 	const groups = nav.groups.map(g => `\t\t<section>\n\t\t\t<h3>${g.label}</h3>\n${g.items.map(it => {
 		if (it.href && workBySlug[it.href]) {
 			const w = workBySlug[it.href];
-			return `\t\t\t<a href="${url(w.slug)}"${w.slug === current ? ' aria-current="page"' : ''}>${esc(w.title)}<small>${w.year}</small></a>`;
+			return `\t\t\t<a href="${url(w.slug)}"${w.slug === current ? ' aria-current="page"' : ''}><i class="k${kcls((w.meta || {}).kind)}" aria-hidden="true"></i>${esc(w.title)}<small>${w.year}</small></a>`;
 		}
 		return `\t\t\t<span class="dead" title="Coming soon">${it.text}</span>`;
 	}).join('\n')}\n\t\t</section>`).join('\n');
@@ -190,13 +192,14 @@ function homeMain() {
 			const w = workBySlug[it.href];
 			const m = w.meta || {};
 			const facts = [['Category', w.category], ['Techniques', m.techniques], [m.client_label || 'Client', m.client]].filter(x => x[1]).map(([k, v]) => `<span class="fact"><b>${esc(k)}</b>${esc(v)}</span>`).join('');
-			return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}">${splitTitle(w.title)}<small>${w.year}</small></a><div class="more"><div><div class="more-in"><img class="thumb" alt="" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></div></div></div></div>`;
+			return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}"><i class="k${kcls(m.kind)}" aria-hidden="true"></i>${splitTitle(w.title)}<small>${w.year}</small></a><div class="more"><div><a class="more-in" href="${url(w.slug)}" tabindex="-1" aria-hidden="true"><img class="thumb" alt="" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></a></div></div></div>`;
 		}
 		return `\t\t\t<span class="dead" title="Coming soon">${splitTitle(it.text.replace(/\s*\(.*\)$/, ''))}<small>${(it.text.match(/\((.*)\)/) || [])[1] || ''}</small></span>`;
 	}).join('\n')}`).join('\n');
 	return `<main class="home">
 		<h1 class="visually-hidden">${esc(site.title)}</h1>
 		<nav class="marquee" aria-label="Projects">
+			<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
 ${list}
 		</nav>
 		<aside class="home-aside">
@@ -262,12 +265,12 @@ ${side}
 function aboutMain(page) {
 	const a = readJSON(path.join(SRC, 'about.json'));
 	const L = h => fixLinks(h, page.slug);
-	const kcls = e => e.kind === 'art' ? ' k--art' : e.kind === 'both' ? ' k--both' : '';
 	const entry = e => `				<div class="entry${e.kind === 'art' ? ' art' : ''}">
 					<div class="dates">${e.dates}</div>
 					<div class="main">
-						<div class="role"><i class="k${kcls(e)}" aria-hidden="true"></i>${L(e.role)}</div>
-						${e.org ? `<div class="org">${e.org_url ? `<a href="${e.org_url}" target="_blank" rel="noopener">${esc(e.org)}</a>` : esc(e.org)}${e.place ? ` — ${esc(e.place)}` : ''}</div>` : (e.place ? `<div class="org">${esc(e.place)}</div>` : '')}
+						<div class="role"><i class="k${kcls(e.kind)}" aria-hidden="true"></i><span>${L(e.role)}</span></div>
+						${e.org ? `<div class="org">${e.org_url ? `<a href="${e.org_url}" target="_blank" rel="noopener">${esc(e.org)}</a>` : esc(e.org)}</div>` : ''}
+						${e.place ? `<div class="org place">${esc(e.place)}</div>` : ''}
 						${e.note ? `<div class="note">${L(e.note)}</div>` : ''}
 						${e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${L(b)}</li>`).join('')}</ul>` : ''}
 					</div>

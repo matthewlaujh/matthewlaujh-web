@@ -94,6 +94,7 @@
   "line": "A MIDI controller that plays the ambient sounds of vernacular typography.",
   "techniques": "MIDI, field recording, physical computing",
   "client_label": "School",
-  "client": "LASALLE College of the Arts"
+  "client": "LASALLE College of the Arts",
+  "kind": "design"
  }
 }

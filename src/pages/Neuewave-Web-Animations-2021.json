@@ -64,6 +64,7 @@
   "line": "Web assets and a generative colour wave for Neuewave’s identity.",
   "techniques": "p5.js, 3D web animation, generative graphics",
   "client_label": "Client",
-  "client": "Neuewave"
+  "client": "Neuewave",
+  "kind": "design"
  }
 }

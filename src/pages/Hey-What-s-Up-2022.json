@@ -76,6 +76,7 @@
   "line": "An interactive installation that visualises the spiral of our thoughts.",
   "techniques": "Generative AI, speech input, projection",
   "client_label": "Client",
-  "client": "R/GA (internship)"
+  "client": "R/GA (internship)",
+  "kind": "design"
  }
 }

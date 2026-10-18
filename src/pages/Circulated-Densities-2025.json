@@ -82,6 +82,7 @@
   "line": "A circuit board that shows Singapore’s mobility as live data.",
   "techniques": "PCB design, real-time transport data, LED matrix",
   "client_label": "Exhibited at",
-  "client": "Gallery 1, ICA Singapore"
+  "client": "Gallery 1, ICA Singapore",
+  "kind": "art"
  }
 }

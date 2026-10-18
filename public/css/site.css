@@ -150,7 +150,7 @@ ul { padding: 0; list-style: none; }
 /* hover: the row opens to show the one-liner and facts beneath the title */
 .marquee .more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease); }
 .marquee .more > div { overflow: hidden; min-height: 0; }
-.marquee .more-in { display: flex; gap: 28px; align-items: flex-start; padding: 4px 0 12px .4em; }
+.marquee .more-in { display: flex; gap: 28px; align-items: flex-start; padding: 4px 0 12px .4em; color: inherit; width: fit-content; }
 .marquee .more .text { flex: 1 1 auto; min-width: 0; max-width: 52ch; }
 .marquee .more .thumb { flex: none; width: clamp(140px, 16vw, 220px); height: auto; opacity: 0; transform: translateY(6px); transition: opacity .35s .1s, transform .5s var(--ease) .1s; }
 .marquee .item:hover .more .thumb, .marquee .item:focus-within .more .thumb { opacity: 1; transform: none; }
@@ -270,6 +270,13 @@ html[data-glass="light"] .rights { opacity: 1; color: rgba(0, 0, 0, .7); }
 .about .lede h2 { font: 300 12px/1.4 var(--sans); color: rgba(0, 0, 0, .5); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
 .k { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); flex: none; }
 .k--art { background: none; border: 1px solid var(--ink); }
+.k--both { background: linear-gradient(90deg, var(--ink) 50%, transparent 50%); border: 1px solid var(--ink); }
+/* dots on the dark pages */
+.marquee .k, .dropdown .k { --ink: #fff; width: 7px; height: 7px; margin-right: 10px; vertical-align: middle; position: relative; top: -2px; }
+.marquee .legend { display: flex; gap: 18px; font: 300 12px/1.4 var(--sans); color: var(--fg-dim); margin-bottom: 22px; }
+.marquee .legend span { display: inline-flex; align-items: center; gap: 8px; }
+.marquee .legend .k { margin: 0; top: 0; }
+.about .entry .place { margin-top: 0; }
 .k--both { background: linear-gradient(90deg, var(--ink) 50%, transparent 50%); border: 1px solid var(--ink); box-sizing: border-box; }
 .about .legend { font: 300 12px/1.4 var(--sans); color: rgba(0, 0, 0, .5); display: flex; gap: 18px; margin: 0 0 40px; }
 .about .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 72px; align-items: start; }

@@ -310,6 +310,7 @@
   "line": "An archive of self-set physical-computing challenges.",
   "techniques": "Physical computing, Arduino, prototyping",
   "client_label": "School",
-  "client": "LASALLE College of the Arts"
+  "client": "LASALLE College of the Arts",
+  "kind": "design"
  }
 }

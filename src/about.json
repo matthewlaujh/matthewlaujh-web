@@ -1,6 +1,6 @@
 {
 	"lede": [
-		"I am a creative technologist and artist working at the intersection of computational design, emerging technology and light. My experience spans building AI-driven tools and interactive media for global brands, at Accenture Song and through my studio Organised Mess, to creating installations that translate computational systems into human-centred experiences. Those installations, shown in Singapore and New York, use machine learning and custom hardware to make the processes inside a system something you can feel in a room.",
+		"I am a creative technologist and artist working at the intersection of computational design, emerging technology and light. My experience spans building AI-driven tools and interactive media for global brands, at Accenture Song and through my studio Organised Mess, to creating installations that translate computational systems into human-centred experiences. In my own practice, shown in Singapore and New York, I use machine learning and custom hardware to make the processes inside a system visible as light in a room.",
 		"Whether prototyping for clients or developing my own practice, I combine technical experimentation with design-led thinking to deliver outcomes that are both innovative and tangible."
 	],
 	"statement_title": "Artist statement",
@@ -135,8 +135,15 @@
 					"org_url": "https://www.lasalle.edu.sg/events/technoterra-archive-of-the-future/",
 					"place": "Gallery 1, Institute of Contemporary Arts Singapore",
 					"note": "4 Sep – 24 Oct 2026.",
-					"kind": "art",
-					"bullets": []
+					"kind": "art"
+				},
+				{
+					"dates": "2026",
+					"role": "<i>Forms Drifting</i>, in collaboration with MDRN",
+					"org": "I SAW IT, Singapore Art Week 2026",
+					"place": "Flock at Kampong Java, Singapore",
+					"note": "",
+					"kind": "both"
 				},
 				{
 					"dates": "2025",
@@ -145,18 +152,24 @@
 					"org_url": "https://www.lasalle.edu.sg/events/singapore-design-thesis-making?source=ica-events",
 					"place": "Gallery 1, Institute of Contemporary Arts Singapore",
 					"note": "12 Sep – 28 Oct 2025.",
-					"kind": "art",
-					"bullets": []
+					"kind": "art"
 				},
 				{
 					"dates": "2025",
 					"role": "<a href=\"Deconstructed-Ambiance-2025\"><i>Deconstructed Ambiance</i></a>",
 					"org": "Beyond Interface & Prompt: Exploring the Language of Technology in Contemporary Art",
 					"org_url": "https://www.wahcenter.net/2025/04/beyond-interface-prompt-exploring-the-language-of-technology-in-contemporary-art/",
-					"place": "Williamsburg Art & Historical Center, Brooklyn, New York",
+					"place": "WAH Center (Williamsburg Art & Historical Center), Brooklyn, New York",
 					"note": "18 Apr – 17 May 2025.",
-					"kind": "art",
-					"bullets": []
+					"kind": "art"
+				},
+				{
+					"dates": "2025",
+					"role": "<a href=\"Ambi-latent-Space-2025\"><i>Ambi(latent) Space</i></a>",
+					"org": "to be CONTINUED – a work in progress show",
+					"place": "NYC Resistor, Brooklyn, New York",
+					"note": "",
+					"kind": "both"
 				},
 				{
 					"dates": "2023",
@@ -165,8 +178,47 @@
 					"org_url": "https://www.lasalle.edu.sg/events/threads-critical-craft-collective-experiment-draft-2",
 					"place": "Earl Lu Gallery, Institute of Contemporary Arts Singapore",
 					"note": "13 – 25 Mar 2023.",
-					"kind": "art",
-					"bullets": []
+					"kind": "art"
+				},
+				{
+					"dates": "2022–2025",
+					"role": "<a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\"><i>The Oort Cloud and the Blue Mountain</i></a>, with MDRN, Andreas Schlegel & Hazel Lim-Schlegel",
+					"org": "Singapore Art Week 2022",
+					"place": "Tanjong Pagar Distripark, Singapore",
+					"note": "",
+					"kind": "both"
+				},
+				{
+					"dates": "2022",
+					"role": "<i>ASICS Art in Motion Campaign</i>",
+					"org": "Pop-up activation",
+					"place": "Alchemist, Design Orchard, Singapore",
+					"note": "",
+					"kind": "design"
+				},
+				{
+					"dates": "2021",
+					"role": "<i>NewWave</i>, in collaboration with MDRN",
+					"org": "Farewell To Reason, by (KSY) Nathan Yong",
+					"place": "Industry+, Singapore",
+					"note": "",
+					"kind": "design"
+				},
+				{
+					"dates": "2021–2022",
+					"role": "<a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\"><i>The Oort Cloud and the Blue Mountain</i></a>, with MDRN, Andreas Schlegel & Hazel Lim-Schlegel",
+					"org": "Kinderbiënnale 2021",
+					"place": "Groninger Museum, Groningen, Netherlands",
+					"note": "",
+					"kind": "both"
+				},
+				{
+					"dates": "2021–2022",
+					"role": "<a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\"><i>The Oort Cloud and the Blue Mountain</i></a>, with MDRN, Andreas Schlegel & Hazel Lim-Schlegel",
+					"org": "Children's Biennale 2021",
+					"place": "Japanisches Palais, Staatliche Kunstsammlungen Dresden, Germany",
+					"note": "",
+					"kind": "both"
 				}
 			]
 		}

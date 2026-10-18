@@ -142,6 +142,7 @@
   "line": "Motion control and electronics for an Archifest installation.",
   "techniques": "Custom electronics, motion control",
   "client_label": "Client",
-  "client": "Neuewave"
+  "client": "Neuewave",
+  "kind": "design"
  }
 }

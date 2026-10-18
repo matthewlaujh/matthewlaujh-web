@@ -64,6 +64,7 @@
   "line": "A data study of how experts measure happiness, with a sound visualiser.",
   "techniques": "Data visualisation, web, sound",
   "client_label": "School",
-  "client": "LASALLE College of the Arts"
+  "client": "LASALLE College of the Arts",
+  "kind": "design"
  }
 }

@@ -120,6 +120,7 @@
   "line": "A lighting fixture that turns images into light through machine learning.",
   "techniques": "Machine learning (UMAP), colour-palette extraction, custom LED fixture",
   "client_label": "School",
-  "client": "NYU ITP"
+  "client": "NYU ITP",
+  "kind": "both"
  }
 }

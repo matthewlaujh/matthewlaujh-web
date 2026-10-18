@@ -50,6 +50,7 @@
   "line": "A generative light object that learns from its own output until its colours collapse.",
   "techniques": "Model collapse, spectral sensing, generative light, custom LED panel, feedback loop",
   "client_label": "Exhibited at",
-  "client": "Gallery 1, ICA Singapore"
+  "client": "Gallery 1, ICA Singapore",
+  "kind": "art"
  }
 }
