@@ -353,7 +353,7 @@ function render(page) {
 		<link rel="stylesheet" href="${asset('/css/site.css')}">
 		<script src="${asset('/js/backdrops.js')}" defer></script>
 		<script src="${asset('/js/site.js')}" defer></script>
-${kind === 'project' ? `		<script>try{var c=JSON.parse(sessionStorage.getItem('carry')||'null');sessionStorage.removeItem('carry');if(c&&c.slug==='${page.slug}'){window.__carry=c;var h=document.documentElement;h.classList.add('carry');h.style.setProperty('--carry','url('+(c.shown||c.img)+')')}}catch(e){}</script>\n` : ''}	</head>
+	</head>
 	<body>
 		${backdrop}
 		${barHTML(page)}

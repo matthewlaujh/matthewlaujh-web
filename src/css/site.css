@@ -57,16 +57,15 @@ ul { padding: 0; list-style: none; }
    way to the diffusion once the shader has warmed up */
 .poster { position: fixed; inset: 0; z-index: 0; background: #000 center / cover no-repeat; filter: blur(18px) saturate(1.3) brightness(.8); transform: scale(1.08); transition: opacity 1.4s ease; }
 .backdrop.loaded ~ .poster { opacity: 0; }
-html[data-page="project"] .backdrop { opacity: 1; transition: none; }
-html.carry .poster { background-image: var(--carry) !important; filter: none; transform: none; }
-html.carry .project .hero .ch { animation-delay: calc(var(--d) + .35s); }
-html.carry .project .hero h1 small { animation-delay: .85s; }
-html.carry .project .hero .line { animation-delay: .95s; }
-html.carry .project .hero .facts { animation-delay: 1.1s; }
-html.carry .project .hero .scroll-cue { animation-delay: 1.35s; }
-/* home: leaving for a project */
+html[data-page="project"] .backdrop { opacity: 1; }
+/* pages are swapped in place under one renderer: leaving states */
 html.leaving .home { opacity: 0; transform: translateY(-10px); transition: opacity .55s var(--ease), transform .6s var(--ease); }
-.home { transition: opacity .3s; }
+html.leaving .project, html.leaving .about { opacity: 0; transition: opacity .4s var(--ease); }
+html.leaving .bar-title { opacity: 0; transform: translateY(-10px); transition: opacity .35s, transform .4s var(--ease); }
+.backdrop.off { opacity: 0 !important; transition: opacity .9s ease !important; }
+.veil--off { background: transparent; }
+main { animation: pagein .5s var(--ease) both; }
+@keyframes pagein { from { opacity: 0; } }
 .backdrop canvas, .backdrop .slitscan_canvas { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; }
 .veil { position: fixed; inset: 0; z-index: 0; background: var(--veil); pointer-events: none; transition: background-color .6s; }
 .veil--light { background: var(--veil-light); }
@@ -283,7 +282,7 @@ html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-t
 html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title { animation: capsule .9s .1s var(--ease) both; }
 html[data-page="project"] .bar .back span, html[data-page="about"] .bar .back span { overflow: hidden; animation: arrow .7s .3s var(--ease) both; }
 html[data-page="project"] .bar-title, html[data-page="about"] .bar-title { animation: barin .7s .45s var(--ease) backwards; }
-@keyframes barin { from { opacity: 0; transform: translateY(8px); } }
+@keyframes barin { from { opacity: 0; transform: translateY(-10px); } }
 @keyframes capsule { from { background-color: transparent; border-color: transparent; transform: translateX(-15px); } }
 @keyframes arrow { from { opacity: 0; max-width: 0; margin-right: -6px; transform: translateX(6px); } to { opacity: 1; max-width: 24px; margin-right: 0; transform: none; } }
 /* every page: the rights line is a glass pill too */

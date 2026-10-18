@@ -12,6 +12,13 @@
 	var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	var page = html.getAttribute('data-page');
 
+	/* listeners that belong to the current page: dropped on every swap */
+	var pageAC = null;
+	function on(target, ev, fn, opts) {
+		opts = Object.assign({}, opts || {}, pageAC ? { signal: pageAC.signal } : {});
+		target.addEventListener(ev, fn, opts);
+	}
+
 	/* ---------------- dropdown ---------------- */
 	function setupDropdown() {
 		var btn = document.getElementById('bar_title');
@@ -30,7 +37,7 @@
 		}
 		btn.addEventListener('click', function () { toggle(); });
 		if (scrim) scrim.addEventListener('click', function () { toggle(false); });
-		document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false); });
+		on(document, 'keydown', function (e) { if (e.key === 'Escape') toggle(false); });
 	}
 
 	/* ---------------- backdrop helpers ---------------- */
@@ -41,16 +48,6 @@
 	function setBackdropSpeed(s) {
 		var inst = backdropInstance();
 		if (inst && inst.data) inst.data.speedScale = s;
-	}
-	/* hand the running diffusion to the next page: it carries on from this
-	   snapshot instead of starting over (see Diffuse in backdrops.js) */
-	function carryTo(href) {
-		var bd = backdropInstance();
-		try {
-			var snap = bd && bd.snapshot && bd.snapshot();
-			if (snap) { snap.slug = href.replace(/\.html$/, '').replace(/^.*\//, ''); sessionStorage.setItem('carry', JSON.stringify(snap)); }
-		} catch (x) {}
-		location.href = href;
 	}
 	/* project pages: randomise the slit-scan within a calm band on every load */
 	function randomiseBackdrop() {
@@ -82,8 +79,8 @@
 			var k = Math.floor(scrollY / step);
 			if (k !== last) { inst.show(inst.index + (k > last ? 1 : -1)); last = k; }
 		}
-		addEventListener('scroll', onScroll, { passive: true });
-		addEventListener('resize', function () { step = Math.max(240, innerHeight * 0.45); });
+		on(window, 'scroll', onScroll, { passive: true });
+		on(window, 'resize', function () { step = Math.max(240, innerHeight * 0.45); });
 	}
 
 	/* ease the backdrop speed from `from` to `to` over `ms` (after a short hold at `from`) */
@@ -128,12 +125,11 @@
 				if (bd && bd.show && a.hasAttribute('data-i')) bd.show(+a.getAttribute('data-i'));
 				setBackdropSpeed(2);
 				document.documentElement.classList.add('leaving');
-				setTimeout(function () { carryTo(href); }, 650);
+				setTimeout(function () { navigate(href); }, 650);
 			}
 			a.addEventListener('click', go);
 			var more = item.querySelector('.more-in'); if (more) more.addEventListener('click', go);
 		})(links[i]);
-		addEventListener('pageshow', function (e) { if (e.persisted) document.documentElement.classList.remove('leaving'); });
 	}
 
 	/* ---------------- project: plate reveal, slit-scan calms as it's covered ---------------- */
@@ -153,7 +149,7 @@
 			setBackdropSpeed(Math.max(0.2, 1 - scrollY / innerHeight));
 			html.setAttribute('data-glass', scrollY > innerHeight - barH ? 'light' : 'dark');
 		}
-		addEventListener('scroll', glass, { passive: true });
+		on(window, 'scroll', glass, { passive: true });
 		glass();
 	}
 
@@ -271,14 +267,14 @@
 			f.classList.add('ready');
 		}
 		layout();
-		var rt; addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
+		var rt; on(window, 'resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
 		function loop() {
 			px += (tx - px) * 0.06; py += (ty - py) * 0.06;
 			f.style.setProperty('--px', px + 'px'); f.style.setProperty('--py', py + 'px');
 			drawEdges();
 			raf = (Math.abs(tx - px) + Math.abs(ty - py) > 0.05) ? requestAnimationFrame(loop) : null;
 		}
-		if (!reduced) addEventListener('mousemove', function (e) {
+		if (!reduced) on(window, 'mousemove', function (e) {
 			tx = (e.clientX / innerWidth - 0.5) * -40; ty = (e.clientY / innerHeight - 0.5) * -30;
 			if (!raf) raf = requestAnimationFrame(loop);
 		});
@@ -301,7 +297,7 @@
 		   grows over it, melting into the shader as it goes, so the project page
 		   (which opens on the same diffused cover) continues the picture */
 		function go(e, el) {
-			if (reduced || e.metaKey || e.ctrlKey || e.shiftKey || e.button || mobile.matches) return;
+			if (reduced || e.metaKey || e.ctrlKey || e.shiftKey || e.button || mobile.matches || e.defaultPrevented) return;
 			e.preventDefault();
 			var img = el.querySelector('img'), r = img.getBoundingClientRect();
 			var d = document.createElement('div');
@@ -319,14 +315,9 @@
 					{ left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', opacity: 1, filter: 'blur(0px)' },
 					{ opacity: 1, filter: 'blur(0px)', offset: 0.35 },
 					{ left: '0px', top: '0px', width: innerWidth + 'px', height: innerHeight + 'px', opacity: 0, filter: 'blur(14px)' }
-				], { duration: 1100, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' }).onfinish = function () { carryTo(href); };
-			} else location.href = href;
+				], { duration: 1100, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' }).onfinish = function () { navigate(href); };
+			} else navigate(href);
 		}
-		addEventListener('pageshow', function (e) {
-			if (!e.persisted) return;
-			[].forEach.call(document.querySelectorAll('.flip'), function (d) { d.remove(); });
-			f.classList.remove('leaving'); var sd = document.querySelector('.field-side'); if (sd) sd.classList.remove('leaving');
-		});
 		tiles.forEach(function (t) { t.addEventListener('click', function (e) { go(e, t); }); });
 		side.forEach(function (a) { a.addEventListener('click', function (e) { go(e, tiles[+a.getAttribute('data-i')]); }); });
 	}
@@ -346,7 +337,7 @@
 		}
 		for (var i = 0; i < tabs.length; i++) (function (t) { t.addEventListener('click', function () { show(t.getAttribute('data-track'), true); }); })(tabs[i]);
 		if (location.hash === '#art') show('art');
-		addEventListener('hashchange', function () { show(location.hash === '#art' ? 'art' : 'design'); });
+		on(window, 'hashchange', function () { show(location.hash === '#art' ? 'art' : 'design'); });
 	}
 
 	/* ---------------- custom cursor (pointer devices only) ---------------- */
@@ -396,18 +387,113 @@
 		}
 	}
 
-	/* ---------------- init ---------------- */
-	function init() {
+	/* ---------------- per-page setup ---------------- */
+	function setupPage() {
+		if (pageAC) pageAC.abort();
+		pageAC = typeof AbortController !== 'undefined' ? new AbortController() : null;
+		page = html.getAttribute('data-page');
 		setupDropdown();
 		fixWidows();
-		randomiseBackdrop();
-		if (window.MLBackdrops) window.MLBackdrops.init(document);
 		setupDiffuseScroll();
-		setupCursor();
 		if (page === 'home') setupHome();
 		if (page === 'project') setupProject();
 		if (page === 'field') setupField();
 		if (page === 'about') { html.setAttribute('data-glass', 'light'); setupAbout(); }
+	}
+
+	/* ---------------- navigation: one renderer, pages swapped underneath ----------------
+	   The diffusion canvas never reloads. A click fetches the next page, the current
+	   one plays its leave, then bar + main are swapped and the backdrop is pointed
+	   at the new page's images (a crossfade, not a restart). */
+	var navigating = false;
+	function navigate(href, opts) {
+		opts = opts || {};
+		if (navigating) return;
+		navigating = true;
+		var leaving = leave();
+		fetch(href, { credentials: 'same-origin' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+			.then(function (text) { return leaving.then(function () { return text; }); })
+			.then(function (text) {
+				var doc = new DOMParser().parseFromString(text, 'text/html');
+				if (!opts.pop) history.pushState({ ml: 1 }, '', href);
+				swap(doc);
+				navigating = false;
+			})
+			.catch(function () { location.href = href; });
+	}
+	/* the current page's exit, as a promise */
+	function leave() {
+		var ms = 0;
+		if (page === 'home') { if (!html.classList.contains('leaving')) { html.classList.add('leaving'); ms = 500; } }
+		else if (page === 'project' || page === 'about') { html.classList.add('leaving'); ms = 420; }
+		else if (page === 'field') { var f = document.getElementById('field'); if (f && !f.classList.contains('leaving')) { f.classList.add('leaving'); ms = 500; } }
+		return new Promise(function (res) { setTimeout(res, ms); });
+	}
+	function swap(doc) {
+		var nb = doc.body, kind = doc.documentElement.getAttribute('data-page');
+		document.title = doc.title;
+		html.setAttribute('data-page', kind);
+		html.removeAttribute('data-glass');
+		html.classList.remove('leaving');
+		// drop everything page-specific; keep the renderer, veil, footer and cursor
+		[].slice.call(document.body.children).forEach(function (el) {
+			if (el.matches('.backdrop, .veil, .site-footer, .cursor')) return;
+			el.remove();
+		});
+		var footer = document.querySelector('.site-footer');
+		[].slice.call(nb.children).forEach(function (el) {
+			if (el.matches('.backdrop, .poster, .veil, .site-footer, script')) return;
+			document.body.insertBefore(document.importNode(el, true), footer);
+		});
+		// the veil follows the page (dark on home / field, lighter on a project)
+		var veil = document.querySelector('.veil'), nveil = nb.querySelector('.veil');
+		if (veil && nveil) veil.className = nveil.className;
+		if (veil && !nveil) veil.classList.add('veil--off');
+		retarget(nb.querySelector('.backdrop'));
+		scrollTo(0, 0);
+		setupPage();
+	}
+	/* point the running diffusion at the next page's images */
+	function retarget(nel) {
+		var el = document.querySelector('.backdrop');
+		if (!nel) { if (el) { el.classList.add('off'); var i0 = el.__instance; if (i0 && i0.pause) setTimeout(function () { if (el.classList.contains('off')) i0.pause(); }, 1200); } return; }
+		var cfg = {};
+		try { cfg = JSON.parse(nel.querySelector('script').textContent); } catch (e) {}
+		if (!el) {                                   // came from a page without one
+			var np = nel.parentNode.querySelector('.poster');
+			if (np) document.body.insertBefore(document.importNode(np, true), document.body.firstChild);
+			document.body.insertBefore(document.importNode(nel, true), document.body.firstChild);
+			if (window.MLBackdrops) window.MLBackdrops.init(document);
+			return;
+		}
+		el.classList.remove('off');
+		var sc = el.querySelector('script'); if (sc) sc.textContent = JSON.stringify(cfg);
+		var inst = el.__instance;
+		if (inst && inst.retarget) { inst.retarget(cfg.images || [], cfg.settings || {}); inst.start(); }
+	}
+	function setupNav() {
+		if (!window.fetch || !window.DOMParser || !history.pushState) return;
+		document.addEventListener('click', function (e) {
+			if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+			var a = e.target.closest && e.target.closest('a[href]');
+			if (!a || a.target || a.hasAttribute('download') || a.origin !== location.origin) return;
+			var href = a.getAttribute('href');
+			if (!href || href[0] === '#' || /^mailto:/.test(href) || /\.(pdf|zip|jpg|png|webp|mp4|webm)$/i.test(a.pathname)) return;
+			if (a.pathname === location.pathname && a.hash) return;
+			e.preventDefault();
+			navigate(a.href);
+		});
+		addEventListener('popstate', function () { navigate(location.href, { pop: true }); });
+		history.replaceState({ ml: 1 }, '', location.href);
+	}
+
+	/* ---------------- init ---------------- */
+	function init() {
+		randomiseBackdrop();
+		if (window.MLBackdrops) window.MLBackdrops.init(document);
+		setupCursor();
+		setupNav();
+		setupPage();
 	}
 	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
 	else init();
