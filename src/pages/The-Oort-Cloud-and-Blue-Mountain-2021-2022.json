@@ -1,13 +1,13 @@
 {
  "id": 24916419,
- "slug": "Singapore-Art-Week-2022-The-Oort-Cloud-and-the-Blue-Mountain",
- "title": "Singapore Art Week 2022: The Oort Cloud and the Blue Mountain, Singapore (2022)",
- "title_no_html": "Singapore Art Week 2022: The Oort Cloud and the Blue Mountain, Singapore (2022)",
+ "slug": "The-Oort-Cloud-and-Blue-Mountain-2021-2022",
+ "title": "The Oort Cloud and Blue Mountain (2021–2022)",
+ "title_no_html": "The Oort Cloud and Blue Mountain (2021–2022)",
  "is_homepage": false,
  "pin": false,
  "pin_options": null,
- "excerpt": "Completed while with Neuewave for Andreas Schlegel & Hazel Lim-Schlegel.\n—\n\nThe Oort Cloud and the Blue Mountain for Singapore Art Museum:...",
- "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed while with <a href=\"http://neuewave.sg\" target=\"_blank\">Neuewave</a> for Andreas Schlegel &amp; Hazel Lim-Schlegel.<br>—<br>\n<i>The Oort Cloud and the Blue Mountain</i> for Singapore Art Museum: Tanjong Pagar Distripark is an installation work that refers both to Blue Mountain, an early 20th century painting by Wassily Kandinsky and the Oort Cloud, an astronomical phenomenon described as an extended shell of icy objects that exist on the outer reaches of our solar system.<br>\n<br>\nAdapted artists' original artwork into vinyl sticker designs and developed electronic components and setup for LED light installations.<br>—\n</h1><br>\n</div>\n</div>",
+ "excerpt": "With Neuewave for Andreas Schlegel & Hazel Lim-Schlegel. Dresden, Groningen and Singapore...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\"><h1>Completed while with Neuewave for Andreas Schlegel &amp; Hazel Lim-Schlegel. Shown at the Children’s Biennale 2021, Dresden (photo: SKD Museum), the Kinderbiënnale 2021, Groningen (photo: Groninger Museum), and Singapore Art Week 2022 at Singapore Art Museum, Tanjong Pagar Distripark.<br><br>—<br><br><i>The Oort Cloud and the Blue Mountain</i> is an installation work by Andreas Schlegel and Hazel Lim-Schlegel that refers both to <i>Blue Mountain</i>, an early twentieth-century painting by Wassily Kandinsky, and to the Oort Cloud, the extended shell of icy objects at the outer reaches of our solar system.<br><br>For the two biennale showings I adapted the artists’ original artwork into vinyl designs for the gallery walls. For Singapore Art Week I did the same and also developed the electronic components and setup for the LED light installations.</h1></div>\n</div>",
  "local_css": "[local-style=\"24916419\"] .container_width {\n}\n\n[local-style=\"24916419\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24916419\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24916419\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24916419\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24916419\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] small a:hover {\n}\n\n[local-style=\"24916419\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
  "backdrop": {
   "type": "wallpaper",
@@ -144,11 +144,51 @@
    "exclude_from_backdrop": false,
    "original": "/img-original/7e09482b-SAW-TOCBM-11.jpg",
    "thumb": "/img/7e09482b-SAW-TOCBM-11-s.webp"
+  },
+  {
+   "id": 173874770,
+   "src": "/img/8a1025f9-theOortCloudAndBlueMountainDresden-1.webp",
+   "name": "theOortCloudAndBlueMountainDresden-1.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/8a1025f9-theOortCloudAndBlueMountainDresden-1.jpg",
+   "thumb": "/img/8a1025f9-theOortCloudAndBlueMountainDresden-1-s.webp"
+  },
+  {
+   "id": 173874771,
+   "src": "/img/a91245c3-theOortCloudAndBlueMountainDresden-2.webp",
+   "name": "theOortCloudAndBlueMountainDresden-2.jpg",
+   "width": 765,
+   "height": 510,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/a91245c3-theOortCloudAndBlueMountainDresden-2.jpg",
+   "thumb": "/img/a91245c3-theOortCloudAndBlueMountainDresden-2-s.webp"
+  },
+  {
+   "id": 173874781,
+   "src": "/img/7e45b712-theOortCloudAndBlueMountainGroninger-1.webp",
+   "name": "theOortCloudAndBlueMountainGroninger-1.jpg",
+   "width": 1000,
+   "height": 666,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/7e45b712-theOortCloudAndBlueMountainGroninger-1.jpg",
+   "thumb": "/img/7e45b712-theOortCloudAndBlueMountainGroninger-1-s.webp"
+  },
+  {
+   "id": 173874782,
+   "src": "/img/f923d01d-theOortCloudAndBlueMountainGroninger-2.webp",
+   "name": "theOortCloudAndBlueMountainGroninger-2.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/f923d01d-theOortCloudAndBlueMountainGroninger-2.jpg",
+   "thumb": "/img/f923d01d-theOortCloudAndBlueMountainGroninger-2-s.webp"
   }
  ],
  "meta": {
-  "line": "Electronics and vinyl adaptation for an installation after Kandinsky.",
-  "techniques": "Custom electronics, vinyl graphics, installation",
+  "line": "Vinyl adaptation and LED electronics for an installation after Kandinsky, across three venues.",
+  "techniques": "Vinyl graphics, custom electronics, LED installation",
   "client_label": "Client",
   "client": "Andreas Schlegel & Hazel Lim-Schlegel, with Neuewave"
  }
