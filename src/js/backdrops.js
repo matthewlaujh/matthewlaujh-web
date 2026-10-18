@@ -735,6 +735,7 @@ var VERT = [
 		var sw = Math.min(this.w, 720), sh = Math.round(this.h * sw / this.w);
 		var c = document.createElement('canvas'); c.width = sw; c.height = sh;
 		var x = c.getContext('2d'); x.drawImage(this.canvas, 0, 0, sw, sh);
+		var shown = c.toDataURL('image/jpeg', 0.72);
 		var d = x.getImageData(0, 0, sw, sh), p = d.data, lut = new Uint8Array(256);
 		for (var i = 0; i < 256; i++) lut[i] = Math.round(255 * Math.pow(i / 255, 1 / 0.85));
 		for (var j = 0; j < p.length; j += 4) {
@@ -743,7 +744,7 @@ var VERT = [
 			p[j] = l + (r - l) * k; p[j + 1] = l + (g - l) * k; p[j + 2] = l + (bl - l) * k;
 		}
 		x.putImageData(d, 0, 0);
-		return { img: c.toDataURL('image/jpeg', 0.72), seed: this.seed, time: this.time };
+		return { img: c.toDataURL('image/jpeg', 0.72), shown: shown, seed: this.seed, time: this.time };
 	};
 	Diffuse.prototype.program = function (vs, fs) {
 		var gl = this.gl;
@@ -813,7 +814,7 @@ var VERT = [
 				if (self.carryImg) {
 					gl.bindTexture(gl.TEXTURE_2D, self.a.t);
 					gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, self.carryImg);
-					self.reset = 0.05; self.carryImg = null; // a gentle pull towards this page's own cover
+					self.reset = 0; self.carryEase = 1; self.carryImg = null; // ease the source back in over a few seconds
 				} else { self.reset = 1; self.warm(140); }
 				self.el.classList.add('loaded'); self.start();
 				return;
@@ -882,7 +883,9 @@ var VERT = [
 		gl.uniform2f(this.u.uRes, this.w, this.h); gl.uniform2f(this.u.uImg, this.srcW, this.srcH);
 		gl.uniform1f(this.u.uTime, this.time); gl.uniform2f(this.u.uMouse, this.mouse[0], this.mouse[1]);
 		gl.uniform1f(this.u.uStrength, (s.strength == null ? 0.7 : s.strength) * this.data.speedScale);
-		gl.uniform1f(this.u.uBlend, s.blend == null ? 0.012 : s.blend);
+		var blend = s.blend == null ? 0.012 : s.blend;
+		if (this.carryEase) { blend *= 1 - 0.85 * this.carryEase; this.carryEase = this.carryEase > 0.01 ? this.carryEase * 0.985 : 0; }
+		gl.uniform1f(this.u.uBlend, blend);
 		gl.uniform1f(this.u.uSeed, this.seed); gl.uniform1f(this.u.uReset, this.reset);
 		gl.bindFramebuffer(gl.FRAMEBUFFER, this.b.f); gl.viewport(0, 0, this.w, this.h);
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);

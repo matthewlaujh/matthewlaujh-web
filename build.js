@@ -353,7 +353,7 @@ function render(page) {
 		<link rel="stylesheet" href="${asset('/css/site.css')}">
 		<script src="${asset('/js/backdrops.js')}" defer></script>
 		<script src="${asset('/js/site.js')}" defer></script>
-${kind === 'project' ? `		<script>try{var c=JSON.parse(sessionStorage.getItem('carry')||'null');sessionStorage.removeItem('carry');if(c&&c.slug==='${page.slug}'){window.__carry=c;var h=document.documentElement;h.classList.add('carry');h.style.setProperty('--carry','url('+c.img+')')}}catch(e){}</script>\n` : ''}	</head>
+${kind === 'project' ? `		<script>try{var c=JSON.parse(sessionStorage.getItem('carry')||'null');sessionStorage.removeItem('carry');if(c&&c.slug==='${page.slug}'){window.__carry=c;var h=document.documentElement;h.classList.add('carry');h.style.setProperty('--carry','url('+(c.shown||c.img)+')')}}catch(e){}</script>\n` : ''}	</head>
 	<body>
 		${backdrop}
 		${barHTML(page)}
@@ -382,7 +382,7 @@ for (const page of all) {
 }
 
 if (!RELATIVE) {
-	fs.writeFileSync(path.join(OUT, '_redirects'), `/${site.homepage}  /  301\n`);
+	fs.writeFileSync(path.join(OUT, '_redirects'), `/${site.homepage}  /  301\n/Archifest-2021-Sea-of-Debris-2021  /NewWave-2021  301\n`);
 	fs.writeFileSync(path.join(OUT, '_headers'), `/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=31536000, immutable\n`);
 }
 

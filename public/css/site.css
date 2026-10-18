@@ -29,7 +29,7 @@
 
 /* ---------------------------------------------------------------- reset */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: none; background: var(--dark); }
+html { -webkit-text-size-adjust: none; background: var(--dark); scrollbar-gutter: stable; }
 body { margin: 0; background: var(--dark); color: var(--fg); font: 300 13px/1.4 var(--sans); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
 a:focus-visible, button:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
@@ -57,7 +57,7 @@ ul { padding: 0; list-style: none; }
    way to the diffusion once the shader has warmed up */
 .poster { position: fixed; inset: 0; z-index: 0; background: #000 center / cover no-repeat; filter: blur(18px) saturate(1.3) brightness(.8); transform: scale(1.08); transition: opacity 1.4s ease; }
 .backdrop.loaded ~ .poster { opacity: 0; }
-html.carry .poster { background-image: var(--carry); filter: none; transform: none; }
+html.carry .poster { background-image: var(--carry) !important; filter: none; transform: none; }
 html.carry .project .hero .ch { animation-delay: calc(var(--d) + .35s); }
 html.carry .project .hero h1 small { animation-delay: .85s; }
 html.carry .project .hero .line { animation-delay: .95s; }
@@ -277,6 +277,13 @@ html[data-page="project"] .bar-title, html[data-page="about"] .bar-title {
 	transition: background-color .35s, color .35s, border-color .35s;
 }
 html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title { display: inline-flex; align-items: center; gap: 6px; }
+/* arriving on a project or About: the name slides into its capsule, the arrow
+   follows, and the title button rises */
+html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title { animation: capsule .8s var(--ease) both; }
+html[data-page="project"] .bar .back span, html[data-page="about"] .bar .back span { animation: arrow .6s .25s var(--ease) backwards; }
+html[data-page="project"] .bar-title, html[data-page="about"] .bar-title { animation: rise .7s .35s var(--ease) backwards; }
+@keyframes capsule { from { background-color: transparent; border-color: transparent; } }
+@keyframes arrow { from { opacity: 0; transform: translateX(8px); } }
 /* every page: the rights line is a glass pill too */
 .site-footer > * {
 	background: rgba(24, 24, 26, .32);
