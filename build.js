@@ -1,13 +1,17 @@
 #!/usr/bin/env node
 /*
- * Static build for matthewlaujh.com (v2 — semantic markup).
+ * Static build for matthewlaujh.com (v3 — "Marquee" layout).
  *
  *   node build.js              -> public/   (root-relative URLs, for Cloudflare Pages)
  *   node build.js --relative   -> preview/  (relative URLs, for the artifact preview)
  *
- * Reads src/site.json, src/pages/*.json, src/pinned/*.json; converts the Cargo
- * content HTML to semantic HTML (src/lib/convert.js); writes one HTML file per
- * page plus css/js/fonts/img. No dependencies.
+ * Pages:
+ *   /               home: title list (3/4) + intro (1/4) over the slit-scan
+ *   /<slug>         project: slit-scan of its own hero image, then the text + plates on white
+ *   /All-Projects   every cover floating in space
+ *   /About          the About page on white
+ * Every page shares the top bar (← name · title ▾ dropdown) and the footer
+ * (studio clock · rights line). No dependencies.
  */
 'use strict';
 
@@ -30,6 +34,8 @@ const bySlug = Object.fromEntries(pages.map(p => [p.slug, p]));
 const home = bySlug[site.homepage];
 const nav = convert.navModel(navPage.content);
 const email = (infoPage.content.match(/mailto:([^"]+)/) || [])[1] || 'matt@matthewlaujh.com';
+const FIELD_SLUG = 'All-Projects';
+const YEAR = new Date().getFullYear();
 
 /* ------------------------------------------------------------------ utils */
 function readJSON(p) { return JSON.parse(fs.readFileSync(p, 'utf8')); }
@@ -42,12 +48,12 @@ function copyDir(from, to) {
 		e.isDirectory() ? copyDir(a, b) : fs.copyFileSync(a, b);
 	}
 }
-/** internal link for a Cargo slug */
 function url(slug) {
 	if (!slug || slug === site.homepage) return RELATIVE ? 'index.html' : '/';
 	return RELATIVE ? slug + '.html' : '/' + slug;
 }
 function asset(p) { return RELATIVE ? p.replace(/^\//, '') : p; }
+function json(o) { return JSON.stringify(o).replace(/<\/script/gi, '<\\/script'); }
 
 /* Cargo stored links as bare slugs; make them real URLs. Links to pages that
    don't exist are left as plain text (Cargo 404'd on them). */
@@ -55,7 +61,7 @@ function fixLinks(htmlStr, currentSlug) {
 	return htmlStr.replace(/<a\b([^>]*?)href="([^"]*)"([^>]*)>([\s\S]*?)<\/a>/g, (m, pre, href, post, inner) => {
 		let attrs = (pre + post).replace(/\s*rel="history"/, '').replace(/\s+/g, ' ').trim();
 		if (/^[A-Za-z0-9][A-Za-z0-9-]*$/.test(href)) {
-			if (!bySlug[href]) return inner; // dead internal link
+			if (!bySlug[href]) return inner;
 			const h = url(href);
 			if (href === currentSlug && currentSlug !== site.homepage) attrs += ' aria-current="page"';
 			return `<a href="${h}"${attrs ? ' ' + attrs : ''}>${inner}</a>`;
@@ -65,61 +71,171 @@ function fixLinks(htmlStr, currentSlug) {
 	});
 }
 
+/* ------------------------------------------------------------------ model */
+/* the works, in nav order, with the derived fields the layout needs */
+const works = nav.groups.flatMap(g => g.items.filter(i => i.href && bySlug[i.href]).map(i => {
+	const p = bySlug[i.href];
+	const prose = convert.prose(p.content);
+	const paras = prose.split(/\n(?=<)/);
+	const firstP = paras.find(x => x.startsWith('<p>')) || '';
+	const context = firstP.replace(/<\/?p>/g, '');
+	const body = prose.replace(firstP, '').replace(/^\s*<hr>\s*/, '').replace(/<hr>\s*$/, '');
+	const title = p.title_no_html.replace(/\s*\(\d{4}(?:[–-]\d{4})?\)\s*$/, '').replace(/,\s*$/, '');
+	const year = (p.title_no_html.match(/\((\d{4}(?:[–-]\d{4})?)\)/) || [])[1] || '';
+	const images = p.images.map(im => Object.assign({}, im, { src: asset(im.src) }));
+	return { page: p, slug: p.slug, title, year, category: g.label, context, body, images, cover: images[0], meta: p.meta || {} };
+}));
+const workBySlug = Object.fromEntries(works.map(w => [w.slug, w]));
+const years = works.map(w => parseInt(w.year, 10)).filter(Boolean);
+const yearRange = Math.min(...years) + '–' + Math.max(...years);
+
 /* ------------------------------------------------------------- fragments */
-function navHTML(currentSlug) {
-	const groups = nav.groups.map(g => {
-		const items = g.items.map(it => {
-			if (it.href && bySlug[it.href]) {
-				const cur = it.href === currentSlug;
-				return `\t\t\t\t<li><a href="${url(it.href)}"${cur ? ' class="active" aria-current="page"' : ''}>${it.text}</a></li>`;
-			}
-			return `\t\t\t\t<li><span class="dead" title="Coming soon">${it.text}</span></li>`;
-		}).join('\n');
-		return `\t\t<section class="nav-group">\n\t\t\t<h2>${g.label}</h2>\n\t\t\t<ul>\n${items}\n\t\t\t</ul>\n\t\t</section>`;
-	}).join('\n');
-	return `<nav class="site-nav" aria-label="Projects">
-		<a class="site-title" href="${url(site.homepage)}">${nav.title}</a>
-		<p class="nav-heading">${nav.heading}</p>
+function splitTitle(t) {
+	// each letter gets its own span so the hover wave / rise can stagger
+	return t.split(' ').map((word, wi) => `<span class="w">${[...word].map((c, k) => `<span class="ch" style="--d:${(wi * 6 + k) * 18}ms">${esc(c)}</span>`).join('')}</span>`).join(' ');
+}
+
+function dropdownHTML(current) {
+	const groups = nav.groups.map(g => `\t\t<section>\n\t\t\t<h3>${g.label}</h3>\n${g.items.map(it => {
+		if (it.href && workBySlug[it.href]) {
+			const w = workBySlug[it.href];
+			return `\t\t\t<a href="${url(w.slug)}"${w.slug === current ? ' aria-current="page"' : ''}>${esc(w.title)}<small>${w.year}</small></a>`;
+		}
+		return `\t\t\t<span class="dead" title="Coming soon">${it.text}</span>`;
+	}).join('\n')}\n\t\t</section>`).join('\n');
+	return `<div class="scrim" id="scrim"></div>
+	<div class="dropdown" id="dropdown" aria-label="Projects">
 ${groups}
-	</nav>`;
+		<div class="foot">
+			<a href="${url(FIELD_SLUG)}"${current === FIELD_SLUG ? ' aria-current="page"' : ''}>All projects in space →</a>
+			<span><a href="${url('About')}"${current === 'About' ? ' aria-current="page"' : ''}>About</a> &nbsp;&nbsp; <a href="mailto:${email}">Email</a> &nbsp;&nbsp; <a href="${url(site.homepage)}">Home</a></span>
+		</div>
+	</div>`;
 }
 
-function clockHTML() {
-	return `<span class="studio-clock" aria-live="off"><span class="dot" aria-hidden="true"></span><span class="clock-text">Studio · Singapore</span></span>`;
+function barHTML(page) {
+	const isHome = page.slug === site.homepage;
+	const w = workBySlug[page.slug];
+	let mid = 'Projects', midYear = '';
+	if (w) { mid = esc(w.title); midYear = w.year; }
+	else if (page.slug === FIELD_SLUG) mid = 'All projects';
+	else if (page.slug === 'About') mid = 'About';
+	const left = isHome
+		? `<a class="site-title" href="${url(site.homepage)}">${nav.title}</a>`
+		: `<a class="site-title back" href="${url(site.homepage)}" aria-label="Home"><span>←</span> <i class="nm">${nav.title}</i></a>`;
+	return `<header class="bar">
+		<div class="bar-left">${left}</div>
+		<button class="bar-title" id="bar_title" type="button" aria-expanded="false" aria-controls="dropdown">${mid}${midYear ? ` <b>${midYear}</b>` : ''} <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M1 3l4 4 4-4"/></svg></button>
+		<div class="bar-right"></div>
+	</header>
+	${dropdownHTML(page.slug)}`;
 }
 
-function footerHTML(extraClass) {
-	return `<footer class="site-footer${extraClass ? ' ' + extraClass : ''}">
-		<a href="mailto:${email}">${email}</a>
-		${clockHTML()}
+function footerHTML() {
+	return `<footer class="site-footer">
+		<span class="studio-clock" aria-live="off"><span class="dot" aria-hidden="true"></span><span class="clock-text">Studio · Singapore</span></span>
+		<span class="rights">© ${YEAR} Matthew Lau. All rights reserved.</span>
 	</footer>`;
 }
 
-function backdropHTML(page) {
-	const bd = page.backdrop;
-	if (!bd) return '';
-	const cfg = { settings: bd.settings };
-	if (bd.type === 'slitscan') cfg.image = Object.assign({}, bd.image, { src: asset(bd.image.src) });
-	if (bd.type === 'wallpaper') cfg.images = page.images.map(i => Object.assign({}, i, { src: asset(i.src) }));
-	return `<div class="backdrop" data-backdrop="${bd.type}" aria-hidden="true"><script type="application/json">${JSON.stringify(cfg).replace(/<\/script/gi, '<\\/script')}</script></div>`;
+function slitHTML(image, opts) {
+	const settings = Object.assign({}, home.backdrop.settings, opts && opts.settings || {});
+	const cfg = { settings, image: { src: asset(image.src), width: image.width, height: image.height } };
+	return `<div class="backdrop" data-backdrop="slitscan"${opts && opts.random ? ' data-random' : ''} aria-hidden="true"><script type="application/json">${json(cfg)}</script></div><div class="veil${opts && opts.light ? ' veil--light' : ''}" aria-hidden="true"></div>`;
 }
 
 function introHTML(currentSlug) {
-	// the Front Page's second column (the intro paragraph + "more about me")
 	const cols = convert.textColumn(home.content);
 	const intro = cols[cols.length - 1];
-	return `<div class="prose">\n${fixLinks(convert.blocks(intro.html), currentSlug)}\n</div>`;
+	const html = convert.blocks(intro.html)
+		.replace(/<p><a[^>]*>Click here for more about me\.<\/a><\/p>/, '')
+		.replace(/<hr>\s*$/, '');
+	return `<div class="prose">\n${fixLinks(html, currentSlug)}\n</div>`;
 }
 
-function mainHTML(page) {
-	if (page.slug === site.homepage) {
-		return `<main class="page page--home">
+/* ------------------------------------------------------------------ pages */
+function homeMain() {
+	const list = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${g.items.map(it => {
+		if (it.href && workBySlug[it.href]) {
+			const w = workBySlug[it.href];
+			return `\t\t\t<a href="${url(w.slug)}" data-img="${w.cover.src}" data-title="${esc(w.title)}" data-year="${w.year}">${splitTitle(w.title)}<small>${w.year}</small></a>`;
+		}
+		return `\t\t\t<span class="dead" title="Coming soon">${splitTitle(it.text.replace(/\s*\(.*\)$/, ''))}<small>${(it.text.match(/\((.*)\)/) || [])[1] || ''}</small></span>`;
+	}).join('\n')}`).join('\n');
+	return `<main class="home">
 		<h1 class="visually-hidden">${esc(site.title)}</h1>
-		${introHTML(page.slug)}
+		<nav class="marquee" aria-label="Projects">
+${list}
+		</nav>
+		<aside class="home-aside">
+			${introHTML(site.homepage)}
+			<a class="more" href="${url('About')}">More about me</a>
+			<p class="contact"><a href="mailto:${email}">${email}</a><br>Singapore</p>
+		</aside>
+	</main>
+	<div class="cursor-image" id="cursor_image" aria-hidden="true"><img alt=""><div class="cap"></div></div>`;
+}
+
+function projectMain(w) {
+	const m = w.meta;
+	const next = works[(works.indexOf(w) + 1) % works.length];
+	const prev = works[(works.indexOf(w) - 1 + works.length) % works.length];
+	const dl = [
+		['Year', w.year],
+		['Category', w.category],
+		m.techniques && ['Techniques', esc(m.techniques)],
+		m.client && [esc(m.client_label || 'Client'), esc(m.client)]
+	].filter(Boolean).map(([k, v]) => `\t\t\t\t<dt>${k}</dt><dd>${v}</dd>`).join('\n');
+	return `<main class="project">
+		<section class="hero">
+			<h1>${splitTitle(w.title)}<small>${w.year}</small></h1>
+			${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}
+			<p class="facts"><span>${w.category}</span>${m.client ? `<span>${esc(m.client)}</span>` : ''}</p>
+			<p class="scroll-cue">Scroll<i>↓</i></p>
+		</section>
+		<div class="body">
+			<div class="text">
+				<dl>
+${dl}
+				</dl>
+				${w.context ? `<p class="context">${fixLinks(w.context, w.slug)}</p>` : ''}
+				<div class="prose">
+${fixLinks(w.body, w.slug)}
+				</div>
+			</div>
+			<div class="plates">
+${w.images.map((im, i) => `\t\t\t\t<figure><img src="${im.src}" width="${im.width}" height="${im.height}" alt="" loading="${i ? 'lazy' : 'eager'}"><figcaption>${i + 1} / ${w.images.length}</figcaption></figure>`).join('\n')}
+			</div>
+			<nav class="prevnext" aria-label="Neighbouring projects">
+				<a href="${url(prev.slug)}"><span>←</span> ${esc(prev.title)}</a>
+				<a href="${url(next.slug)}">${esc(next.title)} <span>→</span></a>
+			</nav>
+		</div>
 	</main>`;
-	}
-	const top = !/flex-end/.test(page.local_css || '');
-	return `<main class="page${top ? ' page--top' : ''}">
+}
+
+function fieldMain() {
+	let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+	const tiles = works.map((w, i) => {
+		const x = 30 + rnd() * 62, y = 8 + rnd() * 76, wv = 11 + rnd() * 9, z = (0.4 + rnd() * 1.2).toFixed(2);
+		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" style="--x:${x.toFixed(1)}vw;--y:${y.toFixed(1)}vh;--w:${wv.toFixed(1)}vw;--z:${z}"><img src="${w.cover.src}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label">${esc(w.title)}, ${w.year}</span></a>`;
+	}).join('\n');
+	const side = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${works.filter(x => x.category === g.label).map(w => `\t\t\t<a href="${url(w.slug)}" data-i="${works.indexOf(w)}">${esc(w.title)}<small>${w.year}</small></a>`).join('\n')}`).join('\n');
+	return `<main class="field-page">
+		<h1 class="visually-hidden">All projects</h1>
+		<div class="field" id="field">
+${tiles}
+		</div>
+		<nav class="field-side" aria-label="Projects">
+${side}
+		</nav>
+		<p class="hint">Hover a title, or wander. Click to open.</p>
+		<p class="count">${works.length} projects, ${yearRange}</p>
+	</main>`;
+}
+
+function aboutMain(page) {
+	return `<main class="about">
 		<article>
 			<h1 class="visually-hidden">${esc(page.title_no_html)}</h1>
 			<div class="prose">
@@ -129,28 +245,23 @@ ${fixLinks(convert.prose(page.content), page.slug)}
 	</main>`;
 }
 
-function menuHTML(currentSlug) {
-	return `<div id="site_menu" role="dialog" aria-label="Menu">
-		${backdropHTML(home)}
-		<div class="menu-inner">
-			${navHTML(currentSlug)}
-			<div class="menu-intro">${introHTML(currentSlug)}</div>
-			${footerHTML('site-footer--inline')}
-		</div>
-	</div>`;
-}
-
-const MENU_ICON = `<svg viewBox="0 0 34 34" aria-hidden="true" focusable="false"><line x1="4" y1="8" x2="30" y2="8"/><line x1="4" y1="17" x2="30" y2="17"/><line x1="4" y1="26" x2="30" y2="26"/></svg>`;
-
 /* --------------------------------------------------------------- template */
 function render(page) {
 	const isHome = page.slug === site.homepage;
+	const w = workBySlug[page.slug];
 	const title = isHome ? site.title : `${page.title_no_html} - ${site.title}`;
 	const canonical = isHome ? site.url : `${site.url}/${page.slug}`;
-	const desc = site.description;
+	const desc = w && w.meta.line ? w.meta.line : site.description;
+	const ogImage = w ? `${site.url}${w.page.images[0].src}` : `${site.url}${site.social_image}`;
+
+	let kind, backdrop, main;
+	if (isHome) { kind = 'home'; backdrop = slitHTML(home.backdrop.image); main = homeMain(); }
+	else if (w) { kind = 'project'; backdrop = slitHTML(w.page.images[0], { random: true, light: true, settings: { scan_cycles: 3, wiggle: 6, target_speed: 30, flip_y: true } }); main = projectMain(w); }
+	else if (page.slug === FIELD_SLUG) { kind = 'field'; backdrop = slitHTML(home.backdrop.image); main = fieldMain(); }
+	else { kind = 'about'; backdrop = ''; main = aboutMain(page); }
 
 	return `<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="${kind}">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -162,14 +273,14 @@ function render(page) {
 		<meta name="twitter:card" content="summary_large_image">
 		<meta name="twitter:title" content="${esc(title)}">
 		<meta name="twitter:description" content="${esc(desc)}">
-		<meta name="twitter:image" content="${site.url}${site.social_image}">
+		<meta name="twitter:image" content="${ogImage}">
 		<meta property="og:locale" content="en_US">
 		<meta property="og:title" content="${esc(title)}">
 		<meta property="og:description" content="${esc(desc)}">
 		<meta property="og:url" content="${canonical}">
-		<meta property="og:image" content="${site.url}${site.social_image}">
+		<meta property="og:image" content="${ogImage}">
 		<meta property="og:type" content="website">
-		<meta name="theme-color" content="#222222">
+		<meta name="theme-color" content="${kind === 'about' ? '#ffffff' : '#111111'}">
 
 		<link rel="icon" href="${asset(site.favicon)}">
 		<link rel="preload" href="${asset('/fonts/AustinNewsDeck-Light.otf')}" as="font" type="font/otf" crossorigin>
@@ -177,15 +288,11 @@ function render(page) {
 		<script src="${asset('/js/backdrops.js')}" defer></script>
 		<script src="${asset('/js/site.js')}" defer></script>
 	</head>
-	<body class="${isHome ? 'homepage' : ''}" style="visibility: hidden;">
-		<button id="site_menu_button" type="button" aria-controls="site_menu" aria-expanded="false" aria-label="Menu">${MENU_ICON}</button>
-		<div class="site">
-			${backdropHTML(page)}
-			${navHTML(page.slug)}
-			${mainHTML(page)}
-			${footerHTML()}
-		</div>
-		${menuHTML(page.slug)}
+	<body>
+		${backdrop}
+		${barHTML(page)}
+		${main}
+		${footerHTML()}
 	</body>
 </html>
 `;
@@ -200,7 +307,8 @@ for (const dir of ['css', 'js', 'fonts', 'img']) {
 fs.copyFileSync(path.join(SRC, 'favicon.ico'), path.join(OUT, 'favicon.ico'));
 
 let count = 0;
-for (const page of pages) {
+const all = pages.concat([{ slug: FIELD_SLUG, title_no_html: 'All projects', content: '' }]);
+for (const page of all) {
 	const html = render(page);
 	if (page.slug === site.homepage) fs.writeFileSync(path.join(OUT, 'index.html'), html);
 	else fs.writeFileSync(path.join(OUT, page.slug + '.html'), html);

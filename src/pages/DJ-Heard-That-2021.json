@@ -1,79 +1,85 @@
 {
- "id": 24906284,
- "slug": "DJ-Heard-That-2021",
- "title": "DJ Heard That?! (2021)",
- "title_no_html": "DJ Heard That?! (2021)",
- "is_homepage": false,
- "pin": false,
- "pin_options": null,
- "excerpt": "Completed as part of the BA in Design Communication level 2 programme at LASALLE. Developed with collaborators Goh Sing Hong and Azri...",
- "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"><h1>Completed as part of the BA in Design Communication level 2 programme at LASALLE. Developed with collaborators <a href=\"https://singhong.cargo.site\" target=\"_blank\">Goh Sing Hong</a> and <a href=\"https://azrirzk.wixsite.com/azrirzk\" target=\"_blank\">Azri Razak</a>.<br>\n<br>\nWatch it <a href=\"https://vimeo.com/540923727\" target=\"_blank\"><i>in use here</i></a> and check out it’s <a href=\"https://vimeo.com/540923602\" target=\"_blank\"><i>functions here</i></a>.<br>—<br>\n<br>\nExploring ambient type in our surroundings, <i>DJ Hear That!? (2021)</i> explores the relationship between ambient sound and vernacular typography through probing the environment to create an object of play.<br><br>\nThe installation utilizes recordings from “Ambient Type” Probes to create an engaging artefact in the form of a MIDI controller that controls a p5.js sketch, engaging users to create visual typographical compositions and ambient soundscapes through the manipulation of knobs and keys.</h1><h1>—\n</h1>\n<br>\n</div>\n</div>",
- "local_css": "[local-style=\"24906284\"] .container_width {\n}\n\n[local-style=\"24906284\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24906284\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24906284\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24906284\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24906284\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] small a:hover {\n}\n\n[local-style=\"24906284\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
- "backdrop": {
-  "type": "wallpaper",
-  "settings": {
-   "scale_option": "contain",
-   "repeat_image": false,
-   "image_alignment": "image_center_center",
-   "margin": 25,
-   "pattern_size": 70,
-   "limit_size": false,
-   "overlay_color": "rgba(0, 0, 0, 0.5)",
-   "bg_color": "rgb(255, 255, 255)",
-   "cycle_images": true,
-   "autoplay": true,
-   "slideshow_transition": "fade",
-   "transition_timeout": 2.5,
-   "transition_duration": 0.5,
-   "randomize": false,
-   "arrow_navigation": true,
-   "focus_object": "{}",
-   "backdrop_viewport_lock": false,
-   "use_image_focus": "false",
-   "image": "137631886",
-   "requires_webgl": "false"
-  }
- },
- "images": [
-  {
-   "id": 137676069,
-   "src": "/img/333a790b-djheardthat.gif",
-   "name": "djheardthat.gif",
-   "width": 961,
-   "height": 541,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137676070,
-   "src": "/img/2a8e6682-djheardthat-functions.gif",
-   "name": "djheardthat-functions.gif",
-   "width": 864,
-   "height": 486,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137676200,
-   "src": "/img/a2b4d308-CiD_3_3-2_6.jpg",
-   "name": "CiD_3_3-2_6.jpg",
-   "width": 1500,
-   "height": 1000,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137676201,
-   "src": "/img/fc6d870f-CiD_3_3-2_8.jpg",
-   "name": "CiD_3_3-2_8.jpg",
-   "width": 1500,
-   "height": 1000,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137676202,
-   "src": "/img/e00f5656-CiD_3_3-2_16.jpg",
-   "name": "CiD_3_3-2_16.jpg",
-   "width": 1500,
-   "height": 1000,
-   "exclude_from_backdrop": false
-  }
- ]
+	"id": 24906284,
+	"slug": "DJ-Heard-That-2021",
+	"title": "DJ Heard That?! (2021)",
+	"title_no_html": "DJ Heard That?! (2021)",
+	"is_homepage": false,
+	"pin": false,
+	"pin_options": null,
+	"excerpt": "Completed as part of the BA in Design Communication level 2 programme at LASALLE. Developed with collaborators Goh Sing Hong and Azri...",
+	"content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"><h1>Completed as part of the BA in Design Communication level 2 programme at LASALLE. Developed with collaborators <a href=\"https://singhong.cargo.site\" target=\"_blank\">Goh Sing Hong</a> and <a href=\"https://azrirzk.wixsite.com/azrirzk\" target=\"_blank\">Azri Razak</a>.<br>\n<br>\nWatch it <a href=\"https://vimeo.com/540923727\" target=\"_blank\"><i>in use here</i></a> and check out it’s <a href=\"https://vimeo.com/540923602\" target=\"_blank\"><i>functions here</i></a>.<br>—<br>\n<br>\nExploring ambient type in our surroundings, <i>DJ Hear That!? (2021)</i> explores the relationship between ambient sound and vernacular typography through probing the environment to create an object of play.<br><br>\nThe installation utilizes recordings from “Ambient Type” Probes to create an engaging artefact in the form of a MIDI controller that controls a p5.js sketch, engaging users to create visual typographical compositions and ambient soundscapes through the manipulation of knobs and keys.</h1><h1>—\n</h1>\n<br>\n</div>\n</div>",
+	"local_css": "[local-style=\"24906284\"] .container_width {\n}\n\n[local-style=\"24906284\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24906284\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24906284\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24906284\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24906284\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906284\"] small a:hover {\n}\n\n[local-style=\"24906284\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+	"backdrop": {
+		"type": "wallpaper",
+		"settings": {
+			"scale_option": "contain",
+			"repeat_image": false,
+			"image_alignment": "image_center_center",
+			"margin": 25,
+			"pattern_size": 70,
+			"limit_size": false,
+			"overlay_color": "rgba(0, 0, 0, 0.5)",
+			"bg_color": "rgb(255, 255, 255)",
+			"cycle_images": true,
+			"autoplay": true,
+			"slideshow_transition": "fade",
+			"transition_timeout": 2.5,
+			"transition_duration": 0.5,
+			"randomize": false,
+			"arrow_navigation": true,
+			"focus_object": "{}",
+			"backdrop_viewport_lock": false,
+			"use_image_focus": "false",
+			"image": "137631886",
+			"requires_webgl": "false"
+		}
+	},
+	"images": [
+		{
+			"id": 137676069,
+			"src": "/img/333a790b-djheardthat.gif",
+			"name": "djheardthat.gif",
+			"width": 961,
+			"height": 541,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137676070,
+			"src": "/img/2a8e6682-djheardthat-functions.gif",
+			"name": "djheardthat-functions.gif",
+			"width": 864,
+			"height": 486,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137676200,
+			"src": "/img/a2b4d308-CiD_3_3-2_6.jpg",
+			"name": "CiD_3_3-2_6.jpg",
+			"width": 1500,
+			"height": 1000,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137676201,
+			"src": "/img/fc6d870f-CiD_3_3-2_8.jpg",
+			"name": "CiD_3_3-2_8.jpg",
+			"width": 1500,
+			"height": 1000,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137676202,
+			"src": "/img/e00f5656-CiD_3_3-2_16.jpg",
+			"name": "CiD_3_3-2_16.jpg",
+			"width": 1500,
+			"height": 1000,
+			"exclude_from_backdrop": false
+		}
+	],
+	"meta": {
+		"line": "A MIDI controller that plays the ambient sounds of vernacular typography.",
+		"techniques": "MIDI, field recording, physical computing",
+		"client_label": "School",
+		"client": "LASALLE College of the Arts"
+	}
 }

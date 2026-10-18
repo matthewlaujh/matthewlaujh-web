@@ -1,127 +1,133 @@
 {
- "id": 24916419,
- "slug": "Singapore-Art-Week-2022-The-Oort-Cloud-and-the-Blue-Mountain",
- "title": "Singapore Art Week 2022: The Oort Cloud and the Blue Mountain, Singapore (2022)",
- "title_no_html": "Singapore Art Week 2022: The Oort Cloud and the Blue Mountain, Singapore (2022)",
- "is_homepage": false,
- "pin": false,
- "pin_options": null,
- "excerpt": "Completed while with Neuewave for Andreas Schlegel & Hazel Lim-Schlegel.\n—\n\nThe Oort Cloud and the Blue Mountain for Singapore Art Museum:...",
- "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed while with <a href=\"http://neuewave.sg\" target=\"_blank\">Neuewave</a> for Andreas Schlegel &amp; Hazel Lim-Schlegel.<br>—<br>\n<i>The Oort Cloud and the Blue Mountain</i> for Singapore Art Museum: Tanjong Pagar Distripark is an installation work that refers both to Blue Mountain, an early 20th century painting by Wassily Kandinsky and the Oort Cloud, an astronomical phenomenon described as an extended shell of icy objects that exist on the outer reaches of our solar system.<br>\n<br>\nAdapted artists' original artwork into vinyl sticker designs and developed electronic components and setup for LED light installations.<br>—\n</h1><br>\n</div>\n</div>",
- "local_css": "[local-style=\"24916419\"] .container_width {\n}\n\n[local-style=\"24916419\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24916419\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24916419\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24916419\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24916419\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] small a:hover {\n}\n\n[local-style=\"24916419\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
- "backdrop": {
-  "type": "wallpaper",
-  "settings": {
-   "scale_option": "contain",
-   "repeat_image": false,
-   "image_alignment": "image_center_center",
-   "margin": 25,
-   "pattern_size": 70,
-   "limit_size": false,
-   "overlay_color": "rgba(0, 0, 0, 0.5)",
-   "bg_color": "rgb(255, 255, 255)",
-   "cycle_images": true,
-   "autoplay": true,
-   "slideshow_transition": "fade",
-   "transition_timeout": 2.5,
-   "transition_duration": 0.5,
-   "randomize": false,
-   "arrow_navigation": true,
-   "focus_object": "{}",
-   "backdrop_viewport_lock": false,
-   "use_image_focus": "false",
-   "image": "137631886",
-   "requires_webgl": "false"
-  }
- },
- "images": [
-  {
-   "id": 137692624,
-   "src": "/img/ebbaf4ae-SAW-TOCBM-1.jpg",
-   "name": "SAW-TOCBM-1.jpg",
-   "width": 1000,
-   "height": 667,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137692625,
-   "src": "/img/e81ffe47-SAW-TOCBM-2.jpg",
-   "name": "SAW-TOCBM-2.jpg",
-   "width": 1000,
-   "height": 667,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137692626,
-   "src": "/img/1ce181d8-SAW-TOCBM-3.jpg",
-   "name": "SAW-TOCBM-3.jpg",
-   "width": 1000,
-   "height": 667,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137692627,
-   "src": "/img/5f7f579c-SAW-TOCBM-4.jpg",
-   "name": "SAW-TOCBM-4.jpg",
-   "width": 1000,
-   "height": 1499,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137692628,
-   "src": "/img/c4718ca8-SAW-TOCBM-5.jpg",
-   "name": "SAW-TOCBM-5.jpg",
-   "width": 1000,
-   "height": 1499,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137692629,
-   "src": "/img/75bd3ac9-SAW-TOCBM-6.jpg",
-   "name": "SAW-TOCBM-6.jpg",
-   "width": 1000,
-   "height": 667,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137692630,
-   "src": "/img/d6a5a4d2-SAW-TOCBM-7.jpg",
-   "name": "SAW-TOCBM-7.jpg",
-   "width": 1000,
-   "height": 667,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137692631,
-   "src": "/img/6e7df789-SAW-TOCBM-8.jpg",
-   "name": "SAW-TOCBM-8.jpg",
-   "width": 1000,
-   "height": 667,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137692632,
-   "src": "/img/8fdbdeec-SAW-TOCBM-9.jpg",
-   "name": "SAW-TOCBM-9.jpg",
-   "width": 1000,
-   "height": 667,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137692633,
-   "src": "/img/77a584de-SAW-TOCBM-10.jpg",
-   "name": "SAW-TOCBM-10.jpg",
-   "width": 1000,
-   "height": 667,
-   "exclude_from_backdrop": false
-  },
-  {
-   "id": 137692634,
-   "src": "/img/7e09482b-SAW-TOCBM-11.jpg",
-   "name": "SAW-TOCBM-11.jpg",
-   "width": 1000,
-   "height": 667,
-   "exclude_from_backdrop": false
-  }
- ]
+	"id": 24916419,
+	"slug": "Singapore-Art-Week-2022-The-Oort-Cloud-and-the-Blue-Mountain",
+	"title": "Singapore Art Week 2022: The Oort Cloud and the Blue Mountain, Singapore (2022)",
+	"title_no_html": "Singapore Art Week 2022: The Oort Cloud and the Blue Mountain, Singapore (2022)",
+	"is_homepage": false,
+	"pin": false,
+	"pin_options": null,
+	"excerpt": "Completed while with Neuewave for Andreas Schlegel & Hazel Lim-Schlegel.\n—\n\nThe Oort Cloud and the Blue Mountain for Singapore Art Museum:...",
+	"content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed while with <a href=\"http://neuewave.sg\" target=\"_blank\">Neuewave</a> for Andreas Schlegel &amp; Hazel Lim-Schlegel.<br>—<br>\n<i>The Oort Cloud and the Blue Mountain</i> for Singapore Art Museum: Tanjong Pagar Distripark is an installation work that refers both to Blue Mountain, an early 20th century painting by Wassily Kandinsky and the Oort Cloud, an astronomical phenomenon described as an extended shell of icy objects that exist on the outer reaches of our solar system.<br>\n<br>\nAdapted artists' original artwork into vinyl sticker designs and developed electronic components and setup for LED light installations.<br>—\n</h1><br>\n</div>\n</div>",
+	"local_css": "[local-style=\"24916419\"] .container_width {\n}\n\n[local-style=\"24916419\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24916419\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24916419\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24916419\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24916419\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916419\"] small a:hover {\n}\n\n[local-style=\"24916419\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+	"backdrop": {
+		"type": "wallpaper",
+		"settings": {
+			"scale_option": "contain",
+			"repeat_image": false,
+			"image_alignment": "image_center_center",
+			"margin": 25,
+			"pattern_size": 70,
+			"limit_size": false,
+			"overlay_color": "rgba(0, 0, 0, 0.5)",
+			"bg_color": "rgb(255, 255, 255)",
+			"cycle_images": true,
+			"autoplay": true,
+			"slideshow_transition": "fade",
+			"transition_timeout": 2.5,
+			"transition_duration": 0.5,
+			"randomize": false,
+			"arrow_navigation": true,
+			"focus_object": "{}",
+			"backdrop_viewport_lock": false,
+			"use_image_focus": "false",
+			"image": "137631886",
+			"requires_webgl": "false"
+		}
+	},
+	"images": [
+		{
+			"id": 137692624,
+			"src": "/img/ebbaf4ae-SAW-TOCBM-1.jpg",
+			"name": "SAW-TOCBM-1.jpg",
+			"width": 1000,
+			"height": 667,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137692625,
+			"src": "/img/e81ffe47-SAW-TOCBM-2.jpg",
+			"name": "SAW-TOCBM-2.jpg",
+			"width": 1000,
+			"height": 667,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137692626,
+			"src": "/img/1ce181d8-SAW-TOCBM-3.jpg",
+			"name": "SAW-TOCBM-3.jpg",
+			"width": 1000,
+			"height": 667,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137692627,
+			"src": "/img/5f7f579c-SAW-TOCBM-4.jpg",
+			"name": "SAW-TOCBM-4.jpg",
+			"width": 1000,
+			"height": 1499,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137692628,
+			"src": "/img/c4718ca8-SAW-TOCBM-5.jpg",
+			"name": "SAW-TOCBM-5.jpg",
+			"width": 1000,
+			"height": 1499,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137692629,
+			"src": "/img/75bd3ac9-SAW-TOCBM-6.jpg",
+			"name": "SAW-TOCBM-6.jpg",
+			"width": 1000,
+			"height": 667,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137692630,
+			"src": "/img/d6a5a4d2-SAW-TOCBM-7.jpg",
+			"name": "SAW-TOCBM-7.jpg",
+			"width": 1000,
+			"height": 667,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137692631,
+			"src": "/img/6e7df789-SAW-TOCBM-8.jpg",
+			"name": "SAW-TOCBM-8.jpg",
+			"width": 1000,
+			"height": 667,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137692632,
+			"src": "/img/8fdbdeec-SAW-TOCBM-9.jpg",
+			"name": "SAW-TOCBM-9.jpg",
+			"width": 1000,
+			"height": 667,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137692633,
+			"src": "/img/77a584de-SAW-TOCBM-10.jpg",
+			"name": "SAW-TOCBM-10.jpg",
+			"width": 1000,
+			"height": 667,
+			"exclude_from_backdrop": false
+		},
+		{
+			"id": 137692634,
+			"src": "/img/7e09482b-SAW-TOCBM-11.jpg",
+			"name": "SAW-TOCBM-11.jpg",
+			"width": 1000,
+			"height": 667,
+			"exclude_from_backdrop": false
+		}
+	],
+	"meta": {
+		"line": "Electronics and vinyl adaptation for an installation after Kandinsky.",
+		"techniques": "Custom electronics, vinyl graphics, installation",
+		"client_label": "Client",
+		"client": "Andreas Schlegel & Hazel Lim-Schlegel, with Neuewave"
+	}
 }

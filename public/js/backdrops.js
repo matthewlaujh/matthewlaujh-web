@@ -238,7 +238,7 @@ var VERT = [
 			if (self.destroyed) return;
 			var gl = self.gl;
 			gl.bindTexture(gl.TEXTURE_2D, self.texture);
-			gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+			gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, !!self.settings.flip_y);
 			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
 			self.imageLoaded = true;
 			var contents = self.el.closest('.backdrop');
@@ -677,7 +677,8 @@ var VERT = [
 					alpha: parseFloat(s.alpha) || 0,
 					image: cfg.image && cfg.image.src,
 					imageWidth: cfg.image && cfg.image.width,
-					imageHeight: cfg.image && cfg.image.height
+					imageHeight: cfg.image && cfg.image.height,
+					flip_y: !!s.flip_y
 				});
 			} else if (type === 'wallpaper') {
 				el.__instance = new Wallpaper(el, cfg.settings || {}, cfg.images || []);

@@ -1,7 +1,35 @@
 # matthewlaujh.com
 
 Static source for [matthewlaujh.com](https://matthewlaujh.com), migrated off Cargo (Cargo 2) to
-Cloudflare Pages. A 60-line Node script turns the page data in `src/` into plain HTML in `public/`.
+Cloudflare Pages. `build.js` turns the page data in `src/` into plain HTML in `public/`.
+
+## v3 — "Marquee"
+
+- **Home** (`/`): the project list as a large serif title list (3/4) with the intro beside it (1/4),
+  over the slit-scan. Hovering a title italicises it letter by letter and the project's cover
+  follows the cursor; the slit-scan speeds up while you hover.
+- **Project** (`/<slug>`): lands on a slit-scan of the project's own hero image (settings randomised
+  on every load, inside a calm band), title + year, one-liner, category · school/client. Scroll:
+  the text column (year, category, techniques, school/client, then the full text) and the plates
+  on white. ← / → neighbours at the end.
+- **All projects** (`/All-Projects`): every cover floating in space with mouse parallax; the list on
+  the left pulls one forward; click grows it into the project page. Falls back to a 2-up grid on mobile.
+- **About** (`/About`): on white.
+- **Top bar on every page**: `← Matthew Lau` · the page title as a dropdown of all projects ·
+  nothing on the right. **Footer**: studio clock (left) · `© year Matthew Lau` (right), blended
+  so it reads on dark and on white.
+- Per-project fields that Cargo didn't have live in each page JSON under `meta`:
+  `line` (one-liner), `techniques`, `client_label` (School / Client / Studio / Exhibited at) and
+  `client`. Drafted from the old text — edit freely.
+- `backdrops.js` accepts `flip_y` in the slit-scan settings (photos need it; the tiled gradient didn't).
+
+## Local preview
+
+```
+node build.js
+python3 -m http.server -d public 8080      # then open http://localhost:8080
+```
+(`npx serve public` also works and gives clean URLs like Cloudflare does.)
 
 ```
 src/
@@ -10,8 +38,8 @@ src/
   pinned/nav.json      the pinned-top "Nav" page (project list, desktop only)
   pinned/info.json     the pinned-bottom "Info" page (email, desktop only)
   lib/convert.js       Cargo grid/<br> markup -> semantic HTML (p, h2, ul, hr) + nav model
-  css/site.css         the whole stylesheet: fonts, tokens, layout, backdrops, menu, lights-off
-  js/site.js           viewport base unit (Cargo formula), mobile menu, studio clock, lights-off, widow fix
+  css/site.css         the whole stylesheet: fonts, tokens, bar + dropdown, home, project, field, about, mobile
+  js/site.js           dropdown, studio clock, lights-off, home cursor image, project reveal, field parallax
   js/backdrops.js      WebGL slit-scan backdrop + wallpaper slideshow, no dependencies
   fonts/               Austin News Deck + Atlas Grotesk (your own uploads from Cargo)
   img/                 images (see "Images" below)
