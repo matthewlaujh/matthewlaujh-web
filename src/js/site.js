@@ -42,6 +42,16 @@
 		var inst = backdropInstance();
 		if (inst && inst.data) inst.data.speedScale = s;
 	}
+	/* hand the running diffusion to the next page: it carries on from this
+	   snapshot instead of starting over (see Diffuse in backdrops.js) */
+	function carryTo(href) {
+		var bd = backdropInstance();
+		try {
+			var snap = bd && bd.snapshot && bd.snapshot();
+			if (snap) { snap.slug = href.replace(/\.html$/, '').replace(/^.*\//, ''); sessionStorage.setItem('carry', JSON.stringify(snap)); }
+		} catch (x) {}
+		location.href = href;
+	}
 	/* project pages: randomise the slit-scan within a calm band on every load */
 	function randomiseBackdrop() {
 		var el = document.querySelector('.backdrop[data-random]');
@@ -109,7 +119,21 @@
 			item.addEventListener('mouseenter', enter);
 			a.addEventListener('focus', enter);
 			item.addEventListener('mouseleave', function () { settle(1, 1, 0); });
+			/* click: the list fades, the flow quickens, and the project page
+			   carries the diffusion on from here */
+			function go(e) {
+				if (reduced || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+				e.preventDefault();
+				var href = this.getAttribute('href'), bd = backdropInstance();
+				if (bd && bd.show && a.hasAttribute('data-i')) bd.show(+a.getAttribute('data-i'));
+				setBackdropSpeed(2);
+				document.documentElement.classList.add('leaving');
+				setTimeout(function () { carryTo(href); }, 650);
+			}
+			a.addEventListener('click', go);
+			var more = item.querySelector('.more-in'); if (more) more.addEventListener('click', go);
 		})(links[i]);
+		addEventListener('pageshow', function (e) { if (e.persisted) document.documentElement.classList.remove('leaving'); });
 	}
 
 	/* ---------------- project: plate reveal, slit-scan calms as it's covered ---------------- */
@@ -166,7 +190,9 @@
 					y: y0 + c[1] * H + Math.sin(ang) * rad * 0.9 + d[1] * H * 0.05 + (rnd() - 0.5) * 24,
 					w: w, h: h, z: 0.4 + rnd() * 1.2 };
 			});
-			var gap = 14;
+			/* tiles may overlap, but never by more than ~40% of the smaller one:
+			   along one axis they keep at least 60% of its size clear */
+			var allow = 0.4;
 			for (var it = 0; it < 160; it++) {
 				for (var a = 0; a < nodes.length; a++) {
 					var A = nodes[a];
@@ -175,7 +201,7 @@
 					for (var b = a + 1; b < nodes.length; b++) {
 						var B = nodes[b];
 						var dx = B.x - A.x, dy = B.y - A.y;
-						var ox = (A.w + B.w) / 2 + gap - Math.abs(dx), oy = (A.h + B.h) / 2 + gap - Math.abs(dy);
+						var ox = (A.w + B.w) / 2 - allow * Math.min(A.w, B.w) - Math.abs(dx), oy = (A.h + B.h) / 2 - allow * Math.min(A.h, B.h) - Math.abs(dy);
 						if (ox <= 0 || oy <= 0) continue;
 						if (ox < oy) { var sx = (dx < 0 ? -1 : 1) * ox / 2; A.x -= sx; B.x += sx; }
 						else { var sy = (dy < 0 ? -1 : 1) * oy / 2; A.y -= sy; B.y += sy; }
@@ -248,7 +274,7 @@
 					{ left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', opacity: 1, filter: 'blur(0px)' },
 					{ opacity: 1, filter: 'blur(0px)', offset: 0.35 },
 					{ left: '0px', top: '0px', width: innerWidth + 'px', height: innerHeight + 'px', opacity: 0, filter: 'blur(14px)' }
-				], { duration: 1100, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' }).onfinish = function () { location.href = href; };
+				], { duration: 1100, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' }).onfinish = function () { carryTo(href); };
 			} else location.href = href;
 		}
 		addEventListener('pageshow', function (e) {

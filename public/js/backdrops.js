@@ -717,8 +717,34 @@ var VERT = [
 		this.setSize();
 		this.bind();
 		if (this.settings.random && this.images.length > 1) this.index = Math.floor(Math.random() * this.images.length);
-		this.load(this.index, true);
+		/* a snapshot handed over from the previous page (see snapshot): the
+		   simulation carries on from it instead of starting over */
+		var carry = window.__carry, self = this;
+		if (carry && carry.img) {
+			this.seed = carry.seed; this.time = carry.time || 0;
+			var im = new Image();
+			im.onload = function () { self.carryImg = im; self.load(self.index, true); };
+			im.onerror = function () { self.load(self.index, true); };
+			im.src = carry.img;
+		} else this.load(this.index, true);
 	}
+	/* the current state, downscaled, with the display lift undone, as a jpeg data url */
+	Diffuse.prototype.snapshot = function () {
+		if (!this.gl || !this.w) return null;
+		this.frame(performance.now());
+		var sw = Math.min(this.w, 720), sh = Math.round(this.h * sw / this.w);
+		var c = document.createElement('canvas'); c.width = sw; c.height = sh;
+		var x = c.getContext('2d'); x.drawImage(this.canvas, 0, 0, sw, sh);
+		var d = x.getImageData(0, 0, sw, sh), p = d.data, lut = new Uint8Array(256);
+		for (var i = 0; i < 256; i++) lut[i] = Math.round(255 * Math.pow(i / 255, 1 / 0.85));
+		for (var j = 0; j < p.length; j += 4) {
+			var r = lut[p[j]], g = lut[p[j + 1]], bl = lut[p[j + 2]];
+			var l = 0.299 * r + 0.587 * g + 0.114 * bl, k = 1 / 1.35;
+			p[j] = l + (r - l) * k; p[j + 1] = l + (g - l) * k; p[j + 2] = l + (bl - l) * k;
+		}
+		x.putImageData(d, 0, 0);
+		return { img: c.toDataURL('image/jpeg', 0.72), seed: this.seed, time: this.time };
+	};
 	Diffuse.prototype.program = function (vs, fs) {
 		var gl = this.gl;
 		function sh(t, src) { var s = gl.createShader(t); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
@@ -784,8 +810,11 @@ var VERT = [
 				gl.bindTexture(gl.TEXTURE_2D, self.src);
 				gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
 				self.srcW = img.naturalWidth; self.srcH = img.naturalHeight;
-				self.reset = 1;
-				self.warm(140);
+				if (self.carryImg) {
+					gl.bindTexture(gl.TEXTURE_2D, self.a.t);
+					gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, self.carryImg);
+					self.reset = 0.05; self.carryImg = null; // a gentle pull towards this page's own cover
+				} else { self.reset = 1; self.warm(140); }
 				self.el.classList.add('loaded'); self.start();
 				return;
 			}

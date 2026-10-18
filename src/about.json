@@ -89,7 +89,7 @@
 					"note": "May – Aug 2021.",
 					"bullets": [
 						"Assisted the artists with <i>The Oort Cloud and Blue Mountain</i>, shown at the <a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\">Children's Biennale 2021 (Dresden and Groningen) and Singapore Art Week 2022</a>.",
-						"Assisted with <a href=\"Archifest-2021-Sea-of-Debris-2021\"><i>Sea of Debris</i></a> for Archifest 2021, a kinetic object using sensors and motors to raise awareness of ocean waste."
+						"Assisted with <a href=\"Archifest-2021-Sea-of-Debris-2021\"><i>NewWave</i></a> (shown as <i>Sea of Debris</i> at Archifest 2021), a kinetic object using sensors and motors to raise awareness of ocean waste."
 					]
 				},
 				{
@@ -173,7 +173,7 @@
 					"org": "I SAW IT, Singapore Art Week 2026",
 					"place": "Flock at Kampong Java, Singapore",
 					"note": "",
-					"kind": "both"
+					"kind": "art"
 				},
 				{
 					"dates": "2025",
@@ -199,7 +199,7 @@
 					"org": "to be CONTINUED – a work in progress show",
 					"place": "NYC Resistor, Brooklyn, New York",
 					"note": "",
-					"kind": "both"
+					"kind": "art"
 				},
 				{
 					"dates": "2023",
@@ -224,15 +224,15 @@
 					"org": "Pop-up activation",
 					"place": "Alchemist, Design Orchard, Singapore",
 					"note": "",
-					"kind": "design"
+					"kind": "art"
 				},
 				{
 					"dates": "2021",
-					"role": "<i>NewWave</i>, in collaboration with MDRN",
+					"role": "<a href=\"Archifest-2021-Sea-of-Debris-2021\"><i>NewWave</i></a>, in collaboration with MDRN",
 					"org": "Farewell To Reason, by (KSY) Nathan Yong",
 					"place": "Industry+, Singapore",
 					"note": "",
-					"kind": "design"
+					"kind": "art"
 				},
 				{
 					"dates": "2021–2022",

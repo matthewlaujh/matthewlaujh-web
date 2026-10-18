@@ -57,6 +57,15 @@ ul { padding: 0; list-style: none; }
    way to the diffusion once the shader has warmed up */
 .poster { position: fixed; inset: 0; z-index: 0; background: #000 center / cover no-repeat; filter: blur(18px) saturate(1.3) brightness(.8); transform: scale(1.08); transition: opacity 1.4s ease; }
 .backdrop.loaded ~ .poster { opacity: 0; }
+html.carry .poster { background-image: var(--carry); filter: none; transform: none; }
+html.carry .project .hero .ch { animation-delay: calc(var(--d) + .35s); }
+html.carry .project .hero h1 small { animation-delay: .85s; }
+html.carry .project .hero .line { animation-delay: .95s; }
+html.carry .project .hero .facts { animation-delay: 1.1s; }
+html.carry .project .hero .scroll-cue { animation-delay: 1.35s; }
+/* home: leaving for a project */
+html.leaving .home { opacity: 0; transform: translateY(-10px); transition: opacity .55s var(--ease), transform .6s var(--ease); }
+.home { transition: opacity .3s; }
 .backdrop canvas, .backdrop .slitscan_canvas { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; }
 .veil { position: fixed; inset: 0; z-index: 0; background: var(--veil); pointer-events: none; transition: background-color .6s; }
 .veil--light { background: var(--veil-light); }
