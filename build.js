@@ -188,7 +188,9 @@ function homeMain() {
 	const list = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${g.items.map(it => {
 		if (it.href && workBySlug[it.href]) {
 			const w = workBySlug[it.href];
-			return `\t\t\t<a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}">${splitTitle(w.title)}<small>${w.year}</small></a>`;
+			const m = w.meta || {};
+			const facts = [w.category, m.techniques, m.client].filter(Boolean).map(esc).join('<span class="sep"> · </span>');
+			return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}">${splitTitle(w.title)}<small>${w.year}</small></a><div class="more"><div>${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></div></div>`;
 		}
 		return `\t\t\t<span class="dead" title="Coming soon">${splitTitle(it.text.replace(/\s*\(.*\)$/, ''))}<small>${(it.text.match(/\((.*)\)/) || [])[1] || ''}</small></span>`;
 	}).join('\n')}`).join('\n');

@@ -697,7 +697,7 @@ var VERT = [
 		'void main(){ vec3 c = texture2D(uTex, vUv).rgb;',
 		'  float l = dot(c, vec3(0.299, 0.587, 0.114));',
 		'  c = mix(vec3(l), c, 1.35);',                      // a little more colour
-		'  c = pow(max(c, 0.0), vec3(0.78)) * 1.15;',         // lift the dark ones so they still read as texture
+		'  c = pow(max(c, 0.0), vec3(0.85));',         // lift the dark ones so they still read as texture
 		'  gl_FragColor = vec4(c, 1.0); }'
 	].join('\n');
 

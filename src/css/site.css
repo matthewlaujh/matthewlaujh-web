@@ -22,7 +22,7 @@
 	--fg: #ffffff;
 	--fg-dim: rgba(255, 255, 255, .55);
 	--fg-rule: rgba(255, 255, 255, .18);
-	--veil: rgba(0, 0, 0, .38);
+	--veil: rgba(0, 0, 0, .45);
 	--veil-light: rgba(0, 0, 0, .22);
 	--ease: cubic-bezier(.2, .6, .2, 1);
 }
@@ -129,6 +129,14 @@ ul { padding: 0; list-style: none; }
 .marquee:has(a:hover) a:not(:hover) { color: rgba(255, 255, 255, .32); }
 .marquee a:hover { padding-left: .4em; }
 .marquee small { vertical-align: top; display: inline-block; padding-top: .45em; }
+/* hover: the row opens to show the one-liner and facts beneath the title */
+.marquee .more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease); }
+.marquee .more > div { overflow: hidden; }
+.marquee .item:hover .more, .marquee .item:focus-within .more { grid-template-rows: 1fr; }
+.marquee .more .line { font: 300 15px/1.4 var(--serif); color: rgba(255, 255, 255, .85); max-width: 46ch; padding: 2px 0 0 .4em; opacity: 0; transform: translateY(-4px); transition: opacity .3s .1s, transform .4s var(--ease) .1s; }
+.marquee .more .facts { font: 300 12px/1.4 var(--sans); color: var(--fg-dim); padding: 2px 0 10px .4em; opacity: 0; transform: translateY(-4px); transition: opacity .3s .15s, transform .4s var(--ease) .15s; }
+.marquee .more .sep { opacity: .6; }
+.marquee .item:hover .more .line, .marquee .item:hover .more .facts, .marquee .item:focus-within .more .line, .marquee .item:focus-within .more .facts { opacity: 1; transform: none; }
 
 .home-aside { position: sticky; top: calc(var(--bar-h) + 8px); margin-top: 0; padding-top: 0; }
 .home-aside .prose { font: 300 15px/1.45 var(--serif); color: rgba(255, 255, 255, .85); }
@@ -289,6 +297,7 @@ html[data-page="project"] .rights, html[data-page="about"] .rights { opacity: 1;
 	.home { grid-template-columns: 1fr; gap: 32px; padding-bottom: 100px; }
 	.home-aside { position: static; padding-top: 0; margin-top: 0; }
 	.marquee a:hover { padding-left: 0; }
+	.marquee .more .line, .marquee .more .facts { padding-left: 0; }
 	.cursor-image { display: none; }
 	.project .hero { padding-bottom: 110px; }
 	.project .hero .scroll-cue { bottom: 110px; }
