@@ -190,14 +190,17 @@
 			var x0 = sideW + 40, x1 = innerWidth - pad, y0 = 80, y1 = innerHeight - 130;
 			var W = x1 - x0, H = y1 - y0;
 			var tw = Math.max(84, Math.min(190, W * 0.13));                 // tile width scales with the free area
+			var years = tiles.map(function (t) { return +t.getAttribute('data-year') || 0; });
+			var ymin = Math.min.apply(null, years), ymax = Math.max.apply(null, years);
 			var nodes = tiles.map(function (t) {
 				var ci = Math.max(0, cats.indexOf(t.getAttribute('data-cat'))), c = centres[ci] || [0.5, 0.5];
 				var k = t.getAttribute('data-kind') || 'design', d = drift[k] || [0, 0];
 				var j = tiles.filter(function (o) { return o.getAttribute('data-cat') === t.getAttribute('data-cat'); }).indexOf(t);
 				var ang = j * 2.39996 + rnd() * 0.6, rad = (0.05 + Math.sqrt(j + 1) * 0.07) * Math.min(W, H * 1.3);
-				var w = tw * (0.8 + rnd() * 0.45), img = t.querySelector('img');
+				var rec = ymax > ymin ? ((+t.getAttribute('data-year') || ymin) - ymin) / (ymax - ymin) : 1;   // 0 oldest .. 1 newest
+				var w = tw * (0.7 + rec * 0.6 + rnd() * 0.15), img = t.querySelector('img');
 				var h = w * (img.height && img.width ? img.height / img.width : 0.66);
-				return { el: t, ci: ci, cx: x0 + c[0] * W, cy: y0 + c[1] * H,
+				return { el: t, ci: ci, rec: rec, cx: x0 + c[0] * W, cy: y0 + c[1] * H,
 					x: x0 + c[0] * W + Math.cos(ang) * rad * 1.3 + d[0] * W * 0.03 + (rnd() - 0.5) * 24,
 					y: y0 + c[1] * H + Math.sin(ang) * rad * 0.9 + d[1] * H * 0.05 + (rnd() - 0.5) * 24,
 					w: w, h: h, z: 0.4 + rnd() * 1.2 };
@@ -223,7 +226,7 @@
 				}
 			}
 			nodes.forEach(function (n) {
-				n.el.style.cssText = 'left:' + n.x.toFixed(1) + 'px;top:' + n.y.toFixed(1) + 'px;width:' + n.w.toFixed(1) + 'px;--z:' + n.z.toFixed(2);
+				n.el.style.cssText = 'left:' + n.x.toFixed(1) + 'px;top:' + n.y.toFixed(1) + 'px;width:' + n.w.toFixed(1) + 'px;--z:' + n.z.toFixed(2) + ';z-index:' + (1 + Math.round(n.rec * 10));
 			});
 			/* the graph: each tile joins its two nearest neighbours in its cluster,
 			   and each pair of clusters is bridged once at its closest point */

@@ -57,6 +57,7 @@ ul { padding: 0; list-style: none; }
    way to the diffusion once the shader has warmed up */
 .poster { position: fixed; inset: 0; z-index: 0; background: #000 center / cover no-repeat; filter: blur(18px) saturate(1.3) brightness(.8); transform: scale(1.08); transition: opacity 1.4s ease; }
 .backdrop.loaded ~ .poster { opacity: 0; }
+html[data-page="project"] .backdrop { opacity: 1; transition: none; }
 html.carry .poster { background-image: var(--carry) !important; filter: none; transform: none; }
 html.carry .project .hero .ch { animation-delay: calc(var(--d) + .35s); }
 html.carry .project .hero h1 small { animation-delay: .85s; }
@@ -233,9 +234,9 @@ html[data-page="field"], html[data-page="field"] body { height: 100%; overflow: 
 .field a img { width: 100%; outline: 1px solid rgba(255, 255, 255, .06); outline-offset: -1px; }
 .field a .label { position: absolute; left: 0; top: 100%; margin-top: 8px; white-space: nowrap; opacity: 0; transform: translateY(-4px); transition: .25s; }
 .field.focus a { filter: brightness(.25) blur(2px); }
-.field.focus a.on { filter: none; z-index: 3; }
+.field.focus a.on { filter: none; z-index: 20 !important; }
 .field a.on .label, .field a:hover .label { opacity: 1; transform: none; }
-.field a:hover { filter: none; z-index: 4; }
+.field a:hover { filter: none; z-index: 20 !important; }
 .field-side { position: fixed; left: var(--pad); top: 50%; transform: translateY(-50%); z-index: 5; width: min(34vw, 420px); }
 .field-side .group { color: var(--fg-dim); margin: 14px 0 2px; }
 .field-side a { display: block; font: 300 15px/1.3 var(--serif); padding: 1px 0; color: rgba(255, 255, 255, .85); transition: color .2s, padding-left .3s var(--ease); }
@@ -243,13 +244,13 @@ html[data-page="field"], html[data-page="field"] body { height: 100%; overflow: 
 .field-page .hint, .field-page .count { position: fixed; bottom: 44px; z-index: 5; color: rgba(255, 255, 255, .45); }
 .field-page .hint { left: var(--pad); }
 .field-page .count { right: var(--pad); bottom: 90px; font-variant-numeric: tabular-nums; }
-.field .links { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 1.2s .3s; z-index: 2; mix-blend-mode: screen; }
+.field .links { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 1.2s .3s; z-index: 12; mix-blend-mode: screen; }
 .field.ready .links { opacity: 1; }
 .field .links line { stroke: rgba(255, 255, 255, .28); stroke-width: 1; transition: stroke .3s; }
 .field .links line.bridge { stroke-dasharray: 3 5; stroke: rgba(255, 255, 255, .2); }
 .field .links line.on { stroke: rgba(255, 255, 255, .8); }
 .field.leaving .links { opacity: 0; transition: opacity .6s; }
-.field .cluster { position: absolute; left: -999px; top: -999px; transform: translate(calc(var(--px, 0px) * .3), calc(var(--py, 0px) * .3)) translate(-50%, -50%); font: 300 12px/1 var(--sans); letter-spacing: .04em; color: rgba(255, 255, 255, .55); pointer-events: none; white-space: nowrap; z-index: 2; mix-blend-mode: difference; }
+.field .cluster { position: absolute; left: -999px; top: -999px; transform: translate(calc(var(--px, 0px) * .3), calc(var(--py, 0px) * .3)) translate(-50%, -50%); font: 300 12px/1 var(--sans); letter-spacing: .04em; color: rgba(255, 255, 255, .55); pointer-events: none; white-space: nowrap; z-index: 13; mix-blend-mode: difference; }
 .field a .label .k, .field-side a .k, .field-page .count .k { --ink: rgba(255, 255, 255, .85); width: 6px; height: 6px; margin-right: 8px; vertical-align: middle; position: relative; top: -1px; }
 .field.leaving a, .field.leaving .cluster { opacity: 0; filter: blur(3px); transition: filter .9s var(--ease), opacity .9s var(--ease); }
 .field-side.leaving, .field-page .hint, .field-page .count { transition: opacity .6s; }
@@ -279,11 +280,11 @@ html[data-page="project"] .bar-title, html[data-page="about"] .bar-title {
 html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title { display: inline-flex; align-items: center; gap: 6px; }
 /* arriving on a project or About: the name slides into its capsule, the arrow
    follows, and the title button rises */
-html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title { animation: capsule .8s var(--ease) both; }
-html[data-page="project"] .bar .back span, html[data-page="about"] .bar .back span { animation: arrow .6s .25s var(--ease) backwards; }
-html[data-page="project"] .bar-title, html[data-page="about"] .bar-title { animation: rise .7s .35s var(--ease) backwards; }
-@keyframes capsule { from { background-color: transparent; border-color: transparent; } }
-@keyframes arrow { from { opacity: 0; transform: translateX(8px); } }
+html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title { animation: capsule .9s .1s var(--ease) both; }
+html[data-page="project"] .bar .back span, html[data-page="about"] .bar .back span { overflow: hidden; animation: arrow .7s .3s var(--ease) both; }
+html[data-page="project"] .bar-title, html[data-page="about"] .bar-title { animation: rise .7s .45s var(--ease) backwards; }
+@keyframes capsule { from { background-color: transparent; border-color: transparent; transform: translateX(-15px); } }
+@keyframes arrow { from { opacity: 0; max-width: 0; margin-right: -6px; transform: translateX(6px); } to { opacity: 1; max-width: 24px; margin-right: 0; transform: none; } }
 /* every page: the rights line is a glass pill too */
 .site-footer > * {
 	background: rgba(24, 24, 26, .32);

@@ -250,7 +250,7 @@ function fieldMain() {
 	   tiles nudged apart until none overlap. Here we only emit the tiles. */
 	const tiles = works.map((w, i) => {
 		const k = (w.meta || {}).kind || 'design';
-		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" data-kind="${k}" data-cat="${esc(w.category)}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label"><i class="k${kcls(k)}" aria-hidden="true"></i>${esc(w.title)}, ${w.year}</span></a>`;
+		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" data-kind="${k}" data-cat="${esc(w.category)}" data-year="${String(w.year).slice(0, 4)}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label"><i class="k${kcls(k)}" aria-hidden="true"></i>${esc(w.title)}, ${w.year}</span></a>`;
 	});
 	const marks = nav.groups.map(g => `\t\t\t<span class="cluster" data-cat="${esc(g.label)}">${esc(g.label)}</span>`).join('\n');
 	const side = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${works.filter(x => x.category === g.label).map(w => `\t\t\t<a href="${url(w.slug)}" data-i="${works.indexOf(w)}"><i class="k${kcls((w.meta || {}).kind)}" aria-hidden="true"></i>${esc(w.title)}<small>${w.year}</small></a>`).join('\n')}`).join('\n');
@@ -382,7 +382,7 @@ for (const page of all) {
 }
 
 if (!RELATIVE) {
-	fs.writeFileSync(path.join(OUT, '_redirects'), `/${site.homepage}  /  301\n/Archifest-2021-Sea-of-Debris-2021  /NewWave-2021  301\n`);
+	fs.writeFileSync(path.join(OUT, '_redirects'), `/${site.homepage}  /  301\n/Archifest-2021-Sea-of-Debris-2021  /NewWave-2021  301\n/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition  /Proximate-2022  301\n`);
 	fs.writeFileSync(path.join(OUT, '_headers'), `/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=31536000, immutable\n`);
 }
 
