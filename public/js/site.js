@@ -473,7 +473,6 @@
 		// the veil follows the page (dark on home / field, lighter on a project)
 		var veil = document.querySelector('.veil'), nveil = nb.querySelector('.veil');
 		if (veil && nveil) veil.className = nveil.className;
-		if (veil && !nveil) veil.classList.add('veil--off');
 		scrollTo(0, 0);
 		setupPage();
 	}

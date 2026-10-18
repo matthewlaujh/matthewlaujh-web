@@ -61,6 +61,7 @@ html[data-page="project"] .backdrop { opacity: 1; }
 /* pages are swapped in place under one renderer: leaving states */
 html, body { transition: background-color .9s ease; }
 html[data-to="about"], html[data-to="about"] body { background: var(--paper); }
+html[data-to="about"] .veil, html[data-page="about"] .veil { background: transparent !important; }
 html[data-page="about"][data-to]:not([data-to="about"]), html[data-page="about"][data-to]:not([data-to="about"]) body { background: var(--dark); }
 html[data-page="about"] main { animation: pagein .7s .15s var(--ease) both; }
 html.leaving .home { opacity: 0; transform: translateY(-10px); transition: opacity .55s var(--ease), transform .6s var(--ease); }
@@ -69,7 +70,6 @@ html.leaving[data-to][data-page] .bar-title { animation: barout .6s var(--ease) 
 html.leaving[data-to="home"][data-page] .bar-title { animation-duration: .8s; }
 @keyframes barout { to { opacity: 0; transform: translateY(-12px); } }
 .backdrop.off { opacity: 0 !important; transition: opacity .9s ease !important; }
-.veil--off { background: transparent; }
 main { animation: pagein .5s var(--ease) both; }
 @keyframes pagein { from { opacity: 0; } }
 /* home arrives as a cascade: legend, headings and rows one beat apart, the intro after */
