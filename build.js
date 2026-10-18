@@ -316,6 +316,24 @@ ${section('Group exhibitions')}
 }
 
 /* --------------------------------------------------------------- template */
+/* typographic hygiene on rendered text (never inside tags or scripts):
+   curly apostrophes and quotes, en dashes in year ranges and spaced hyphens,
+   a thin no-break space before the year in "Title 2026" is left to CSS. */
+function typo(html) {
+	return html.split(/(<script[\s\S]*?<\/script>|<[^>]+>)/g).map((part, i) => {
+		if (i % 2) return part;                               // a tag or a script block
+		return part
+			.replace(/(\w)'(\w)/g, '$1\u2019$2')                // it's, I'm, Matthew's
+			.replace(/(^|[\s(])'(?=\w)/g, '$1\u2018')            // opening single
+			.replace(/'/g, '\u2019')
+			.replace(/(^|[\s(])"(?=\S)/g, '$1\u201c')            // opening double
+			.replace(/"/g, '\u201d')
+			.replace(/(\d{4})-(\d{2,4})\b/g, '$1\u2013$2')       // 2021–2022
+			.replace(/ - /g, ' \u2013 ')                          // spaced hyphen -> en dash
+			.replace(/\.\.\./g, '\u2026');
+	}).join('');
+}
+
 function render(page) {
 	const isHome = page.slug === site.homepage;
 	const w = workBySlug[page.slug];
@@ -360,9 +378,9 @@ function render(page) {
 	</head>
 	<body>
 		${backdrop}
-		${barHTML(page)}
+${typo(`		${barHTML(page)}
 		${main}
-		${footerHTML()}
+		${footerHTML()}`)}
 	</body>
 </html>
 `;
