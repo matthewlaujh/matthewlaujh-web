@@ -104,7 +104,7 @@
 				var bd = backdropInstance();
 				if (bd && bd.show && a.hasAttribute('data-i')) bd.show(+a.getAttribute('data-i'));
 				/* a new project: the flow picks up, then settles the longer you stay */
-				settle(2.2, 0.35, 2600);
+				settle(2.2, 0.7, 2600);
 			}
 			item.addEventListener('mouseenter', enter);
 			a.addEventListener('focus', enter);
