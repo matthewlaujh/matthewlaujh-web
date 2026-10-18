@@ -1,13 +1,13 @@
 {
 	"lede": [
-		"I practice creative technology through a design lens, thriving at the intersection of computational design and emerging technologies. My experience spans from building AI-driven tools and interactive media for global brands to creating installations that translate computational systems into human-centered experiences.",
-		"Whether prototyping for clients or developing my artistic practice, I combine technical experimentation with design-led thinking to deliver outcomes that are both innovative and tangible."
+		"I am a creative technologist and artist working with light, machine learning and custom hardware. I build tools and prototypes for brands at Accenture Song and through my studio, Organised Mess, and I make installations, shown in Singapore and New York, that turn computational systems into something you can feel in a room.",
+		"Whether prototyping for clients or developing my own practice, I pair technical experiment with design thinking to make things that are new and that work."
 	],
 	"statement_title": "Artist statement",
 	"statement": [
-		"My work explores human-machine relationships through interactive light installations. Light functions as a medium of expression that connects across different forms of understanding. Through responsive lighting environments, I transform abstract computational concepts into sensory experiences that can be felt and understood intuitively.",
-		"By making visible what typically remains hidden — the algorithms, processes, and machine learning principles that increasingly shape our world — I challenge the notion of artificial intelligence as an inscrutable \"black box.\" My installations invite viewers to develop more intuitive understandings of the systems that surround us.",
-		"Central to my practice is the belief that technology should enhance human connection rather than diminish it. By investigating the potential of human-machine co-creation, my work examines how technology can serve not just as a tool but as a creative collaborator, establishing a dialogue where both human intention and computational processes contribute to the final experience."
+		"My work explores the relationship between people and machines through interactive light. Light is a medium that connects across different kinds of understanding, and through responsive lighting environments I turn abstract computational ideas into sensory experiences that can be felt before they are explained.",
+		"By making visible what usually stays hidden — the algorithms, processes and machine-learning principles that increasingly shape our world — the work pushes back on the idea of artificial intelligence as an inscrutable black box. Earlier pieces made latent spaces legible as colour and light. The newer ones ask what such a system does when it is left alone with itself, learning from its own output until its range collapses.",
+		"Underneath this is a belief that technology should deepen human connection rather than thin it out. The installations treat the machine as a collaborator rather than a tool, setting up a dialogue in which human intention and computational process both shape what is finally seen."
 	],
 	"contact": {
 		"email": "matt@matthewlaujh.com",
@@ -61,7 +61,7 @@
 					"org": "Accenture Song",
 					"org_url": "https://www.accenture.com/sg-en/about/accenture-song-index",
 					"place": "New York · Singapore",
-					"note": "New York, Nov 2023 – Oct 2024; Singapore, Jun – Aug 2023.",
+					"note": "New York, Nov 2023 – Oct 2024. Singapore, Jun – Aug 2023.",
 					"bullets": [
 						"Architected and prototyped multi-modal AI solutions for global enterprise clients, shaping new ways for brands to explore generative AI in marketing and operations.",
 						"Led technical evaluation of emerging AI tools and platforms, with assessment frameworks and capability demonstrations for senior leaders and clients.",
@@ -135,7 +135,8 @@
 					"org_url": "https://www.lasalle.edu.sg/events/technoterra-archive-of-the-future/",
 					"place": "Gallery 1, Institute of Contemporary Arts Singapore",
 					"note": "4 Sep – 24 Oct 2026.",
-					"kind": "art"
+					"kind": "art",
+					"bullets": []
 				},
 				{
 					"dates": "2025",
@@ -144,7 +145,8 @@
 					"org_url": "https://www.lasalle.edu.sg/events/singapore-design-thesis-making?source=ica-events",
 					"place": "Gallery 1, Institute of Contemporary Arts Singapore",
 					"note": "12 Sep – 28 Oct 2025.",
-					"kind": "art"
+					"kind": "art",
+					"bullets": []
 				},
 				{
 					"dates": "2025",
@@ -153,7 +155,8 @@
 					"org_url": "https://www.wahcenter.net/2025/04/beyond-interface-prompt-exploring-the-language-of-technology-in-contemporary-art/",
 					"place": "Williamsburg Art & Historical Center, Brooklyn, New York",
 					"note": "18 Apr – 17 May 2025.",
-					"kind": "art"
+					"kind": "art",
+					"bullets": []
 				},
 				{
 					"dates": "2023",
@@ -162,7 +165,8 @@
 					"org_url": "https://www.lasalle.edu.sg/events/threads-critical-craft-collective-experiment-draft-2",
 					"place": "Earl Lu Gallery, Institute of Contemporary Arts Singapore",
 					"note": "13 – 25 Mar 2023.",
-					"kind": "art"
+					"kind": "art",
+					"bullets": []
 				}
 			]
 		}

@@ -204,12 +204,12 @@
 	/* ---------------- custom cursor (pointer devices only) ---------------- */
 	function setupCursor() {
 		if (!window.matchMedia || !matchMedia('(pointer: fine)').matches || reduced) return;
-		var el = document.createElement('div'); el.className = 'cursor'; el.setAttribute('aria-hidden', 'true');
+		var el = document.createElement('div'); el.className = 'cursor'; el.setAttribute('aria-hidden', 'true'); el.innerHTML = '<i></i><i></i>';
 		document.body.appendChild(el);
 		var x = -100, y = -100, tx = x, ty = y, raf = null, shown = false;
 		function loop() {
 			x += (tx - x) * 0.35; y += (ty - y) * 0.35;
-			el.style.transform = 'translate(' + x + 'px,' + y + 'px)' + (el.classList.contains('is-down') ? ' scale(.8)' : '');
+			el.style.transform = 'translate(' + x + 'px,' + y + 'px)';
 			raf = (Math.abs(tx - x) + Math.abs(ty - y) > 0.1) ? requestAnimationFrame(loop) : null;
 		}
 		function kind(t) {

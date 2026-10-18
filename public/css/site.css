@@ -58,20 +58,21 @@ ul { padding: 0; list-style: none; }
 .veil--light { background: var(--veil-light); }
 
 /* ------------------------------------------------------------ cursor */
-/* a small dot that opens into a ring over anything clickable; difference-blended so it reads on dark and light */
+/* a small crosshair, difference-blended. Over a link it turns 45° into an ×
+   and the arms stretch. Over text it collapses to a bar. */
 @media (pointer: fine) {
 	html.has-cursor, html.has-cursor a, html.has-cursor button, html.has-cursor [role="button"] { cursor: none; }
-	.cursor {
-		position: fixed; left: 0; top: 0; z-index: 1000; pointer-events: none;
-		width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%;
-		background: #fff; mix-blend-mode: difference;
-		transition: width .25s var(--ease), height .25s var(--ease), margin .25s var(--ease), background-color .25s, opacity .3s;
-		opacity: 0;
-	}
+	.cursor { position: fixed; left: 0; top: 0; z-index: 1000; pointer-events: none; width: 0; height: 0; mix-blend-mode: difference; opacity: 0; transition: opacity .3s; }
 	html.has-cursor .cursor { opacity: 1; }
-	.cursor.is-link { width: 34px; height: 34px; margin: -17px 0 0 -17px; background: rgba(255, 255, 255, .22); }
-	.cursor.is-text { width: 2px; height: 22px; margin: -11px 0 0 -1px; border-radius: 1px; }
-	.cursor.is-down { transform: scale(.8); }
+	.cursor i { position: absolute; left: 0; top: 0; background: #fff; display: block; transition: width .3s var(--ease), height .3s var(--ease), transform .3s var(--ease), opacity .2s; }
+	.cursor i:first-child { width: 12px; height: 1px; transform: translate(-6px, 0); }
+	.cursor i:last-child { width: 1px; height: 12px; transform: translate(0, -6px); }
+	.cursor.is-link i:first-child { width: 18px; transform: translate(-9px, 0) rotate(45deg); }
+	.cursor.is-link i:last-child { height: 18px; transform: translate(0, -9px) rotate(45deg); }
+	.cursor.is-text i:first-child { width: 1px; opacity: 0; }
+	.cursor.is-text i:last-child { height: 20px; transform: translate(0, -10px); }
+	.cursor.is-down i:first-child { width: 8px; transform: translate(-4px, 0) rotate(45deg); }
+	.cursor.is-down i:last-child { height: 8px; transform: translate(0, -4px) rotate(45deg); }
 	.cursor.is-hidden { opacity: 0; }
 }
 
