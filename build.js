@@ -248,27 +248,48 @@ function aboutMain(page) {
 					<div class="dates">${e.dates}</div>
 					<div class="main">
 						<div class="role">${L(e.role)}</div>
-						${e.org ? `<div class="org">${e.org_url ? `<a href="${e.org_url}" target="_blank" rel="noopener">${esc(e.org)}</a>` : esc(e.org)}${e.place ? ` — ${esc(e.place)}` : ''}</div>` : ''}
+						${e.org ? `<div class="org">${e.org_url ? `<a href="${e.org_url}" target="_blank" rel="noopener">${esc(e.org)}</a>` : esc(e.org)}${e.place ? ` — ${esc(e.place)}` : ''}</div>` : (e.place ? `<div class="org">${esc(e.place)}</div>` : '')}
 						${e.note ? `<div class="note">${L(e.note)}</div>` : ''}
 						${e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${L(b)}</li>`).join('')}</ul>` : ''}
 					</div>
 				</div>`;
-	return `<main class="about">
-		<h1 class="visually-hidden">${esc(page.title_no_html)}</h1>
-		<aside class="side">
-			<div class="lede">${a.lede.map(p => `<p>${p}</p>`).join('')}</div>
-			<div class="statement"><h2>${esc(a.statement_title)}</h2>${a.statement.map(p => `<p>${p}</p>`).join('')}</div>
-			<div class="contact">
+	const section = name => {
+		const sec = a.sections.find(s => s.title === name);
+		return sec ? `			<section>\n				<h2>${esc(sec.title)}</h2>\n${sec.entries.map(entry).join('\n')}\n			</section>` : '';
+	};
+	const skills = a.skills ? `<section class="skills"><h2>Skills</h2><dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : '';
+	const contact = `<div class="contact">
 				<a href="mailto:${a.contact.email}">${a.contact.email}</a>
 				<a href="${a.contact.resume}" target="_blank" rel="noopener">Resume (PDF)</a>
 				${a.contact.github ? `<a href="${a.contact.github}" target="_blank" rel="noopener">GitHub</a>` : ''}
 				${a.contact.linkedin ? `<a href="${a.contact.linkedin}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
 				<span>${esc(a.contact.location)}</span>
+			</div>`;
+	const t = a.tracks;
+	return `<main class="about">
+		<h1 class="visually-hidden">${esc(page.title_no_html)}</h1>
+		<div class="seg" role="tablist" aria-label="About">
+			<button type="button" role="tab" id="tab_design" aria-controls="track_design" aria-selected="true" data-track="design">${esc(t.design.label)}</button>
+			<button type="button" role="tab" id="tab_art" aria-controls="track_art" aria-selected="false" data-track="art">${esc(t.art.label)}</button>
+		</div>
+		<div class="track" id="track_design" role="tabpanel" aria-labelledby="tab_design" data-track="design">
+			<aside class="side">
+				<div class="lede"><h2>${esc(a.lede_title)}</h2>${a.lede.map(p => `<p>${p}</p>`).join('')}</div>
+				${contact}
+			</aside>
+			<div class="cv">
+${t.design.sections.map(section).join('\n')}
+				${t.design.skills ? skills : ''}
 			</div>
-		</aside>
-		<div class="cv">
-${a.sections.map(sec => `			<section>\n				<h2>${esc(sec.title)}</h2>\n${sec.entries.map(entry).join('\n')}\n			</section>`).join('\n')}
-			${a.skills ? `<section class="skills"><h2>Skills</h2><dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : ''}
+		</div>
+		<div class="track" id="track_art" role="tabpanel" aria-labelledby="tab_art" data-track="art" hidden>
+			<aside class="side">
+				<div class="lede"><h2>${esc(a.statement_title)}</h2>${a.statement.map(p => `<p>${p}</p>`).join('')}</div>
+				${contact}
+			</aside>
+			<div class="cv">
+${t.art.sections.map(section).join('\n')}
+			</div>
 		</div>
 	</main>`;
 }

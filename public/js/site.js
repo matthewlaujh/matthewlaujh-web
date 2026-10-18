@@ -218,6 +218,24 @@
 		side.forEach(function (a) { a.addEventListener('click', function (e) { go(e, tiles[+a.getAttribute('data-i')]); }); });
 	}
 
+	/* ---------------- about: design / art tracks ---------------- */
+	function setupAbout() {
+		var tabs = document.querySelectorAll('.about .seg [role="tab"]');
+		if (!tabs.length) return;
+		function show(name, push) {
+			for (var i = 0; i < tabs.length; i++) {
+				var on = tabs[i].getAttribute('data-track') === name;
+				tabs[i].setAttribute('aria-selected', on ? 'true' : 'false');
+				var panel = document.getElementById('track_' + tabs[i].getAttribute('data-track'));
+				if (panel) panel.hidden = !on;
+			}
+			if (push && history.replaceState) history.replaceState(null, '', name === 'art' ? '#art' : location.pathname);
+		}
+		for (var i = 0; i < tabs.length; i++) (function (t) { t.addEventListener('click', function () { show(t.getAttribute('data-track'), true); }); })(tabs[i]);
+		if (location.hash === '#art') show('art');
+		addEventListener('hashchange', function () { show(location.hash === '#art' ? 'art' : 'design'); });
+	}
+
 	/* ---------------- widow / orphan fallback ---------------- */
 	function fixWidows() {
 		if (CSS.supports && CSS.supports('text-wrap', 'pretty')) return;
@@ -244,7 +262,7 @@
 		if (page === 'home') setupHome();
 		if (page === 'project') setupProject();
 		if (page === 'field') setupField();
-		if (page === 'about') html.setAttribute('data-glass', 'light');
+		if (page === 'about') { html.setAttribute('data-glass', 'light'); setupAbout(); }
 	}
 	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
 	else init();

@@ -249,7 +249,14 @@ html[data-glass="light"] .bar-title b { color: rgba(0, 0, 0, .55); }
 html[data-glass="light"] .studio-clock, html[data-glass="light"] .rights { opacity: 1; color: rgba(0, 0, 0, .7); }
 html[data-page="project"] .studio-clock, html[data-page="project"] .rights,
 html[data-page="about"] .studio-clock, html[data-page="about"] .rights { opacity: 1; }
-.about { position: relative; z-index: 1; padding: 40px var(--pad) 140px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px 72px; align-items: start; }
+.about { position: relative; z-index: 1; padding: 24px var(--pad) 140px; }
+.about .seg { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid rgba(0, 0, 0, .12); border-radius: 999px; margin-bottom: 40px; font: 300 13px/1 var(--sans); }
+.about .seg button { padding: 9px 16px; border-radius: 999px; color: rgba(0, 0, 0, .55); transition: background-color .25s, color .25s; }
+.about .seg button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+.about .seg button:not([aria-selected="true"]):hover { color: var(--ink); }
+.about .track { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px 72px; align-items: start; }
+.about .track[hidden] { display: none; }
+.about .lede h2, .about .statement h2 { font: 300 12px/1.4 var(--sans); color: rgba(0, 0, 0, .5); margin-bottom: 14px; }
 .about a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(0, 0, 0, .3); }
 .about a:hover { text-decoration-color: currentColor; }
 .about .side { position: static; }
@@ -302,7 +309,7 @@ html[data-page="about"] .studio-clock, html[data-page="about"] .rights { opacity
 	.field a .label { position: static; opacity: 1; transform: none; white-space: normal; margin-top: 6px; }
 	.field-side, .field-page .hint { display: none; }
 	.field-page .count { position: static; padding: 0 var(--pad) 90px; }
-	.about { grid-template-columns: 1fr; gap: 40px; }
+	.about .track { grid-template-columns: 1fr; gap: 40px; }
 	.about .side { position: static; }
 	.about .entry, .about .skills dl > div { grid-template-columns: 1fr; gap: 2px; }
 	.site-footer { font-size: 11px; justify-content: flex-end; padding: 10px var(--pad); }

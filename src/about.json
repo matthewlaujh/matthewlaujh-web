@@ -26,7 +26,7 @@
 					"org": "Accenture Song",
 					"org_url": "https://www.accenture.com/sg-en/about/accenture-song-index",
 					"place": "Singapore",
-					"note": "October 2026 – present. Creative technology point person for Intel, supporting technology and innovation efforts across other Accenture accounts.",
+					"note": "October 2026 – present.",
 					"bullets": [
 						"Partner with creative directors, writers, art directors and designers from the earliest stages of a brief to shape ideas with technology at their core — the bridge between “what if we could” and “here’s how we could actually do it.”",
 						"Rapidly prototype, test and validate technology-led concepts: interactive demos, working tools, campaign experiences and proofs of concept, assessing feasibility and production considerations early.",
@@ -42,17 +42,6 @@
 					"place": "Singapore",
 					"note": "Independent creative technology studio: embedded systems, physical computing, custom hardware, interactive installations and generative work for clients and collaborators.",
 					"bullets": []
-				},
-				{
-					"dates": "2022–",
-					"role": "Artist",
-					"org": "Independent art practice",
-					"place": "New York · Singapore",
-					"note": "",
-					"bullets": [
-						"Interactive light installations exploring human–machine relationships, exhibited in group shows in New York (<a href=\"Deconstructed-Ambiance-2025\"><i>Deconstructed Ambiance</i></a>) and Singapore (<a href=\"Deconstructed-Colours-2023\"><i>Deconstructed Colours</i></a>).",
-						"Custom hardware and software integrating machine learning, microcontrollers and real-time data for objects such as <a href=\"Circulated-Densities-2025\"><i>Circulated Densities</i></a>."
-					]
 				},
 				{
 					"dates": "2023–2024",
@@ -158,6 +147,22 @@
 					"note": "13 – 25 Mar 2023."
 				}
 			]
+		},
+		{
+			"title": "Practice",
+			"entries": [
+				{
+					"dates": "2022–",
+					"role": "Independent art practice",
+					"org": "",
+					"place": "New York · Singapore",
+					"note": "",
+					"bullets": [
+						"Interactive light installations exploring human–machine relationships, exhibited in group shows in New York (<a href=\"Deconstructed-Ambiance-2025\"><i>Deconstructed Ambiance</i></a>) and Singapore (<a href=\"Deconstructed-Colours-2023\"><i>Deconstructed Colours</i></a>).",
+						"Custom hardware and software integrating machine learning, microcontrollers and real-time data for objects such as <a href=\"Circulated-Densities-2025\"><i>Circulated Densities</i></a>."
+					]
+				}
+			]
 		}
 	],
 	"skills": [
@@ -197,5 +202,23 @@
 			"Fabrication",
 			"3D printing, Laser cutting"
 		]
-	]
+	],
+	"lede_title": "About me",
+	"tracks": {
+		"design": {
+			"label": "Design & technology",
+			"sections": [
+				"Experience",
+				"Education"
+			],
+			"skills": true
+		},
+		"art": {
+			"label": "Art practice",
+			"sections": [
+				"Practice",
+				"Group exhibitions"
+			]
+		}
+	}
 }
