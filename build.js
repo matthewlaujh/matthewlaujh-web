@@ -190,7 +190,7 @@ function homeMain() {
 			const w = workBySlug[it.href];
 			const m = w.meta || {};
 			const facts = [w.category, m.techniques, m.client].filter(Boolean).map(esc).join('<span class="sep"> · </span>');
-			return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}">${splitTitle(w.title)}<small>${w.year}</small></a><div class="more"><div>${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></div></div>`;
+			return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}">${splitTitle(w.title)}<small>${w.year}</small></a><div class="more"><div><div class="more-in"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div><img class="thumb" alt="" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"></div></div></div></div>`;
 		}
 		return `\t\t\t<span class="dead" title="Coming soon">${splitTitle(it.text.replace(/\s*\(.*\)$/, ''))}<small>${(it.text.match(/\((.*)\)/) || [])[1] || ''}</small></span>`;
 	}).join('\n')}`).join('\n');
@@ -203,7 +203,6 @@ ${list}
 			${introHTML(site.homepage)}
 			<a class="more" href="${url('About')}">More about me</a>
 			<p class="contact"><a href="mailto:${email}">${email}</a><br>Singapore</p>
-			<div class="preview" id="cursor_image" aria-hidden="true"><img alt=""><div class="cap"></div></div>
 		</aside>
 	</main>`;
 }

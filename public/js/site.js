@@ -76,29 +76,23 @@
 		addEventListener('resize', function () { step = Math.max(240, innerHeight * 0.45); });
 	}
 
-	/* ---------------- home: the hovered cover shows in the aside ---------------- */
+	/* ---------------- home: hovered row -> thumb loads, backdrop takes the project ---------------- */
 	function setupHome() {
-		var c = document.getElementById('cursor_image');
-		if (!c) return;
-		var im = c.querySelector('img'), cap = c.querySelector('.cap');
 		var links = document.querySelectorAll('.marquee a[data-img]');
-		/* warm the cache so the first hover on each title is instant */
+		if (!links.length) return;
 		var warm = function () { for (var k = 0; k < links.length; k++) { var pre = new Image(); pre.src = links[k].getAttribute('data-img'); } };
 		if ('requestIdleCallback' in window) requestIdleCallback(warm); else setTimeout(warm, 800);
 		for (var i = 0; i < links.length; i++) (function (a) {
-			a.addEventListener('mouseenter', function () {
-				var src = a.getAttribute('data-img');
-				cap.innerHTML = '<span>' + a.getAttribute('data-title') + '</span><span>' + a.getAttribute('data-year') + '</span>';
-				c.classList.remove('on');
-				im.onload = function () { if (im.src.indexOf(src) >= 0 && a.matches(':hover')) c.classList.add('on'); };
-				im.src = src;
-				/* the backdrop takes on the hovered project too */
+			var item = a.parentNode, thumb = item.querySelector('.thumb');
+			function enter() {
+				if (thumb && !thumb.src) thumb.src = thumb.getAttribute('data-src');
 				var bd = backdropInstance();
 				if (bd && bd.show && a.hasAttribute('data-i')) bd.show(+a.getAttribute('data-i'));
-				if (im.complete && im.naturalWidth) c.classList.add('on');
 				setBackdropSpeed(2.2);
-			});
-			a.addEventListener('mouseleave', function () { c.classList.remove('on'); setBackdropSpeed(1); });
+			}
+			item.addEventListener('mouseenter', enter);
+			a.addEventListener('focus', enter);
+			item.addEventListener('mouseleave', function () { setBackdropSpeed(1); });
 		})(links[i]);
 	}
 
