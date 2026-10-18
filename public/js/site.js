@@ -414,12 +414,16 @@
 		opts = opts || {};
 		if (navigating) return;
 		navigating = true;
-		var leaving = leave(kindOf(href));
+		var to = kindOf(href), leaving = leave(to);
 		fetch(href, { credentials: 'same-origin' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
-			.then(function (text) { return leaving.then(function () { return text; }); })
 			.then(function (text) {
 				var doc = new DOMParser().parseFromString(text, 'text/html');
 				if (!doc.documentElement.getAttribute('data-page') || !doc.body.querySelector('main')) throw new Error('not a site page');
+				/* the backdrop moves first: it is already the next page's by the time the text arrives */
+				retarget(doc.body.querySelector('.backdrop'), true);
+				return leaving.then(function () { return doc; });
+			})
+			.then(function (doc) {
 				if (!opts.pop) { try { history.pushState({ ml: 1 }, '', href); } catch (x) {} }
 				swap(doc);
 				navigating = false;
@@ -433,7 +437,8 @@
 		var dd = document.getElementById('dropdown'), sc = document.getElementById('scrim');
 		if (dd) dd.classList.remove('on'); if (sc) sc.classList.remove('on');
 		if (page === 'home') { if (!html.classList.contains('leaving')) { html.classList.add('leaving'); ms = 500; } }
-		else if (page === 'project' || page === 'about') { html.classList.add('leaving'); ms = 450; }
+		else if (page === 'project' || page === 'about') { html.classList.add('leaving'); ms = to === 'project' ? 900 : 450; }
+		if (to === 'home' && page !== 'home') ms = Math.max(ms, 1000);   // the capsule folds away at the same pace it arrived
 		else if (page === 'field') { var f = document.getElementById('field'); if (f && !f.classList.contains('leaving')) { f.classList.add('leaving'); ms = 500; } }
 		/* to or from the white page: let the background cross over first */
 		if (to === 'about' || page === 'about') {
@@ -464,12 +469,11 @@
 		var veil = document.querySelector('.veil'), nveil = nb.querySelector('.veil');
 		if (veil && nveil) veil.className = nveil.className;
 		if (veil && !nveil) veil.classList.add('veil--off');
-		retarget(nb.querySelector('.backdrop'));
 		scrollTo(0, 0);
 		setupPage();
 	}
 	/* point the running diffusion at the next page's images */
-	function retarget(nel) {
+	function retarget(nel, early) {
 		var el = document.querySelector('.backdrop');
 		if (!nel) { if (el) { el.classList.add('off'); var i0 = el.__instance; if (i0 && i0.pause) setTimeout(function () { if (el.classList.contains('off')) i0.pause(); }, 1200); } return; }
 		var cfg = {};
@@ -484,7 +488,12 @@
 		el.classList.remove('off');
 		var sc = el.querySelector('script'); if (sc) sc.textContent = JSON.stringify(cfg);
 		var inst = el.__instance;
-		if (inst && inst.retarget) { inst.retarget(cfg.images || [], cfg.settings || {}); inst.start(); }
+		if (inst && inst.retarget) {
+			var s = Object.assign({}, cfg.settings || {});
+			if (early) s.fade = Math.min(s.fade || 2, 0.9);    // quick enough to land before the text
+			inst.retarget(cfg.images || [], s); inst.start();
+			if (early) setTimeout(function () { inst.settings.fade = (cfg.settings || {}).fade || 2; }, 1500);
+		}
 	}
 	function setupNav() {
 		if (!window.fetch || !window.DOMParser || !history.pushState) return;

@@ -294,8 +294,8 @@ html:not([data-page="home"]) .bar-title { animation: barin .7s .45s var(--ease) 
 /* between two capsule pages the name stays as it is; only the title changes */
 html[data-from]:not([data-from="home"]) .bar .site-title, html[data-from]:not([data-from="home"]) .bar .back span { animation: none; }
 /* leaving for home: the capsule and arrow fold away before the swap */
-html.leaving[data-to="home"] .bar .site-title { animation: capsule .5s var(--ease) reverse both; }
-html.leaving[data-to="home"] .bar .back span { animation: arrow .45s var(--ease) reverse both; }
+html.leaving[data-to="home"] .bar .site-title { animation: capsule .9s .1s var(--ease) reverse both; }
+html.leaving[data-to="home"] .bar .back span { animation: arrow .7s var(--ease) reverse both; }
 @keyframes barin { from { opacity: 0; transform: translateY(-10px); } }
 @keyframes capsule { from { background-color: transparent; border-color: transparent; transform: translateX(-15px); } }
 @keyframes arrow { from { opacity: 0; max-width: 0; margin-right: -6px; transform: translateX(6px); } to { opacity: 1; max-width: 24px; margin-right: 0; transform: none; } }
