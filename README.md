@@ -87,6 +87,17 @@ take the Cargo site down — the script reads from `freight.cargo.site`.
 
 ## Deploy to Cloudflare Pages
 
+### Quick: direct upload from this folder (good for testing)
+
+```
+npx wrangler login                                              # once: opens the browser
+npx wrangler pages project create matthewlaujh --production-branch main   # once
+npm run deploy                                                  # builds, then uploads public/
+```
+Each deploy prints a `*.pages.dev` URL. The project name is set in `package.json`.
+
+### Later: connect the repo so every push deploys
+
 1. Push to GitHub/GitLab.
 2. Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git.
 3. Build settings: Framework preset **None**, build command **`node build.js`** (or leave empty —

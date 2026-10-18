@@ -1,0 +1,11 @@
+{
+  "name": "matthewlaujh-com",
+  "private": true,
+  "version": "3.0.0",
+  "description": "matthewlaujh.com — static build for Cloudflare Pages",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "node scripts/serve.js",
+    "deploy": "node build.js && npx wrangler pages deploy public --project-name matthewlaujh --commit-dirty=true"
+  }
+}
