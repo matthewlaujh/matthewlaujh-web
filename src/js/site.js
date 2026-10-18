@@ -201,6 +201,39 @@
 		addEventListener('hashchange', function () { show(location.hash === '#art' ? 'art' : 'design'); });
 	}
 
+	/* ---------------- custom cursor (pointer devices only) ---------------- */
+	function setupCursor() {
+		if (!window.matchMedia || !matchMedia('(pointer: fine)').matches || reduced) return;
+		var el = document.createElement('div'); el.className = 'cursor'; el.setAttribute('aria-hidden', 'true');
+		document.body.appendChild(el);
+		var x = -100, y = -100, tx = x, ty = y, raf = null, shown = false;
+		function loop() {
+			x += (tx - x) * 0.35; y += (ty - y) * 0.35;
+			el.style.transform = 'translate(' + x + 'px,' + y + 'px)' + (el.classList.contains('is-down') ? ' scale(.8)' : '');
+			raf = (Math.abs(tx - x) + Math.abs(ty - y) > 0.1) ? requestAnimationFrame(loop) : null;
+		}
+		function kind(t) {
+			if (!t || !t.closest) return '';
+			if (t.closest('a, button, [role="button"], summary, label, input, select, textarea')) return 'link';
+			if (t.closest('p, li, dd, dt, h1, h2, h3, figcaption, .lede, .role, .org, .note')) return 'text';
+			return '';
+		}
+		document.addEventListener('mousemove', function (e) {
+			tx = e.clientX; ty = e.clientY;
+			if (!shown) { x = tx; y = ty; shown = true; html.classList.add('has-cursor'); }
+			var k = kind(e.target);
+			el.classList.toggle('is-link', k === 'link');
+			el.classList.toggle('is-text', k === 'text');
+			if (!raf) raf = requestAnimationFrame(loop);
+		}, { passive: true });
+		document.addEventListener('mousedown', function () { el.classList.add('is-down'); });
+		document.addEventListener('mouseup', function () { el.classList.remove('is-down'); });
+		document.addEventListener('mouseleave', function () { el.classList.add('is-hidden'); });
+		document.addEventListener('mouseenter', function () { el.classList.remove('is-hidden'); });
+		/* touch after mouse: give the native cursor back */
+		addEventListener('touchstart', function () { html.classList.remove('has-cursor'); }, { passive: true });
+	}
+
 	/* ---------------- widow / orphan fallback ---------------- */
 	function fixWidows() {
 		if (CSS.supports && CSS.supports('text-wrap', 'pretty')) return;
@@ -222,6 +255,7 @@
 		randomiseBackdrop();
 		if (window.MLBackdrops) window.MLBackdrops.init(document);
 		setupDiffuseScroll();
+		setupCursor();
 		if (page === 'home') setupHome();
 		if (page === 'project') setupProject();
 		if (page === 'field') setupField();

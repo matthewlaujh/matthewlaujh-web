@@ -57,6 +57,24 @@ ul { padding: 0; list-style: none; }
 .veil { position: fixed; inset: 0; z-index: 0; background: var(--veil); pointer-events: none; transition: background-color .6s; }
 .veil--light { background: var(--veil-light); }
 
+/* ------------------------------------------------------------ cursor */
+/* a small dot that opens into a ring over anything clickable; difference-blended so it reads on dark and light */
+@media (pointer: fine) {
+	html.has-cursor, html.has-cursor a, html.has-cursor button, html.has-cursor [role="button"] { cursor: none; }
+	.cursor {
+		position: fixed; left: 0; top: 0; z-index: 1000; pointer-events: none;
+		width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%;
+		background: #fff; mix-blend-mode: difference;
+		transition: width .25s var(--ease), height .25s var(--ease), margin .25s var(--ease), background-color .25s, opacity .3s;
+		opacity: 0;
+	}
+	html.has-cursor .cursor { opacity: 1; }
+	.cursor.is-link { width: 34px; height: 34px; margin: -17px 0 0 -17px; background: rgba(255, 255, 255, .22); }
+	.cursor.is-text { width: 2px; height: 22px; margin: -11px 0 0 -1px; border-radius: 1px; }
+	.cursor.is-down { transform: scale(.8); }
+	.cursor.is-hidden { opacity: 0; }
+}
+
 /* --------------------------------------------------------------- bar */
 .bar {
 	position: sticky; top: 0; z-index: 20;
