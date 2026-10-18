@@ -281,10 +281,17 @@
 			tx = (e.clientX / innerWidth - 0.5) * -40; ty = (e.clientY / innerHeight - 0.5) * -30;
 			if (!raf) raf = requestAnimationFrame(loop);
 		});
+		/* the backdrop takes whichever project is under the cursor, as on the home list */
+		function showBackdrop(i) {
+			var bd = backdropInstance();
+			if (bd && bd.show && i >= 0) { bd.show(i); settle(2.2, 0.7, 2600); }
+			else if (i < 0) settle(1, 1, 0);
+		}
 		function focus(i) {
 			f.classList.toggle('focus', i >= 0);
 			tiles.forEach(function (t) { t.classList.toggle('on', +t.getAttribute('data-i') === i); });
 			side.forEach(function (a) { a.classList.toggle('on', +a.getAttribute('data-i') === i); });
+			showBackdrop(i);
 		}
 		side.forEach(function (a) {
 			a.addEventListener('mouseenter', function () { focus(+a.getAttribute('data-i')); });
@@ -293,8 +300,8 @@
 			a.addEventListener('blur', function () { focus(-1); });
 		});
 		tiles.forEach(function (t) {
-			t.addEventListener('mouseenter', function () { side.forEach(function (a) { a.classList.toggle('on', a.getAttribute('data-i') === t.getAttribute('data-i')); }); });
-			t.addEventListener('mouseleave', function () { side.forEach(function (a) { a.classList.remove('on'); }); });
+			t.addEventListener('mouseenter', function () { side.forEach(function (a) { a.classList.toggle('on', a.getAttribute('data-i') === t.getAttribute('data-i')); }); showBackdrop(+t.getAttribute('data-i')); });
+			t.addEventListener('mouseleave', function () { side.forEach(function (a) { a.classList.remove('on'); }); showBackdrop(-1); });
 		});
 		/* click: the field's own diffusion switches to this cover and the tile
 		   grows over it, melting into the shader as it goes, so the project page

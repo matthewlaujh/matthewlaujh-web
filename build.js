@@ -129,7 +129,7 @@ function dropdownHTML(current) {
 ${groups}
 		<div class="foot">
 			<a href="${url(FIELD_SLUG)}"${current === FIELD_SLUG ? ' aria-current="page"' : ''}>Works in space →</a>
-			<span><a href="${url('About')}"${current === 'About' ? ' aria-current="page"' : ''}>About</a> &nbsp;&nbsp; <a href="mailto:${email}">Email</a> &nbsp;&nbsp; <a href="${url(site.homepage)}">Home</a></span>
+			<a href="${url('About')}"${current === 'About' ? ' aria-current="page"' : ''}>About</a>
 		</div>
 	</div>`;
 }
