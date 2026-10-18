@@ -4,10 +4,10 @@
    project · all-projects field · about · mobile · reduced motion
    ========================================================================== */
 
-@font-face { font-family: "Austin News Deck"; font-weight: 300; font-style: normal; src: url(../fonts/AustinNewsDeck-Light.woff2) format("woff2"), url(../fonts/AustinNewsDeck-Light.otf) format("opentype"); font-display: swap; }
-@font-face { font-family: "Austin News Deck"; font-weight: 300; font-style: italic; src: url(../fonts/AustinNewsDeck-LightItalic.woff2) format("woff2"), url(../fonts/AustinNewsDeck-LightItalic.otf) format("opentype"); font-display: swap; }
-@font-face { font-family: "Atlas Grotesk"; font-weight: 300; font-style: normal; src: url(../fonts/AtlasGrotesk-Light.woff2) format("woff2"), url(../fonts/AtlasGrotesk-Light.otf) format("opentype"); font-display: swap; }
-@font-face { font-family: "Atlas Grotesk"; font-weight: 300; font-style: italic; src: url(../fonts/AtlasGrotesk-LightItalic.woff2) format("woff2"), url(../fonts/AtlasGrotesk-LightItalic.otf) format("opentype"); font-display: swap; }
+@font-face { font-family: "Austin News Deck"; font-weight: 300; font-style: normal; src: url(../fonts/AustinNewsDeck-Light.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Austin News Deck"; font-weight: 300; font-style: italic; src: url(../fonts/AustinNewsDeck-LightItalic.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Atlas Grotesk"; font-weight: 300; font-style: normal; src: url(../fonts/AtlasGrotesk-Light.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Atlas Grotesk"; font-weight: 300; font-style: italic; src: url(../fonts/AtlasGrotesk-LightItalic.woff2) format("woff2"); font-display: swap; }
 
 :root {
 	--serif: "Austin News Deck", Georgia, "Times New Roman", serif;
