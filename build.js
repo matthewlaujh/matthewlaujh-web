@@ -169,7 +169,8 @@ function slitHTML(image, opts) {
 function diffuseHTML(images, opts) {
 	const settings = Object.assign({ random: false, scroll: false, strength: 0.8, speed: 1, blend: 0.01, fade: 2 }, opts && opts.settings || {});
 	const cfg = { settings, images: images.map(im => ({ src: im.src, width: im.width, height: im.height })) };
-	return `<div class="backdrop" data-backdrop="diffuse" aria-hidden="true"><script type="application/json">${json(cfg)}</script></div><div class="veil${opts && opts.light ? ' veil--light' : ''}" aria-hidden="true"></div>`;
+	const poster = opts && opts.poster ? `<div class="poster" style="background-image:url('${opts.poster}')" aria-hidden="true"></div>` : '';
+	return `<div class="backdrop" data-backdrop="diffuse" aria-hidden="true"><script type="application/json">${json(cfg)}</script></div>${poster}<div class="veil${opts && opts.light ? ' veil--light' : ''}" aria-hidden="true"></div>`;
 }
 /* every project's cover as a small still, for the home / field backdrop */
 function coverStills() {
@@ -244,30 +245,18 @@ ${w.images.map((im, i) => `\t\t\t\t<figure>${mediaHTML(im, ` loading="${i ? 'laz
 }
 
 function fieldMain() {
-	/* A UMAP-ish scatter: one cluster per category, art drifts to the lower left of
-	   its cluster and design to the upper right, with a seeded jitter so the map is
-	   the same on every visit. */
-	let seed = 11; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
-	const centres = { Experiential: [50, 40], Computational: [76, 68], Digital: [80, 20] };
-	const kindShift = { art: [-1, 1], both: [0, 0], design: [1, -1] };
-	const groups = nav.groups.map(g => works.filter(x => x.category === g.label));
-	const tiles = [];
-	groups.forEach((g, gi) => {
-		const c = centres[nav.groups[gi].label] || [60, 50];
-		g.forEach((w, j) => {
-			const k = (w.meta || {}).kind || 'design', ks = kindShift[k];
-			const ang = j * 2.39996 + rnd() * 0.6, rad = 2 + Math.sqrt(j + 1) * 4.8;
-			const x = Math.min(90, Math.max(38, c[0] + Math.cos(ang) * rad * 1.3 + ks[0] * 4 + (rnd() - 0.5) * 3));
-			const y = Math.min(84, Math.max(14, c[1] + Math.sin(ang) * rad * 0.9 + ks[1] * 6 + (rnd() - 0.5) * 4));
-			const wv = 7.5 + rnd() * 4.5, z = (0.4 + rnd() * 1.2).toFixed(2), i = works.indexOf(w);
-			tiles.push(`\t\t\t<a href="${url(w.slug)}" data-i="${i}" data-kind="${k}" style="--x:${x.toFixed(1)}vw;--y:${y.toFixed(1)}vh;--w:${wv.toFixed(1)}vw;--z:${z}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label"><i class="k${kcls(k)}" aria-hidden="true"></i>${esc(w.title)}, ${w.year}</span></a>`);
-		});
+	/* The map itself is laid out in site.js (setupField) so it fits any window:
+	   one cluster per category, art drifting lower-left and design upper-right,
+	   tiles nudged apart until none overlap. Here we only emit the tiles. */
+	const tiles = works.map((w, i) => {
+		const k = (w.meta || {}).kind || 'design';
+		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" data-kind="${k}" data-cat="${esc(w.category)}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label"><i class="k${kcls(k)}" aria-hidden="true"></i>${esc(w.title)}, ${w.year}</span></a>`;
 	});
-	const marks = nav.groups.map(g => { const c = centres[g.label] || [60, 50]; return `\t\t\t<span class="cluster" style="--x:${c[0]}vw;--y:${c[1] - 17}vh">${esc(g.label)}</span>`; }).join('\n');
+	const marks = nav.groups.map(g => `\t\t\t<span class="cluster" data-cat="${esc(g.label)}">${esc(g.label)}</span>`).join('\n');
 	const side = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${works.filter(x => x.category === g.label).map(w => `\t\t\t<a href="${url(w.slug)}" data-i="${works.indexOf(w)}"><i class="k${kcls((w.meta || {}).kind)}" aria-hidden="true"></i>${esc(w.title)}<small>${w.year}</small></a>`).join('\n')}`).join('\n');
 	return `<main class="field-page">
 		<h1 class="visually-hidden">All projects</h1>
-		<div class="field" id="field">
+		<div class="field" id="field" data-cats="${esc(nav.groups.map(g => g.label).join('|'))}">
 ${marks}
 ${tiles.join('\n')}
 		</div>
@@ -333,7 +322,7 @@ function render(page) {
 
 	let kind, backdrop, main;
 	if (isHome) { kind = 'home'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: true } }); main = homeMain(); }
-	else if (w) { kind = 'project'; backdrop = diffuseHTML([{ src: w.cover.video ? w.cover.poster : w.cover.src, width: w.cover.width, height: w.cover.height }], { light: true, settings: { strength: 0.55 } }); main = projectMain(w); }
+	else if (w) { kind = 'project'; backdrop = diffuseHTML([{ src: w.cover.video ? w.cover.poster : w.cover.src, width: w.cover.width, height: w.cover.height }], { light: true, poster: w.cover.video ? w.cover.poster : w.cover.thumb, settings: { strength: 0.55 } }); main = projectMain(w); }
 	else if (page.slug === FIELD_SLUG) { kind = 'field'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: false, strength: 0.5 } }); main = fieldMain(); }
 	else { kind = 'about'; backdrop = ''; main = aboutMain(page); }
 
@@ -364,9 +353,9 @@ function render(page) {
 		<link rel="stylesheet" href="${asset('/css/site.css')}">
 		<script src="${asset('/js/backdrops.js')}" defer></script>
 		<script src="${asset('/js/site.js')}" defer></script>
-${kind === 'project' ? `		<script>try{if(sessionStorage.getItem('flip')==='${page.slug}')document.documentElement.classList.add('from-field')}catch(e){}</script>\n` : ''}	</head>
+	</head>
 	<body>
-${w ? `		<div class="enter" aria-hidden="true"><img src="${w.cover.video ? w.cover.poster : w.cover.thumb}" alt=""></div>\n` : ''}		${backdrop}
+		${backdrop}
 		${barHTML(page)}
 		${main}
 		${footerHTML()}

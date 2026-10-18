@@ -114,16 +114,6 @@
 
 	/* ---------------- project: plate reveal, slit-scan calms as it's covered ---------------- */
 	function setupProject() {
-		var enter = document.querySelector('.enter');
-		if (enter) {
-			if (document.documentElement.classList.contains('from-field') && !reduced) {
-				try { sessionStorage.removeItem('flip'); } catch (x) {}
-				setTimeout(function () {
-					enter.classList.add('out');
-					setTimeout(function () { enter.remove(); }, 1600);
-				}, 350);
-			} else enter.remove();
-		}
 		var figs = document.querySelectorAll('.plates figure');
 		if (!figs.length) return;
 		if ('IntersectionObserver' in window && !reduced) {
@@ -147,8 +137,70 @@
 	function setupField() {
 		var f = document.getElementById('field');
 		if (!f) return;
-		var tiles = [].slice.call(f.children);
+		var tiles = [].slice.call(f.querySelectorAll('a'));
+		var marks = [].slice.call(f.querySelectorAll('.cluster'));
 		var side = [].slice.call(document.querySelectorAll('.field-side a'));
+		var mobile = window.matchMedia('(max-width: 800px)');
+
+		/* ---- the map: clusters by category, kind as a drift, no overlaps ---- */
+		var cats = (f.getAttribute('data-cats') || '').split('|');
+		var centres = [[0.24, 0.42], [0.64, 0.74], [0.74, 0.18]];      // per category, as fractions of the free area
+		var drift = { art: [-1, 1], both: [0, 0], design: [1, -1] };
+		function layout() {
+			if (mobile.matches) { tiles.forEach(function (t) { t.style.cssText = ''; }); return; }
+			var seed = 11; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+			var pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 28;
+			var sideEl = document.querySelector('.field-side'), sideW = sideEl ? sideEl.getBoundingClientRect().right : pad;
+			var x0 = sideW + 40, x1 = innerWidth - pad, y0 = 80, y1 = innerHeight - 130;
+			var W = x1 - x0, H = y1 - y0;
+			var tw = Math.max(84, Math.min(190, W * 0.13));                 // tile width scales with the free area
+			var nodes = tiles.map(function (t) {
+				var ci = Math.max(0, cats.indexOf(t.getAttribute('data-cat'))), c = centres[ci] || [0.5, 0.5];
+				var k = t.getAttribute('data-kind') || 'design', d = drift[k] || [0, 0];
+				var j = tiles.filter(function (o) { return o.getAttribute('data-cat') === t.getAttribute('data-cat'); }).indexOf(t);
+				var ang = j * 2.39996 + rnd() * 0.6, rad = (0.05 + Math.sqrt(j + 1) * 0.07) * Math.min(W, H * 1.3);
+				var w = tw * (0.8 + rnd() * 0.45), img = t.querySelector('img');
+				var h = w * (img.height && img.width ? img.height / img.width : 0.66);
+				return { el: t, ci: ci, cx: x0 + c[0] * W, cy: y0 + c[1] * H,
+					x: x0 + c[0] * W + Math.cos(ang) * rad * 1.3 + d[0] * W * 0.03 + (rnd() - 0.5) * 24,
+					y: y0 + c[1] * H + Math.sin(ang) * rad * 0.9 + d[1] * H * 0.05 + (rnd() - 0.5) * 24,
+					w: w, h: h, z: 0.4 + rnd() * 1.2 };
+			});
+			var gap = 14;
+			for (var it = 0; it < 160; it++) {
+				for (var a = 0; a < nodes.length; a++) {
+					var A = nodes[a];
+					// a soft pull home keeps each cluster together
+					A.x += (A.cx - A.x) * 0.004; A.y += (A.cy - A.y) * 0.004;
+					for (var b = a + 1; b < nodes.length; b++) {
+						var B = nodes[b];
+						var dx = B.x - A.x, dy = B.y - A.y;
+						var ox = (A.w + B.w) / 2 + gap - Math.abs(dx), oy = (A.h + B.h) / 2 + gap - Math.abs(dy);
+						if (ox <= 0 || oy <= 0) continue;
+						if (ox < oy) { var sx = (dx < 0 ? -1 : 1) * ox / 2; A.x -= sx; B.x += sx; }
+						else { var sy = (dy < 0 ? -1 : 1) * oy / 2; A.y -= sy; B.y += sy; }
+					}
+					A.x = Math.max(x0 + A.w / 2, Math.min(x1 - A.w / 2, A.x));
+					A.y = Math.max(y0 + A.h / 2, Math.min(y1 - A.h / 2, A.y));
+				}
+			}
+			nodes.forEach(function (n) {
+				n.el.style.cssText = 'left:' + n.x.toFixed(1) + 'px;top:' + n.y.toFixed(1) + 'px;width:' + n.w.toFixed(1) + 'px;--z:' + n.z.toFixed(2);
+			});
+			// cluster labels: above the topmost tile of each cluster, centred on it
+			marks.forEach(function (m) {
+				var ci = cats.indexOf(m.getAttribute('data-cat')), ns = nodes.filter(function (n) { return n.ci === ci; });
+				if (!ns.length) return;
+				var mx = ns.reduce(function (s, n) { return s + n.x; }, 0) / ns.length, my = ns.reduce(function (s, n) { return s + n.y; }, 0) / ns.length;
+				var dist = function (n) { return Math.hypot(n.x - mx, n.y - my); }, md = ns.reduce(function (s, n) { return s + dist(n); }, 0) / ns.length;
+				var core = ns.filter(function (n) { return dist(n) <= md * 1.15; }); if (!core.length) core = ns;
+				var top = Math.min.apply(null, core.map(function (n) { return n.y - n.h / 2; }));
+				m.style.cssText = 'left:' + mx.toFixed(1) + 'px;top:' + Math.max(50, top - 22).toFixed(1) + 'px';
+			});
+			f.classList.add('ready');
+		}
+		layout();
+		var rt; addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
 		var px = 0, py = 0, tx = 0, ty = 0, raf = null;
 		function loop() {
 			px += (tx - px) * 0.06; py += (ty - py) * 0.06;
@@ -174,11 +226,11 @@
 			t.addEventListener('mouseenter', function () { side.forEach(function (a) { a.classList.toggle('on', a.getAttribute('data-i') === t.getAttribute('data-i')); }); });
 			t.addEventListener('mouseleave', function () { side.forEach(function (a) { a.classList.remove('on'); }); });
 		});
-		/* click: the cover grows to fill the window while the rest of the field
-		   recedes, then the project page opens behind the same image and lets it
-		   dissolve into the diffusion (see setupProject) */
+		/* click: the field's own diffusion switches to this cover and the tile
+		   grows over it, melting into the shader as it goes, so the project page
+		   (which opens on the same diffused cover) continues the picture */
 		function go(e, el) {
-			if (reduced || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+			if (reduced || e.metaKey || e.ctrlKey || e.shiftKey || e.button || mobile.matches) return;
 			e.preventDefault();
 			var img = el.querySelector('img'), r = img.getBoundingClientRect();
 			var d = document.createElement('div');
@@ -187,11 +239,16 @@
 			d.innerHTML = '<img src="' + img.src + '" alt="">';
 			document.body.appendChild(d);
 			var href = el.getAttribute('href');
-			try { sessionStorage.setItem('flip', href.replace(/\.html$/, '')); } catch (x) {}
+			var bd = backdropInstance();
+			if (bd && bd.show) { bd.settings.fade = 0.7; bd.show(+el.getAttribute('data-i')); setBackdropSpeed(2.2); }
 			f.classList.add('leaving');
-			var side = document.querySelector('.field-side'); if (side) side.classList.add('leaving');
+			var sideEl = document.querySelector('.field-side'); if (sideEl) sideEl.classList.add('leaving');
 			if (d.animate) {
-				d.animate([{ borderRadius: '2px' }, { left: '0px', top: '0px', width: innerWidth + 'px', height: innerHeight + 'px', borderRadius: '0px' }], { duration: 900, easing: 'cubic-bezier(.65,0,.15,1)', fill: 'forwards' }).onfinish = function () { location.href = href; };
+				d.animate([
+					{ left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', opacity: 1, filter: 'blur(0px)' },
+					{ opacity: 1, filter: 'blur(0px)', offset: 0.35 },
+					{ left: '0px', top: '0px', width: innerWidth + 'px', height: innerHeight + 'px', opacity: 0, filter: 'blur(14px)' }
+				], { duration: 1100, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' }).onfinish = function () { location.href = href; };
 			} else location.href = href;
 		}
 		addEventListener('pageshow', function (e) {
