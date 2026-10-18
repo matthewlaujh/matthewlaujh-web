@@ -255,7 +255,7 @@ html[data-page="about"] .studio-clock, html[data-page="about"] .rights { opacity
 .about .side { position: static; }
 .about .lede { font: 300 clamp(20px, 2vw, 26px)/1.35 var(--serif); max-width: 24em; }
 .about .lede p + p { margin-top: .6em; }
-.about .statement { margin-top: 40px; max-width: 42em; font: 300 15px/1.5 var(--serif); color: rgba(0, 0, 0, .75); }
+.about .statement { margin-top: 40px; max-width: 24em; font: 300 clamp(20px, 2vw, 26px)/1.35 var(--serif); }
 .about .statement h2 { font: 300 12px/1.4 var(--sans); color: rgba(0, 0, 0, .5); margin-bottom: 10px; }
 .about .statement p + p { margin-top: .6em; }
 .about .contact { margin-top: 36px; display: grid; gap: 4px; font: 300 13px/1.45 var(--sans); }
