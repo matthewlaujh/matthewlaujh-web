@@ -165,7 +165,7 @@ function slitHTML(image, opts) {
 /* the diffusion backdrop: one or more images, optionally random on load and
    cycled on scroll (site.js drives the cycling) */
 function diffuseHTML(images, opts) {
-	const settings = Object.assign({ random: false, scroll: false, strength: 0.7, speed: 1, blend: 0.02, fade: 1.6 }, opts && opts.settings || {});
+	const settings = Object.assign({ random: false, scroll: false, strength: 0.8, speed: 1, blend: 0.01, fade: 2 }, opts && opts.settings || {});
 	const cfg = { settings, images: images.map(im => ({ src: im.src, width: im.width, height: im.height })) };
 	return `<div class="backdrop" data-backdrop="diffuse" aria-hidden="true"><script type="application/json">${json(cfg)}</script></div><div class="veil${opts && opts.light ? ' veil--light' : ''}" aria-hidden="true"></div>`;
 }

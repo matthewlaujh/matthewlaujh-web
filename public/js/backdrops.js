@@ -678,10 +678,10 @@ var VERT = [
 		'  if (ra > ia) s.y = ia / ra; else s.x = ra / ia; return (uv - 0.5) * s + 0.5; }',
 		'void main(){',
 		'  vec2 uv = vUv; vec2 asp = vec2(uRes.x / uRes.y, 1.0);',
-		'  vec2 p = uv * asp * 1.6 + uSeed * 7.0;',
-		'  vec2 flow = curl(p + uTime * 0.05) * 0.0032 * uStrength;',
+		'  vec2 p = uv * asp * 1.1 + uSeed * 7.0;',
+		'  vec2 flow = curl(p + uTime * 0.05) * 0.0045 * uStrength;',
 		'  flow += (uMouse - 0.5) * 0.0015 * uStrength;',
-		'  vec2 px = 1.0 / uRes;',
+		'  vec2 px = 2.0 / uRes;',
 		'  vec2 q = uv + flow;',
 		'  vec3 prev = texture2D(uPrev, q).rgb * 0.4',
 		'    + texture2D(uPrev, q + vec2(px.x, 0.0)).rgb * 0.15 + texture2D(uPrev, q - vec2(px.x, 0.0)).rgb * 0.15',
@@ -694,7 +694,11 @@ var VERT = [
 	].join('\n');
 	var DSHOW = [
 		'precision mediump float;', 'varying vec2 vUv;', 'uniform sampler2D uTex;',
-		'void main(){ gl_FragColor = vec4(texture2D(uTex, vUv).rgb, 1.0); }'
+		'void main(){ vec3 c = texture2D(uTex, vUv).rgb;',
+		'  float l = dot(c, vec3(0.299, 0.587, 0.114));',
+		'  c = mix(vec3(l), c, 1.35);',                      // a little more colour
+		'  c = pow(max(c, 0.0), vec3(0.78)) * 1.15;',         // lift the dark ones so they still read as texture
+		'  gl_FragColor = vec4(c, 1.0); }'
 	].join('\n');
 
 	function Diffuse(el, settings, images) {
@@ -780,7 +784,9 @@ var VERT = [
 				gl.bindTexture(gl.TEXTURE_2D, self.src);
 				gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
 				self.srcW = img.naturalWidth; self.srcH = img.naturalHeight;
-				self.reset = 1; self.el.classList.add('loaded'); self.start();
+				self.reset = 1;
+				self.warm(140);
+				self.el.classList.add('loaded'); self.start();
 				return;
 			}
 			// bake whatever the current blend is into src, then fade src -> src2
@@ -792,6 +798,13 @@ var VERT = [
 		};
 		this.pending = img;
 		img.src = im.src;
+	};
+	/* run the simulation ahead, unseen, so the picture is already dissolved */
+	Diffuse.prototype.warm = function (n) {
+		var keep = this.data.speedScale; this.data.speedScale = 3;
+		var t = performance.now();
+		for (var i = 0; i < n; i++) { this.last = t; t += 33; this.frame(t); }
+		this.data.speedScale = keep; this.last = performance.now();
 	};
 	/* the fade finished (or was interrupted): src2 becomes src */
 	Diffuse.prototype.commitFade = function () {
