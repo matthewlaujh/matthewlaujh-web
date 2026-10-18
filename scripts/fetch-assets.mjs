@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /*
- * Downloads every image the site uses from Cargo's CDN into src/img/.
+ * Downloads every original image from Cargo's CDN into src/img-original/
+ * (then run scripts/optimize-images.py to make the web versions in src/img/).
  *
  *   node scripts/fetch-assets.mjs          # fetch what's missing
  *   node scripts/fetch-assets.mjs --force  # re-download everything
@@ -13,7 +14,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const OUT = path.join(ROOT, 'src', 'img');
+const OUT = path.join(ROOT, 'src', 'img-original');
 const MAP = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'assets.json'), 'utf8'));
 const FORCE = process.argv.includes('--force');
 

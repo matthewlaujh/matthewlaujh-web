@@ -1,0 +1,117 @@
+{
+ "id": 24906423,
+ "slug": "Affective-Communication-Research-2021-2022",
+ "title": "Affective Communication Research (2021-2022)",
+ "title_no_html": "Affective Communication Research (2021-2022)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Completed as part of the BA in Design Communication level 3 programme at LASALLE...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed as part of the BA in Design Communication level 3 programme at LASALLE.<br><br>Part of a series of work exploring communication through light — culminated in <i><a href=\"Hello-I-m-Here-Exhibition-2022\" rel=\"history\">Hello, I’m Here (2022)</a></i>.\n<br>—<br>\n<br>\nDeveloped as an exploration of Affective Computing through a communication design lens for the recognition, communication and interpretation of affective states as forms of computer-mediated communication and interaction design practice.<br>\n<br><i>Affective Communication Research (2021-2022)</i> explores creative technology applications through an interactive and immersive installation. Utilising machine learning-based facial expression recognition as a means of a future interface that encourages participants to recognise, interpret, and communicate their emotions.<br>\n<br>Participants non-verbally communicate their emotions, which are then abstracted into a series of coloured LEDs, putting them in touch with their emotions as well as understanding the emotions of others, reflecting their collective emotional state.\n<br>—\n</h1><br>\n</div>\n</div>",
+ "local_css": "",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 10,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "173874832",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 137635700,
+   "src": "/img/67802daa-BADC6C_Lau-Jun-Hui-Matthew_2.webm",
+   "name": "BADC6C_Lau-Jun-Hui-Matthew_2.gif",
+   "width": 980,
+   "height": 654,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/67802daa-BADC6C_Lau-Jun-Hui-Matthew_2.gif",
+   "mp4": "/img/67802daa-BADC6C_Lau-Jun-Hui-Matthew_2.mp4",
+   "poster": "/img/67802daa-BADC6C_Lau-Jun-Hui-Matthew_2-poster.jpg",
+   "thumb": "/img/67802daa-BADC6C_Lau-Jun-Hui-Matthew_2-s.webp"
+  },
+  {
+   "id": 137635701,
+   "src": "/img/d82b357d-BADC6C_Lau-Jun-Hui-Matthew_3.webm",
+   "name": "BADC6C_Lau-Jun-Hui-Matthew_3.gif",
+   "width": 1120,
+   "height": 746,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/d82b357d-BADC6C_Lau-Jun-Hui-Matthew_3.gif",
+   "mp4": "/img/d82b357d-BADC6C_Lau-Jun-Hui-Matthew_3.mp4",
+   "poster": "/img/d82b357d-BADC6C_Lau-Jun-Hui-Matthew_3-poster.jpg",
+   "thumb": "/img/d82b357d-BADC6C_Lau-Jun-Hui-Matthew_3-s.webp"
+  },
+  {
+   "id": 137635702,
+   "src": "/img/194b0b02-BADC6C_Lau-Jun-Hui-Matthew_4.webm",
+   "name": "BADC6C_Lau-Jun-Hui-Matthew_4.gif",
+   "width": 1120,
+   "height": 746,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/194b0b02-BADC6C_Lau-Jun-Hui-Matthew_4.gif",
+   "mp4": "/img/194b0b02-BADC6C_Lau-Jun-Hui-Matthew_4.mp4",
+   "poster": "/img/194b0b02-BADC6C_Lau-Jun-Hui-Matthew_4-poster.jpg",
+   "thumb": "/img/194b0b02-BADC6C_Lau-Jun-Hui-Matthew_4-s.webp"
+  },
+  {
+   "id": 137635703,
+   "src": "/img/993bb6d7-BADC6C_Lau-Jun-Hui-Matthew_5.webm",
+   "name": "BADC6C_Lau-Jun-Hui-Matthew_5.gif",
+   "width": 1120,
+   "height": 746,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/993bb6d7-BADC6C_Lau-Jun-Hui-Matthew_5.gif",
+   "mp4": "/img/993bb6d7-BADC6C_Lau-Jun-Hui-Matthew_5.mp4",
+   "poster": "/img/993bb6d7-BADC6C_Lau-Jun-Hui-Matthew_5-poster.jpg",
+   "thumb": "/img/993bb6d7-BADC6C_Lau-Jun-Hui-Matthew_5-s.webp"
+  },
+  {
+   "id": 137635704,
+   "src": "/img/5c089837-BADC6C_Lau-Jun-Hui-Matthew_6.webm",
+   "name": "BADC6C_Lau-Jun-Hui-Matthew_6.gif",
+   "width": 1120,
+   "height": 746,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/5c089837-BADC6C_Lau-Jun-Hui-Matthew_6.gif",
+   "mp4": "/img/5c089837-BADC6C_Lau-Jun-Hui-Matthew_6.mp4",
+   "poster": "/img/5c089837-BADC6C_Lau-Jun-Hui-Matthew_6-poster.jpg",
+   "thumb": "/img/5c089837-BADC6C_Lau-Jun-Hui-Matthew_6-s.webp"
+  },
+  {
+   "id": 137635705,
+   "src": "/img/c3a0e066-BADC6C_Lau-Jun-Hui-Matthew_7.webm",
+   "name": "BADC6C_Lau-Jun-Hui-Matthew_7.gif",
+   "width": 1120,
+   "height": 746,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/c3a0e066-BADC6C_Lau-Jun-Hui-Matthew_7.gif",
+   "mp4": "/img/c3a0e066-BADC6C_Lau-Jun-Hui-Matthew_7.mp4",
+   "poster": "/img/c3a0e066-BADC6C_Lau-Jun-Hui-Matthew_7-poster.jpg",
+   "thumb": "/img/c3a0e066-BADC6C_Lau-Jun-Hui-Matthew_7-s.webp"
+  }
+ ],
+ "meta": {
+  "line": "Facial-expression recognition that turns what you feel into coloured light.",
+  "techniques": "Machine learning (facial expression recognition), LEDs, physical computing",
+  "client_label": "School",
+  "client": "LASALLE College of the Arts"
+ }
+}
