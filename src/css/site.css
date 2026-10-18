@@ -104,7 +104,6 @@ ul { padding: 0; list-style: none; }
 	pointer-events: none;
 }
 .site-footer a { pointer-events: auto; }
-.rights { opacity: .7; }
 
 /* --------------------------------------------------------------- home */
 .home {
@@ -185,11 +184,6 @@ ul { padding: 0; list-style: none; }
 .project .plates img, .project .plates video { width: 100%; transform: scale(1.06); transition: transform 1.4s var(--ease); }
 .project .plates figure.seen img, .project .plates figure.seen video { transform: none; }
 .project .plates figcaption { position: absolute; left: 12px; bottom: 10px; font-size: 11px; color: #fff; mix-blend-mode: difference; }
-.prevnext { grid-column: 1 / -1; margin-top: 24px; display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--ink-rule); padding-top: 14px; color: var(--ink-dim); }
-.prevnext a:hover { color: var(--ink); }
-.prevnext a span { display: inline-block; transition: transform .25s var(--ease); }
-.prevnext a:first-child:hover span { transform: translateX(-4px); }
-.prevnext a:last-child:hover span { transform: translateX(4px); }
 
 /* -------------------------------------------------- all projects (field) */
 html[data-page="field"], html[data-page="field"] body { height: 100%; overflow: hidden; }
@@ -226,27 +220,26 @@ html[data-page="project"] .bar, html[data-page="about"] .bar { mix-blend-mode: n
 html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title,
 html[data-page="project"] .bar-title, html[data-page="about"] .bar-title {
 	pointer-events: auto;
-	background: rgba(24, 24, 26, .55);
-	-webkit-backdrop-filter: blur(22px) saturate(1.6); backdrop-filter: blur(22px) saturate(1.6);
-	border: 1px solid rgba(255, 255, 255, .08); border-radius: 999px;
+	background: rgba(24, 24, 26, .32);
+	-webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5);
+	border: 1px solid rgba(255, 255, 255, .1); border-radius: 999px;
 	padding: 8px 14px;
 	transition: background-color .35s, color .35s, border-color .35s;
 }
 html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title { display: inline-flex; align-items: center; gap: 6px; }
-html[data-page="project"] .site-footer, html[data-page="about"] .site-footer { mix-blend-mode: normal; color: #fff; }
-html[data-page="project"] .site-footer > *, html[data-page="about"] .site-footer > * {
-	background: rgba(24, 24, 26, .55);
-	-webkit-backdrop-filter: blur(22px) saturate(1.6); backdrop-filter: blur(22px) saturate(1.6);
-	border: 1px solid rgba(255, 255, 255, .08); border-radius: 999px;
+/* every page: the rights line is a glass pill too */
+.site-footer > * {
+	background: rgba(24, 24, 26, .32);
+	-webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5);
+	border: 1px solid rgba(255, 255, 255, .1); border-radius: 999px;
 	padding: 8px 14px; opacity: 1;
 	transition: background-color .35s, color .35s, border-color .35s;
 }
 html[data-glass="light"] .bar .site-title, html[data-glass="light"] .bar-title, html[data-glass="light"] .site-footer > * {
-	background: rgba(255, 255, 255, .62); color: var(--ink); border-color: rgba(0, 0, 0, .08);
+	background: rgba(255, 255, 255, .45); color: var(--ink); border-color: rgba(0, 0, 0, .08);
 }
 html[data-glass="light"] .bar-title b { color: rgba(0, 0, 0, .55); }
 html[data-glass="light"] .rights { opacity: 1; color: rgba(0, 0, 0, .7); }
-html[data-page="project"] .rights, html[data-page="about"] .rights { opacity: 1; }
 .about { position: relative; z-index: 1; padding: 24px var(--pad) 140px; }
 .about a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(0, 0, 0, .3); }
 .about a:hover { text-decoration-color: currentColor; }
