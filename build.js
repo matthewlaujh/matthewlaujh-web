@@ -244,10 +244,11 @@ ${side}
 function aboutMain(page) {
 	const a = readJSON(path.join(SRC, 'about.json'));
 	const L = h => fixLinks(h, page.slug);
+	const kcls = e => e.kind === 'art' ? ' k--art' : e.kind === 'both' ? ' k--both' : '';
 	const entry = e => `				<div class="entry${e.kind === 'art' ? ' art' : ''}">
 					<div class="dates">${e.dates}</div>
 					<div class="main">
-						<div class="role"><i class="k${e.kind === 'art' ? ' k--art' : ''}" aria-hidden="true"></i>${L(e.role)}</div>
+						<div class="role"><i class="k${kcls(e)}" aria-hidden="true"></i>${L(e.role)}</div>
 						${e.org ? `<div class="org">${e.org_url ? `<a href="${e.org_url}" target="_blank" rel="noopener">${esc(e.org)}</a>` : esc(e.org)}${e.place ? ` — ${esc(e.place)}` : ''}</div>` : (e.place ? `<div class="org">${esc(e.place)}</div>` : '')}
 						${e.note ? `<div class="note">${L(e.note)}</div>` : ''}
 						${e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${L(b)}</li>`).join('')}</ul>` : ''}
@@ -260,7 +261,14 @@ function aboutMain(page) {
 	const skills = a.skills ? `<section class="skills"><h2>Skills</h2><dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : '';
 	return `<main class="about">
 		<h1 class="visually-hidden">${esc(page.title_no_html)}</h1>
-		<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art practice</span></p>
+		<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span></p>
+		<div class="contact">
+			<a href="mailto:${a.contact.email}">${a.contact.email}</a>
+			<a href="${a.contact.resume}" target="_blank" rel="noopener">Resume (PDF)</a>
+			${a.contact.github ? `<a href="${a.contact.github}" target="_blank" rel="noopener">GitHub</a>` : ''}
+			${a.contact.linkedin ? `<a href="${a.contact.linkedin}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
+			<span>${esc(a.contact.location)}</span>
+		</div>
 		<div class="heads">
 			<div class="lede"><h2><i class="k" aria-hidden="true"></i>${esc(a.lede_title)}</h2>${a.lede.map(p => `<p>${p}</p>`).join('')}</div>
 			<div class="lede"><h2><i class="k k--art" aria-hidden="true"></i>${esc(a.statement_title)}</h2>${a.statement.map(p => `<p>${p}</p>`).join('')}</div>
@@ -272,13 +280,6 @@ ${section('Education')}
 			</div>
 ${section('Group exhibitions')}
 			${skills}
-		</div>
-		<div class="contact">
-			<a href="mailto:${a.contact.email}">${a.contact.email}</a>
-			<a href="${a.contact.resume}" target="_blank" rel="noopener">Resume (PDF)</a>
-			${a.contact.github ? `<a href="${a.contact.github}" target="_blank" rel="noopener">GitHub</a>` : ''}
-			${a.contact.linkedin ? `<a href="${a.contact.linkedin}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
-			<span>${esc(a.contact.location)}</span>
 		</div>
 	</main>`;
 }

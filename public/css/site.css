@@ -43,7 +43,7 @@ p, h1, h2, h3, ul, dl, dd, figure { margin: 0; }
 ul { padding: 0; list-style: none; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-.prose { text-wrap: pretty; }
+.prose, p, li, dd, dt, h1, h2, h3, figcaption, .lede, .note, .org, .role, .marquee a, .field-side a, .dropdown a { text-wrap: pretty; }
 .prose p + p, .prose ul + p, .prose p + ul, .prose h2 + p { margin-top: .6em; }
 .prose h2 { font: inherit; font-family: var(--sans); font-size: 12px; color: var(--ink-dim); margin: 1.6em 0 .4em; }
 .prose hr { border: 0; border-top: 1px solid currentColor; opacity: .3; margin: 1em 0; width: 2em; }
@@ -258,6 +258,7 @@ html[data-page="about"] .studio-clock, html[data-page="about"] .rights { opacity
 .about .lede h2 { font: 300 12px/1.4 var(--sans); color: rgba(0, 0, 0, .5); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
 .k { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); flex: none; }
 .k--art { background: none; border: 1px solid var(--ink); }
+.k--both { background: linear-gradient(90deg, var(--ink) 50%, transparent 50%); border: 1px solid var(--ink); box-sizing: border-box; }
 .about .legend { font: 300 12px/1.4 var(--sans); color: rgba(0, 0, 0, .5); display: flex; gap: 18px; margin: 0 0 40px; }
 .about .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 72px; align-items: start; }
 .about .cv .pair section + section { margin-top: 0; }
@@ -279,7 +280,7 @@ html[data-page="about"] .studio-clock, html[data-page="about"] .rights { opacity
 .about .entry ul { margin: 8px 0 0; padding-left: calc(18px + 1em); list-style: disc; font: 300 13px/1.5 var(--sans); color: rgba(0, 0, 0, .6); max-width: 70ch; }
 .about .entry li + li { margin-top: 4px; }
 .about .entry .dates, .about .entry .main { min-width: 0; }
-.about .contact { margin-top: 64px; border-top: 1px solid var(--ink); padding-top: 16px; display: flex; flex-wrap: wrap; gap: 24px; font: 300 13px/1.45 var(--sans); }
+.about .contact { margin: -26px 0 56px; display: flex; flex-wrap: wrap; gap: 24px; font: 300 13px/1.45 var(--sans); }
 .about .contact a { text-decoration: none; border-bottom: 1px solid rgba(0, 0, 0, .3); }
 .about .contact a:hover { border-color: currentColor; }
 .about .skills dl { margin: 0; }

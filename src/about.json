@@ -107,7 +107,8 @@
 					"bullets": [
 						"Built a lighting fixture with embedded TinyML models that actively controls light quality based on productive lighting principles while balancing human preferences through real-time environmental data and human input.",
 						"Cultivated a practice bridging design, making and critical thinking: custom electronics and networked systems (<a href=\"Hello-I-m-Here-Communicators-2024\"><i>Hello I'm Here Communicators</i></a>), generative AI (<a href=\"The-Ascension-Algorithm-2023\"><i>The Ascension Algorithm</i></a>) and interactive light installations, alongside the curation and preservation of new media art, generative algorithms and data-driven practice."
-					]
+					],
+					"kind": "both"
 				},
 				{
 					"dates": "2020–2022",
@@ -119,7 +120,8 @@
 					"bullets": [
 						"Designed an interactive installation using machine-learning facial expression recognition and electronics to translate human emotions into coloured LED visualisations.",
 						"Developed a practice bridging graphic and computational design through generative systems (<a href=\"Generative-Type-Tool-2020\"><i>Generative Type Tool</i></a>), physical controllers for visual composition (<a href=\"DJ-Heard-That-2021\"><i>DJ Heard That?!</i></a>) and proposals on digital consumption's environmental impact (<a href=\"Breathing-Bytes-Proposal-2020\"><i>Breathing Bytes</i></a>)."
-					]
+					],
+					"kind": "both"
 				}
 			]
 		},
