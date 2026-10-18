@@ -790,6 +790,7 @@ var VERT = [
 		img.onload = function () {
 			if (self.destroyed) return;
 			if (self.pending !== img) return; // a newer request superseded this one
+			self.measure(img);
 			var gl = self.gl;
 			gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 			if (first) {
@@ -809,6 +810,18 @@ var VERT = [
 		};
 		this.pending = img;
 		img.src = im.src;
+	};
+	/* how bright the source is, 0..1, published as --lum so the veil can darken
+	   over pale covers that would otherwise wash the text out */
+	Diffuse.prototype.measure = function (img) {
+		try {
+			var c = this.mc || (this.mc = document.createElement('canvas')); c.width = 24; c.height = 24;
+			var x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(img, 0, 0, 24, 24);
+			var d = x.getImageData(0, 0, 24, 24).data, s = 0;
+			for (var i = 0; i < d.length; i += 4) s += 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+			var lum = s / (d.length / 4) / 255;
+			document.documentElement.style.setProperty('--lum', Math.max(0, (lum - 0.25) / 0.75).toFixed(3));
+		} catch (e) {}
 	};
 	/* run the simulation ahead, unseen, so the picture is already dissolved */
 	Diffuse.prototype.warm = function (n) {
