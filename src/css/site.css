@@ -156,7 +156,7 @@ html[data-lights="off"] .backdrop canvas { filter: saturate(.6); }
 .project .hero {
 	position: relative; z-index: 1; height: 100vh; height: 100svh; margin-top: calc(-1 * var(--bar-h));
 	display: flex; flex-direction: column; justify-content: flex-end;
-	padding: 0 var(--pad) 48px; color: #fff;
+	padding: 0 var(--pad) 96px; color: #fff;
 }
 .project .hero h1 { font: 300 clamp(44px, 8.5vw, 128px)/.95 var(--serif); letter-spacing: -.01em; max-width: 11em; }
 .project .hero h1 .w { white-space: nowrap; display: inline-block; }
@@ -164,7 +164,7 @@ html[data-lights="off"] .backdrop canvas { filter: saturate(.6); }
 .project .hero h1 small { font: 300 12px/1 var(--sans); color: rgba(255, 255, 255, .6); vertical-align: top; margin-left: .5em; display: inline-block; padding-top: .5em; opacity: 0; animation: rise .9s .5s forwards; }
 .project .hero .line { margin-top: 22px; font: 300 clamp(17px, 1.6vw, 22px)/1.35 var(--serif); color: rgba(255, 255, 255, .85); max-width: 36em; opacity: 0; animation: rise .9s .6s forwards; }
 .project .hero .facts { margin-top: 14px; display: flex; gap: 24px; color: rgba(255, 255, 255, .6); opacity: 0; animation: rise .9s .75s forwards; }
-.project .hero .scroll-cue { position: absolute; right: var(--pad); bottom: 48px; color: rgba(255, 255, 255, .55); opacity: 0; animation: rise .9s 1s forwards; }
+.project .hero .scroll-cue { position: absolute; right: var(--pad); bottom: 96px; color: rgba(255, 255, 255, .55); opacity: 0; animation: rise .9s 1s forwards; }
 .project .hero .scroll-cue i { display: inline-block; font-style: normal; margin-left: 6px; animation: bob 1.8s ease-in-out infinite; }
 @keyframes rise { to { opacity: 1; transform: none; } }
 @keyframes bob { 50% { transform: translateY(4px); } }
@@ -219,6 +219,32 @@ html[data-page="field"], html[data-page="field"] body { height: 100%; overflow: 
 
 /* -------------------------------------------------------------- about */
 html[data-page="about"], html[data-page="about"] body { background: var(--paper); color: var(--ink); }
+
+/* ---------------------------------------------- glass bar + footer (project, about) */
+/* iOS/macOS-style frosted panels instead of the blend trick: dark glass over
+   the hero, light glass once the white body is under them (JS sets data-glass). */
+html[data-page="project"] .bar, html[data-page="about"] .bar {
+	mix-blend-mode: normal; color: #fff;
+	background: rgba(24, 24, 26, .55);
+	-webkit-backdrop-filter: blur(22px) saturate(1.6); backdrop-filter: blur(22px) saturate(1.6);
+	border-bottom: 1px solid rgba(255, 255, 255, .08);
+	transition: background-color .35s, color .35s, border-color .35s;
+}
+html[data-page="project"] .site-footer, html[data-page="about"] .site-footer { mix-blend-mode: normal; color: #fff; }
+html[data-page="project"] .site-footer > *, html[data-page="about"] .site-footer > * {
+	background: rgba(24, 24, 26, .55);
+	-webkit-backdrop-filter: blur(22px) saturate(1.6); backdrop-filter: blur(22px) saturate(1.6);
+	border: 1px solid rgba(255, 255, 255, .08); border-radius: 999px;
+	padding: 8px 14px; opacity: 1;
+	transition: background-color .35s, color .35s, border-color .35s;
+}
+html[data-glass="light"] .bar, html[data-glass="light"] .site-footer > * {
+	background: rgba(255, 255, 255, .62); color: var(--ink); border-color: rgba(0, 0, 0, .08);
+}
+html[data-glass="light"] .bar-title b { color: rgba(0, 0, 0, .55); }
+html[data-glass="light"] .studio-clock, html[data-glass="light"] .rights { opacity: 1; color: rgba(0, 0, 0, .7); }
+html[data-page="project"] .studio-clock, html[data-page="project"] .rights,
+html[data-page="about"] .studio-clock, html[data-page="about"] .rights { opacity: 1; }
 .about { position: relative; z-index: 1; padding: 40px var(--pad) 120px; }
 .about .prose { font: 300 16px/1.5 var(--serif); max-width: 40em; }
 .about .prose a { text-decoration-color: rgba(0, 0, 0, .35); }
@@ -234,8 +260,8 @@ html[data-page="about"], html[data-page="about"] body { background: var(--paper)
 	.home-aside { position: static; padding-top: 0; margin-top: 0; }
 	.marquee a:hover { padding-left: 0; }
 	.cursor-image { display: none; }
-	.project .hero { padding-bottom: 80px; }
-	.project .hero .scroll-cue { bottom: 80px; }
+	.project .hero { padding-bottom: 110px; }
+	.project .hero .scroll-cue { bottom: 110px; }
 	.project .body { grid-template-columns: 1fr; gap: 32px; }
 	.project .text { position: static; }
 	html[data-page="field"], html[data-page="field"] body { height: auto; overflow: auto; }

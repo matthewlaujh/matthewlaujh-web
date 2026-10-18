@@ -152,7 +152,13 @@
 		} else {
 			for (var j = 0; j < figs.length; j++) figs[j].classList.add('seen');
 		}
-		addEventListener('scroll', function () { setBackdropSpeed(Math.max(0.2, 1 - scrollY / innerHeight)); }, { passive: true });
+		var barH = parseFloat(getComputedStyle(html).getPropertyValue('--bar-h')) || 62;
+		function glass() {
+			setBackdropSpeed(Math.max(0.2, 1 - scrollY / innerHeight));
+			html.setAttribute('data-glass', scrollY > innerHeight - barH ? 'light' : 'dark');
+		}
+		addEventListener('scroll', glass, { passive: true });
+		glass();
 	}
 
 	/* ---------------- all projects: the field ---------------- */
@@ -231,6 +237,7 @@
 		if (page === 'home') setupHome();
 		if (page === 'project') setupProject();
 		if (page === 'field') setupField();
+		if (page === 'about') html.setAttribute('data-glass', 'light');
 	}
 	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
 	else init();
