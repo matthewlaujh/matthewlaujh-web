@@ -1,125 +1,147 @@
 {
-	"id": 24916534,
-	"slug": "Archifest-2021-Sea-of-Debris-2021",
-	"title": "Archifest 2021: Sea of Debris (2021)",
-	"title_no_html": "Archifest 2021: Sea of Debris (2021)",
-	"is_homepage": false,
-	"pin": false,
-	"pin_options": null,
-	"excerpt": "Completed while with Neuewave.\n—\n\n\nBuilt electronic components and programmed the installation's motion control system.\n—",
-	"content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed while with <a href=\"http://neuewave.sg\" target=\"_blank\">Neuewave</a>.<br>—<br>\n<br>Built electronic components and programmed the installation's motion control system.<br>—</h1><br>\n</div>\n</div>",
-	"local_css": "[local-style=\"24916534\"] .container_width {\n}\n\n[local-style=\"24916534\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24916534\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24916534\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24916534\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24916534\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] small a:hover {\n}\n\n[local-style=\"24916534\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
-	"backdrop": {
-		"type": "wallpaper",
-		"settings": {
-			"scale_option": "contain",
-			"repeat_image": false,
-			"image_alignment": "image_center_center",
-			"margin": 25,
-			"pattern_size": 70,
-			"limit_size": false,
-			"overlay_color": "rgba(0, 0, 0, 0.5)",
-			"bg_color": "rgb(255, 255, 255)",
-			"cycle_images": true,
-			"autoplay": true,
-			"slideshow_transition": "fade",
-			"transition_timeout": 2.5,
-			"transition_duration": 0.5,
-			"randomize": false,
-			"arrow_navigation": true,
-			"focus_object": "{}",
-			"backdrop_viewport_lock": false,
-			"use_image_focus": "false",
-			"image": "137631886",
-			"requires_webgl": "false"
-		}
-	},
-	"images": [
-		{
-			"id": 137697468,
-			"src": "/img/b7e9f40f-seaOfDebris.gif",
-			"name": "seaOfDebris.gif",
-			"width": 648,
-			"height": 432,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 137697475,
-			"src": "/img/fbbceb51-ARCHIFEST-seaOfDebris-1.jpg",
-			"name": "ARCHIFEST-seaOfDebris-1.jpg",
-			"width": 1000,
-			"height": 667,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 137697476,
-			"src": "/img/afa275b1-ARCHIFEST-seaOfDebris-2.jpg",
-			"name": "ARCHIFEST-seaOfDebris-2.jpg",
-			"width": 1000,
-			"height": 667,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 137697477,
-			"src": "/img/ff978a8a-ARCHIFEST-seaOfDebris-3.jpg",
-			"name": "ARCHIFEST-seaOfDebris-3.jpg",
-			"width": 1000,
-			"height": 667,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 137697478,
-			"src": "/img/886fc984-ARCHIFEST-seaOfDebris-4.jpg",
-			"name": "ARCHIFEST-seaOfDebris-4.jpg",
-			"width": 1000,
-			"height": 667,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 137697479,
-			"src": "/img/b1c90c3b-ARCHIFEST-seaOfDebris-5.jpg",
-			"name": "ARCHIFEST-seaOfDebris-5.jpg",
-			"width": 1000,
-			"height": 667,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 137697480,
-			"src": "/img/c8c33bcd-ARCHIFEST-seaOfDebris-6.jpg",
-			"name": "ARCHIFEST-seaOfDebris-6.jpg",
-			"width": 1000,
-			"height": 667,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 137697481,
-			"src": "/img/25629f1f-ARCHIFEST-seaOfDebris-7.jpg",
-			"name": "ARCHIFEST-seaOfDebris-7.jpg",
-			"width": 1000,
-			"height": 667,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 137697482,
-			"src": "/img/7951732a-ARCHIFEST-seaOfDebris-8.jpg",
-			"name": "ARCHIFEST-seaOfDebris-8.jpg",
-			"width": 1000,
-			"height": 667,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 137697483,
-			"src": "/img/10902a19-ARCHIFEST-seaOfDebris-9.jpg",
-			"name": "ARCHIFEST-seaOfDebris-9.jpg",
-			"width": 1000,
-			"height": 667,
-			"exclude_from_backdrop": false
-		}
-	],
-	"meta": {
-		"line": "Motion control and electronics for an Archifest installation.",
-		"techniques": "Custom electronics, motion control",
-		"client_label": "Client",
-		"client": "Neuewave"
-	}
+ "id": 24916534,
+ "slug": "Archifest-2021-Sea-of-Debris-2021",
+ "title": "Archifest 2021: Sea of Debris (2021)",
+ "title_no_html": "Archifest 2021: Sea of Debris (2021)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Completed while with Neuewave.\n—\n\n\nBuilt electronic components and programmed the installation's motion control system.\n—",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed while with <a href=\"http://neuewave.sg\" target=\"_blank\">Neuewave</a>.<br>—<br>\n<br>Built electronic components and programmed the installation's motion control system.<br>—</h1><br>\n</div>\n</div>",
+ "local_css": "[local-style=\"24916534\"] .container_width {\n}\n\n[local-style=\"24916534\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24916534\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24916534\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24916534\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24916534\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24916534\"] small a:hover {\n}\n\n[local-style=\"24916534\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 70,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 2.5,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "137631886",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 137697468,
+   "src": "/img/b7e9f40f-seaOfDebris.webm",
+   "name": "seaOfDebris.gif",
+   "width": 648,
+   "height": 432,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/b7e9f40f-seaOfDebris.gif",
+   "mp4": "/img/b7e9f40f-seaOfDebris.mp4",
+   "poster": "/img/b7e9f40f-seaOfDebris-poster.jpg",
+   "thumb": "/img/b7e9f40f-seaOfDebris-s.webp"
+  },
+  {
+   "id": 137697475,
+   "src": "/img/fbbceb51-ARCHIFEST-seaOfDebris-1.webp",
+   "name": "ARCHIFEST-seaOfDebris-1.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/fbbceb51-ARCHIFEST-seaOfDebris-1.jpg",
+   "thumb": "/img/fbbceb51-ARCHIFEST-seaOfDebris-1-s.webp"
+  },
+  {
+   "id": 137697476,
+   "src": "/img/afa275b1-ARCHIFEST-seaOfDebris-2.webp",
+   "name": "ARCHIFEST-seaOfDebris-2.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/afa275b1-ARCHIFEST-seaOfDebris-2.jpg",
+   "thumb": "/img/afa275b1-ARCHIFEST-seaOfDebris-2-s.webp"
+  },
+  {
+   "id": 137697477,
+   "src": "/img/ff978a8a-ARCHIFEST-seaOfDebris-3.webp",
+   "name": "ARCHIFEST-seaOfDebris-3.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/ff978a8a-ARCHIFEST-seaOfDebris-3.jpg",
+   "thumb": "/img/ff978a8a-ARCHIFEST-seaOfDebris-3-s.webp"
+  },
+  {
+   "id": 137697478,
+   "src": "/img/886fc984-ARCHIFEST-seaOfDebris-4.webp",
+   "name": "ARCHIFEST-seaOfDebris-4.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/886fc984-ARCHIFEST-seaOfDebris-4.jpg",
+   "thumb": "/img/886fc984-ARCHIFEST-seaOfDebris-4-s.webp"
+  },
+  {
+   "id": 137697479,
+   "src": "/img/b1c90c3b-ARCHIFEST-seaOfDebris-5.webp",
+   "name": "ARCHIFEST-seaOfDebris-5.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/b1c90c3b-ARCHIFEST-seaOfDebris-5.jpg",
+   "thumb": "/img/b1c90c3b-ARCHIFEST-seaOfDebris-5-s.webp"
+  },
+  {
+   "id": 137697480,
+   "src": "/img/c8c33bcd-ARCHIFEST-seaOfDebris-6.webp",
+   "name": "ARCHIFEST-seaOfDebris-6.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/c8c33bcd-ARCHIFEST-seaOfDebris-6.jpg",
+   "thumb": "/img/c8c33bcd-ARCHIFEST-seaOfDebris-6-s.webp"
+  },
+  {
+   "id": 137697481,
+   "src": "/img/25629f1f-ARCHIFEST-seaOfDebris-7.webp",
+   "name": "ARCHIFEST-seaOfDebris-7.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/25629f1f-ARCHIFEST-seaOfDebris-7.jpg",
+   "thumb": "/img/25629f1f-ARCHIFEST-seaOfDebris-7-s.webp"
+  },
+  {
+   "id": 137697482,
+   "src": "/img/7951732a-ARCHIFEST-seaOfDebris-8.webp",
+   "name": "ARCHIFEST-seaOfDebris-8.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/7951732a-ARCHIFEST-seaOfDebris-8.jpg",
+   "thumb": "/img/7951732a-ARCHIFEST-seaOfDebris-8-s.webp"
+  },
+  {
+   "id": 137697483,
+   "src": "/img/10902a19-ARCHIFEST-seaOfDebris-9.webp",
+   "name": "ARCHIFEST-seaOfDebris-9.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/10902a19-ARCHIFEST-seaOfDebris-9.jpg",
+   "thumb": "/img/10902a19-ARCHIFEST-seaOfDebris-9-s.webp"
+  }
+ ],
+ "meta": {
+  "line": "Motion control and electronics for an Archifest installation.",
+  "techniques": "Custom electronics, motion control",
+  "client_label": "Client",
+  "client": "Neuewave"
+ }
 }

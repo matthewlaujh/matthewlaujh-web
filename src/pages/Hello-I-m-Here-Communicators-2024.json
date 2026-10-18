@@ -1,93 +1,105 @@
 {
-	"id": 37410315,
-	"slug": "Hello-I-m-Here-Communicators-2024",
-	"title": "Hello I'm Here Communicators (2024)",
-	"title_no_html": "Hello I'm Here Communicators (2024)",
-	"is_homepage": false,
-	"pin": false,
-	"pin_options": null,
-	"excerpt": "Completed as part of the MPS Interactive Telecommunications Program at NYU TISCH. Part of a series of work exploring communication through light —...",
-	"content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><br><br><br><br>\n<br>\n<h1>Completed as part of the MPS Interactive Telecommunications Program at NYU TISCH. Part of a series of work exploring communication through light&nbsp;— other works in series include <a href=\"Hello-I-m-Here-Exhibition-2022\" rel=\"history\"><i>Hello, I’m Here. (2022)</i></a>.<br>—<br>\n<br><i>Hello, I'm Here Communicators (2024)</i> abstracts how we communicate through the use of light and colour. Communicating through a shared contextual understanding of colour and sequences in light animation through an interactive desktop artefact. With texting, calling and teleconferencing, a lot of times now we take the ease of communication for granted, and much of communication has lost its meaning to some extent. Hello, I'm Here is meant to encourage thoughtful communication through a slowed-down process, making each message more meaningful through thoughtfully sequenced light animations that could mean things from current mood to a secret coded message. The gradient glow of the lights represents a collective state between people. As these messages are fleeting, the messages are also abstractly represented in generative graphics generated with the messages in mind.<br><br>Built on a custom-designed printed circuit board and encased in an acrylic object with 3D printed buttons, two networked devices are connected over HTTP on a cloud-hosted server. They send sequences of light and colour data over to each other. The LEDs are positioned in a way that blends the light together, creating a gradient glow of a collective state of the people. The same colour data will also be used to generate graphics on p5.js through liquid simulation representing the lights blending together creating unique pieces representing the messages between people.<br>—</h1></div>\n</div>",
-	"local_css": "[local-style=\"37410315\"] .container_width {\n}\n\n[local-style=\"37410315\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"37410315\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"37410315\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"37410315\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"37410315\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] small a:hover {\n}\n\n[local-style=\"37410315\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
-	"backdrop": {
-		"type": "wallpaper",
-		"settings": {
-			"scale_option": "contain",
-			"repeat_image": false,
-			"image_alignment": "image_center_center",
-			"margin": 25,
-			"pattern_size": 75,
-			"limit_size": false,
-			"overlay_color": "rgba(0, 0, 0, 0.5)",
-			"bg_color": "rgb(255, 255, 255)",
-			"cycle_images": true,
-			"autoplay": true,
-			"slideshow_transition": "fade",
-			"transition_timeout": 10,
-			"transition_duration": 0.5,
-			"randomize": false,
-			"arrow_navigation": true,
-			"focus_object": "{}",
-			"backdrop_viewport_lock": false,
-			"use_image_focus": "false",
-			"image": "229446765",
-			"requires_webgl": "false"
-		}
-	},
-	"images": [
-		{
-			"id": 229565632,
-			"src": "/img/8a92384a-helloimherelightcommunicators.JPG",
-			"name": "helloimherelightcommunicators.JPG",
-			"width": 6000,
-			"height": 4000,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 229446765,
-			"src": "/img/cdfbcb55-helloimhere-lamp-1.JPG",
-			"name": "helloimhere-lamp-1.JPG",
-			"width": 6240,
-			"height": 4160,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 229446766,
-			"src": "/img/a8e7e1dd-helloimhere-lamp-2.JPG",
-			"name": "helloimhere-lamp-2.JPG",
-			"width": 4160,
-			"height": 6240,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 229446768,
-			"src": "/img/cb79eab5-helloimhere-lamp-4.jpg",
-			"name": "helloimhere-lamp-4.jpg",
-			"width": 1623,
-			"height": 1081,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 229446767,
-			"src": "/img/3c3ed328-helloimhere-lamp-3.jpg",
-			"name": "helloimhere-lamp-3.jpg",
-			"width": 1179,
-			"height": 786,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 229446770,
-			"src": "/img/0e337cce-helloimhere-lamp-6.JPG",
-			"name": "helloimhere-lamp-6.JPG",
-			"width": 3558,
-			"height": 2372,
-			"exclude_from_backdrop": false
-		}
-	],
-	"meta": {
-		"line": "Desktop artefacts that let people talk to each other in light and colour.",
-		"techniques": "Physical computing, light animation, networked devices",
-		"client_label": "School",
-		"client": "NYU ITP"
-	}
+ "id": 37410315,
+ "slug": "Hello-I-m-Here-Communicators-2024",
+ "title": "Hello I'm Here Communicators (2024)",
+ "title_no_html": "Hello I'm Here Communicators (2024)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Completed as part of the MPS Interactive Telecommunications Program at NYU TISCH. Part of a series of work exploring communication through light —...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\"></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><br><br><br><br>\n<br>\n<h1>Completed as part of the MPS Interactive Telecommunications Program at NYU TISCH. Part of a series of work exploring communication through light&nbsp;— other works in series include <a href=\"Hello-I-m-Here-Exhibition-2022\" rel=\"history\"><i>Hello, I’m Here. (2022)</i></a>.<br>—<br>\n<br><i>Hello, I'm Here Communicators (2024)</i> abstracts how we communicate through the use of light and colour. Communicating through a shared contextual understanding of colour and sequences in light animation through an interactive desktop artefact. With texting, calling and teleconferencing, a lot of times now we take the ease of communication for granted, and much of communication has lost its meaning to some extent. Hello, I'm Here is meant to encourage thoughtful communication through a slowed-down process, making each message more meaningful through thoughtfully sequenced light animations that could mean things from current mood to a secret coded message. The gradient glow of the lights represents a collective state between people. As these messages are fleeting, the messages are also abstractly represented in generative graphics generated with the messages in mind.<br><br>Built on a custom-designed printed circuit board and encased in an acrylic object with 3D printed buttons, two networked devices are connected over HTTP on a cloud-hosted server. They send sequences of light and colour data over to each other. The LEDs are positioned in a way that blends the light together, creating a gradient glow of a collective state of the people. The same colour data will also be used to generate graphics on p5.js through liquid simulation representing the lights blending together creating unique pieces representing the messages between people.<br>—</h1></div>\n</div>",
+ "local_css": "[local-style=\"37410315\"] .container_width {\n}\n\n[local-style=\"37410315\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"37410315\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"37410315\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"37410315\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"37410315\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"37410315\"] small a:hover {\n}\n\n[local-style=\"37410315\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 10,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "229446765",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 229565632,
+   "src": "/img/8a92384a-helloimherelightcommunicators.webp",
+   "name": "helloimherelightcommunicators.JPG",
+   "width": 2400,
+   "height": 1600,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/8a92384a-helloimherelightcommunicators.JPG",
+   "thumb": "/img/8a92384a-helloimherelightcommunicators-s.webp"
+  },
+  {
+   "id": 229446765,
+   "src": "/img/cdfbcb55-helloimhere-lamp-1.webp",
+   "name": "helloimhere-lamp-1.JPG",
+   "width": 2400,
+   "height": 1600,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/cdfbcb55-helloimhere-lamp-1.JPG",
+   "thumb": "/img/cdfbcb55-helloimhere-lamp-1-s.webp"
+  },
+  {
+   "id": 229446766,
+   "src": "/img/a8e7e1dd-helloimhere-lamp-2.webp",
+   "name": "helloimhere-lamp-2.JPG",
+   "width": 2400,
+   "height": 1600,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/a8e7e1dd-helloimhere-lamp-2.JPG",
+   "thumb": "/img/a8e7e1dd-helloimhere-lamp-2-s.webp"
+  },
+  {
+   "id": 229446768,
+   "src": "/img/cb79eab5-helloimhere-lamp-4.webp",
+   "name": "helloimhere-lamp-4.jpg",
+   "width": 1623,
+   "height": 1081,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/cb79eab5-helloimhere-lamp-4.jpg",
+   "thumb": "/img/cb79eab5-helloimhere-lamp-4-s.webp"
+  },
+  {
+   "id": 229446767,
+   "src": "/img/3c3ed328-helloimhere-lamp-3.webp",
+   "name": "helloimhere-lamp-3.jpg",
+   "width": 1179,
+   "height": 786,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/3c3ed328-helloimhere-lamp-3.jpg",
+   "thumb": "/img/3c3ed328-helloimhere-lamp-3-s.webp"
+  },
+  {
+   "id": 229446770,
+   "src": "/img/0e337cce-helloimhere-lamp-6.webp",
+   "name": "helloimhere-lamp-6.JPG",
+   "width": 2400,
+   "height": 1600,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/0e337cce-helloimhere-lamp-6.JPG",
+   "thumb": "/img/0e337cce-helloimhere-lamp-6-s.webp"
+  }
+ ],
+ "meta": {
+  "line": "Desktop artefacts that let people talk to each other in light and colour.",
+  "techniques": "Physical computing, light animation, networked devices",
+  "client_label": "School",
+  "client": "NYU ITP"
+ }
 }

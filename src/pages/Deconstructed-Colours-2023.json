@@ -1,93 +1,105 @@
 {
-	"id": 31251578,
-	"slug": "Deconstructed-Colours-2023",
-	"title": "Deconstructed Colours (2023)",
-	"title_no_html": "Deconstructed Colours (2023)",
-	"is_homepage": false,
-	"pin": false,
-	"pin_options": null,
-	"excerpt": "Exhibited at ‘threads: A Critical Craft Collective experiment,\nDraft #2’ at the Earl Lu Gallery, Institute of Contemporary\nArts...",
-	"content": "<br><br><br><br><br>\n<br><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\">\n</div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><br><br><br><br><br><br><br><br><br><br></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><h1>Exhibited at ‘threads: A Critical Craft Collective experiment,\nDraft #2’ at the Earl Lu Gallery, Institute of Contemporary\nArts Singapore (13–25 March 2023)<br><br>Part of a series of work exploring Machine Learning and Light — other works in series <a href=\"Ambi-latent-Space-2025\" rel=\"history\"><i>Ambi(latent) Space (2025)</i></a> and&nbsp;<a href=\"Deconstructed-Ambiance-2025\" rel=\"history\"><i>Deconstructed Ambiance (2025)</i></a>.<br>—<br>\n<br>As our understanding of machine learning concepts is often limited, <i>Deconstructed Colours (2023)</i> is a generative light object that explores the relationship between machine learning concepts of high and low dimensional spaces. By creating a tangible representation of a latent space, designed to draw visual similarities to diffusion models and algorithmic graphical plots. Through the installation, viewers are encouraged to contemplate the hidden patterns and potential of random colour data. <br><br>In machine learning, a high-dimensional space refers to a space that has many variables or features, while a low-dimensional space has fewer variables or features. In Deconstructed Colours, the screen’s colours, which are in a high-dimensional space, are translated into a physical representation of a low-dimensional space through the lights. <br><br>The work uses a convoluted method of processing data using various software functions interplaying with various hardware components. An Arduino and LCD screen cycle through random colours to provide the input for the installation. Another Arduino uses its light colour sensor to pick up these colours and translate them into separate red, green, and blue values that control the LEDs with varying intensities and a fading animation. The LEDs are arranged in an organic pattern of varying lengths on an aluminium frame that is suspended from the ceiling, with the LEDs facing the ground to create a sense of space and depth.<br>—</h1></div>\n</div>",
-	"local_css": "[local-style=\"31251578\"] .container_width {\n}\n\n[local-style=\"31251578\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"31251578\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"31251578\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"31251578\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"31251578\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] small a:hover {\n}\n\n[local-style=\"31251578\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
-	"backdrop": {
-		"type": "wallpaper",
-		"settings": {
-			"scale_option": "contain",
-			"repeat_image": false,
-			"image_alignment": "image_center_center",
-			"margin": 25,
-			"pattern_size": 75,
-			"limit_size": false,
-			"overlay_color": "rgba(0, 0, 0, 0.5)",
-			"bg_color": "rgb(255, 255, 255)",
-			"cycle_images": true,
-			"autoplay": true,
-			"slideshow_transition": "fade",
-			"transition_timeout": 10,
-			"transition_duration": 0.5,
-			"randomize": false,
-			"arrow_navigation": true,
-			"focus_object": "{}",
-			"backdrop_viewport_lock": false,
-			"use_image_focus": "false",
-			"image": "173874832",
-			"requires_webgl": "false"
-		}
-	},
-	"images": [
-		{
-			"id": 173874832,
-			"src": "/img/0dd5cbc1-deconstructedColours-1.jpg",
-			"name": "deconstructedColours-1.jpg",
-			"width": 1000,
-			"height": 668,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 173874833,
-			"src": "/img/48992941-deconstructedColours-2.jpg",
-			"name": "deconstructedColours-2.jpg",
-			"width": 1000,
-			"height": 668,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 173874834,
-			"src": "/img/023a7904-deconstructedColours-3.jpg",
-			"name": "deconstructedColours-3.jpg",
-			"width": 1000,
-			"height": 668,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 173874835,
-			"src": "/img/82672a4c-deconstructedColours-4.jpg",
-			"name": "deconstructedColours-4.jpg",
-			"width": 1000,
-			"height": 667,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 173874836,
-			"src": "/img/aea5de3a-deconstructedColours-5.jpg",
-			"name": "deconstructedColours-5.jpg",
-			"width": 1000,
-			"height": 668,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 173874837,
-			"src": "/img/e54e58c9-deconstructedColours-6.jpg",
-			"name": "deconstructedColours-6.jpg",
-			"width": 1000,
-			"height": 668,
-			"exclude_from_backdrop": false
-		}
-	],
-	"meta": {
-		"line": "A generative light object that makes machine-learning concepts tangible.",
-		"techniques": "Machine learning, generative light, custom electronics",
-		"client_label": "Exhibited at",
-		"client": "Earl Lu Gallery, ICA Singapore"
-	}
+ "id": 31251578,
+ "slug": "Deconstructed-Colours-2023",
+ "title": "Deconstructed Colours (2023)",
+ "title_no_html": "Deconstructed Colours (2023)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Exhibited at ‘threads: A Critical Craft Collective experiment,\nDraft #2’ at the Earl Lu Gallery, Institute of Contemporary\nArts...",
+ "content": "<br><br><br><br><br>\n<br><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"x10\" grid-pad=\"4\">\n</div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><br><br><br><br><br><br><br><br><br><br></div>\n\t<div grid-col=\"x10\" grid-pad=\"4\" class=\"\"><h1>Exhibited at ‘threads: A Critical Craft Collective experiment,\nDraft #2’ at the Earl Lu Gallery, Institute of Contemporary\nArts Singapore (13–25 March 2023)<br><br>Part of a series of work exploring Machine Learning and Light — other works in series <a href=\"Ambi-latent-Space-2025\" rel=\"history\"><i>Ambi(latent) Space (2025)</i></a> and&nbsp;<a href=\"Deconstructed-Ambiance-2025\" rel=\"history\"><i>Deconstructed Ambiance (2025)</i></a>.<br>—<br>\n<br>As our understanding of machine learning concepts is often limited, <i>Deconstructed Colours (2023)</i> is a generative light object that explores the relationship between machine learning concepts of high and low dimensional spaces. By creating a tangible representation of a latent space, designed to draw visual similarities to diffusion models and algorithmic graphical plots. Through the installation, viewers are encouraged to contemplate the hidden patterns and potential of random colour data. <br><br>In machine learning, a high-dimensional space refers to a space that has many variables or features, while a low-dimensional space has fewer variables or features. In Deconstructed Colours, the screen’s colours, which are in a high-dimensional space, are translated into a physical representation of a low-dimensional space through the lights. <br><br>The work uses a convoluted method of processing data using various software functions interplaying with various hardware components. An Arduino and LCD screen cycle through random colours to provide the input for the installation. Another Arduino uses its light colour sensor to pick up these colours and translate them into separate red, green, and blue values that control the LEDs with varying intensities and a fading animation. The LEDs are arranged in an organic pattern of varying lengths on an aluminium frame that is suspended from the ceiling, with the LEDs facing the ground to create a sense of space and depth.<br>—</h1></div>\n</div>",
+ "local_css": "[local-style=\"31251578\"] .container_width {\n}\n\n[local-style=\"31251578\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"31251578\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"31251578\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"31251578\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"31251578\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"31251578\"] small a:hover {\n}\n\n[local-style=\"31251578\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 10,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "173874832",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 173874832,
+   "src": "/img/0dd5cbc1-deconstructedColours-1.webp",
+   "name": "deconstructedColours-1.jpg",
+   "width": 1000,
+   "height": 668,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/0dd5cbc1-deconstructedColours-1.jpg",
+   "thumb": "/img/0dd5cbc1-deconstructedColours-1-s.webp"
+  },
+  {
+   "id": 173874833,
+   "src": "/img/48992941-deconstructedColours-2.webp",
+   "name": "deconstructedColours-2.jpg",
+   "width": 1000,
+   "height": 668,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/48992941-deconstructedColours-2.jpg",
+   "thumb": "/img/48992941-deconstructedColours-2-s.webp"
+  },
+  {
+   "id": 173874834,
+   "src": "/img/023a7904-deconstructedColours-3.webp",
+   "name": "deconstructedColours-3.jpg",
+   "width": 1000,
+   "height": 668,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/023a7904-deconstructedColours-3.jpg",
+   "thumb": "/img/023a7904-deconstructedColours-3-s.webp"
+  },
+  {
+   "id": 173874835,
+   "src": "/img/82672a4c-deconstructedColours-4.webp",
+   "name": "deconstructedColours-4.jpg",
+   "width": 1000,
+   "height": 667,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/82672a4c-deconstructedColours-4.jpg",
+   "thumb": "/img/82672a4c-deconstructedColours-4-s.webp"
+  },
+  {
+   "id": 173874836,
+   "src": "/img/aea5de3a-deconstructedColours-5.webp",
+   "name": "deconstructedColours-5.jpg",
+   "width": 1000,
+   "height": 668,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/aea5de3a-deconstructedColours-5.jpg",
+   "thumb": "/img/aea5de3a-deconstructedColours-5-s.webp"
+  },
+  {
+   "id": 173874837,
+   "src": "/img/e54e58c9-deconstructedColours-6.webp",
+   "name": "deconstructedColours-6.jpg",
+   "width": 1000,
+   "height": 668,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/e54e58c9-deconstructedColours-6.jpg",
+   "thumb": "/img/e54e58c9-deconstructedColours-6-s.webp"
+  }
+ ],
+ "meta": {
+  "line": "A generative light object that makes machine-learning concepts tangible.",
+  "techniques": "Machine learning, generative light, custom electronics",
+  "client_label": "Exhibited at",
+  "client": "Earl Lu Gallery, ICA Singapore"
+ }
 }

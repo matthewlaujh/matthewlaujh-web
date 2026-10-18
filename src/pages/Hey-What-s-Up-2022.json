@@ -1,69 +1,81 @@
 {
-	"id": 28982554,
-	"slug": "Hey-What-s-Up-2022",
-	"title": "Hey, What's Up (2022)",
-	"title_no_html": "Hey, What's Up (2022)",
-	"is_homepage": false,
-	"pin": false,
-	"pin_options": null,
-	"excerpt": "Completed as part of an internship project with R/GA and as a personal practice investigating the way we think and how generative AI plays a role in...",
-	"content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\" class=\"\"><h1>Completed as part of an internship project with <a href=\"http://rga.com\" target=\"_blank\">R/GA</a> and as a personal practice investigating the way we think and how generative AI plays a role in that.<br>—<br>\n<br><i>Hey, What’s Up? (2022)</i> is an interactive installation designed to visualize what goes on in our mind. Representing the layers of thoughts as we spiral out in our mind. Audience are invited to input their thoughts through a microphone. Through that the installation focuses on helping&nbsp; us express our thoughts and process them by probing users with open-ended prompts with every interaction. <br><br>The internal conversation will then be externalised, loggedand printed onto a looping piece of paper. Articulated thoughts are intentionally printed on top of each other, showing the overlapping nature of how thoughts manifest naturally.<br>—</h1></div>\n</div>",
-	"local_css": "[local-style=\"28982554\"] .container_width {\n}\n\n[local-style=\"28982554\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"28982554\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"28982554\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"28982554\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"28982554\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] small a:hover {\n}\n\n[local-style=\"28982554\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
-	"backdrop": {
-		"type": "wallpaper",
-		"settings": {
-			"scale_option": "contain",
-			"repeat_image": false,
-			"image_alignment": "image_center_center",
-			"margin": 25,
-			"pattern_size": 75,
-			"limit_size": false,
-			"overlay_color": "rgba(0, 0, 0, 0.5)",
-			"bg_color": "rgb(255, 255, 255)",
-			"cycle_images": true,
-			"autoplay": true,
-			"slideshow_transition": "fade",
-			"transition_timeout": 10,
-			"transition_duration": 0.5,
-			"randomize": false,
-			"arrow_navigation": true,
-			"focus_object": "{}",
-			"backdrop_viewport_lock": false,
-			"use_image_focus": "false",
-			"image": "160613821",
-			"requires_webgl": "false"
-		}
-	},
-	"images": [
-		{
-			"id": 160613822,
-			"src": "/img/04d8862c-hwu-full.gif",
-			"name": "hwu-full.gif",
-			"width": 640,
-			"height": 352,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 160613821,
-			"src": "/img/c59fc6e6-hwu-screen.gif",
-			"name": "hwu-screen.gif",
-			"width": 640,
-			"height": 352,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 160613823,
-			"src": "/img/792b1349-hwu-print.gif",
-			"name": "hwu-print.gif",
-			"width": 640,
-			"height": 352,
-			"exclude_from_backdrop": false
-		}
-	],
-	"meta": {
-		"line": "An interactive installation that visualises the spiral of our thoughts.",
-		"techniques": "Generative AI, speech input, projection",
-		"client_label": "Client",
-		"client": "R/GA (internship)"
-	}
+ "id": 28982554,
+ "slug": "Hey-What-s-Up-2022",
+ "title": "Hey, What's Up (2022)",
+ "title_no_html": "Hey, What's Up (2022)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Completed as part of an internship project with R/GA and as a personal practice investigating the way we think and how generative AI plays a role in...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\" class=\"\"><h1>Completed as part of an internship project with <a href=\"http://rga.com\" target=\"_blank\">R/GA</a> and as a personal practice investigating the way we think and how generative AI plays a role in that.<br>—<br>\n<br><i>Hey, What’s Up? (2022)</i> is an interactive installation designed to visualize what goes on in our mind. Representing the layers of thoughts as we spiral out in our mind. Audience are invited to input their thoughts through a microphone. Through that the installation focuses on helping&nbsp; us express our thoughts and process them by probing users with open-ended prompts with every interaction. <br><br>The internal conversation will then be externalised, loggedand printed onto a looping piece of paper. Articulated thoughts are intentionally printed on top of each other, showing the overlapping nature of how thoughts manifest naturally.<br>—</h1></div>\n</div>",
+ "local_css": "[local-style=\"28982554\"] .container_width {\n}\n\n[local-style=\"28982554\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"28982554\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"28982554\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"28982554\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"28982554\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"28982554\"] small a:hover {\n}\n\n[local-style=\"28982554\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": true,
+   "slideshow_transition": "fade",
+   "transition_timeout": 10,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "160613821",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 160613822,
+   "src": "/img/04d8862c-hwu-full.webm",
+   "name": "hwu-full.gif",
+   "width": 640,
+   "height": 352,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/04d8862c-hwu-full.gif",
+   "mp4": "/img/04d8862c-hwu-full.mp4",
+   "poster": "/img/04d8862c-hwu-full-poster.jpg",
+   "thumb": "/img/04d8862c-hwu-full-s.webp"
+  },
+  {
+   "id": 160613821,
+   "src": "/img/c59fc6e6-hwu-screen.webm",
+   "name": "hwu-screen.gif",
+   "width": 640,
+   "height": 352,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/c59fc6e6-hwu-screen.gif",
+   "mp4": "/img/c59fc6e6-hwu-screen.mp4",
+   "poster": "/img/c59fc6e6-hwu-screen-poster.jpg",
+   "thumb": "/img/c59fc6e6-hwu-screen-s.webp"
+  },
+  {
+   "id": 160613823,
+   "src": "/img/792b1349-hwu-print.webm",
+   "name": "hwu-print.gif",
+   "width": 640,
+   "height": 352,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/792b1349-hwu-print.gif",
+   "mp4": "/img/792b1349-hwu-print.mp4",
+   "poster": "/img/792b1349-hwu-print-poster.jpg",
+   "thumb": "/img/792b1349-hwu-print-s.webp"
+  }
+ ],
+ "meta": {
+  "line": "An interactive installation that visualises the spiral of our thoughts.",
+  "techniques": "Generative AI, speech input, projection",
+  "client_label": "Client",
+  "client": "R/GA (internship)"
+ }
 }

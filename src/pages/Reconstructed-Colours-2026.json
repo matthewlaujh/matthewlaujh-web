@@ -37,11 +37,13 @@
  "images": [
   {
    "id": 0,
-   "src": "/img/92248648-reconstructedColours-1.jpg",
+   "src": "/img/92248648-reconstructedColours-1.webp",
    "name": "reconstructedColours-1.jpg",
-   "width": 2576,
-   "height": 1717,
-   "exclude_from_backdrop": false
+   "width": 2400,
+   "height": 1600,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/92248648-reconstructedColours-1.jpg",
+   "thumb": "/img/92248648-reconstructedColours-1-s.webp"
   }
  ],
  "meta": {

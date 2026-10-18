@@ -36,27 +36,33 @@
  "images": [
   {
    "id": 137641462,
-   "src": "/img/37cde9c4-BG-01.png",
+   "src": "/img/37cde9c4-BG-01.webp",
    "name": "BG-01.png",
-   "width": 12000,
-   "height": 7500,
-   "exclude_from_backdrop": false
+   "width": 2400,
+   "height": 1500,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/37cde9c4-BG-01.png",
+   "thumb": "/img/37cde9c4-BG-01-s.webp"
   },
   {
    "id": 137641463,
-   "src": "/img/5d6025ce-bg.png",
+   "src": "/img/5d6025ce-bg.webp",
    "name": "bg.png",
-   "width": 8000,
-   "height": 4500,
-   "exclude_from_backdrop": false
+   "width": 2400,
+   "height": 1350,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/5d6025ce-bg.png",
+   "thumb": "/img/5d6025ce-bg-s.webp"
   },
   {
    "id": 137641464,
-   "src": "/img/4a927375-bg.png",
+   "src": "/img/4a927375-bg.webp",
    "name": "bg.png",
-   "width": 8000,
-   "height": 4500,
-   "exclude_from_backdrop": false
+   "width": 2400,
+   "height": 1350,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/4a927375-bg.png",
+   "thumb": "/img/4a927375-bg-s.webp"
   }
  ]
 }

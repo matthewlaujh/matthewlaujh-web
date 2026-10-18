@@ -82,7 +82,13 @@ const works = nav.groups.flatMap(g => g.items.filter(i => i.href && bySlug[i.hre
 	const body = prose.replace(firstP, '').replace(/^\s*<hr>\s*/, '').replace(/<hr>\s*$/, '');
 	const title = p.title_no_html.replace(/\s*\(\d{4}(?:[–-]\d{4})?\)\s*$/, '').replace(/,\s*$/, '');
 	const year = (p.title_no_html.match(/\((\d{4}(?:[–-]\d{4})?)\)/) || [])[1] || '';
-	const images = p.images.map(im => Object.assign({}, im, { src: asset(im.src) }));
+	const images = p.images.map(im => Object.assign({}, im, {
+		src: asset(im.src),
+		video: /\.webm$/i.test(im.src),
+		mp4: im.mp4 && asset(im.mp4),
+		poster: im.poster && asset(im.poster),
+		thumb: asset(im.thumb || im.poster || im.src)
+	}));
 	return { page: p, slug: p.slug, title, year, category: g.label, context, body, images, cover: images[0], meta: p.meta || {} };
 }));
 const workBySlug = Object.fromEntries(works.map(w => [w.slug, w]));
@@ -92,9 +98,15 @@ const yearRange = Math.min(...years) + '–' + Math.max(...years);
 /* ------------------------------------------------------------- fragments */
 /* the hover preview wants a small still: first non-GIF image, else the GIF's poster JPG */
 function hoverImage(w) {
-	const still = w.images.find(im => !/\.gif$/i.test(im.src));
-	if (still) return still.src;
-	return w.cover.src.replace(/\.gif$/i, '-poster.jpg');
+	const still = w.images.find(im => !im.video);
+	return (still || w.cover).thumb;
+}
+/* a still for places that need one (slit-scan texture, og:image) */
+function stillOf(im) { return im.video ? im.poster : im.src; }
+/* <img> or a silent looping <video> for a plate */
+function mediaHTML(im, attrs) {
+	if (!im.video) return `<img src="${im.src}" width="${im.width}" height="${im.height}" alt=""${attrs || ''}>`;
+	return `<video autoplay muted loop playsinline preload="metadata" poster="${im.poster}" width="${im.width}" height="${im.height}" aria-label=""><source src="${im.src}" type="video/webm"><source src="${im.mp4}" type="video/mp4"></video>`;
 }
 
 function splitTitle(t) {
@@ -211,7 +223,7 @@ ${fixLinks(w.body, w.slug)}
 				</div>
 			</div>
 			<div class="plates">
-${w.images.map((im, i) => `\t\t\t\t<figure><img src="${im.src}" width="${im.width}" height="${im.height}" alt="" loading="${i ? 'lazy' : 'eager'}"><figcaption>${i + 1} / ${w.images.length}</figcaption></figure>`).join('\n')}
+${w.images.map((im, i) => `\t\t\t\t<figure>${mediaHTML(im, ` loading="${i ? 'lazy' : 'eager'}"`)}<figcaption>${i + 1} / ${w.images.length}</figcaption></figure>`).join('\n')}
 			</div>
 			<nav class="prevnext" aria-label="Neighbouring projects">
 				<a href="${url(prev.slug)}"><span>←</span> ${esc(prev.title)}</a>
@@ -225,7 +237,7 @@ function fieldMain() {
 	let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
 	const tiles = works.map((w, i) => {
 		const x = 30 + rnd() * 62, y = 8 + rnd() * 76, wv = 11 + rnd() * 9, z = (0.4 + rnd() * 1.2).toFixed(2);
-		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" style="--x:${x.toFixed(1)}vw;--y:${y.toFixed(1)}vh;--w:${wv.toFixed(1)}vw;--z:${z}"><img src="${w.cover.src}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label">${esc(w.title)}, ${w.year}</span></a>`;
+		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" style="--x:${x.toFixed(1)}vw;--y:${y.toFixed(1)}vh;--w:${wv.toFixed(1)}vw;--z:${z}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label">${esc(w.title)}, ${w.year}</span></a>`;
 	}).join('\n');
 	const side = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${works.filter(x => x.category === g.label).map(w => `\t\t\t<a href="${url(w.slug)}" data-i="${works.indexOf(w)}">${esc(w.title)}<small>${w.year}</small></a>`).join('\n')}`).join('\n');
 	return `<main class="field-page">
@@ -291,11 +303,11 @@ function render(page) {
 	const title = isHome ? site.title : `${page.title_no_html} - ${site.title}`;
 	const canonical = isHome ? site.url : `${site.url}/${page.slug}`;
 	const desc = w && w.meta.line ? w.meta.line : site.description;
-	const ogImage = w ? `${site.url}${w.page.images[0].src}` : `${site.url}${site.social_image}`;
+	const ogImage = w ? `${site.url}${w.cover.video ? w.page.images[0].poster : w.page.images[0].src}` : `${site.url}${site.social_image}`;
 
 	let kind, backdrop, main;
 	if (isHome) { kind = 'home'; backdrop = slitHTML(home.backdrop.image); main = homeMain(); }
-	else if (w) { kind = 'project'; backdrop = slitHTML(w.page.images[0], { random: true, light: true, settings: { scan_cycles: 3, wiggle: 6, target_speed: 30, flip_y: true } }); main = projectMain(w); }
+	else if (w) { kind = 'project'; backdrop = slitHTML(Object.assign({}, w.page.images[0], { src: w.cover.video ? w.page.images[0].poster : w.page.images[0].src }), { random: true, light: true, settings: { scan_cycles: 3, wiggle: 6, target_speed: 30, flip_y: true } }); main = projectMain(w); }
 	else if (page.slug === FIELD_SLUG) { kind = 'field'; backdrop = slitHTML(home.backdrop.image); main = fieldMain(); }
 	else { kind = 'about'; backdrop = ''; main = aboutMain(page); }
 

@@ -2,3 +2,6 @@
 node_modules/
 .wrangler/
 *.part
+# high-res originals: kept locally as backup, regenerate src/img with scripts/optimize-images.py
+src/img-original/
+preview/

@@ -1,61 +1,69 @@
 {
-	"id": 24906137,
-	"slug": "Source-of-Happiness-2020",
-	"title": "Source of Happiness (2020)",
-	"title_no_html": "Source of Happiness (2020)",
-	"is_homepage": false,
-	"pin": false,
-	"pin_options": null,
-	"excerpt": "Completed as part of the BA in Design Communication level 2 programme at LASALLE.\nTry out the Sound Visualizer!\nCheck out the Data...",
-	"content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\" class=\"\"><br><br><br><br><br><br><br>\n<br>\n</div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed as part of the BA in Design Communication level 2 programme at LASALLE.<br>Try out the <a href=\"https://editor.p5js.org/matthew.laujh/present/6k2oYbKG-\">Sound Visualizer!</a><br>Check out the <a href=\"https://editor.p5js.org/matthew.laujh/present/m2z6q_OJ-\">Data Visualization Graphs.</a><br>View the full website <a href=\"https://sourceofhappiness.netlify.app/\">here.</a><br>—<br>\nHappiness is such a subjective term, it could mean a feeling or a mood and it could be perceived differently from people to people. And so I thought it would be interesting to study how experts defined different factors in their ranking of happiness. I also thought it would be good to look at things on a more macro level, looking at how different regions are ranked, and compiled another set of data from that based on the original source.<br><br>Music is a source of happiness for many so to interpret the data topic, I've created a sound interactive audio visualization tool where users would see a graphic, when playing music, on screen to capture the feeling of happiness through song. The audio visualizer graphics is based of the visual interpretation of music using sine waves and also inspired by the grooves pressed into records.<br><br>Using data from the <a href=\"https://worldhappiness.report/ed/2020/\">\"World Happiness Report 2020\"</a> for this p5js sketch, I've chosen to create an app interface platform where users can easily access an overview of the data as at first glance it might have been overwhelming to most people.<br>—\n</h1>\n<br>\n\n</div>\n</div>",
-	"local_css": "[local-style=\"24906137\"] .container_width {\n}\n\n[local-style=\"24906137\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24906137\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24906137\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24906137\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24906137\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] small a:hover {\n}\n\n[local-style=\"24906137\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
-	"backdrop": {
-		"type": "wallpaper",
-		"settings": {
-			"scale_option": "contain",
-			"repeat_image": false,
-			"image_alignment": "image_center_center",
-			"margin": 25,
-			"pattern_size": 75,
-			"limit_size": false,
-			"overlay_color": "rgba(0, 0, 0, 0.5)",
-			"bg_color": "rgb(255, 255, 255)",
-			"cycle_images": true,
-			"autoplay": false,
-			"slideshow_transition": "fade",
-			"transition_timeout": 10,
-			"transition_duration": 0.5,
-			"randomize": false,
-			"arrow_navigation": true,
-			"focus_object": "{}",
-			"backdrop_viewport_lock": false,
-			"use_image_focus": "false",
-			"image": "137675637",
-			"requires_webgl": "false"
-		}
-	},
-	"images": [
-		{
-			"id": 137675637,
-			"src": "/img/287eb366-sourceofhappiness.gif",
-			"name": "sourceofhappiness.gif",
-			"width": 1080,
-			"height": 721,
-			"exclude_from_backdrop": false
-		},
-		{
-			"id": 137675640,
-			"src": "/img/a738a09f-sourceOfHappiness_dataVisualizationGraphs.gif",
-			"name": "sourceOfHappiness_dataVisualizationGraphs.gif",
-			"width": 1080,
-			"height": 607,
-			"exclude_from_backdrop": false
-		}
-	],
-	"meta": {
-		"line": "A data study of how experts measure happiness, with a sound visualiser.",
-		"techniques": "Data visualisation, web, sound",
-		"client_label": "School",
-		"client": "LASALLE College of the Arts"
-	}
+ "id": 24906137,
+ "slug": "Source-of-Happiness-2020",
+ "title": "Source of Happiness (2020)",
+ "title_no_html": "Source of Happiness (2020)",
+ "is_homepage": false,
+ "pin": false,
+ "pin_options": null,
+ "excerpt": "Completed as part of the BA in Design Communication level 2 programme at LASALLE.\nTry out the Sound Visualizer!\nCheck out the Data...",
+ "content": "<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div><div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\"></div>\n</div>\n<div grid-row=\"\" grid-pad=\"4\" grid-gutter=\"8\" grid-responsive=\"\">\n\t<div grid-col=\"2\" grid-pad=\"4\"></div>\n\t<div grid-col=\"5\" grid-pad=\"4\" class=\"\"><br><br><br><br><br><br><br>\n<br>\n</div>\n\t<div grid-col=\"5\" grid-pad=\"4\">\n<h1>Completed as part of the BA in Design Communication level 2 programme at LASALLE.<br>Try out the <a href=\"https://editor.p5js.org/matthew.laujh/present/6k2oYbKG-\">Sound Visualizer!</a><br>Check out the <a href=\"https://editor.p5js.org/matthew.laujh/present/m2z6q_OJ-\">Data Visualization Graphs.</a><br>View the full website <a href=\"https://sourceofhappiness.netlify.app/\">here.</a><br>—<br>\nHappiness is such a subjective term, it could mean a feeling or a mood and it could be perceived differently from people to people. And so I thought it would be interesting to study how experts defined different factors in their ranking of happiness. I also thought it would be good to look at things on a more macro level, looking at how different regions are ranked, and compiled another set of data from that based on the original source.<br><br>Music is a source of happiness for many so to interpret the data topic, I've created a sound interactive audio visualization tool where users would see a graphic, when playing music, on screen to capture the feeling of happiness through song. The audio visualizer graphics is based of the visual interpretation of music using sine waves and also inspired by the grooves pressed into records.<br><br>Using data from the <a href=\"https://worldhappiness.report/ed/2020/\">\"World Happiness Report 2020\"</a> for this p5js sketch, I've chosen to create an app interface platform where users can easily access an overview of the data as at first glance it might have been overwhelming to most people.<br>—\n</h1>\n<br>\n\n</div>\n</div>",
+ "local_css": "[local-style=\"24906137\"] .container_width {\n}\n\n[local-style=\"24906137\"] body {\n\tbackground-color: initial /*!variable_defaults*/;\n}\n\n[local-style=\"24906137\"] .backdrop {\n\twidth: 100% /*!background_cover*/;\n}\n\n[local-style=\"24906137\"] .page {\n\tmin-height: 100vh /*!page_height_100vh*/;\n}\n\n[local-style=\"24906137\"] .page_background {\n\tbackground-color: initial /*!page_container_bgcolor*/;\n}\n\n[local-style=\"24906137\"] .content_padding {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] bodycopy {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] bodycopy a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] bodycopy a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h1 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h1 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h1 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h2 {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h2 a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] h2 a:hover {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] small {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] small a {\n}\n\n[data-predefined-style=\"true\"] [local-style=\"24906137\"] small a:hover {\n}\n\n[local-style=\"24906137\"] .container {\n\talign-items: flex-end /*!vertical_bottom*/;\n\t-webkit-align-items: flex-end /*!vertical_bottom*/;\n\tmargin-left: 0 /*!content_left*/;\n}",
+ "backdrop": {
+  "type": "wallpaper",
+  "settings": {
+   "scale_option": "contain",
+   "repeat_image": false,
+   "image_alignment": "image_center_center",
+   "margin": 25,
+   "pattern_size": 75,
+   "limit_size": false,
+   "overlay_color": "rgba(0, 0, 0, 0.5)",
+   "bg_color": "rgb(255, 255, 255)",
+   "cycle_images": true,
+   "autoplay": false,
+   "slideshow_transition": "fade",
+   "transition_timeout": 10,
+   "transition_duration": 0.5,
+   "randomize": false,
+   "arrow_navigation": true,
+   "focus_object": "{}",
+   "backdrop_viewport_lock": false,
+   "use_image_focus": "false",
+   "image": "137675637",
+   "requires_webgl": "false"
+  }
+ },
+ "images": [
+  {
+   "id": 137675637,
+   "src": "/img/287eb366-sourceofhappiness.webm",
+   "name": "sourceofhappiness.gif",
+   "width": 1080,
+   "height": 720,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/287eb366-sourceofhappiness.gif",
+   "mp4": "/img/287eb366-sourceofhappiness.mp4",
+   "poster": "/img/287eb366-sourceofhappiness-poster.jpg",
+   "thumb": "/img/287eb366-sourceofhappiness-s.webp"
+  },
+  {
+   "id": 137675640,
+   "src": "/img/a738a09f-sourceOfHappiness_dataVisualizationGraphs.webm",
+   "name": "sourceOfHappiness_dataVisualizationGraphs.gif",
+   "width": 1080,
+   "height": 606,
+   "exclude_from_backdrop": false,
+   "original": "/img-original/a738a09f-sourceOfHappiness_dataVisualizationGraphs.gif",
+   "mp4": "/img/a738a09f-sourceOfHappiness_dataVisualizationGraphs.mp4",
+   "poster": "/img/a738a09f-sourceOfHappiness_dataVisualizationGraphs-poster.jpg",
+   "thumb": "/img/a738a09f-sourceOfHappiness_dataVisualizationGraphs-s.webp"
+  }
+ ],
+ "meta": {
+  "line": "A data study of how experts measure happiness, with a sound visualiser.",
+  "techniques": "Data visualisation, web, sound",
+  "client_label": "School",
+  "client": "LASALLE College of the Arts"
+ }
 }
