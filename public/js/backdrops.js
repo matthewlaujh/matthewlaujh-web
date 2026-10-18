@@ -728,23 +728,37 @@ var VERT = [
 			im.src = carry.img;
 		} else this.load(this.index, true);
 	}
-	/* the current state, downscaled, with the display lift undone, as a jpeg data url */
+	/* the current state as two jpeg data urls: the raw simulation (to continue
+	   from) and the lifted version (what was on screen). Read straight from the
+	   state texture, which works whether or not the drawing buffer survives. */
 	Diffuse.prototype.snapshot = function () {
-		if (!this.gl || !this.w) return null;
+		var gl = this.gl; if (!gl || !this.w) return null;
 		this.frame(performance.now());
-		var sw = Math.min(this.w, 720), sh = Math.round(this.h * sw / this.w);
-		var c = document.createElement('canvas'); c.width = sw; c.height = sh;
-		var x = c.getContext('2d'); x.drawImage(this.canvas, 0, 0, sw, sh);
-		var shown = c.toDataURL('image/jpeg', 0.72);
-		var d = x.getImageData(0, 0, sw, sh), p = d.data, lut = new Uint8Array(256);
-		for (var i = 0; i < 256; i++) lut[i] = Math.round(255 * Math.pow(i / 255, 1 / 0.85));
-		for (var j = 0; j < p.length; j += 4) {
-			var r = lut[p[j]], g = lut[p[j + 1]], bl = lut[p[j + 2]];
-			var l = 0.299 * r + 0.587 * g + 0.114 * bl, k = 1 / 1.35;
-			p[j] = l + (r - l) * k; p[j + 1] = l + (g - l) * k; p[j + 2] = l + (bl - l) * k;
+		var w = this.w, h = this.h, buf = new Uint8Array(w * h * 4);
+		gl.bindFramebuffer(gl.FRAMEBUFFER, this.a.f);
+		gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, buf);
+		gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+		var full = document.createElement('canvas'); full.width = w; full.height = h;
+		var fx = full.getContext('2d'), id = fx.createImageData(w, h), p = id.data;
+		for (var y = 0; y < h; y++) {                          // flip rows: GL is bottom-up
+			var src = (h - 1 - y) * w * 4, dst = y * w * 4;
+			for (var x = 0; x < w * 4; x += 4) { p[dst + x] = buf[src + x]; p[dst + x + 1] = buf[src + x + 1]; p[dst + x + 2] = buf[src + x + 2]; p[dst + x + 3] = 255; }
 		}
-		x.putImageData(d, 0, 0);
-		return { img: c.toDataURL('image/jpeg', 0.72), shown: shown, seed: this.seed, time: this.time };
+		fx.putImageData(id, 0, 0);
+		var sw = Math.min(w, 720), sh = Math.round(h * sw / w);
+		var c = document.createElement('canvas'); c.width = sw; c.height = sh;
+		var x2 = c.getContext('2d'); x2.drawImage(full, 0, 0, sw, sh);
+		var raw = c.toDataURL('image/jpeg', 0.72);
+		// the display pass: a little more colour, then a lift
+		var d = x2.getImageData(0, 0, sw, sh), q = d.data, lut = new Uint8Array(256);
+		for (var i = 0; i < 256; i++) lut[i] = Math.round(255 * Math.pow(i / 255, 0.85));
+		for (var j = 0; j < q.length; j += 4) {
+			var r = q[j], g = q[j + 1], bl = q[j + 2], l = 0.299 * r + 0.587 * g + 0.114 * bl;
+			r = l + (r - l) * 1.35; g = l + (g - l) * 1.35; bl = l + (bl - l) * 1.35;
+			q[j] = lut[Math.max(0, Math.min(255, r)) | 0]; q[j + 1] = lut[Math.max(0, Math.min(255, g)) | 0]; q[j + 2] = lut[Math.max(0, Math.min(255, bl)) | 0];
+		}
+		x2.putImageData(d, 0, 0);
+		return { img: raw, shown: c.toDataURL('image/jpeg', 0.72), seed: this.seed, time: this.time };
 	};
 	Diffuse.prototype.program = function (vs, fs) {
 		var gl = this.gl;

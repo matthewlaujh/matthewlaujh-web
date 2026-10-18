@@ -282,7 +282,8 @@ html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-t
    follows, and the title button rises */
 html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title { animation: capsule .9s .1s var(--ease) both; }
 html[data-page="project"] .bar .back span, html[data-page="about"] .bar .back span { overflow: hidden; animation: arrow .7s .3s var(--ease) both; }
-html[data-page="project"] .bar-title, html[data-page="about"] .bar-title { animation: rise .7s .45s var(--ease) backwards; }
+html[data-page="project"] .bar-title, html[data-page="about"] .bar-title { animation: barin .7s .45s var(--ease) backwards; }
+@keyframes barin { from { opacity: 0; transform: translateY(8px); } }
 @keyframes capsule { from { background-color: transparent; border-color: transparent; transform: translateX(-15px); } }
 @keyframes arrow { from { opacity: 0; max-width: 0; margin-right: -6px; transform: translateX(6px); } to { opacity: 1; max-width: 24px; margin-right: 0; transform: none; } }
 /* every page: the rights line is a glass pill too */
