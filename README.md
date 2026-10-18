@@ -37,9 +37,11 @@ page loads a 13 MB GIF any more. Re-run after adding originals; existing outputs
 
 ```
 node build.js
-python3 -m http.server -d public 8080      # then open http://localhost:8080
+node scripts/serve.js        # then open http://localhost:8000
 ```
-(`npx serve public` also works and gives clean URLs like Cloudflare does.)
+The site uses clean URLs (`/Reconstructed-Colours-2026`, no `.html`) exactly as
+Cloudflare Pages serves them, so a plain `python3 -m http.server` will 404 on
+every link. `scripts/serve.js` resolves them the same way Cloudflare does.
 
 ```
 src/
@@ -63,8 +65,8 @@ public/                generated output, what Cloudflare serves (committed so Pa
 ## Build
 
 ```
-node build.js        # regenerates public/
-npx serve public     # or: python3 -m http.server -d public 8080
+node build.js            # regenerates public/
+node scripts/serve.js    # clean-URL dev server on :8000
 ```
 
 Each page becomes `public/<slug>.html`; Cloudflare Pages serves it at `/<slug>` (clean URLs), exactly
