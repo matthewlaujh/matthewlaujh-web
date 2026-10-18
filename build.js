@@ -260,13 +260,17 @@ function aboutMain(page) {
 	const skills = a.skills ? `<section class="skills"><h2>Skills</h2><dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : '';
 	return `<main class="about">
 		<h1 class="visually-hidden">${esc(page.title_no_html)}</h1>
+		<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art practice</span></p>
 		<div class="heads">
 			<div class="lede"><h2><i class="k" aria-hidden="true"></i>${esc(a.lede_title)}</h2>${a.lede.map(p => `<p>${p}</p>`).join('')}</div>
 			<div class="lede"><h2><i class="k k--art" aria-hidden="true"></i>${esc(a.statement_title)}</h2>${a.statement.map(p => `<p>${p}</p>`).join('')}</div>
 		</div>
-		<p class="legend"><span><i class="k" aria-hidden="true"></i>Design &amp; technology</span><span><i class="k k--art" aria-hidden="true"></i>Art practice</span></p>
 		<div class="cv">
-${(a.section_order || a.sections.map(s => s.title)).map(section).join('\n')}
+			<div class="pair">
+${section('Experience')}
+${section('Education')}
+			</div>
+${section('Group exhibitions')}
 			${skills}
 		</div>
 		<div class="contact">
