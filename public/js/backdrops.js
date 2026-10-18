@@ -720,6 +720,7 @@ var VERT = [
 	/* point the running simulation at another page's images: the state is kept,
 	   only the source crossfades (used when pages are swapped in place) */
 	Diffuse.prototype.retarget = function (images, settings) {
+		if (!this.gl) return;                                  // no WebGL: nothing to point anywhere
 		this.images = images || [];
 		var s = this.settings;
 		['strength', 'speed', 'blend', 'fade', 'random', 'scroll'].forEach(function (k) { if (settings[k] !== undefined) s[k] = settings[k]; });
@@ -836,7 +837,7 @@ var VERT = [
 	};
 	/* swap the source image (scroll cycling / API) */
 	Diffuse.prototype.show = function (i) {
-		if (!this.images.length) return;
+		if (!this.gl || !this.images.length) return;
 		i = ((i % this.images.length) + this.images.length) % this.images.length;
 		if (i === this.index) return;
 		this.index = i;

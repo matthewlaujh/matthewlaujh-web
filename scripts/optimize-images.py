@@ -70,11 +70,13 @@ for f in sorted(os.listdir(ORIG)):
         ew, eh = w - w % 2, h - h % 2
         webm = os.path.join(OUT, base + '.webm'); mp4 = os.path.join(OUT, base + '.mp4')
         poster = os.path.join(OUT, base + '-poster.jpg'); thumb = os.path.join(OUT, base + '-s.webp')
+        # cap at 960px wide: these are looping GIF captures, not photography
+        if ew > 960: eh = int(eh * 960 / ew) // 2 * 2; ew = 960
         vf = f'scale={ew}:{eh}:flags=lanczos'
         if not newer(webm, src):
-            subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-vf', vf, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '32', '-row-mt', '1', '-an', webm], check=True)
+            subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-vf', vf, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '38', '-row-mt', '1', '-an', webm], check=True)
         if not newer(mp4, src):
-            subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-vf', vf, '-c:v', 'libx264', '-preset', 'slow', '-crf', '23', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an', mp4], check=True)
+            subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-vf', vf, '-c:v', 'libx264', '-preset', 'slow', '-crf', '28', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an', mp4], check=True)
         if not newer(poster, src) or base in poster_at:
             if base in poster_at:
                 # pull the frame from the mp4 at that time

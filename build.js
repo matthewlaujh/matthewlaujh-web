@@ -105,8 +105,14 @@ function hoverImage(w) {
 function stillOf(im) { return im.video ? im.poster : im.src; }
 /* <img> or a silent looping <video> for a plate */
 function mediaHTML(im, attrs) {
-	if (!im.video) return `<img src="${im.src}" width="${im.width}" height="${im.height}" alt=""${attrs || ''}>`;
-	return `<video autoplay muted loop playsinline preload="metadata" poster="${im.poster}" width="${im.width}" height="${im.height}" aria-label=""><source src="${im.src}" type="video/webm"><source src="${im.mp4}" type="video/mp4"></video>`;
+	if (!im.video) {
+		// the ≤1200px thumb serves 1x screens; the full file only when the slot needs it
+		const tw = Math.round(im.width * Math.min(1, 1200 / Math.max(im.width, im.height)));
+		const srcset = im.thumb && im.thumb !== im.src && tw < im.width ? ` srcset="${im.thumb} ${tw}w, ${im.src} ${im.width}w" sizes="(max-width: 800px) 100vw, 62vw"` : '';
+		return `<img src="${im.src}"${srcset} width="${im.width}" height="${im.height}" alt="" decoding="async"${attrs || ''}>`;
+	}
+	const eager = /eager/.test(attrs || '');
+	return `<video muted loop playsinline preload="${eager ? 'auto' : 'none'}"${eager ? ' autoplay' : ''} poster="${im.poster}" width="${im.width}" height="${im.height}" aria-label=""><source src="${im.src}" type="video/webm"><source src="${im.mp4}" type="video/mp4"></video>`;
 }
 
 const kcls = k => k === 'art' ? ' k--art' : k === 'both' ? ' k--both' : '';
@@ -141,6 +147,7 @@ function barHTML(page) {
 	if (w) { mid = esc(w.title); midYear = w.year; }
 	else if (page.slug === FIELD_SLUG) mid = 'Works in space';
 	else if (page.slug === 'About') mid = 'About';
+	else if (page.slug === '404') mid = 'Not found';
 	const left = isHome
 		? `<a class="site-title" href="${url(site.homepage)}">${nav.title}</a>`
 		: `<a class="site-title back" href="${url(site.homepage)}" aria-label="Home"><span>←</span> <i class="nm">${nav.title}</i></a>`;
@@ -320,6 +327,7 @@ ${section('Group exhibitions')}
    curly apostrophes and quotes, en dashes in year ranges and spaced hyphens,
    a thin no-break space before the year in "Title 2026" is left to CSS. */
 function typo(html) {
+	html = html.replace(/(<\/(?:a|i|em|b|strong)>) +([.,;:!?])/g, '$1$2');   // "...</a> ." -> "...</a>."
 	return html.split(/(<script[\s\S]*?<\/script>|<[^>]+>)/g).map((part, i) => {
 		if (i % 2) return part;                               // a tag or a script block
 		return part
@@ -328,7 +336,7 @@ function typo(html) {
 			.replace(/'/g, '\u2019')
 			.replace(/(^|[\s(])"(?=\S)/g, '$1\u201c')            // opening double
 			.replace(/"/g, '\u201d')
-			.replace(/(\d{4})-(\d{2,4})\b/g, '$1\u2013$2')       // 2021–2022
+			.replace(/\b(\d+)-(\d+)\b/g, '$1\u2013$2')             // 2021–2022, ages 18–30
 			.replace(/ - /g, ' \u2013 ')                          // spaced hyphen -> en dash
 			.replace(/\.\.\./g, '\u2026');
 	}).join('');
@@ -344,8 +352,12 @@ function render(page) {
 
 	let kind, backdrop, main;
 	if (isHome) { kind = 'home'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: true } }); main = homeMain(); }
-	else if (w) { kind = 'project'; backdrop = diffuseHTML([{ src: w.cover.video ? w.cover.poster : w.cover.src, width: w.cover.width, height: w.cover.height }], { light: true, poster: w.cover.video ? w.cover.poster : w.cover.thumb, settings: { strength: 0.55 } }); main = projectMain(w); }
+	else if (w) { kind = 'project'; backdrop = diffuseHTML([{ src: w.cover.video ? w.cover.poster : w.cover.thumb, width: w.cover.width, height: w.cover.height }], { light: true, poster: w.cover.video ? w.cover.poster : w.cover.thumb, settings: { strength: 0.55 } }); main = projectMain(w); }
 	else if (page.slug === FIELD_SLUG) { kind = 'field'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: false, strength: 0.5 } }); main = fieldMain(); }
+	else if (page.slug === '404') { kind = 'about'; backdrop = ''; main = `<main class="about notfound">
+		<h1>Nothing here.</h1>
+		<p>That page may have moved. Try the <a href="${url(site.homepage)}">home page</a>, <a href="${url(FIELD_SLUG)}">works in space</a> or <a href="${url('About')}">about</a>.</p>
+	</main>`; }
 	else { kind = 'about'; backdrop = ''; main = aboutMain(page); }
 
 	return `<!DOCTYPE html>
@@ -353,7 +365,7 @@ function render(page) {
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="robots" content="index,follow">
+		<meta name="robots" content="${page.slug === '404' ? 'noindex' : 'index,follow'}">
 		<title>${esc(title)}</title>
 		<meta name="description" content="${esc(desc)}">
 		<link rel="canonical" href="${canonical}">
@@ -371,7 +383,8 @@ function render(page) {
 		<meta name="theme-color" content="${kind === 'about' ? '#ffffff' : '#111111'}">
 
 		<link rel="icon" href="${asset(site.favicon)}">
-		<link rel="preload" href="${asset('/fonts/AustinNewsDeck-Light.otf')}" as="font" type="font/otf" crossorigin>
+		<link rel="preload" href="${asset('/fonts/AustinNewsDeck-Light.woff2')}" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="${asset('/fonts/AtlasGrotesk-Light.woff2')}" as="font" type="font/woff2" crossorigin>
 		<link rel="stylesheet" href="${asset('/css/site.css')}">
 		<script src="${asset('/js/backdrops.js')}" defer></script>
 		<script src="${asset('/js/site.js')}" defer></script>
@@ -395,7 +408,7 @@ for (const dir of ['css', 'js', 'fonts', 'img']) {
 fs.copyFileSync(path.join(SRC, 'favicon.ico'), path.join(OUT, 'favicon.ico'));
 
 let count = 0;
-const all = pages.concat([{ slug: FIELD_SLUG, title_no_html: 'Works in space', content: '' }]);
+const all = pages.concat([{ slug: FIELD_SLUG, title_no_html: 'Works in space', content: '' }, { slug: '404', title_no_html: 'Not found', content: '' }]);
 for (const page of all) {
 	const html = render(page);
 	if (page.slug === site.homepage) fs.writeFileSync(path.join(OUT, 'index.html'), html);
@@ -405,7 +418,7 @@ for (const page of all) {
 
 if (!RELATIVE) {
 	fs.writeFileSync(path.join(OUT, '_redirects'), `/${site.homepage}  /  301\n/Archifest-2021-Sea-of-Debris-2021  /NewWave-2021  301\n/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition  /Proximate-2022  301\n`);
-	fs.writeFileSync(path.join(OUT, '_headers'), `/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=31536000, immutable\n`);
+	fs.writeFileSync(path.join(OUT, '_headers'), `/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=31536000, immutable\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n`);
 }
 
 console.log(`built ${count} pages -> ${path.relative(ROOT, OUT)}/`);

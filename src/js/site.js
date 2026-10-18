@@ -142,6 +142,18 @@
 	function setupProject() {
 		var figs = document.querySelectorAll('.plates figure');
 		if (!figs.length) return;
+		/* videos load and play only while near the viewport */
+		var vids = document.querySelectorAll('.plates video');
+		if ('IntersectionObserver' in window) {
+			var vo = new IntersectionObserver(function (es) {
+				es.forEach(function (e) {
+					var v = e.target;
+					if (e.isIntersecting) { if (v.preload === 'none') v.preload = 'auto'; v.play && v.play().catch(function () {}); }
+					else if (!v.paused) v.pause();
+				});
+			}, { rootMargin: '40% 0px' });
+			for (var k = 0; k < vids.length; k++) vo.observe(vids[k]);
+		} else for (var m = 0; m < vids.length; m++) vids[m].play && vids[m].play().catch(function () {});
 		if ('IntersectionObserver' in window && !reduced) {
 			var io = new IntersectionObserver(function (es) {
 				es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } });
@@ -166,7 +178,7 @@
 		var tiles = [].slice.call(f.querySelectorAll('a'));
 		var marks = [].slice.call(f.querySelectorAll('.cluster'));
 		var side = [].slice.call(document.querySelectorAll('.field-time a'));
-		var mobile = window.matchMedia('(max-width: 800px)');
+		var mobile = window.matchMedia('(max-width: 1100px)');
 		var px = 0, py = 0, tx = 0, ty = 0, raf = null;
 		var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 		svg.setAttribute('class', 'links'); svg.setAttribute('aria-hidden', 'true');
@@ -418,14 +430,14 @@
 	   The diffusion canvas never reloads. A click fetches the next page, the current
 	   one plays its leave, then bar + main are swapped and the backdrop is pointed
 	   at the new page's images (a crossfade, not a restart). */
-	var navigating = false;
+	var navigating = false, queued = null;
 	function kindOf(href) {
 		var m = href.replace(/[?#].*$/, '').replace(/\.html$/, '').split('/').pop();
-		return m === 'About' ? 'about' : m === 'All-Projects' ? 'field' : (m === '' || m === 'index' || m === 'Front-Page') ? 'home' : 'project';
+		return m === 'About' || m === '404' ? 'about' : m === 'All-Projects' ? 'field' : (m === '' || m === 'index' || m === 'Front-Page') ? 'home' : 'project';
 	}
 	function navigate(href, opts) {
 		opts = opts || {};
-		if (navigating) return;
+		if (navigating) { queued = { href: href, opts: opts }; return; }   // the latest request wins once this one lands
 		navigating = true;
 		var to = kindOf(href), leaving = leave(to);
 		fetch(href, { credentials: 'same-origin' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
@@ -440,6 +452,7 @@
 				if (!opts.pop) { try { history.pushState({ ml: 1 }, '', href); } catch (x) {} }
 				swap(doc);
 				navigating = false;
+				if (queued) { var q = queued; queued = null; navigate(q.href, q.opts); }
 			})
 			.catch(function () { location.href = href; });
 	}
