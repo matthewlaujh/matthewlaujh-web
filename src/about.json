@@ -48,6 +48,24 @@
 			"title": "Experience",
 			"entries": [
 				{
+					"dates": "2026–",
+					"role": "Creative Technologist",
+					"org": "Accenture Song",
+					"org_url": "https://www.accenture.com/sg-en/about/accenture-song-index",
+					"place": "Singapore",
+					"note": "Rejoined October 2026. Partnering with the creative team on emerging technology, prototyping and partner management.",
+					"bullets": []
+				},
+				{
+					"dates": "2023–",
+					"role": "Founder & Creative Technologist",
+					"org": "Organised Mess",
+					"org_url": "https://organisedmess.studio",
+					"place": "Singapore",
+					"note": "Independent creative technology studio: embedded systems, physical computing, custom hardware, interactive installations and generative work for clients and collaborators.",
+					"bullets": []
+				},
+				{
 					"dates": "2023–2024",
 					"role": "Creative Technologist",
 					"org": "Accenture Song",
