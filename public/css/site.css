@@ -294,7 +294,8 @@ html[data-page="about"], html[data-page="about"] body { background: var(--paper)
    the hero, light glass once the white body is under them (JS sets data-glass). */
 html[data-page="project"] .bar, html[data-page="about"] .bar, html[data-page="field"] .bar { mix-blend-mode: normal; color: #fff; pointer-events: none; }
 html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title, html[data-page="field"] .bar .site-title,
-html[data-page="project"] .bar-title, html[data-page="about"] .bar-title, html[data-page="field"] .bar-title {
+html[data-page="project"] .bar-title, html[data-page="about"] .bar-title, html[data-page="field"] .bar-title,
+html[data-page="home"][data-scrolled] .bar .site-title {
 	pointer-events: auto;
 	background: rgba(24, 24, 26, .32);
 	-webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
@@ -303,6 +304,10 @@ html[data-page="project"] .bar-title, html[data-page="about"] .bar-title, html[d
 	transition: background-color .35s, color .35s, border-color .35s;
 }
 html[data-page="project"] .bar .site-title, html[data-page="about"] .bar .site-title, html[data-page="field"] .bar .site-title { display: inline-flex; align-items: center; gap: 6px; }
+/* home: the name becomes a floating pill once the list scrolls under it */
+html[data-page="home"] .bar .site-title { display: inline-flex; align-items: center; height: 38px; padding: 0 15px; margin-left: -15px; border: 1px solid transparent; border-radius: 999px; transition: background-color .35s, border-color .35s; }
+html[data-page="home"][data-scrolled] .bar .site-title { margin-left: 0; }
+html[data-page="home"] .bar .site-title { transition: background-color .35s, border-color .35s, margin-left .35s var(--ease); }
 /* arriving on a project or About: the name slides into its capsule, the arrow
    follows, and the title button rises */
 html:not([data-page="home"]) .bar .site-title { animation: capsule .9s .1s var(--ease) both; }

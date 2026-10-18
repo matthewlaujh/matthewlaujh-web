@@ -102,6 +102,9 @@
 	function setupHome() {
 		var links = document.querySelectorAll('.marquee a[data-img]');
 		if (!links.length) return;
+		/* once the list scrolls under the bar, the name floats as a pill */
+		function scrolled() { if (scrollY > 6) html.setAttribute('data-scrolled', '1'); else html.removeAttribute('data-scrolled'); }
+		on(window, 'scroll', scrolled, { passive: true }); scrolled();
 		/* the list arrives as a cascade: each row a beat after the last */
 		var rows = document.querySelectorAll('.marquee > *');
 		for (var r = 0; r < rows.length; r++) rows[r].style.setProperty('--i', r);
@@ -466,6 +469,7 @@
 		html.removeAttribute('data-to');
 		html.setAttribute('data-page', kind);
 		html.removeAttribute('data-glass');
+		html.removeAttribute('data-scrolled');
 		html.classList.remove('leaving');
 		// drop everything page-specific; keep the renderer, veil, footer and cursor
 		[].slice.call(document.body.children).forEach(function (el) {
