@@ -234,11 +234,11 @@ main.home { animation: none; }
 .project .prose { font: 300 var(--t-serif)/1.55 var(--serif); max-width: 34em; }
 .project .prose h2 { color: var(--ink-dim); }
 .project .prose a { text-decoration-color: rgba(0, 0, 0, .35); }
-.project .plates figure { margin-bottom: 28px; position: relative; overflow: hidden; background: #f2f2f2; }
-.project .plates video { width: 100%; height: auto; display: block; }
-.project .plates img, .project .plates video { width: 100%; transform: scale(1.06); transition: transform 1.4s var(--ease); }
-.project .plates figure.seen img, .project .plates figure.seen video { transform: none; }
-.project .plates figcaption { position: absolute; left: 12px; bottom: 10px; font-size: var(--t-xs); color: #fff; mix-blend-mode: difference; }
+.project figure { margin: 0 0 28px; position: relative; overflow: hidden; background: #f2f2f2; }
+.project figure video { width: 100%; height: auto; display: block; }
+.project figure img, .project figure video { width: 100%; display: block; transform: scale(1.06); transition: transform 1.4s var(--ease); }
+.project figure.seen img, .project figure.seen video { transform: none; }
+.project figcaption { position: absolute; left: 12px; bottom: 10px; font-size: var(--t-xs); color: #fff; mix-blend-mode: difference; }
 
 /* -------------------------------------------------- all projects (field) */
 html[data-page="field"], html[data-page="field"] body { height: 100%; overflow: hidden; }
@@ -413,13 +413,15 @@ html[data-glass="light"] .rights { opacity: 1; color: rgba(0, 0, 0, .7); }
 	.marquee a:hover { padding-left: 0; }
 	.marquee .more-in { gap: 14px; padding-left: 0; }
 	.marquee .more .thumb { width: 96px; }
-	.project .hero { padding-bottom: 110px; }
-	.project .hero .scroll-cue { bottom: 110px; }
+	.project .hero { padding-bottom: 36px; }
+	.project .hero .scroll-cue { bottom: 36px; }
+	.project .prose figure { margin: 28px 0; }
+	.project .text > figure.lead { margin: 8px 0 28px; }
 	.project .body { grid-template-columns: 1fr; gap: 32px; }
 	.project .text { position: static; }
 	.about .heads, .about .pair { grid-template-columns: 1fr; gap: 40px; }
 	.about .cv .pair section + section { margin-top: 44px; }
-	.about .entry, .about .skills dl > div { grid-template-columns: 1fr; gap: 2px; }
+	.about .entry, .about .pair .entry, .about .skills dl > div { grid-template-columns: 1fr; gap: 2px; }
 	.site-footer { position: static; font-size: var(--t-xs); justify-content: flex-end; padding: 8px var(--pad) 28px; }
 	html[data-page="about"] .site-footer, html[data-page="project"] .site-footer { background: var(--paper); }
 	.home { padding-bottom: 24px; }
@@ -434,5 +436,5 @@ html[data-glass="light"] .rights { opacity: 1; color: rgba(0, 0, 0, .7); }
 @media (prefers-reduced-motion: reduce) {
 	*, *::before, *::after { transition: none !important; animation: none !important; }
 	.project .hero h1 .ch, .project .hero h1 small, .project .hero .line, .project .hero .facts, .project .hero .scroll-cue { opacity: 1; transform: none; }
-	.project .plates img { transform: none; }
+	.project figure img { transform: none; }
 }

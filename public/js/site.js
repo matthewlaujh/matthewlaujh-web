@@ -140,7 +140,20 @@
 
 	/* ---------------- project: plate reveal, slit-scan calms as it's covered ---------------- */
 	function setupProject() {
-		var figs = document.querySelectorAll('.plates figure');
+		/* phones: one column — meta and intro, the first plate, then prose with a
+		   plate after every second paragraph and whatever is left at the end */
+		if (window.matchMedia('(max-width: 800px)').matches) {
+			var plates = document.querySelector('.plates'), text = document.querySelector('.project .text'), prose = document.querySelector('.project .prose');
+			var fl = plates ? [].slice.call(plates.children) : [];
+			if (fl.length && text && prose) {
+				var first = fl.shift(); first.classList.add('lead'); text.insertBefore(first, prose);
+				var ps = [].slice.call(prose.children).filter(function (n) { return n.tagName === 'P' && n.textContent.length > 140; });   // real paragraphs, not link lines
+				for (var pi = 1, fi = 0; pi < ps.length && fi < fl.length; pi += 2, fi++) ps[pi].insertAdjacentElement('afterend', fl[fi]);
+				while (fl.length && fi < fl.length) prose.appendChild(fl[fi++]);
+				plates.remove();
+			}
+		}
+		var figs = document.querySelectorAll('.project figure');
 		if (!figs.length) return;
 		/* videos load and play only while near the viewport */
 		var vids = document.querySelectorAll('.plates video');
