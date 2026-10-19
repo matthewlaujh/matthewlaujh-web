@@ -79,6 +79,12 @@ html.leaving[data-to][data-page] .bar-title { animation: barout .6s var(--ease) 
 html.leaving[data-to="home"][data-page] .bar-title { animation-duration: .8s; }
 @keyframes barout { to { opacity: 0; transform: translateY(-12px); } }
 .backdrop.off { opacity: 0 !important; transition: opacity .9s ease !important; }
+.backdrop.gone, html[data-page="about"] .veil { display: none; }
+/* once the white body covers the screen, the renderer is not needed: the page
+   is plain paper underneath (so rubber-band overscroll and the footer are white too) */
+html[data-glass="light"] { background: var(--paper); }
+html[data-glass="light"] .backdrop, html[data-glass="light"] .veil, html[data-glass="light"] .poster { opacity: 0 !important; transition: opacity .6s !important; }
+html[data-page="about"] .backdrop { opacity: 0 !important; }
 main { animation: pagein .5s var(--ease) both; }
 @keyframes pagein { from { opacity: 0; } }
 /* home arrives as a cascade: legend, headings and rows one beat apart, the intro after */
@@ -422,11 +428,11 @@ html[data-glass="light"] .rights { opacity: 1; color: rgba(0, 0, 0, .7); }
 	.about .heads, .about .pair { grid-template-columns: 1fr; gap: 40px; }
 	.about .cv .pair section + section { margin-top: 44px; }
 	.about .entry, .about .pair .entry, .about .skills dl > div { grid-template-columns: 1fr; gap: 2px; }
-	.site-footer { position: static; font-size: var(--t-xs); justify-content: flex-end; padding: 8px var(--pad) 28px; }
+	.site-footer { position: relative; z-index: 2; font-size: var(--t-xs); justify-content: flex-end; padding: 0 var(--pad) var(--pad); }
 	html[data-page="about"] .site-footer, html[data-page="project"] .site-footer { background: var(--paper); }
-	.home { padding-bottom: 24px; }
-	.project .body { padding-bottom: 24px; }
-	.about { padding-bottom: 24px; }
+	.home { padding-bottom: var(--pad); }
+	.project .body { padding-bottom: var(--pad); }
+	.about { padding-bottom: var(--pad); }
 	.bar-left .site-title { white-space: nowrap; }
 	.bar-left .back .nm { display: none; }
 	.project .hero .facts { padding-right: 70px; }

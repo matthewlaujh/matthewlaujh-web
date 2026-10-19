@@ -176,9 +176,12 @@
 			for (var j = 0; j < figs.length; j++) figs[j].classList.add('seen');
 		}
 		var barH = parseFloat(getComputedStyle(html).getPropertyValue('--bar-h')) || 62;
+		var wasLight = false;
 		function glass() {
 			setBackdropSpeed(Math.max(0.2, 1 - scrollY / innerHeight));
-			html.setAttribute('data-glass', scrollY > innerHeight - barH ? 'light' : 'dark');
+			var light = scrollY > innerHeight - barH;
+			html.setAttribute('data-glass', light ? 'light' : 'dark');
+			if (light !== wasLight) { wasLight = light; var bd = backdropInstance(); if (bd) { if (light) { if (bd.pause) setTimeout(function () { if (wasLight) bd.pause(); }, 700); } else if (bd.start) bd.start(); } }
 		}
 		on(window, 'scroll', glass, { passive: true });
 		glass();
@@ -516,7 +519,7 @@
 	/* point the running diffusion at the next page's images */
 	function retarget(nel, early) {
 		var el = document.querySelector('.backdrop');
-		if (!nel) { if (el) { el.classList.add('off'); var i0 = el.__instance; if (i0 && i0.pause) setTimeout(function () { if (el.classList.contains('off')) i0.pause(); }, 1200); } return; }
+		if (!nel) { if (el) { el.classList.add('off'); var i0 = el.__instance; setTimeout(function () { if (el.classList.contains('off')) { el.classList.add('gone'); if (i0 && i0.pause) i0.pause(); } }, 1200); } return; }
 		var cfg = {};
 		try { cfg = JSON.parse(nel.querySelector('script').textContent); } catch (e) {}
 		if (!el) {                                   // came from a page without one
@@ -526,7 +529,7 @@
 			if (window.MLBackdrops) window.MLBackdrops.init(document);
 			return;
 		}
-		el.classList.remove('off');
+		el.classList.remove('off'); el.classList.remove('gone');
 		var sc = el.querySelector('script'); if (sc) sc.textContent = JSON.stringify(cfg);
 		var inst = el.__instance;
 		if (inst && inst.retarget) {
