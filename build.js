@@ -345,9 +345,9 @@ function typo(html) {
 function render(page) {
 	const isHome = page.slug === site.homepage;
 	const w = workBySlug[page.slug];
-	const title = isHome ? site.title : `${page.title_no_html} - ${site.title}`;
+	const title = typo(isHome ? site.title : `${page.title_no_html} \u2013 ${site.title}`);
 	const canonical = isHome ? site.url : `${site.url}/${page.slug}`;
-	const desc = w && w.meta.line ? w.meta.line : site.description;
+	const desc = typo(w && w.meta.line ? w.meta.line : site.description);
 	const ogImage = w ? `${site.url}${w.cover.video ? w.page.images[0].poster : w.page.images[0].src}` : `${site.url}${site.social_image}`;
 
 	let kind, backdrop, main;
