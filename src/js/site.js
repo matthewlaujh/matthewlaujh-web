@@ -447,23 +447,27 @@
 		if (!window.matchMedia || !matchMedia('(pointer: fine)').matches || reduced) return;
 		var el = document.createElement('div'); el.className = 'cursor'; el.setAttribute('aria-hidden', 'true'); el.innerHTML = '<i></i><i></i>';
 		document.body.appendChild(el);
-		/* the crosshair sits exactly under the pointer: any easing shows as lag on a fast move */
-		var tx = -100, ty = -100, raf = null, shown = false;
-		function loop() { el.style.transform = 'translate(' + tx + 'px,' + ty + 'px)'; raf = null; }
-		function kind(t) {
-			if (!t || !t.closest) return '';
-			if (t.closest('a, button, [role="button"], .more-in, summary, label, input, select, textarea')) return 'link';
-			if (t.closest('p, li, dd, dt, h1, h2, h3, figcaption, .lede, .role, .org, .note')) return 'text';
-			return '';
-		}
-		document.addEventListener('mousemove', function (e) {
-			tx = e.clientX; ty = e.clientY;
+		/* the crosshair sits exactly under the pointer: the position is written in the
+		   event itself (no frame of delay), from pointerrawupdate where the browser
+		   offers it, which arrives at the hardware rate rather than once a frame */
+		var shown = false, lastTarget = null;
+		function place(e) {
+			el.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
 			if (!shown) { shown = true; html.classList.add('has-cursor'); }
+		}
+		function classify(e) {
+			if (e.target === lastTarget) return;
+			lastTarget = e.target;
 			var k = kind(e.target);
 			el.classList.toggle('is-link', k === 'link');
 			el.classList.toggle('is-text', k === 'text');
-			if (!raf) raf = requestAnimationFrame(loop);
-		}, { passive: true });
+		}
+		if ('onpointerrawupdate' in window) {
+			document.addEventListener('pointerrawupdate', function (e) { if (e.pointerType === 'mouse') place(e); }, { passive: true });
+			document.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') { place(e); classify(e); } }, { passive: true });
+		} else {
+			document.addEventListener('mousemove', function (e) { place(e); classify(e); }, { passive: true });
+		}
 		document.addEventListener('mousedown', function () { el.classList.add('is-down'); });
 		document.addEventListener('mouseup', function () { el.classList.remove('is-down'); });
 		document.addEventListener('mouseleave', function () { el.classList.add('is-hidden'); });
