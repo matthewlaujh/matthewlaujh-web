@@ -116,7 +116,7 @@ function mediaHTML(im, attrs) {
 }
 /* a silent loop needs a way to stop it: a small pill in the plate's corner */
 function videoControl() {
-	return `<button class="vctl" type="button" aria-pressed="false" aria-label="Pause video"><svg viewBox="0 0 10 10" aria-hidden="true"><path class="pause" d="M2.5 1.5v7M7.5 1.5v7"/><path class="play" d="M3 1.5l5.5 3.5L3 8.5z"/></svg></button>`;
+	return `<button class="vctl" type="button" aria-label="Pause video"><svg viewBox="0 0 10 10" aria-hidden="true"><path class="pause" d="M2.5 1.5v7M7.5 1.5v7"/><path class="play" d="M3 1.5l5.5 3.5L3 8.5z"/></svg></button>`;
 }
 
 const kcls = k => k === 'art' ? ' k--art' : k === 'both' ? ' k--both' : '';
@@ -206,7 +206,7 @@ function introHTML(currentSlug) {
 function itemHTML(w) {
 	const m = w.meta || {};
 	const facts = [['Category', w.category], ['Techniques', m.techniques], [m.client_label || 'Client', m.client]].filter(x => x[1]).map(([k, v]) => `<span class="fact"><b>${esc(k)}</b>${esc(v)}</span>`).join('');
-	return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}" aria-label="${esc(KIND_LABEL[m.kind] || KIND_LABEL.design)}: ${esc(w.title)}, ${w.year}">${kdot(m.kind)}<span class="tt" aria-hidden="true">${splitTitle(w.title)}<small>${w.year}</small></span></a><div class="more"><div><div class="more-in" aria-hidden="true"><img class="thumb" alt="" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></div></div></div></div>`;
+	return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}" aria-label="${esc(KIND_LABEL[m.kind] || KIND_LABEL.design)}: ${esc(w.title)}, ${w.year}">${kdot(m.kind)}<span class="tt" aria-hidden="true">${splitTitle(w.title)}<small>${w.year}</small></span></a><div class="more"><div><div class="more-in" aria-hidden="true"><img class="thumb" alt="" decoding="async" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></div></div></div></div>`;
 }
 function homeMain() {
 	const list = nav.groups.map(g => `\t\t\t<h2 class="group">${g.label}</h2>\n${g.items.map(it => {
@@ -233,9 +233,8 @@ ${list}
 function notFoundMain() {
 	const recent = works.slice().sort((a, b) => parseInt(b.year, 10) - parseInt(a.year, 10)).slice(0, 5);
 	return `<main id="main" tabindex="-1" class="home notfound">
-		<h1 class="visually-hidden">Page not found</h1>
 		<nav class="marquee" aria-label="Recent projects">
-			<p class="oops">There\u2019s nothing at this address.</p>
+			<h1 class="oops">There\u2019s nothing at this address.</h1>
 			<h2 class="group">Recent work</h2>
 ${recent.map(itemHTML).join('\n')}
 			<a class="space" href="${url(FIELD_SLUG)}">All works in space${yr(works.length)}</a>
@@ -289,7 +288,7 @@ function fieldMain() {
 	   tiles nudged apart until none overlap. Here we only emit the tiles. */
 	const tiles = works.map((w, i) => {
 		const k = (w.meta || {}).kind || 'design';
-		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" data-kind="${k}" data-cat="${esc(w.category)}" data-year="${String(w.year).slice(0, 4)}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label">${kdot(k)}${esc(w.title)}, ${w.year}</span></a>`;
+		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" data-kind="${k}" data-cat="${esc(w.category)}" data-year="${String(w.year).slice(0, 4)}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" decoding="async" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label">${kdot(k)}${esc(w.title)}, ${w.year}</span></a>`;
 	});
 	const marks = nav.groups.map(g => `\t\t\t<span class="cluster" data-cat="${esc(g.label)}">${esc(g.label)}</span>`).join('\n');
 	/* the timeline: one lane per category, one column per year, newest first */
@@ -459,7 +458,7 @@ if (!RELATIVE) {
 	fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `\t<url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 	fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
 	fs.writeFileSync(path.join(OUT, '_redirects'), `/${site.homepage}  /  301\n/Archifest-2021-Sea-of-Debris-2021  /NewWave-2021  301\n/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition  /Proximate-2022  301\n`);
-	fs.writeFileSync(path.join(OUT, '_headers'), `/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=31536000, immutable\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n`);
+	fs.writeFileSync(path.join(OUT, '_headers'), `/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=31536000, immutable\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\nhttps://matthewlaujh-web.organisedmess-studio.workers.dev/*\n  X-Robots-Tag: noindex, nofollow\n`);
 }
 
 console.log(`built ${count} pages -> ${path.relative(ROOT, OUT)}/`);

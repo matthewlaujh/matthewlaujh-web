@@ -181,7 +181,7 @@
 			function reflect() {
 				var stopped = v.paused && !!v.getAttribute('data-stopped');
 				if (fig) fig.classList.toggle('stopped', stopped);
-				if (btn) { btn.setAttribute('aria-pressed', stopped ? 'true' : 'false'); btn.setAttribute('aria-label', stopped ? 'Play video' : 'Pause video'); }
+				if (btn) btn.setAttribute('aria-label', stopped ? 'Play video' : 'Pause video');
 			}
 			v.addEventListener('play', reflect); v.addEventListener('pause', reflect);
 			if (btn) btn.addEventListener('click', function () {
@@ -247,7 +247,7 @@
 		var centres = [[0.2, 0.4], [0.55, 0.72], [0.82, 0.22]];      // per category, as fractions of the free area
 		var drift = { art: [-1, 1], both: [0, 0], design: [1, -1] };
 		function layout() {
-			if (mobile.matches) { tiles.forEach(function (t) { t.style.cssText = ''; }); return; }
+			if (mobile.matches) { tiles.forEach(function (t) { t.style.cssText = ''; }); html.classList.remove('field-tall'); f.style.height = ''; return; }
 			var seed = 11; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
 			var pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 28;
 			var timeEl = document.querySelector('.field-time'), timeB = timeEl ? timeEl.getBoundingClientRect().bottom : 80;
@@ -349,9 +349,12 @@
 			d.innerHTML = '<img src="' + img.src + '" alt="">';
 			document.body.appendChild(d);
 			tile.style.transition = 'none'; tile.style.opacity = '0';
-			function settleTile() { d.remove(); tile.style.transition = ''; tile.style.opacity = ''; }
+			var settled = false;
+			function settleTile() { if (settled) return; settled = true; d.remove(); tile.style.transition = ''; tile.style.opacity = ''; }
 			if (!d.animate) { settleTile(); return; }
+			setTimeout(settleTile, 1400);
 			requestAnimationFrame(function () {
+				if (settled) return;
 				var r = img.getBoundingClientRect();
 				d.animate([
 					{ left: '0px', top: '0px', width: innerWidth + 'px', height: innerHeight + 'px', opacity: 0, filter: 'blur(14px)' },
@@ -361,6 +364,7 @@
 			});
 		})();
 		var rt; on(window, 'resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
+		on(mobile, 'change', function () { clearTimeout(rt); layout(); });   // across the grid/field line: no debounce, no empty field
 		function scrolled() { if (scrollY > 6) html.setAttribute('data-scrolled', '1'); else html.removeAttribute('data-scrolled'); }
 		on(window, 'scroll', scrolled, { passive: true });
 		function loop() {
@@ -412,13 +416,15 @@
 			if (bd && bd.show) { bd.settings.fade = 0.7; bd.show(+el.getAttribute('data-i')); setBackdropSpeed(2.2); }
 			f.classList.add('leaving');
 			var sideEl = document.querySelector('.field-time'); if (sideEl) sideEl.classList.add('leaving');
-			var seq = popSeq;
+			var seq = popSeq, gone = false;
+			function arrive() { if (gone) return; gone = true; d.remove(); if (popSeq === seq) navigate(href); }
 			if (d.animate) {
+				setTimeout(arrive, 1300);
 				d.animate([
 					{ left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', opacity: 1, filter: 'blur(0px)' },
 					{ opacity: 1, filter: 'blur(0px)', offset: 0.35 },
 					{ left: '0px', top: '0px', width: innerWidth + 'px', height: innerHeight + 'px', opacity: 0, filter: 'blur(14px)' }
-				], { duration: 1100, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' }).onfinish = function () { d.remove(); if (popSeq === seq) navigate(href); };
+				], { duration: 1100, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' }).onfinish = arrive;
 			} else navigate(href);
 		}
 		tiles.forEach(function (t) { t.addEventListener('click', function (e) { go(e, t); }); });
@@ -446,22 +452,34 @@
 	/* ---------------- custom cursor (pointer devices only) ---------------- */
 	function setupCursor() {
 		if (!window.matchMedia || !matchMedia('(pointer: fine)').matches || reduced) return;
+		/* two layers: a faint unblended halo underneath, so the difference-blended
+		   lines still read over mid-grey, where white minus grey is grey */
+		var halo = document.createElement('div'); halo.className = 'cursor cursor-halo'; halo.setAttribute('aria-hidden', 'true'); halo.innerHTML = '<i></i><i></i>';
 		var el = document.createElement('div'); el.className = 'cursor'; el.setAttribute('aria-hidden', 'true'); el.innerHTML = '<i></i><i></i>';
-		document.body.appendChild(el);
+		document.body.appendChild(halo); document.body.appendChild(el);
+		function cls(name, on) { el.classList.toggle(name, on); halo.classList.toggle(name, on); }
 		/* the crosshair sits exactly under the pointer: the position is written in the
 		   event itself (no frame of delay), from pointerrawupdate where the browser
 		   offers it, which arrives at the hardware rate rather than once a frame */
 		var shown = false, lastTarget = null;
 		function place(e) {
-			el.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
-			if (!shown) { shown = true; html.classList.add('has-cursor'); }
+			var t = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+			el.style.transform = t; halo.style.transform = t;
+			/* a touch hands the native cursor back; the next mouse move takes it again */
+			if (!shown || !html.classList.contains('has-cursor')) { shown = true; html.classList.add('has-cursor'); }
+		}
+		function kind(t) {
+			if (!t || !t.closest) return '';
+			if (t.closest('a, button, [role="button"], .more-in, summary, label, input, select, textarea')) return 'link';
+			if (t.closest('p, li, dd, dt, h1, h2, h3, figcaption, .lede, .role, .org, .note')) return 'text';
+			return '';
 		}
 		function classify(e) {
 			if (e.target === lastTarget) return;
 			lastTarget = e.target;
 			var k = kind(e.target);
-			el.classList.toggle('is-link', k === 'link');
-			el.classList.toggle('is-text', k === 'text');
+			cls('is-link', k === 'link');
+			cls('is-text', k === 'text');
 		}
 		if ('onpointerrawupdate' in window) {
 			document.addEventListener('pointerrawupdate', function (e) { if (e.pointerType === 'mouse') place(e); }, { passive: true });
@@ -469,10 +487,13 @@
 		} else {
 			document.addEventListener('mousemove', function (e) { place(e); classify(e); }, { passive: true });
 		}
-		document.addEventListener('mousedown', function () { el.classList.add('is-down'); });
-		document.addEventListener('mouseup', function () { el.classList.remove('is-down'); });
-		document.addEventListener('mouseleave', function () { el.classList.add('is-hidden'); });
-		document.addEventListener('mouseenter', function () { el.classList.remove('is-hidden'); });
+		document.addEventListener('mousedown', function () { cls('is-down', true); });
+		/* a native drag swallows mouseup, so every way a press can end clears the pressed shape */
+		['mouseup', 'pointerup', 'pointercancel', 'dragend', 'blur'].forEach(function (t) { addEventListener(t, function () { cls('is-down', false); }, true); });
+		/* links and images do not start a native drag (which would freeze the crosshair and show the OS drag cursor) */
+		document.addEventListener('dragstart', function (e) { if (e.target.closest && e.target.closest('a, img, video, .more-in')) e.preventDefault(); });
+		document.addEventListener('mouseleave', function () { cls('is-hidden', true); });
+		document.addEventListener('mouseenter', function () { cls('is-hidden', false); });
 		/* touch after mouse: give the native cursor back */
 		addEventListener('touchstart', function () { html.classList.remove('has-cursor'); }, { passive: true });
 	}
