@@ -128,7 +128,7 @@ const yr = y => `<small><span class="visually-hidden">, </span>${y}</small>`;
 
 function splitTitle(t) {
 	// each letter gets its own span so the hover wave / rise can stagger
-	return t.split(' ').map((word, wi) => `<span class="w">${[...word].map((c, k) => `<span class="ch" style="--d:${(wi * 6 + k) * 18}ms">${esc(c)}</span>`).join('')}</span>`).join(' ');
+	return t.split(' ').map((word, wi) => `<span class="w">${[...word].map((c, k) => `<span class="ch" style="--d:${Math.min(360, (wi * 6 + k) * 12)}ms">${esc(c)}</span>`).join('')}</span>`).join(' ');
 }
 
 function dropdownHTML(current) {

@@ -111,7 +111,7 @@ main.home { animation: none; }
 	.cursor { position: fixed; left: 0; top: 0; z-index: 1000; pointer-events: none; width: 0; height: 0; mix-blend-mode: difference; opacity: 0; transition: opacity .3s; }
 	html.has-cursor .cursor { opacity: 1; }
 	.cursor { will-change: transform; }
-	.cursor i { position: absolute; left: 0; top: 0; background: #fff; display: block; transition: width .3s var(--ease), height .3s var(--ease), transform .3s var(--ease), opacity .2s; }
+	.cursor i { position: absolute; left: 0; top: 0; background: #fff; display: block; transition: width .15s var(--ease), height .15s var(--ease), transform .15s var(--ease), opacity .12s; }
 	.cursor i:first-child { width: 12px; height: 1px; transform: translate(-6px, 0); }
 	.cursor i:last-child { width: 1px; height: 12px; transform: translate(0, -6px); }
 	.cursor.is-link i:first-child { width: 18px; transform: translate(-9px, 0) rotate(45deg); }
@@ -187,17 +187,19 @@ main.home { animation: none; }
 	display: block; width: fit-content; max-width: 100%;
 	font: 300 var(--t-title)/1.2 var(--serif); padding: .08em 0;
 	color: rgba(255, 255, 255, .9);
-	transition: color .3s, padding-left .4s var(--ease);
+	transition: color .25s, padding-left .3s var(--ease);
 }
 .marquee .dead { color: rgba(255, 255, 255, .35); cursor: default; }
 .marquee .w { white-space: nowrap; display: inline-block; }
-.marquee .ch { display: inline-block; transition: transform .25s; transition-delay: var(--d); }
+.marquee .ch { display: inline-block; transition: transform .18s; transition-delay: var(--d); }
 .marquee a:hover .ch { font-style: italic; transform: translateY(-.03em); }
 .marquee:has(a:hover) a:not(:hover) { color: rgba(255, 255, 255, .32); }
 .marquee a:hover { padding-left: .4em; }
 .marquee small { vertical-align: top; display: inline-block; padding-top: .45em; }
 /* hover: the row opens to show the one-liner and facts beneath the title */
-.marquee .more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease); }
+.marquee .more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .32s var(--ease); }
+/* a pass down the list should not open every row: opening waits a beat, closing does not */
+.marquee .item:hover .more { transition-delay: .09s; }
 .marquee .more > div { overflow: hidden; min-height: 0; }
 .marquee .more-in { display: flex; gap: 28px; align-items: flex-start; padding: 4px 0 12px .4em; color: inherit; width: fit-content; max-width: 100%; cursor: pointer; }
 .marquee .more .text { flex: 1 1 auto; min-width: 0; max-width: 52ch; }
