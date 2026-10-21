@@ -38,7 +38,8 @@
 /* ---------------------------------------------------------------- reset */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: none; background: var(--dark); scrollbar-gutter: stable; overflow-x: clip; }
-body { margin: 0; background: var(--dark); color: var(--fg); font: 300 var(--t-base)/1.5 var(--sans); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+/* no overflow on body: it would make body the scroll container and the sticky bar would stop sticking */
+body { margin: 0; background: var(--dark); color: var(--fg); font: 300 var(--t-base)/1.5 var(--sans); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 a { color: inherit; text-decoration: none; }
 a:focus-visible, button:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
@@ -56,6 +57,8 @@ body { text-wrap: pretty; }
 .prose p + p, .prose ul + p, .prose p + ul, .prose h2 + p { margin-top: .6em; }
 .prose h2 { font: inherit; font-family: var(--sans); font-size: var(--t-base); color: var(--ink-dim); margin: 1.6em 0 .4em; }
 .prose hr { border: 0; border-top: 1px solid currentColor; opacity: .3; margin: 1em 0; width: 2em; }
+/* a dash closes every run of text, as it did on the old site */
+.end { margin-top: 1em; opacity: .45; font: inherit; }
 .prose ul { padding-left: 1.1em; list-style: disc; }
 .prose li + li { margin-top: .3em; }
 .prose i { font-style: italic; }

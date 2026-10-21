@@ -198,7 +198,7 @@ function introHTML(currentSlug) {
 	const html = convert.blocks(intro.html)
 		.replace(/<p><a[^>]*>Click here for more about me\.<\/a><\/p>/, '')
 		.replace(/<hr>\s*$/, '');
-	return `<div class="prose">\n${fixLinks(html, currentSlug)}\n</div>`;
+	return `<div class="prose">\n${fixLinks(html, currentSlug)}\n<p class="end" aria-hidden="true">\u2014</p>\n</div>`;
 }
 
 /* ------------------------------------------------------------------ pages */
@@ -273,6 +273,7 @@ ${dl}
 				${w.context ? `<p class="context">${fixLinks(w.context, w.slug)}</p>` : ''}
 				<div class="prose">
 ${fixLinks(w.body, w.slug)}
+<p class="end" aria-hidden="true">\u2014</p>
 				</div>
 			</div>
 			<div class="plates">
@@ -339,8 +340,8 @@ function aboutMain(page) {
 			<span>${esc(a.contact.location)}</span>
 		</div>
 		<div class="heads">
-			<div class="lede"><h2><i class="k" aria-hidden="true"></i>${esc(a.lede_title)}</h2>${a.lede.map(p => `<p>${p}</p>`).join('')}</div>
-			<div class="lede"><h2><i class="k k--art" aria-hidden="true"></i>${esc(a.statement_title)}</h2>${a.statement.map(p => `<p>${p}</p>`).join('')}</div>
+			<div class="lede"><h2><i class="k" aria-hidden="true"></i>${esc(a.lede_title)}</h2>${a.lede.map(p => `<p>${p}</p>`).join('')}<p class="end" aria-hidden="true">\u2014</p></div>
+			<div class="lede"><h2><i class="k k--art" aria-hidden="true"></i>${esc(a.statement_title)}</h2>${a.statement.map(p => `<p>${p}</p>`).join('')}<p class="end" aria-hidden="true">\u2014</p></div>
 		</div>
 		<div class="cv">
 			<div class="pair">
