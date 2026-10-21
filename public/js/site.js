@@ -447,12 +447,9 @@
 		if (!window.matchMedia || !matchMedia('(pointer: fine)').matches || reduced) return;
 		var el = document.createElement('div'); el.className = 'cursor'; el.setAttribute('aria-hidden', 'true'); el.innerHTML = '<i></i><i></i>';
 		document.body.appendChild(el);
-		var x = -100, y = -100, tx = x, ty = y, raf = null, shown = false;
-		function loop() {
-			x += (tx - x) * 0.35; y += (ty - y) * 0.35;
-			el.style.transform = 'translate(' + x + 'px,' + y + 'px)';
-			raf = (Math.abs(tx - x) + Math.abs(ty - y) > 0.1) ? requestAnimationFrame(loop) : null;
-		}
+		/* the crosshair sits exactly under the pointer: any easing shows as lag on a fast move */
+		var tx = -100, ty = -100, raf = null, shown = false;
+		function loop() { el.style.transform = 'translate(' + tx + 'px,' + ty + 'px)'; raf = null; }
 		function kind(t) {
 			if (!t || !t.closest) return '';
 			if (t.closest('a, button, [role="button"], .more-in, summary, label, input, select, textarea')) return 'link';
@@ -461,7 +458,7 @@
 		}
 		document.addEventListener('mousemove', function (e) {
 			tx = e.clientX; ty = e.clientY;
-			if (!shown) { x = tx; y = ty; shown = true; html.classList.add('has-cursor'); }
+			if (!shown) { shown = true; html.classList.add('has-cursor'); }
 			var k = kind(e.target);
 			el.classList.toggle('is-link', k === 'link');
 			el.classList.toggle('is-text', k === 'text');
