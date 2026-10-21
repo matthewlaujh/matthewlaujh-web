@@ -84,11 +84,11 @@
 				{
 					"dates": "2021",
 					"role": "Designer",
-					"org": "Neuewave",
+					"org": "Neuewave/MDRN",
 					"place": "Singapore",
 					"note": "May – Aug 2021.",
 					"bullets": [
-						"Assisted the artists with <i>The Oort Cloud and Blue Mountain</i>, shown at the <a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\">Children's Biennale 2021 (Dresden and Groningen) and Singapore Art Week 2022</a>.",
+						"Assisted the artists with <i>The Oort Cloud and the Blue Mountain</i>, shown at the <a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\">Children's Biennale 2021 (Dresden and Groningen) and Singapore Art Week 2022</a>.",
 						"Assisted with <a href=\"NewWave-2021\"><i>NewWave</i></a> (shown as <i>Sea of Debris</i> at Archifest 2021), a kinetic object using sensors and motors to raise awareness of ocean waste."
 					]
 				},
@@ -164,12 +164,12 @@
 					"org": "Techno Terra: Archive of the Future",
 					"org_url": "https://www.lasalle.edu.sg/events/technoterra-archive-of-the-future/",
 					"place": "Gallery 1, Institute of Contemporary Arts Singapore",
-					"note": "4 Sep – 24 Oct 2026.",
+					"note": "4 September–24 October 2026",
 					"kind": "art"
 				},
 				{
 					"dates": "2026",
-					"role": "<i>Forms Drifting</i>, in collaboration with MDRN",
+					"role": "<i>Forms Drifting</i>, in collaboration with Neuewave/MDRN",
 					"org": "I SAW IT, Singapore Art Week 2026",
 					"place": "Flock at Kampong Java, Singapore",
 					"note": "",
@@ -181,7 +181,7 @@
 					"org": "Singapore: A Design Thesis in the Making",
 					"org_url": "https://www.lasalle.edu.sg/events/singapore-design-thesis-making?source=ica-events",
 					"place": "Gallery 1, Institute of Contemporary Arts Singapore",
-					"note": "12 Sep – 28 Oct 2025.",
+					"note": "12 September–28 October 2025",
 					"kind": "art"
 				},
 				{
@@ -190,7 +190,7 @@
 					"org": "Beyond Interface & Prompt: Exploring the Language of Technology in Contemporary Art",
 					"org_url": "https://www.wahcenter.net/2025/04/beyond-interface-prompt-exploring-the-language-of-technology-in-contemporary-art/",
 					"place": "WAH Center (Williamsburg Art & Historical Center), Brooklyn, New York",
-					"note": "18 Apr – 17 May 2025.",
+					"note": "18 April–17 May 2025",
 					"kind": "art"
 				},
 				{
@@ -207,12 +207,12 @@
 					"org": "Threads: A Critical Craft Collective Experiment, Draft #2",
 					"org_url": "https://www.lasalle.edu.sg/events/threads-critical-craft-collective-experiment-draft-2",
 					"place": "Earl Lu Gallery, Institute of Contemporary Arts Singapore",
-					"note": "13 – 25 Mar 2023.",
+					"note": "13–25 March 2023",
 					"kind": "art"
 				},
 				{
-					"dates": "2022–2025",
-					"role": "<a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\"><i>The Oort Cloud and the Blue Mountain</i></a>, with MDRN, Andreas Schlegel & Hazel Lim-Schlegel",
+					"dates": "2022",
+					"role": "<a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\"><i>The Oort Cloud and the Blue Mountain</i></a>, with Neuewave/MDRN, Andreas Schlegel & Hazel Lim-Schlegel",
 					"org": "Singapore Art Week 2022",
 					"place": "Tanjong Pagar Distripark, Singapore",
 					"note": "",
@@ -228,7 +228,15 @@
 				},
 				{
 					"dates": "2021",
-					"role": "<a href=\"NewWave-2021\"><i>NewWave</i></a>, in collaboration with MDRN",
+					"role": "<a href=\"NewWave-2021\"><i>NewWave</i></a> (shown as <i>Sea of Debris</i>), in collaboration with Neuewave/MDRN",
+					"org": "Archifest 2021",
+					"place": "Singapore",
+					"note": "",
+					"kind": "art"
+				},
+				{
+					"dates": "2021",
+					"role": "<a href=\"NewWave-2021\"><i>NewWave</i></a>, in collaboration with Neuewave/MDRN",
 					"org": "Farewell To Reason, by (KSY) Nathan Yong",
 					"place": "Industry+, Singapore",
 					"note": "",
@@ -236,7 +244,7 @@
 				},
 				{
 					"dates": "2021–2022",
-					"role": "<a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\"><i>The Oort Cloud and the Blue Mountain</i></a>, with MDRN, Andreas Schlegel & Hazel Lim-Schlegel",
+					"role": "<a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\"><i>The Oort Cloud and the Blue Mountain</i></a>, with Neuewave/MDRN, Andreas Schlegel & Hazel Lim-Schlegel",
 					"org": "Kinderbiënnale 2021",
 					"place": "Groninger Museum, Groningen, Netherlands",
 					"note": "",
@@ -244,7 +252,7 @@
 				},
 				{
 					"dates": "2021–2022",
-					"role": "<a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\"><i>The Oort Cloud and the Blue Mountain</i></a>, with MDRN, Andreas Schlegel & Hazel Lim-Schlegel",
+					"role": "<a href=\"The-Oort-Cloud-and-Blue-Mountain-2021-2022\"><i>The Oort Cloud and the Blue Mountain</i></a>, with Neuewave/MDRN, Andreas Schlegel & Hazel Lim-Schlegel",
 					"org": "Children's Biennale 2021",
 					"place": "Japanisches Palais, Staatliche Kunstsammlungen Dresden, Germany",
 					"note": "",

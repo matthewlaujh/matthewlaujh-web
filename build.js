@@ -378,7 +378,10 @@ function render(page) {
 	const w = workBySlug[page.slug];
 	const title = typo(isHome ? site.title : `${page.title_no_html} \u2013 ${site.title}`);
 	const canonical = isHome ? site.url : `${site.url}/${page.slug}`;
-	const desc = typo(w && w.meta.line ? w.meta.line : site.description);
+	const desc = typo(w && w.meta.line ? w.meta.line
+		: page.slug === 'About' ? 'Who I am and what I have made: experience, education, exhibitions and skills of a creative technologist and artist working with computation and light.'
+		: page.slug === FIELD_SLUG ? `Every project laid out by kind and year: experiential, computational and digital work from ${yearRange}.`
+		: site.description);
 	const ogImage = w ? `${site.url}${w.cover.video ? w.page.images[0].poster : w.page.images[0].src}` : `${site.url}${site.social_image}`;
 
 	let kind, backdrop, main;
