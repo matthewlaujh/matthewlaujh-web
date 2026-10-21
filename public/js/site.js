@@ -335,6 +335,30 @@
 			f.classList.add('ready');
 		}
 		layout();
+		/* back from a project: its cover shrinks from the whole screen into its tile,
+		   the reverse of the way it left */
+		if (cameFrom && !reduced && !mobile.matches) (function () {
+			var tile = tiles.filter(function (t) { return slugOf(t.getAttribute('href')) === cameFrom; })[0];
+			cameFrom = null;
+			if (!tile) return;
+			var img = tile.querySelector('img'), bd = backdropInstance();
+			if (bd && bd.show) bd.show(+tile.getAttribute('data-i'));
+			var d = document.createElement('div');
+			d.className = 'flip';
+			d.innerHTML = '<img src="' + img.src + '" alt="">';
+			document.body.appendChild(d);
+			tile.style.transition = 'none'; tile.style.opacity = '0';
+			function settleTile() { d.remove(); tile.style.transition = ''; tile.style.opacity = ''; }
+			if (!d.animate) { settleTile(); return; }
+			requestAnimationFrame(function () {
+				var r = img.getBoundingClientRect();
+				d.animate([
+					{ left: '0px', top: '0px', width: innerWidth + 'px', height: innerHeight + 'px', opacity: 0, filter: 'blur(14px)' },
+					{ opacity: 1, filter: 'blur(0px)', offset: 0.55 },
+					{ left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', opacity: 1, filter: 'blur(0px)' }
+				], { duration: 1000, easing: 'cubic-bezier(.2,.6,.2,1)', fill: 'forwards' }).onfinish = settleTile;
+			});
+		})();
 		var rt; on(window, 'resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
 		function scrolled() { if (scrollY > 6) html.setAttribute('data-scrolled', '1'); else html.removeAttribute('data-scrolled'); }
 		on(window, 'scroll', scrolled, { passive: true });
@@ -486,6 +510,9 @@
 	/* one navigation at a time: a newer click, or Back, replaces whatever is in
 	   flight (its fetch is aborted and it never pushes a history entry) */
 	var current = null;
+	var cameFrom = null;   // the project slug we just left, for the field's reverse flip
+	function slugOf(href) { return String(href).replace(/[?#].*$/, '').replace(/\.html$/, '').replace(/\/$/, '').split('/').pop(); }
+	var pageSlug = slugOf(location.pathname);
 	function kindOf(href) {
 		var m = href.replace(/[?#].*$/, '').replace(/\.html$/, '').split('/').pop();
 		return m === 'About' ? 'about' : m === 'All-Projects' ? 'field' : (m === '' || m === 'index' || m === 'Front-Page' || m === '404') ? 'home' : 'project';
@@ -548,6 +575,8 @@
 	}
 	function swap(doc) {
 		var nb = doc.body, kind = doc.documentElement.getAttribute('data-page');
+		cameFrom = page === 'project' ? pageSlug : null;
+		pageSlug = slugOf((doc.querySelector('link[rel="canonical"]') || {}).href || '');
 		document.title = doc.title;
 		html.setAttribute('data-from', page);
 		html.removeAttribute('data-to');

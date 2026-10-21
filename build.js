@@ -206,7 +206,7 @@ function introHTML(currentSlug) {
 function itemHTML(w) {
 	const m = w.meta || {};
 	const facts = [['Category', w.category], ['Techniques', m.techniques], [m.client_label || 'Client', m.client]].filter(x => x[1]).map(([k, v]) => `<span class="fact"><b>${esc(k)}</b>${esc(v)}</span>`).join('');
-	return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}">${kdot(m.kind)}<span class="visually-hidden">${esc(w.title)}, ${w.year}</span><span class="tt" aria-hidden="true">${splitTitle(w.title)}<small>${w.year}</small></span></a><div class="more"><div><div class="more-in" aria-hidden="true"><img class="thumb" alt="" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></div></div></div></div>`;
+	return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}" aria-label="${esc(KIND_LABEL[m.kind] || KIND_LABEL.design)}: ${esc(w.title)}, ${w.year}">${kdot(m.kind)}<span class="tt" aria-hidden="true">${splitTitle(w.title)}<small>${w.year}</small></span></a><div class="more"><div><div class="more-in" aria-hidden="true"><img class="thumb" alt="" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></div></div></div></div>`;
 }
 function homeMain() {
 	const list = nav.groups.map(g => `\t\t\t<h2 class="group">${g.label}</h2>\n${g.items.map(it => {
@@ -260,7 +260,7 @@ function projectMain(w) {
 	].filter(Boolean).map(([k, v]) => `\t\t\t\t<dt>${k}</dt><dd>${v}</dd>`).join('\n');
 	return `<main id="main" tabindex="-1" class="project">
 		<section class="hero">
-			<h1><span class="visually-hidden">${esc(w.title)}, ${w.year}</span><span class="tt" aria-hidden="true">${splitTitle(w.title)}<small>${w.year}</small></span></h1>
+			<h1 aria-label="${esc(w.title)}, ${w.year}"><span class="tt" aria-hidden="true">${splitTitle(w.title)}<small>${w.year}</small></span></h1>
 			${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}
 			<p class="facts"><span>${w.category}</span>${m.client ? `<span>${esc(m.client)}</span>` : ''}</p>
 			<p class="scroll-cue">Scroll<i>↓</i></p>
