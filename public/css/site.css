@@ -319,6 +319,19 @@ html.field-tall .field { position: relative; inset: auto; margin-top: calc(-1 * 
 .field a:hover { filter: none; z-index: 20 !important; }
 /* the timeline across the top: a lane per category, a column per year */
 .field-time { position: fixed; left: 0; right: 0; top: 0; padding: calc(var(--bar-h) + 6px) var(--pad) 0; z-index: 5; font: 300 var(--t-base)/1.35 var(--sans); }
+/* short windows: the lanes fold away under the year axis and the map takes the
+   height. They drop down as a glass shelf on hover over the axis, or from the pill. */
+.field-time .yrs { display: none; }
+html.field-collapsed .field-time .yrs { position: absolute; right: var(--pad); top: calc(var(--bar-h) + 50px); z-index: 2; display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px; border-radius: 999px; font: 300 var(--t-s)/1 var(--sans); color: #fff; background: rgba(24, 24, 26, .32); border: 1px solid rgba(255, 255, 255, .18); -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); transition: background-color .25s; }
+html.field-collapsed .field-time .yrs svg { width: 10px; height: 10px; transition: transform .3s var(--ease); }
+html.field-collapsed .field-time .yrs:hover, html.field-collapsed .field-time.open .yrs { background: rgba(24, 24, 26, .55); }
+html.field-collapsed .field-time.open .yrs svg { transform: rotate(180deg); }
+html.field-collapsed .field-time .lanes { visibility: hidden; opacity: 0; transform: translateY(-8px); transition: opacity .3s, transform .3s var(--ease), visibility .3s; }
+html.field-collapsed .field-time.open .lanes { visibility: visible; opacity: 1; transform: none; }
+html.field-collapsed .field-time.open { background: rgba(17, 17, 17, .7); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); padding-bottom: 52px; }
+html.field-collapsed .field-time.open .yrs { top: auto; bottom: 10px; }
+html.field-collapsed .field-time { pointer-events: none; }
+html.field-collapsed .field-time .axis, html.field-collapsed .field-time .yrs, html.field-collapsed .field-time.open .lanes { pointer-events: auto; }
 /* when the field scrolls under it, the timeline becomes a glass shelf */
 html.field-tall[data-scrolled] .field-time { background: rgba(17, 17, 17, .7); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); padding-bottom: 10px; }
 .field-time .axis, .field-time .lane { display: grid; grid-template-columns: 7.5em repeat(var(--n), minmax(0, 1fr)); gap: 0 14px; align-items: start; }

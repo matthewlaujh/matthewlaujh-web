@@ -229,6 +229,8 @@
 		var marks = [].slice.call(f.querySelectorAll('.cluster'));
 		var side = [].slice.call(document.querySelectorAll('.field-time a'));
 		var mobile = window.matchMedia('(max-width: 1100px)');
+		var short = window.matchMedia('(max-height: 900px)');   // the lanes fold away and the map takes the height
+		var timeEl = document.querySelector('.field-time'), yrsBtn = timeEl && timeEl.querySelector('.yrs');
 		var px = 0, py = 0, tx = 0, ty = 0, raf = null;
 		var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 		svg.setAttribute('class', 'links'); svg.setAttribute('aria-hidden', 'true');
@@ -247,13 +249,16 @@
 		var centres = [[0.2, 0.4], [0.55, 0.72], [0.82, 0.22]];      // per category, as fractions of the free area
 		var drift = { art: [-1, 1], both: [0, 0], design: [1, -1] };
 		function layout() {
-			if (mobile.matches) { tiles.forEach(function (t) { t.style.cssText = ''; }); html.classList.remove('field-tall'); f.style.height = ''; return; }
+			if (mobile.matches) { tiles.forEach(function (t) { t.style.cssText = ''; }); html.classList.remove('field-tall'); html.classList.remove('field-collapsed'); f.style.height = ''; return; }
 			var seed = 11; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
 			var pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 28;
-			var timeEl = document.querySelector('.field-time'), timeB = timeEl ? timeEl.getBoundingClientRect().bottom : 80;
+			var collapsed = short.matches;
+			html.classList.toggle('field-collapsed', collapsed);
+			if (!collapsed && timeEl) { timeEl.classList.remove('open'); if (yrsBtn) yrsBtn.setAttribute('aria-expanded', 'false'); }
+			var timeB = timeEl ? (collapsed ? timeEl.querySelector('.axis') : timeEl).getBoundingClientRect().bottom : 80;
 			/* a short window (a laptop with the timeline open) gets a taller field
 			   than the viewport and scrolls, rather than hiding tiles under each other */
-			var x0 = pad + 20, x1 = innerWidth - pad - 20, y0 = timeB + 50, y1 = Math.max(innerHeight - 130, y0 + 470);
+			var x0 = pad + 20, x1 = innerWidth - pad - 20, y0 = timeB + 50, y1 = Math.max(innerHeight - 130, y0 + (collapsed ? 440 : 470));
 			var tall = y1 > innerHeight - 130;
 			html.classList.toggle('field-tall', tall);
 			f.style.height = tall ? (y1 + 110) + 'px' : '';
@@ -365,6 +370,17 @@
 		})();
 		var rt; on(window, 'resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
 		on(mobile, 'change', function () { clearTimeout(rt); layout(); });   // across the grid/field line: no debounce, no empty field
+		on(short, 'change', function () { clearTimeout(rt); layout(); });
+		/* the folded lanes: open from the pill (click, keyboard) or by resting on the axis */
+		if (timeEl && yrsBtn) {
+			function setOpen(o) { timeEl.classList.toggle('open', o); yrsBtn.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+			yrsBtn.addEventListener('click', function () { setOpen(!timeEl.classList.contains('open')); });
+			var hoverT;
+			timeEl.addEventListener('mouseover', function () { if (!html.classList.contains('field-collapsed')) return; clearTimeout(hoverT); hoverT = setTimeout(function () { setOpen(true); }, 120); });
+			timeEl.addEventListener('mouseout', function (e) { if (!html.classList.contains('field-collapsed') || (e.relatedTarget && timeEl.contains(e.relatedTarget))) return; clearTimeout(hoverT); hoverT = setTimeout(function () { setOpen(false); }, 250); });
+			on(document, 'keydown', function (e) { if (e.key === 'Escape' && timeEl.classList.contains('open')) { setOpen(false); yrsBtn.focus(); } });
+			on(document, 'click', function (e) { if (timeEl.classList.contains('open') && !timeEl.contains(e.target)) setOpen(false); });
+		}
 		function scrolled() { if (scrollY > 6) html.setAttribute('data-scrolled', '1'); else html.removeAttribute('data-scrolled'); }
 		on(window, 'scroll', scrolled, { passive: true });
 		function loop() {
@@ -621,7 +637,7 @@
 		var veil = document.querySelector('.veil'), nveil = nb.querySelector('.veil');
 		if (veil && nveil) veil.className = nveil.className;
 		scrollTo(0, 0);
-		html.classList.remove('field-tall');
+		html.classList.remove('field-tall'); html.classList.remove('field-collapsed');
 		setupPage();
 		/* a page change the way a full load would be: focus at the top, the title read out */
 		var main = document.getElementById('main');

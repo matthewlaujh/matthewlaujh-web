@@ -303,7 +303,10 @@ ${tiles.join('\n')}
 		</div>
 		<nav class="field-time" aria-label="Projects by year" style="--n:${yrs.length}">
 ${axis}
+			<button class="yrs" type="button" aria-expanded="false" aria-controls="lanes">Projects by year <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M1 3l4 4 4-4"/></svg></button>
+			<div class="lanes" id="lanes">
 ${lanes}
+			</div>
 		</nav>
 		<p class="hint">Projects sit near their kind. Hover a title, or wander. Click to open.</p>
 		<p class="count"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
