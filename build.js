@@ -36,6 +36,9 @@ const nav = convert.navModel(navPage.content);
 const email = (infoPage.content.match(/mailto:([^"]+)/) || [])[1] || 'matt@matthewlaujh.com';
 const FIELD_SLUG = 'All-Projects';
 const YEAR = new Date().getFullYear();
+/* a short id of the stylesheet and scripts: pages carry it, asset URLs are keyed by
+   it, and site.js does a full load when a fetched page was built with another one */
+const BUILD = require('crypto').createHash('sha1').update(['css/site.css', 'js/site.js', 'js/backdrops.js'].map(f => fs.readFileSync(path.join(SRC, f))).join('\n')).digest('hex').slice(0, 8);
 
 /* ------------------------------------------------------------------ utils */
 function readJSON(p) { return JSON.parse(fs.readFileSync(p, 'utf8')); }
@@ -116,7 +119,7 @@ function mediaHTML(im, attrs) {
 }
 /* a silent loop needs a way to stop it: a small pill in the plate's corner */
 function videoControl() {
-	return `<button class="vctl" type="button" aria-label="Pause video"><svg viewBox="0 0 10 10" aria-hidden="true"><path class="pause" d="M2.5 1.5v7M7.5 1.5v7"/><path class="play" d="M3 1.5l5.5 3.5L3 8.5z"/></svg></button>`;
+	return `<button class="vctl" type="button" aria-label="Pause video"><svg viewBox="0 0 10 10" width="11" height="11" aria-hidden="true"><path class="pause" d="M2.5 1.5v7M7.5 1.5v7"/><path class="play" d="M3 1.5l5.5 3.5L3 8.5z"/></svg></button>`;
 }
 
 const kcls = k => k === 'art' ? ' k--art' : k === 'both' ? ' k--both' : '';
@@ -161,7 +164,7 @@ function barHTML(page) {
 		: `<a class="site-title back" href="${url(site.homepage)}" aria-label="Home"><span>←</span> <i class="nm">${nav.title}</i></a>`;
 	return `<header class="bar">
 		<div class="bar-left">${left}</div>
-		${isHome ? '<span></span>' : `<button class="bar-title" id="bar_title" type="button" aria-expanded="false" aria-controls="dropdown"><span class="t">${mid}</span>${midYear ? ` <b>${midYear}</b>` : ''} <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M1 3l4 4 4-4"/></svg></button>`}
+		${isHome ? '<span></span>' : `<button class="bar-title" id="bar_title" type="button" aria-expanded="false" aria-controls="dropdown"><span class="t">${mid}</span>${midYear ? ` <b>${midYear}</b>` : ''} <svg viewBox="0 0 10 10" width="10" height="10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M1 3l4 4 4-4"/></svg></button>`}
 		<div class="bar-right"></div>
 	</header>
 	${isHome ? '' : dropdownHTML(page.slug)}`;
@@ -303,7 +306,7 @@ ${tiles.join('\n')}
 		</div>
 		<nav class="field-time" aria-label="Projects by year" style="--n:${yrs.length}">
 ${axis}
-			<button class="yrs" type="button" aria-expanded="false" aria-controls="lanes">Projects by year <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M1 3l4 4 4-4"/></svg></button>
+			<button class="yrs" type="button" aria-expanded="false" aria-controls="lanes">Projects by year <svg viewBox="0 0 10 10" width="10" height="10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M1 3l4 4 4-4"/></svg></button>
 			<div class="lanes" id="lanes">
 ${lanes}
 			</div>
@@ -424,9 +427,10 @@ function render(page) {
 		<link rel="icon" href="${asset(site.favicon)}">
 		<link rel="preload" href="${asset('/fonts/AustinNewsDeck-Light.woff2')}" as="font" type="font/woff2" crossorigin>
 		<link rel="preload" href="${asset('/fonts/AtlasGrotesk-Light.woff2')}" as="font" type="font/woff2" crossorigin>
-		<link rel="stylesheet" href="${asset('/css/site.css')}">
-		<script src="${asset('/js/backdrops.js')}" defer></script>
-		<script src="${asset('/js/site.js')}" defer></script>
+		<meta name="build" content="${BUILD}">
+		<link rel="stylesheet" href="${asset('/css/site.css')}?v=${BUILD}">
+		<script src="${asset('/js/backdrops.js')}?v=${BUILD}" defer></script>
+		<script src="${asset('/js/site.js')}?v=${BUILD}" defer></script>
 	</head>
 	<body>
 		<a class="skip" href="#main">Skip to content</a>

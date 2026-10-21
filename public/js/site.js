@@ -258,8 +258,8 @@
 			var timeB = timeEl ? (collapsed ? timeEl.querySelector('.axis') : timeEl).getBoundingClientRect().bottom : 80;
 			/* a short window (a laptop with the timeline open) gets a taller field
 			   than the viewport and scrolls, rather than hiding tiles under each other */
-			var x0 = pad + 20, x1 = innerWidth - pad - 20, y0 = timeB + 50, y1 = Math.max(innerHeight - 130, y0 + (collapsed ? 440 : 470));
-			var tall = y1 > innerHeight - 130;
+			var x0 = pad + 20, x1 = innerWidth - pad - 20, y0 = timeB + 50, y1 = Math.max(innerHeight - 140, y0 + (collapsed ? 400 : 470));
+			var tall = y1 > innerHeight - 140;
 			html.classList.toggle('field-tall', tall);
 			f.style.height = tall ? (y1 + 110) + 'px' : '';
 			var W = x1 - x0, H = y1 - y0;
@@ -376,7 +376,7 @@
 			function setOpen(o) { timeEl.classList.toggle('open', o); yrsBtn.setAttribute('aria-expanded', o ? 'true' : 'false'); }
 			yrsBtn.addEventListener('click', function () { setOpen(!timeEl.classList.contains('open')); });
 			var hoverT;
-			timeEl.addEventListener('mouseover', function () { if (!html.classList.contains('field-collapsed')) return; clearTimeout(hoverT); hoverT = setTimeout(function () { setOpen(true); }, 120); });
+			timeEl.addEventListener('mouseover', function () { if (!html.classList.contains('field-collapsed')) return; clearTimeout(hoverT); hoverT = setTimeout(function () { setOpen(true); }, 350); });
 			timeEl.addEventListener('mouseout', function (e) { if (!html.classList.contains('field-collapsed') || (e.relatedTarget && timeEl.contains(e.relatedTarget))) return; clearTimeout(hoverT); hoverT = setTimeout(function () { setOpen(false); }, 250); });
 			on(document, 'keydown', function (e) { if (e.key === 'Escape' && timeEl.classList.contains('open')) { setOpen(false); yrsBtn.focus(); } });
 			on(document, 'click', function (e) { if (timeEl.classList.contains('open') && !timeEl.contains(e.target)) setOpen(false); });
@@ -567,6 +567,9 @@
 				if (current !== nav) return null;
 				var doc = new DOMParser().parseFromString(text, 'text/html');
 				if (!doc.documentElement.getAttribute('data-page') || !doc.body.querySelector('main')) throw new Error('not a site page');
+				/* a page from a newer build than the stylesheet and scripts in memory: load it properly */
+				var mine = document.querySelector('meta[name="build"]'), theirs = doc.querySelector('meta[name="build"]');
+				if (mine && theirs && mine.content !== theirs.content) throw new Error('new build');
 				/* the backdrop moves first: it is already the next page's by the time the text arrives */
 				retarget(doc.body.querySelector('.backdrop'), true);
 				return leaving.then(function () { return doc; });
