@@ -617,6 +617,11 @@
 	}
 
 	/* ---------------- init ---------------- */
+	/* the workers.dev / pages.dev copies are for testing: keep them out of search */
+	if (/\.(workers|pages)\.dev$/.test(location.hostname)) {
+		var robots = document.querySelector('meta[name="robots"]') || document.head.appendChild(document.createElement('meta'));
+		robots.setAttribute('name', 'robots'); robots.setAttribute('content', 'noindex, nofollow');
+	}
 	function init() {
 		var live = document.createElement('div'); live.className = 'visually-hidden announce'; live.setAttribute('aria-live', 'polite'); document.body.appendChild(live);
 		randomiseBackdrop();

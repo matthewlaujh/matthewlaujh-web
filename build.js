@@ -382,7 +382,8 @@ function render(page) {
 		: page.slug === 'About' ? 'Who I am and what I have made: experience, education, exhibitions and skills of a creative technologist and artist working with computation and light.'
 		: page.slug === FIELD_SLUG ? `Every project laid out by kind and year: experiential, computational and digital work from ${yearRange}.`
 		: site.description);
-	const ogImage = w ? `${site.url}${w.cover.video ? w.page.images[0].poster : w.page.images[0].src}` : `${site.url}${site.social_image}`;
+	/* link previews: a 1200×630 JPEG per project (some chat apps will not show WebP) */
+	const ogImage = w ? `${site.url}/img/og/${w.slug}.jpg` : `${site.url}${site.social_image}`;
 
 	let kind, backdrop, main;
 	if (isHome) { kind = 'home'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: true } }); main = homeMain(); }
@@ -405,11 +406,15 @@ function render(page) {
 		<meta name="twitter:title" content="${esc(title)}">
 		<meta name="twitter:description" content="${esc(desc)}">
 		<meta name="twitter:image" content="${ogImage}">
+		<meta name="twitter:image:alt" content="${esc(w ? (w.cover.alt || w.title) : site.title)}">
 		<meta property="og:locale" content="en_US">
 		<meta property="og:title" content="${esc(title)}">
 		<meta property="og:description" content="${esc(desc)}">
 		<meta property="og:url" content="${canonical}">
 		<meta property="og:image" content="${ogImage}">
+		<meta property="og:image:width" content="1200">
+		<meta property="og:image:height" content="630">
+		<meta property="og:image:alt" content="${esc(w ? (w.cover.alt || w.title) : site.title)}">
 		<meta property="og:type" content="website">
 		<meta name="theme-color" content="${kind === 'about' ? '#ffffff' : '#111111'}">
 
@@ -449,6 +454,9 @@ for (const page of all) {
 }
 
 if (!RELATIVE) {
+	const urls = all.filter(p => p.slug !== '404').map(p => p.slug === site.homepage ? `${site.url}/` : `${site.url}/${p.slug}`);
+	fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `\t<url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
+	fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
 	fs.writeFileSync(path.join(OUT, '_redirects'), `/${site.homepage}  /  301\n/Archifest-2021-Sea-of-Debris-2021  /NewWave-2021  301\n/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition  /Proximate-2022  301\n`);
 	fs.writeFileSync(path.join(OUT, '_headers'), `/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=31536000, immutable\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n`);
 }
