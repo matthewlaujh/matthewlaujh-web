@@ -32,13 +32,14 @@
 			if (scrim) scrim.classList.toggle('on', open);
 			btn.setAttribute('aria-expanded', open ? 'true' : 'false');
 			if (open) {
+				/* the panel is visibility:hidden until its transition ends: focus after it */
 				var cur = dd.querySelector('a[aria-current]') || dd.querySelector('a');
-				if (cur) cur.focus({ preventScroll: true });
-			}
+				if (cur) setTimeout(function () { if (dd.classList.contains('on')) cur.focus({ preventScroll: true }); }, 320);
+			} else if (dd.contains(document.activeElement)) btn.focus({ preventScroll: true });
 		}
 		btn.addEventListener('click', function () { toggle(); });
 		if (scrim) scrim.addEventListener('click', function () { toggle(false); });
-		on(document, 'keydown', function (e) { if (e.key === 'Escape') toggle(false); });
+		on(document, 'keydown', function (e) { if (e.key === 'Escape' && dd.classList.contains('on')) toggle(false); });
 	}
 
 	/* ---------------- backdrop helpers ---------------- */
@@ -126,9 +127,10 @@
 			/* click: the list fades, the flow quickens, and the project page
 			   carries the diffusion on from here */
 			function go(e) {
-				if (reduced || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+				if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
 				e.preventDefault();
-				var href = this.getAttribute('href'), bd = backdropInstance();
+				var href = a.getAttribute('href'), bd = backdropInstance();
+				if (reduced) { navigate(href); return; }
 				if (bd && bd.show && a.hasAttribute('data-i')) bd.show(+a.getAttribute('data-i'));
 				setBackdropSpeed(2);
 				document.documentElement.classList.add('leaving');
@@ -143,18 +145,28 @@
 	/* ---------------- project: plate reveal, slit-scan calms as it's covered ---------------- */
 	function setupProject() {
 		/* phones: one column — meta and intro, the first plate, then prose with a
-		   plate after every second paragraph and whatever is left at the end */
-		if (window.matchMedia('(max-width: 800px)').matches) {
-			var plates = document.querySelector('.plates'), text = document.querySelector('.project .text'), prose = document.querySelector('.project .prose');
-			var fl = plates ? [].slice.call(plates.children) : [];
-			if (fl.length && text && prose) {
+		   plate after every second paragraph and whatever is left at the end.
+		   Widen the window (or turn a tablet) and the plates go back to their column. */
+		var narrow = window.matchMedia('(max-width: 800px)');
+		var plates = document.querySelector('.plates'), text = document.querySelector('.project .text'), prose = document.querySelector('.project .prose');
+		var plateList = plates ? [].slice.call(plates.children) : [];
+		function reflow() {
+			if (!plateList.length || !text || !prose) return;
+			if (narrow.matches) {
+				if (!plates.parentNode) return;
+				var fl = plateList.slice();
 				var first = fl.shift(); first.classList.add('lead'); text.insertBefore(first, prose);
 				var ps = [].slice.call(prose.children).filter(function (n) { return n.tagName === 'P' && n.textContent.length > 140; });   // real paragraphs, not link lines
 				for (var pi = 1, fi = 0; pi < ps.length && fi < fl.length; pi += 2, fi++) ps[pi].insertAdjacentElement('afterend', fl[fi]);
 				while (fl.length && fi < fl.length) prose.appendChild(fl[fi++]);
 				plates.remove();
+			} else if (!plates.parentNode) {
+				plateList.forEach(function (f) { f.classList.remove('lead'); plates.appendChild(f); });
+				text.parentNode.appendChild(plates);
 			}
 		}
+		reflow();
+		on(narrow, 'change', reflow);
 		var figs = document.querySelectorAll('.project figure');
 		if (!figs.length) return;
 		/* videos load and play only while near the viewport. Each has a pause pill,
@@ -238,7 +250,12 @@
 			var seed = 11; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
 			var pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 28;
 			var timeEl = document.querySelector('.field-time'), timeB = timeEl ? timeEl.getBoundingClientRect().bottom : 80;
-			var x0 = pad + 20, x1 = innerWidth - pad - 20, y0 = timeB + 50, y1 = innerHeight - 130;
+			/* a short window (a laptop with the timeline open) gets a taller field
+			   than the viewport and scrolls, rather than hiding tiles under each other */
+			var x0 = pad + 20, x1 = innerWidth - pad - 20, y0 = timeB + 50, y1 = Math.max(innerHeight - 130, y0 + 470);
+			var tall = y1 > innerHeight - 130;
+			html.classList.toggle('field-tall', tall);
+			f.style.height = tall ? (y1 + 110) + 'px' : '';
 			var W = x1 - x0, H = y1 - y0;
 			var tw = Math.max(84, Math.min(190, W * 0.11));                 // tile width scales with the free area
 			var years = tiles.map(function (t) { return +t.getAttribute('data-year') || 0; });
@@ -281,7 +298,7 @@
 			});
 			/* the graph: each tile joins its two nearest neighbours in its cluster,
 			   and each pair of clusters is bridged once at its closest point */
-			svg.setAttribute('viewBox', '0 0 ' + innerWidth + ' ' + innerHeight);
+			svg.setAttribute('viewBox', '0 0 ' + innerWidth + ' ' + (tall ? y1 + 110 : innerHeight));
 			while (svg.firstChild) svg.removeChild(svg.firstChild);
 			edges = [];
 			var seen = {};
@@ -304,10 +321,6 @@
 				nodes.forEach(function (n) { if (n.ci !== c1) return; nodes.forEach(function (o) { if (o.ci !== c2) return; var d = d2(n, o); if (!best || d < best.d) best = { d: d, a: n, b: o }; }); });
 				if (best) link(best.a, best.b, true);
 			}
-			tiles.forEach(function (t) {
-				t.addEventListener('mouseenter', function () { edges.forEach(function (e) { e.el.classList.toggle('on', e.a.el === t || e.b.el === t); }); });
-				t.addEventListener('mouseleave', function () { edges.forEach(function (e) { e.el.classList.remove('on'); }); });
-			});
 			drawEdges();
 			// cluster labels: above the topmost tile of each cluster, centred on it
 			marks.forEach(function (m) {
@@ -323,6 +336,8 @@
 		}
 		layout();
 		var rt; on(window, 'resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
+		function scrolled() { if (scrollY > 6) html.setAttribute('data-scrolled', '1'); else html.removeAttribute('data-scrolled'); }
+		on(window, 'scroll', scrolled, { passive: true });
 		function loop() {
 			px += (tx - px) * 0.06; py += (ty - py) * 0.06;
 			f.style.setProperty('--px', px + 'px'); f.style.setProperty('--py', py + 'px');
@@ -352,8 +367,8 @@
 			a.addEventListener('blur', function () { focus(-1); });
 		});
 		tiles.forEach(function (t) {
-			t.addEventListener('mouseenter', function () { side.forEach(function (a) { a.classList.toggle('on', a.getAttribute('data-i') === t.getAttribute('data-i')); }); showBackdrop(+t.getAttribute('data-i')); });
-			t.addEventListener('mouseleave', function () { side.forEach(function (a) { a.classList.remove('on'); }); showBackdrop(-1); });
+			t.addEventListener('mouseenter', function () { side.forEach(function (a) { a.classList.toggle('on', a.getAttribute('data-i') === t.getAttribute('data-i')); }); edges.forEach(function (e) { e.el.classList.toggle('on', e.a.el === t || e.b.el === t); }); showBackdrop(+t.getAttribute('data-i')); });
+			t.addEventListener('mouseleave', function () { side.forEach(function (a) { a.classList.remove('on'); }); edges.forEach(function (e) { e.el.classList.remove('on'); }); showBackdrop(-1); });
 		});
 		/* click: the field's own diffusion switches to this cover and the tile
 		   grows over it, melting into the shader as it goes, so the project page
@@ -416,7 +431,7 @@
 		}
 		function kind(t) {
 			if (!t || !t.closest) return '';
-			if (t.closest('a, button, [role="button"], summary, label, input, select, textarea')) return 'link';
+			if (t.closest('a, button, [role="button"], .more-in, summary, label, input, select, textarea')) return 'link';
 			if (t.closest('p, li, dd, dt, h1, h2, h3, figcaption, .lede, .role, .org, .note')) return 'text';
 			return '';
 		}
@@ -542,19 +557,25 @@
 		html.classList.remove('leaving');
 		// drop everything page-specific; keep the renderer, veil, footer and cursor
 		[].slice.call(document.body.children).forEach(function (el) {
-			if (el.matches('.backdrop, .veil, .site-footer, .cursor')) return;
+			if (el.matches('.backdrop, .veil, .site-footer, .cursor, .skip, .announce')) return;
 			el.remove();
 		});
 		var footer = document.querySelector('.site-footer');
 		[].slice.call(nb.children).forEach(function (el) {
-			if (el.matches('.backdrop, .poster, .veil, .site-footer, script')) return;
+			if (el.matches('.backdrop, .poster, .veil, .site-footer, .skip, script')) return;
 			document.body.insertBefore(document.importNode(el, true), footer);
 		});
 		// the veil follows the page (dark on home / field, lighter on a project)
 		var veil = document.querySelector('.veil'), nveil = nb.querySelector('.veil');
 		if (veil && nveil) veil.className = nveil.className;
 		scrollTo(0, 0);
+		html.classList.remove('field-tall');
 		setupPage();
+		/* a page change the way a full load would be: focus at the top, the title read out */
+		var main = document.getElementById('main');
+		if (main) main.focus({ preventScroll: true });
+		var live = document.querySelector('.announce');
+		if (live) { live.textContent = ''; setTimeout(function () { live.textContent = doc.title; }, 50); }
 	}
 	/* point the running diffusion at the next page's images */
 	function retarget(nel, early) {
@@ -597,6 +618,7 @@
 
 	/* ---------------- init ---------------- */
 	function init() {
+		var live = document.createElement('div'); live.className = 'visually-hidden announce'; live.setAttribute('aria-live', 'polite'); document.body.appendChild(live);
 		randomiseBackdrop();
 		if (window.MLBackdrops) window.MLBackdrops.init(document);
 		setupCursor();

@@ -120,6 +120,11 @@ function videoControl() {
 }
 
 const kcls = k => k === 'art' ? ' k--art' : k === 'both' ? ' k--both' : '';
+const KIND_LABEL = { art: 'Art Practice', both: 'Design and Technology, Art Practice', design: 'Design and Technology' };
+/* the category dot, with its meaning for readers who cannot see it */
+const kdot = k => `<i class="k${kcls(k)}" aria-hidden="true"></i><span class="visually-hidden">${KIND_LABEL[k] || KIND_LABEL.design}: </span>`;
+/* the year tag, read as a separate word */
+const yr = y => `<small><span class="visually-hidden">, </span>${y}</small>`;
 
 function splitTitle(t) {
 	// each letter gets its own span so the hover wave / rise can stagger
@@ -127,10 +132,10 @@ function splitTitle(t) {
 }
 
 function dropdownHTML(current) {
-	const groups = nav.groups.map(g => `\t\t<section>\n\t\t\t<h3>${g.label}</h3>\n${g.items.map(it => {
+	const groups = nav.groups.map(g => `\t\t<section>\n\t\t\t<p class="h">${g.label}</p>\n${g.items.map(it => {
 		if (it.href && workBySlug[it.href]) {
 			const w = workBySlug[it.href];
-			return `\t\t\t<a href="${url(w.slug)}"${w.slug === current ? ' aria-current="page"' : ''}><i class="k${kcls((w.meta || {}).kind)}" aria-hidden="true"></i>${esc(w.title)}<small>${w.year}</small></a>`;
+			return `\t\t\t<a href="${url(w.slug)}"${w.slug === current ? ' aria-current="page"' : ''}>${kdot((w.meta || {}).kind)}${esc(w.title)}${yr(w.year)}</a>`;
 		}
 		return `\t\t\t<span class="dead" title="Coming soon">${it.text}</span>`;
 	}).join('\n')}\n\t\t</section>`).join('\n');
@@ -156,7 +161,7 @@ function barHTML(page) {
 		: `<a class="site-title back" href="${url(site.homepage)}" aria-label="Home"><span>←</span> <i class="nm">${nav.title}</i></a>`;
 	return `<header class="bar">
 		<div class="bar-left">${left}</div>
-		${isHome ? '<span></span>' : `<button class="bar-title" id="bar_title" type="button" aria-expanded="false" aria-controls="dropdown">${mid}${midYear ? ` <b>${midYear}</b>` : ''} <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M1 3l4 4 4-4"/></svg></button>`}
+		${isHome ? '<span></span>' : `<button class="bar-title" id="bar_title" type="button" aria-expanded="false" aria-controls="dropdown"><span class="t">${mid}</span>${midYear ? ` <b>${midYear}</b>` : ''} <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M1 3l4 4 4-4"/></svg></button>`}
 		<div class="bar-right"></div>
 	</header>
 	${isHome ? '' : dropdownHTML(page.slug)}`;
@@ -201,19 +206,19 @@ function introHTML(currentSlug) {
 function itemHTML(w) {
 	const m = w.meta || {};
 	const facts = [['Category', w.category], ['Techniques', m.techniques], [m.client_label || 'Client', m.client]].filter(x => x[1]).map(([k, v]) => `<span class="fact"><b>${esc(k)}</b>${esc(v)}</span>`).join('');
-	return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}"><i class="k${kcls(m.kind)}" aria-hidden="true"></i>${splitTitle(w.title)}<small>${w.year}</small></a><div class="more"><div><a class="more-in" href="${url(w.slug)}" tabindex="-1" aria-hidden="true"><img class="thumb" alt="" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></a></div></div></div>`;
+	return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}">${kdot(m.kind)}<span class="visually-hidden">${esc(w.title)}, ${w.year}</span><span class="tt" aria-hidden="true">${splitTitle(w.title)}<small>${w.year}</small></span></a><div class="more"><div><div class="more-in" aria-hidden="true"><img class="thumb" alt="" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></div></div></div></div>`;
 }
 function homeMain() {
-	const list = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${g.items.map(it => {
+	const list = nav.groups.map(g => `\t\t\t<h2 class="group">${g.label}</h2>\n${g.items.map(it => {
 		if (it.href && workBySlug[it.href]) return itemHTML(workBySlug[it.href]);
 		return `\t\t\t<span class="dead" title="Coming soon">${splitTitle(it.text.replace(/\s*\(.*\)$/, ''))}<small>${(it.text.match(/\((.*)\)/) || [])[1] || ''}</small></span>`;
 	}).join('\n')}`).join('\n');
-	return `<main class="home">
+	return `<main id="main" tabindex="-1" class="home">
 		<h1 class="visually-hidden">${esc(site.title)}</h1>
 		<nav class="marquee" aria-label="Projects">
 			<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
 ${list}
-			<a class="space" href="${url(FIELD_SLUG)}">All works in space<small>${works.length}</small></a>
+			<a class="space" href="${url(FIELD_SLUG)}">All works in space${yr(works.length)}</a>
 		</nav>
 		<aside class="home-aside">
 			${introHTML(site.homepage)}
@@ -227,13 +232,13 @@ ${list}
    and the newest work to go on to */
 function notFoundMain() {
 	const recent = works.slice().sort((a, b) => parseInt(b.year, 10) - parseInt(a.year, 10)).slice(0, 5);
-	return `<main class="home notfound">
+	return `<main id="main" tabindex="-1" class="home notfound">
 		<h1 class="visually-hidden">Page not found</h1>
 		<nav class="marquee" aria-label="Recent projects">
 			<p class="oops">There\u2019s nothing at this address.</p>
-			<p class="group">Recent work</p>
+			<h2 class="group">Recent work</h2>
 ${recent.map(itemHTML).join('\n')}
-			<a class="space" href="${url(FIELD_SLUG)}">All works in space<small>${works.length}</small></a>
+			<a class="space" href="${url(FIELD_SLUG)}">All works in space${yr(works.length)}</a>
 		</nav>
 		<aside class="home-aside">
 			<div class="prose">
@@ -253,9 +258,9 @@ function projectMain(w) {
 		m.techniques && ['Techniques', esc(m.techniques)],
 		m.client && [esc(m.client_label || 'Client'), esc(m.client)]
 	].filter(Boolean).map(([k, v]) => `\t\t\t\t<dt>${k}</dt><dd>${v}</dd>`).join('\n');
-	return `<main class="project">
+	return `<main id="main" tabindex="-1" class="project">
 		<section class="hero">
-			<h1>${splitTitle(w.title)}<small>${w.year}</small></h1>
+			<h1><span class="visually-hidden">${esc(w.title)}, ${w.year}</span><span class="tt" aria-hidden="true">${splitTitle(w.title)}<small>${w.year}</small></span></h1>
 			${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}
 			<p class="facts"><span>${w.category}</span>${m.client ? `<span>${esc(m.client)}</span>` : ''}</p>
 			<p class="scroll-cue">Scroll<i>↓</i></p>
@@ -283,14 +288,14 @@ function fieldMain() {
 	   tiles nudged apart until none overlap. Here we only emit the tiles. */
 	const tiles = works.map((w, i) => {
 		const k = (w.meta || {}).kind || 'design';
-		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" data-kind="${k}" data-cat="${esc(w.category)}" data-year="${String(w.year).slice(0, 4)}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label"><i class="k${kcls(k)}" aria-hidden="true"></i>${esc(w.title)}, ${w.year}</span></a>`;
+		return `\t\t\t<a href="${url(w.slug)}" data-i="${i}" data-kind="${k}" data-cat="${esc(w.category)}" data-year="${String(w.year).slice(0, 4)}"><img src="${w.cover.thumb}" width="${w.cover.width}" height="${w.cover.height}" alt="" loading="${i < 10 ? 'eager' : 'lazy'}"><span class="label">${kdot(k)}${esc(w.title)}, ${w.year}</span></a>`;
 	});
 	const marks = nav.groups.map(g => `\t\t\t<span class="cluster" data-cat="${esc(g.label)}">${esc(g.label)}</span>`).join('\n');
 	/* the timeline: one lane per category, one column per year, newest first */
 	const yrs = [...new Set(works.map(w => +String(w.year).slice(0, 4)))].sort((a, b) => b - a);
-	const lanes = nav.groups.map(g => `\t\t\t<div class="lane"><span class="lane-label">${esc(g.label)}</span>${yrs.map(y => `<div class="cell">${works.filter(w => w.category === g.label && +String(w.year).slice(0, 4) === y).map(w => `<a href="${url(w.slug)}" data-i="${works.indexOf(w)}" title="${esc(w.title)}"><i class="k${kcls((w.meta || {}).kind)}" aria-hidden="true"></i>${esc(w.title)}</a>`).join('')}</div>`).join('')}</div>`).join('\n');
+	const lanes = nav.groups.map(g => `\t\t\t<div class="lane"><span class="lane-label">${esc(g.label)}</span>${yrs.map(y => `<div class="cell">${works.filter(w => w.category === g.label && +String(w.year).slice(0, 4) === y).map(w => `<a href="${url(w.slug)}" data-i="${works.indexOf(w)}" title="${esc(w.title)}">${kdot((w.meta || {}).kind)}${esc(w.title)}</a>`).join('')}</div>`).join('')}</div>`).join('\n');
 	const axis = `\t\t\t<div class="axis"><span class="lane-label"></span>${yrs.map(y => `<span>${y}</span>`).join('')}</div>`;
-	return `<main class="field-page">
+	return `<main id="main" tabindex="-1" class="field-page">
 		<h1 class="visually-hidden">Works in space</h1>
 		<div class="field" id="field" data-cats="${esc(nav.groups.map(g => g.label).join('|'))}">
 ${marks}
@@ -311,7 +316,7 @@ function aboutMain(page) {
 	const entry = e => `				<div class="entry${e.kind === 'art' ? ' art' : ''}">
 					<div class="dates">${e.dates}</div>
 					<div class="main">
-						<div class="role"><i class="k${kcls(e.kind)}" aria-hidden="true"></i><span>${L(e.role)}</span></div>
+						<div class="role">${kdot(e.kind)}<span>${L(e.role)}</span></div>
 						${e.org ? `<div class="org">${e.org_url ? `<a href="${e.org_url}" target="_blank" rel="noopener">${esc(e.org)}</a>` : esc(e.org)}</div>` : ''}
 						${e.place ? `<div class="org place">${esc(e.place)}</div>` : ''}
 						${e.note ? `<div class="note">${L(e.note)}</div>` : ''}
@@ -323,7 +328,7 @@ function aboutMain(page) {
 		return sec ? `			<section>\n				<h2>${esc(sec.title)}</h2>\n${sec.entries.map(entry).join('\n')}\n			</section>` : '';
 	};
 	const skills = a.skills ? `<section class="skills"><h2>Skills</h2><dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : '';
-	return `<main class="about">
+	return `<main id="main" tabindex="-1" class="about">
 		<h1 class="visually-hidden">${esc(page.title_no_html)}</h1>
 		<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
 		<div class="contact">
@@ -413,6 +418,7 @@ function render(page) {
 		<script src="${asset('/js/site.js')}" defer></script>
 	</head>
 	<body>
+		<a class="skip" href="#main">Skip to content</a>
 		${backdrop}
 ${typo(`		${barHTML(page)}
 		${main}
