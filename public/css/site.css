@@ -105,7 +105,9 @@ main.home { animation: none; }
 /* a small crosshair, difference-blended. Over a link it turns 45° into an ×
    and the arms stretch. Over text it collapses to a bar. */
 @media (pointer: fine) {
-	html.has-cursor, html.has-cursor a, html.has-cursor button, html.has-cursor [role="button"] { cursor: none; }
+	/* once the crosshair is on, nothing shows the native cursor: not links, buttons,
+	   videos, the hover panel, nor anything that sets its own */
+	html.has-cursor, html.has-cursor * { cursor: none !important; }
 	.cursor { position: fixed; left: 0; top: 0; z-index: 1000; pointer-events: none; width: 0; height: 0; mix-blend-mode: difference; opacity: 0; transition: opacity .3s; }
 	html.has-cursor .cursor { opacity: 1; }
 	.cursor i { position: absolute; left: 0; top: 0; background: #fff; display: block; transition: width .3s var(--ease), height .3s var(--ease), transform .3s var(--ease), opacity .2s; }
