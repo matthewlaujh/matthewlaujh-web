@@ -202,19 +202,21 @@ main.home { animation: none; }
 /* hover: the row opens to show the one-liner and facts beneath the title */
 .marquee .more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .32s var(--ease); }
 /* a pass down the list should not open every row: opening waits a beat, closing does not */
-.marquee .item:hover .more { transition-delay: .09s; }
+.marquee .item:has(> a:hover) .more { transition-delay: .09s; }
 .marquee .more > div { overflow: hidden; min-height: 0; }
 .marquee .more-in { display: flex; gap: 28px; align-items: flex-start; padding: 4px 0 12px .4em; color: inherit; width: fit-content; max-width: 100%; cursor: pointer; }
 .marquee .more .text { flex: 1 1 auto; min-width: 0; max-width: 52ch; }
 .marquee .more .thumb { flex: none; width: clamp(140px, 16vw, 220px); height: auto; opacity: 0; transform: translateY(6px); transition: opacity .35s .1s, transform .5s var(--ease) .1s; }
-.marquee .item:hover .more .thumb, .marquee .item:focus-within .more .thumb { opacity: 1; transform: none; }
-.marquee .item:hover .more, .marquee .item:focus-within .more { grid-template-rows: 1fr; }
+/* the title is the hover target, not the whole row: the panel opens from the
+   words, and stays open while the pointer is on the title or in the panel */
+.marquee .item:has(> a:hover) .more .thumb, .marquee .item:has(.more:hover) .more .thumb, .marquee .item:focus-within .more .thumb { opacity: 1; transform: none; }
+.marquee .item:has(> a:hover) .more, .marquee .item:has(.more:hover) .more, .marquee .item:focus-within .more { grid-template-rows: 1fr; }
 .marquee .more .line { font: 300 var(--t-serif)/1.4 var(--serif); color: rgba(255, 255, 255, .85); max-width: 46ch; padding: 2px 0 0; opacity: 0; transform: translateY(-4px); transition: opacity .3s .1s, transform .4s var(--ease) .1s; }
 .marquee .more .facts { font: 300 var(--t-base)/1.5 var(--sans); color: var(--fg-dim); padding: 4px 0 0; opacity: 0; transform: translateY(-4px); transition: opacity .3s .15s, transform .4s var(--ease) .15s; }
 .marquee .more .facts { display: grid; gap: 2px; }
 .marquee .more .fact { display: grid; grid-template-columns: 7em minmax(0, 1fr); gap: 10px; min-width: 0; }
 .marquee .more .fact b { font-weight: 300; color: rgba(255, 255, 255, .6); }
-.marquee .item:hover .more .line, .marquee .item:hover .more .facts, .marquee .item:focus-within .more .line, .marquee .item:focus-within .more .facts { opacity: 1; transform: none; }
+.marquee .item:has(> a:hover) .more .line, .marquee .item:has(> a:hover) .more .facts, .marquee .item:has(.more:hover) .more .line, .marquee .item:has(.more:hover) .more .facts, .marquee .item:focus-within .more .line, .marquee .item:focus-within .more .facts { opacity: 1; transform: none; }
 
 .home-aside { position: sticky; top: calc(var(--bar-h) + 8px); margin-top: 0; padding: 0 0 80px; }
 .home-aside .prose { font: 300 var(--t-serif)/1.5 var(--serif); color: rgba(255, 255, 255, .85); }

@@ -121,7 +121,8 @@
 				/* a new project: the flow picks up, then settles the longer you stay */
 				settle(2.2, 0.7, 2600);
 			}
-			item.addEventListener('mouseenter', enter);
+			a.addEventListener('mouseenter', enter);
+			var panel = item.querySelector('.more'); if (panel) panel.addEventListener('mouseenter', enter);
 			a.addEventListener('focus', enter);
 			item.addEventListener('mouseleave', function () { settle(1, 1, 0); });
 			/* click: the list fades, the flow quickens, and the project page
