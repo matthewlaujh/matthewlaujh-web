@@ -43,7 +43,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/60ce88fa-C1E1-1.jpg",
-   "thumb": "/img/60ce88fa-C1E1-1-s.webp"
+   "thumb": "/img/60ce88fa-C1E1-1-s.webp",
+   "alt": "A hand pressing a push button on an Arduino mounted on a gold plate, lighting a red LED"
   },
   {
    "id": 137677644,
@@ -53,7 +54,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/987a45ae-C1E1-2.jpg",
-   "thumb": "/img/987a45ae-C1E1-2-s.webp"
+   "thumb": "/img/987a45ae-C1E1-2-s.webp",
+   "alt": "A hand waving over the Arduino board, the LED off"
   },
   {
    "id": 137677645,
@@ -63,7 +65,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/6df76b46-C1E1-3.jpg",
-   "thumb": "/img/6df76b46-C1E1-3-s.webp"
+   "thumb": "/img/6df76b46-C1E1-3-s.webp",
+   "alt": "A hand held over the board's light sensor, the red LED on"
   },
   {
    "id": 137677647,
@@ -73,7 +76,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/913a0194-C1E1-4.jpg",
-   "thumb": "/img/913a0194-C1E1-4-s.webp"
+   "thumb": "/img/913a0194-C1E1-4-s.webp",
+   "alt": "A finger pointing at the sensor on the board, the red LED lit"
   },
   {
    "id": 137677648,
@@ -83,7 +87,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/ea6085f5-C1E1-5.jpg",
-   "thumb": "/img/ea6085f5-C1E1-5-s.webp"
+   "thumb": "/img/ea6085f5-C1E1-5-s.webp",
+   "alt": "A hand on a cardboard keypad of three buttons wired to the board, a blue LED lit"
   },
   {
    "id": 137677649,
@@ -93,7 +98,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/f3ad84ac-C1E1-6.jpg",
-   "thumb": "/img/f3ad84ac-C1E1-6-s.webp"
+   "thumb": "/img/f3ad84ac-C1E1-6-s.webp",
+   "alt": "A hand holding a small sensor module near the board, lighting a purple LED"
   },
   {
    "id": 137677651,
@@ -103,7 +109,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/8ebb117f-C1E1-7.jpg",
-   "thumb": "/img/8ebb117f-C1E1-7-s.webp"
+   "thumb": "/img/8ebb117f-C1E1-7-s.webp",
+   "alt": "A hand holding a module on a cable, the purple LED on"
   },
   {
    "id": 137677652,
@@ -113,7 +120,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/851fb78b-C1E1-8.jpg",
-   "thumb": "/img/851fb78b-C1E1-8-s.webp"
+   "thumb": "/img/851fb78b-C1E1-8-s.webp",
+   "alt": "A hand holding a grey module, the LED now green"
   },
   {
    "id": 137677654,
@@ -123,7 +131,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/656c5cc8-C1E1-9.jpg",
-   "thumb": "/img/656c5cc8-C1E1-9-s.webp"
+   "thumb": "/img/656c5cc8-C1E1-9-s.webp",
+   "alt": "A hand holding a module while a servo arm on the board turns"
   },
   {
    "id": 137677656,
@@ -133,7 +142,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/8b5e3347-C2E2-1.jpg",
-   "thumb": "/img/8b5e3347-C2E2-1-s.webp"
+   "thumb": "/img/8b5e3347-C2E2-1-s.webp",
+   "alt": "A hand on an iPad showing a web page that turns the Arduino's LED on and off"
   },
   {
    "id": 137677658,
@@ -143,7 +153,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/08bf2816-C2E2-2.jpg",
-   "thumb": "/img/08bf2816-C2E2-2-s.webp"
+   "thumb": "/img/08bf2816-C2E2-2-s.webp",
+   "alt": "Two Arduino boards on two gold plates, a hand pressing a button on one"
   },
   {
    "id": 137677659,
@@ -153,7 +164,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/7a13a792-C2E2-3.jpg",
-   "thumb": "/img/7a13a792-C2E2-3-s.webp"
+   "thumb": "/img/7a13a792-C2E2-3-s.webp",
+   "alt": "Two Arduino boards side by side, the LED on one lit by the other's input"
   },
   {
    "id": 137677662,
@@ -163,7 +175,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/8122c91d-C3E3-1.jpg",
-   "thumb": "/img/8122c91d-C3E3-1-s.webp"
+   "thumb": "/img/8122c91d-C3E3-1-s.webp",
+   "alt": "Screen capture of a sensor data page beside a hand holding a small sensor"
   },
   {
    "id": 137677664,
@@ -173,7 +186,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/c88a160e-C3E3-2.jpg",
-   "thumb": "/img/c88a160e-C3E3-2-s.webp"
+   "thumb": "/img/c88a160e-C3E3-2-s.webp",
+   "alt": "Screen capture of the Tiny Motion Trainer web app capturing movement data"
   },
   {
    "id": 137677666,
@@ -183,7 +197,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/81b2d78a-C3E3-3.jpg",
-   "thumb": "/img/81b2d78a-C3E3-3-s.webp"
+   "thumb": "/img/81b2d78a-C3E3-3-s.webp",
+   "alt": "Screen capture of the sensor data page with a hand holding the sensor"
   },
   {
    "id": 137677667,
@@ -193,7 +208,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/10fe0b4c-C3E3-4c.jpg",
-   "thumb": "/img/10fe0b4c-C3E3-4c-s.webp"
+   "thumb": "/img/10fe0b4c-C3E3-4c-s.webp",
+   "alt": "Screen capture of Teachable Machine with webcam samples of a face"
   },
   {
    "id": 137677669,
@@ -203,7 +219,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/493bd66b-C3E3-5b.jpg",
-   "thumb": "/img/493bd66b-C3E3-5b-s.webp"
+   "thumb": "/img/493bd66b-C3E3-5b-s.webp",
+   "alt": "Screen capture of Teachable Machine training on face samples"
   },
   {
    "id": 137677670,
@@ -213,7 +230,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/0ec5c9ac-C4E4-1.jpg",
-   "thumb": "/img/0ec5c9ac-C4E4-1-s.webp"
+   "thumb": "/img/0ec5c9ac-C4E4-1-s.webp",
+   "alt": "A hand holding a sensor module beside the board, a green LED lit"
   },
   {
    "id": 137677672,
@@ -223,7 +241,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/dff897f9-C4E4-2.jpg",
-   "thumb": "/img/dff897f9-C4E4-2-s.webp"
+   "thumb": "/img/dff897f9-C4E4-2-s.webp",
+   "alt": "A hand holding a module on a cable, the board's LED on"
   },
   {
    "id": 137677673,
@@ -233,7 +252,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/b4e1a1e0-C5E5-1a.jpg",
-   "thumb": "/img/b4e1a1e0-C5E5-1a-s.webp"
+   "thumb": "/img/b4e1a1e0-C5E5-1a-s.webp",
+   "alt": "Two boards on two plates with red and green LEDs, hands at either edge"
   },
   {
    "id": 137677675,
@@ -243,7 +263,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/fb528dc1-C5E5-2a.jpg",
-   "thumb": "/img/fb528dc1-C5E5-2a-s.webp"
+   "thumb": "/img/fb528dc1-C5E5-2a-s.webp",
+   "alt": "A hand holding a module beside the board, a green LED lit"
   },
   {
    "id": 137677683,
@@ -253,7 +274,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/aaedfe20-C5E5-3a.jpg",
-   "thumb": "/img/aaedfe20-C5E5-3a-s.webp"
+   "thumb": "/img/aaedfe20-C5E5-3a-s.webp",
+   "alt": "Hands holding wooden clothes pegs wired to the board, green and cyan LEDs lit"
   },
   {
    "id": 137677685,
@@ -263,7 +285,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/06fc0f9d-C5E5-3b.jpg",
-   "thumb": "/img/06fc0f9d-C5E5-3b-s.webp"
+   "thumb": "/img/06fc0f9d-C5E5-3b-s.webp",
+   "alt": "Hands holding the pegs, the LEDs green"
   },
   {
    "id": 137677686,
@@ -273,7 +296,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/62dce851-C5E5-3c.jpg",
-   "thumb": "/img/62dce851-C5E5-3c-s.webp"
+   "thumb": "/img/62dce851-C5E5-3c-s.webp",
+   "alt": "Hands holding the pegs, the LEDs magenta and purple"
   },
   {
    "id": 137677688,
@@ -283,7 +307,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/0c59536a-C5E5-3d.jpg",
-   "thumb": "/img/0c59536a-C5E5-3d-s.webp"
+   "thumb": "/img/0c59536a-C5E5-3d-s.webp",
+   "alt": "A hand holding a peg, the LEDs blue"
   },
   {
    "id": 137677689,
@@ -293,7 +318,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/f84f03c9-C5E5-3e.jpg",
-   "thumb": "/img/f84f03c9-C5E5-3e-s.webp"
+   "thumb": "/img/f84f03c9-C5E5-3e-s.webp",
+   "alt": "Hands holding the pegs, the LEDs red"
   },
   {
    "id": 137677690,
@@ -303,7 +329,8 @@
    "height": 938,
    "exclude_from_backdrop": false,
    "original": "/img-original/b1c77929-Microsite.png",
-   "thumb": "/img/b1c77929-Microsite-s.webp"
+   "thumb": "/img/b1c77929-Microsite-s.webp",
+   "alt": "Screen capture of the microsite listing the explorations"
   }
  ],
  "meta": {

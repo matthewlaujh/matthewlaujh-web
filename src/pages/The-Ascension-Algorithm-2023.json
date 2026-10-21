@@ -43,7 +43,8 @@
    "height": 641,
    "exclude_from_backdrop": false,
    "original": "/img-original/e595b550-theascensionalgorithm-2.png",
-   "thumb": "/img/e595b550-theascensionalgorithm-2-s.webp"
+   "thumb": "/img/e595b550-theascensionalgorithm-2-s.webp",
+   "alt": "A grainy monochrome frame of a spiral staircase, with a caption about repeating a step"
   },
   {
    "id": 229446100,
@@ -53,7 +54,8 @@
    "height": 641,
    "exclude_from_backdrop": false,
    "original": "/img-original/866f01a7-theascensionalgorithm-3.png",
-   "thumb": "/img/866f01a7-theascensionalgorithm-3-s.webp"
+   "thumb": "/img/866f01a7-theascensionalgorithm-3-s.webp",
+   "alt": "A figure in front of a wall of hanging framed images, with a caption about the names of the foot"
   },
   {
    "id": 229446101,
@@ -63,7 +65,8 @@
    "height": 641,
    "exclude_from_backdrop": false,
    "original": "/img-original/fb14c806-theascensionalgorithm-4.png",
-   "thumb": "/img/fb14c806-theascensionalgorithm-4-s.webp"
+   "thumb": "/img/fb14c806-theascensionalgorithm-4-s.webp",
+   "alt": "A translucent figure in a grid of lines, with a caption about the first step"
   },
   {
    "id": 229446102,
@@ -73,7 +76,8 @@
    "height": 641,
    "exclude_from_backdrop": false,
    "original": "/img-original/b7d219d0-theascensionalgorithm-5.png",
-   "thumb": "/img/b7d219d0-theascensionalgorithm-5-s.webp"
+   "thumb": "/img/b7d219d0-theascensionalgorithm-5-s.webp",
+   "alt": "A figure on a staircase towards a bright opening, with a caption about fixing the heel in place"
   },
   {
    "id": 229446103,
@@ -83,7 +87,8 @@
    "height": 641,
    "exclude_from_backdrop": false,
    "original": "/img-original/dfff17ef-theascensionalgorithm.png",
-   "thumb": "/img/dfff17ef-theascensionalgorithm-s.webp"
+   "thumb": "/img/dfff17ef-theascensionalgorithm-s.webp",
+   "alt": "A figure at the foot of a staircase beside a wall of small framed pictures"
   }
  ],
  "meta": {

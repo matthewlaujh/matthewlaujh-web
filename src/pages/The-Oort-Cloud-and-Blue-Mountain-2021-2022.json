@@ -43,7 +43,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/ebbaf4ae-SAW-TOCBM-1.jpg",
-   "thumb": "/img/ebbaf4ae-SAW-TOCBM-1-s.webp"
+   "thumb": "/img/ebbaf4ae-SAW-TOCBM-1-s.webp",
+   "alt": "A carpark wall wrapped in a vinyl mural of pink, green and purple shapes, with neon-like light tubes"
   },
   {
    "id": 137692625,
@@ -53,7 +54,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/e81ffe47-SAW-TOCBM-2.jpg",
-   "thumb": "/img/e81ffe47-SAW-TOCBM-2-s.webp"
+   "thumb": "/img/e81ffe47-SAW-TOCBM-2-s.webp",
+   "alt": "The mural across the carpark wall, with the Singapore Art Week signage"
   },
   {
    "id": 137692626,
@@ -63,7 +65,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/1ce181d8-SAW-TOCBM-3.jpg",
-   "thumb": "/img/1ce181d8-SAW-TOCBM-3-s.webp"
+   "thumb": "/img/1ce181d8-SAW-TOCBM-3-s.webp",
+   "alt": "Detail of the light tubes and a silver vinyl shape on the mural"
   },
   {
    "id": 137692627,
@@ -73,7 +76,8 @@
    "height": 1499,
    "exclude_from_backdrop": false,
    "original": "/img-original/5f7f579c-SAW-TOCBM-4.jpg",
-   "thumb": "/img/5f7f579c-SAW-TOCBM-4-s.webp"
+   "thumb": "/img/5f7f579c-SAW-TOCBM-4-s.webp",
+   "alt": "The mural on a pillar with angled light tubes"
   },
   {
    "id": 137692628,
@@ -83,7 +87,8 @@
    "height": 1499,
    "exclude_from_backdrop": false,
    "original": "/img-original/c4718ca8-SAW-TOCBM-5.jpg",
-   "thumb": "/img/c4718ca8-SAW-TOCBM-5-s.webp"
+   "thumb": "/img/c4718ca8-SAW-TOCBM-5-s.webp",
+   "alt": "The mural on a pillar at the carpark entrance"
   },
   {
    "id": 137692629,
@@ -93,7 +98,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/75bd3ac9-SAW-TOCBM-6.jpg",
-   "thumb": "/img/75bd3ac9-SAW-TOCBM-6-s.webp"
+   "thumb": "/img/75bd3ac9-SAW-TOCBM-6-s.webp",
+   "alt": "Four coloured light tubes angled across the purple mural"
   },
   {
    "id": 137692630,
@@ -103,7 +109,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/d6a5a4d2-SAW-TOCBM-7.jpg",
-   "thumb": "/img/d6a5a4d2-SAW-TOCBM-7-s.webp"
+   "thumb": "/img/d6a5a4d2-SAW-TOCBM-7-s.webp",
+   "alt": "The light tubes unlit, their wiring across the mural"
   },
   {
    "id": 137692631,
@@ -113,7 +120,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/6e7df789-SAW-TOCBM-8.jpg",
-   "thumb": "/img/6e7df789-SAW-TOCBM-8-s.webp"
+   "thumb": "/img/6e7df789-SAW-TOCBM-8-s.webp",
+   "alt": "The LED drivers and power supply mounted on a board"
   },
   {
    "id": 137692632,
@@ -123,7 +131,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/8fdbdeec-SAW-TOCBM-9.jpg",
-   "thumb": "/img/8fdbdeec-SAW-TOCBM-9-s.webp"
+   "thumb": "/img/8fdbdeec-SAW-TOCBM-9-s.webp",
+   "alt": "Hands soldering a small circuit board"
   },
   {
    "id": 137692633,
@@ -133,7 +142,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/77a584de-SAW-TOCBM-10.jpg",
-   "thumb": "/img/77a584de-SAW-TOCBM-10-s.webp"
+   "thumb": "/img/77a584de-SAW-TOCBM-10-s.webp",
+   "alt": "The driver board with its wiring and power supply"
   },
   {
    "id": 137692634,
@@ -143,7 +153,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/7e09482b-SAW-TOCBM-11.jpg",
-   "thumb": "/img/7e09482b-SAW-TOCBM-11-s.webp"
+   "thumb": "/img/7e09482b-SAW-TOCBM-11-s.webp",
+   "alt": "Testing the wiring of the control unit in the workshop"
   },
   {
    "id": 173874770,
@@ -153,7 +164,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/8a1025f9-theOortCloudAndBlueMountainDresden-1.jpg",
-   "thumb": "/img/8a1025f9-theOortCloudAndBlueMountainDresden-1-s.webp"
+   "thumb": "/img/8a1025f9-theOortCloudAndBlueMountainDresden-1-s.webp",
+   "alt": "A child walking through the Dresden gallery, its walls covered in the colourful mural and starburst screens"
   },
   {
    "id": 173874771,
@@ -163,7 +175,8 @@
    "height": 510,
    "exclude_from_backdrop": false,
    "original": "/img-original/a91245c3-theOortCloudAndBlueMountainDresden-2.jpg",
-   "thumb": "/img/a91245c3-theOortCloudAndBlueMountainDresden-2-s.webp"
+   "thumb": "/img/a91245c3-theOortCloudAndBlueMountainDresden-2-s.webp",
+   "alt": "The Dresden gallery with visitors among the mural and screens"
   },
   {
    "id": 173874781,
@@ -173,7 +186,8 @@
    "height": 666,
    "exclude_from_backdrop": false,
    "original": "/img-original/7e45b712-theOortCloudAndBlueMountainGroninger-1.jpg",
-   "thumb": "/img/7e45b712-theOortCloudAndBlueMountainGroninger-1-s.webp"
+   "thumb": "/img/7e45b712-theOortCloudAndBlueMountainGroninger-1-s.webp",
+   "alt": "The Groningen gallery with screens set into the mural"
   },
   {
    "id": 173874782,
@@ -183,7 +197,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/f923d01d-theOortCloudAndBlueMountainGroninger-2.jpg",
-   "thumb": "/img/f923d01d-theOortCloudAndBlueMountainGroninger-2-s.webp"
+   "thumb": "/img/f923d01d-theOortCloudAndBlueMountainGroninger-2-s.webp",
+   "alt": "Visitors in the Groningen gallery beside the mural"
   }
  ],
  "meta": {

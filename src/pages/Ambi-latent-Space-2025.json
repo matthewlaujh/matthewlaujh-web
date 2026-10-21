@@ -43,7 +43,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/9a3df0a1-ambilatentspace-main.jpg",
-   "thumb": "/img/9a3df0a1-ambilatentspace-main-s.webp"
+   "thumb": "/img/9a3df0a1-ambilatentspace-main-s.webp",
+   "alt": "A square lighting fixture hung in a dark room, two people standing in its pool of light"
   },
   {
    "id": 232777093,
@@ -53,7 +54,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/3c20bb77-ambilatentspace-detail.jpg",
-   "thumb": "/img/3c20bb77-ambilatentspace-detail-s.webp"
+   "thumb": "/img/3c20bb77-ambilatentspace-detail-s.webp",
+   "alt": "Close view of the fixture: a grid of lamps above a glowing square frame"
   },
   {
    "id": 232777087,
@@ -63,7 +65,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/0fc605b2-ambilatentspace-1.jpg",
-   "thumb": "/img/0fc605b2-ambilatentspace-1-s.webp"
+   "thumb": "/img/0fc605b2-ambilatentspace-1-s.webp",
+   "alt": "A person at a table under the fixture, lit cool blue"
   },
   {
    "id": 232777088,
@@ -73,7 +76,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/a09353cf-ambilatentspace-2.jpg",
-   "thumb": "/img/a09353cf-ambilatentspace-2-s.webp"
+   "thumb": "/img/a09353cf-ambilatentspace-2-s.webp",
+   "alt": "The fixture tilted, a person sitting on the floor beneath it"
   },
   {
    "id": 232777089,
@@ -83,7 +87,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/86e3f18a-ambilatentspace-3.jpg",
-   "thumb": "/img/86e3f18a-ambilatentspace-3-s.webp"
+   "thumb": "/img/86e3f18a-ambilatentspace-3-s.webp",
+   "alt": "Two people standing under the fixture in warm light"
   },
   {
    "id": 232777090,
@@ -93,7 +98,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/305b6f1d-ambilatentspace-4.jpg",
-   "thumb": "/img/305b6f1d-ambilatentspace-4-s.webp"
+   "thumb": "/img/305b6f1d-ambilatentspace-4-s.webp",
+   "alt": "A person reading on a chair under the fixture"
   },
   {
    "id": 232777091,
@@ -103,7 +109,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/73c8dab4-ambilatentspace-5.jpg",
-   "thumb": "/img/73c8dab4-ambilatentspace-5-s.webp"
+   "thumb": "/img/73c8dab4-ambilatentspace-5-s.webp",
+   "alt": "Two people facing each other under the fixture"
   },
   {
    "id": 232777092,
@@ -113,7 +120,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/7f8b0aee-ambilatentspace-6.jpg",
-   "thumb": "/img/7f8b0aee-ambilatentspace-6-s.webp"
+   "thumb": "/img/7f8b0aee-ambilatentspace-6-s.webp",
+   "alt": "A group sitting on the floor under the fixture"
   }
  ],
  "meta": {

@@ -45,7 +45,8 @@
    "original": "/img-original/b7e9f40f-seaOfDebris.gif",
    "mp4": "/img/b7e9f40f-seaOfDebris.mp4",
    "poster": "/img/b7e9f40f-seaOfDebris-poster.jpg",
-   "thumb": "/img/b7e9f40f-seaOfDebris-s.webp"
+   "thumb": "/img/b7e9f40f-seaOfDebris-s.webp",
+   "alt": "The kinetic sculpture in the dark: a long glass tray of marine debris on wooden blocks, lit from below"
   },
   {
    "id": 137697475,
@@ -55,7 +56,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/fbbceb51-ARCHIFEST-seaOfDebris-1.jpg",
-   "thumb": "/img/fbbceb51-ARCHIFEST-seaOfDebris-1-s.webp"
+   "thumb": "/img/fbbceb51-ARCHIFEST-seaOfDebris-1-s.webp",
+   "alt": "The glass tray of debris on wooden supports, a light tube on the floor beside it"
   },
   {
    "id": 137697476,
@@ -65,7 +67,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/afa275b1-ARCHIFEST-seaOfDebris-2.jpg",
-   "thumb": "/img/afa275b1-ARCHIFEST-seaOfDebris-2-s.webp"
+   "thumb": "/img/afa275b1-ARCHIFEST-seaOfDebris-2-s.webp",
+   "alt": "The tray from the end, the debris gathered around the motor in the middle"
   },
   {
    "id": 137697477,
@@ -75,7 +78,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/ff978a8a-ARCHIFEST-seaOfDebris-3.jpg",
-   "thumb": "/img/ff978a8a-ARCHIFEST-seaOfDebris-3-s.webp"
+   "thumb": "/img/ff978a8a-ARCHIFEST-seaOfDebris-3-s.webp",
+   "alt": "Close view of glass beads and plastic fragments around the motor"
   },
   {
    "id": 137697478,
@@ -85,7 +89,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/886fc984-ARCHIFEST-seaOfDebris-4.jpg",
-   "thumb": "/img/886fc984-ARCHIFEST-seaOfDebris-4-s.webp"
+   "thumb": "/img/886fc984-ARCHIFEST-seaOfDebris-4-s.webp",
+   "alt": "The motor unit on the tray with light tubes radiating from it"
   },
   {
    "id": 137697479,
@@ -95,7 +100,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/b1c90c3b-ARCHIFEST-seaOfDebris-5.jpg",
-   "thumb": "/img/b1c90c3b-ARCHIFEST-seaOfDebris-5-s.webp"
+   "thumb": "/img/b1c90c3b-ARCHIFEST-seaOfDebris-5-s.webp",
+   "alt": "The motor unit on its aluminium frame beneath the tray"
   },
   {
    "id": 137697480,
@@ -105,7 +111,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/c8c33bcd-ARCHIFEST-seaOfDebris-6.jpg",
-   "thumb": "/img/c8c33bcd-ARCHIFEST-seaOfDebris-6-s.webp"
+   "thumb": "/img/c8c33bcd-ARCHIFEST-seaOfDebris-6-s.webp",
+   "alt": "The frame and light tubes seen from under the tray"
   },
   {
    "id": 137697481,
@@ -115,7 +122,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/25629f1f-ARCHIFEST-seaOfDebris-7.jpg",
-   "thumb": "/img/25629f1f-ARCHIFEST-seaOfDebris-7-s.webp"
+   "thumb": "/img/25629f1f-ARCHIFEST-seaOfDebris-7-s.webp",
+   "alt": "A linear actuator fixed to one of the wooden blocks"
   },
   {
    "id": 137697482,
@@ -125,7 +133,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/7951732a-ARCHIFEST-seaOfDebris-8.jpg",
-   "thumb": "/img/7951732a-ARCHIFEST-seaOfDebris-8-s.webp"
+   "thumb": "/img/7951732a-ARCHIFEST-seaOfDebris-8-s.webp",
+   "alt": "Two people wiring the motor unit on the tray, red cables across the floor"
   },
   {
    "id": 137697483,
@@ -135,7 +144,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/10902a19-ARCHIFEST-seaOfDebris-9.jpg",
-   "thumb": "/img/10902a19-ARCHIFEST-seaOfDebris-9-s.webp"
+   "thumb": "/img/10902a19-ARCHIFEST-seaOfDebris-9-s.webp",
+   "alt": "The driver board and Arduino being assembled on a workbench"
   }
  ],
  "meta": {

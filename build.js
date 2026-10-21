@@ -109,10 +109,14 @@ function mediaHTML(im, attrs) {
 		// the ≤1200px thumb serves 1x screens; the full file only when the slot needs it
 		const tw = Math.round(im.width * Math.min(1, 1200 / Math.max(im.width, im.height)));
 		const srcset = im.thumb && im.thumb !== im.src && tw < im.width ? ` srcset="${im.thumb} ${tw}w, ${im.src} ${im.width}w" sizes="(max-width: 800px) 100vw, 62vw"` : '';
-		return `<img src="${im.src}"${srcset} width="${im.width}" height="${im.height}" alt="" decoding="async"${attrs || ''}>`;
+		return `<img src="${im.src}"${srcset} width="${im.width}" height="${im.height}" alt="${esc(im.alt || '')}" decoding="async"${attrs || ''}>`;
 	}
 	const eager = /eager/.test(attrs || '');
-	return `<video muted loop playsinline preload="${eager ? 'auto' : 'none'}"${eager ? ' autoplay' : ''} poster="${im.poster}" width="${im.width}" height="${im.height}" aria-label=""><source src="${im.src}" type="video/webm"><source src="${im.mp4}" type="video/mp4"></video>`;
+	return `<video muted loop playsinline preload="${eager ? 'auto' : 'none'}"${eager ? ' autoplay' : ''} poster="${im.poster}" width="${im.width}" height="${im.height}" aria-label="${esc(im.alt || 'Video')}"><source src="${im.src}" type="video/webm"><source src="${im.mp4}" type="video/mp4"></video>`;
+}
+/* a silent loop needs a way to stop it: a small pill in the plate's corner */
+function videoControl() {
+	return `<button class="vctl" type="button" aria-pressed="false" aria-label="Pause video"><svg viewBox="0 0 10 10" aria-hidden="true"><path class="pause" d="M2.5 1.5v7M7.5 1.5v7"/><path class="play" d="M3 1.5l5.5 3.5L3 8.5z"/></svg></button>`;
 }
 
 const kcls = k => k === 'art' ? ' k--art' : k === 'both' ? ' k--both' : '';
@@ -141,13 +145,12 @@ ${groups}
 }
 
 function barHTML(page) {
-	const isHome = page.slug === site.homepage;
+	const isHome = page.slug === site.homepage || page.slug === '404';
 	const w = workBySlug[page.slug];
 	let mid = 'Projects', midYear = '';
 	if (w) { mid = esc(w.title); midYear = w.year; }
 	else if (page.slug === FIELD_SLUG) mid = 'Works in space';
 	else if (page.slug === 'About') mid = 'About';
-	else if (page.slug === '404') mid = 'Not found';
 	const left = isHome
 		? `<a class="site-title" href="${url(site.homepage)}">${nav.title}</a>`
 		: `<a class="site-title back" href="${url(site.homepage)}" aria-label="Home"><span>←</span> <i class="nm">${nav.title}</i></a>`;
@@ -194,14 +197,15 @@ function introHTML(currentSlug) {
 }
 
 /* ------------------------------------------------------------------ pages */
+/* one row of the home list: title, year, and the panel that opens on hover */
+function itemHTML(w) {
+	const m = w.meta || {};
+	const facts = [['Category', w.category], ['Techniques', m.techniques], [m.client_label || 'Client', m.client]].filter(x => x[1]).map(([k, v]) => `<span class="fact"><b>${esc(k)}</b>${esc(v)}</span>`).join('');
+	return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}"><i class="k${kcls(m.kind)}" aria-hidden="true"></i>${splitTitle(w.title)}<small>${w.year}</small></a><div class="more"><div><a class="more-in" href="${url(w.slug)}" tabindex="-1" aria-hidden="true"><img class="thumb" alt="" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></a></div></div></div>`;
+}
 function homeMain() {
 	const list = nav.groups.map(g => `\t\t\t<p class="group">${g.label}</p>\n${g.items.map(it => {
-		if (it.href && workBySlug[it.href]) {
-			const w = workBySlug[it.href];
-			const m = w.meta || {};
-			const facts = [['Category', w.category], ['Techniques', m.techniques], [m.client_label || 'Client', m.client]].filter(x => x[1]).map(([k, v]) => `<span class="fact"><b>${esc(k)}</b>${esc(v)}</span>`).join('');
-			return `\t\t\t<div class="item"><a href="${url(w.slug)}" data-i="${works.indexOf(w)}" data-img="${hoverImage(w)}" data-title="${esc(w.title)}" data-year="${w.year}"><i class="k${kcls(m.kind)}" aria-hidden="true"></i>${splitTitle(w.title)}<small>${w.year}</small></a><div class="more"><div><a class="more-in" href="${url(w.slug)}" tabindex="-1" aria-hidden="true"><img class="thumb" alt="" width="${w.cover.width}" height="${w.cover.height}" data-src="${hoverImage(w)}"><div class="text">${m.line ? `<p class="line">${esc(m.line)}</p>` : ''}<p class="facts">${facts}</p></div></a></div></div></div>`;
-		}
+		if (it.href && workBySlug[it.href]) return itemHTML(workBySlug[it.href]);
 		return `\t\t\t<span class="dead" title="Coming soon">${splitTitle(it.text.replace(/\s*\(.*\)$/, ''))}<small>${(it.text.match(/\((.*)\)/) || [])[1] || ''}</small></span>`;
 	}).join('\n')}`).join('\n');
 	return `<main class="home">
@@ -214,6 +218,28 @@ ${list}
 		<aside class="home-aside">
 			${introHTML(site.homepage)}
 			<a class="more" href="${url('About')}">More about me</a>
+			<p class="contact"><a href="mailto:${email}">${email}</a><br>Singapore</p>
+		</aside>
+	</main>`;
+}
+
+/* 404: the home page's shape, with a line in place of the list's first group
+   and the newest work to go on to */
+function notFoundMain() {
+	const recent = works.slice().sort((a, b) => parseInt(b.year, 10) - parseInt(a.year, 10)).slice(0, 5);
+	return `<main class="home notfound">
+		<h1 class="visually-hidden">Page not found</h1>
+		<nav class="marquee" aria-label="Recent projects">
+			<p class="oops">There\u2019s nothing at this address.</p>
+			<p class="group">Recent work</p>
+${recent.map(itemHTML).join('\n')}
+			<a class="space" href="${url(FIELD_SLUG)}">All works in space<small>${works.length}</small></a>
+		</nav>
+		<aside class="home-aside">
+			<div class="prose">
+<p>The page may have moved when I rebuilt the site, or the link had a typo in it. If something sent you here, I\u2019d like to know.</p>
+			</div>
+			<a class="more" href="${url(site.homepage)}">Back to the start</a>
 			<p class="contact"><a href="mailto:${email}">${email}</a><br>Singapore</p>
 		</aside>
 	</main>`;
@@ -245,7 +271,7 @@ ${fixLinks(w.body, w.slug)}
 				</div>
 			</div>
 			<div class="plates">
-${w.images.map((im, i) => `\t\t\t\t<figure>${mediaHTML(im, ` loading="${i ? 'lazy' : 'eager'}"`)}<figcaption>${i + 1} / ${w.images.length}</figcaption></figure>`).join('\n')}
+${w.images.map((im, i) => `\t\t\t\t<figure${im.video ? ' class="has-video"' : ''}>${mediaHTML(im, ` loading="${i ? 'lazy' : 'eager'}"`)}${im.video ? videoControl() : ''}${w.images.length > 1 ? `<figcaption>${i + 1} / ${w.images.length}</figcaption>` : ''}</figure>`).join('\n')}
 			</div>
 		</div>
 	</main>`;
@@ -354,10 +380,7 @@ function render(page) {
 	if (isHome) { kind = 'home'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: true } }); main = homeMain(); }
 	else if (w) { kind = 'project'; backdrop = diffuseHTML([{ src: w.cover.video ? w.cover.poster : w.cover.thumb, width: w.cover.width, height: w.cover.height }], { light: true, poster: w.cover.video ? w.cover.poster : w.cover.thumb, settings: { strength: 0.55 } }); main = projectMain(w); }
 	else if (page.slug === FIELD_SLUG) { kind = 'field'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: false, strength: 0.5 } }); main = fieldMain(); }
-	else if (page.slug === '404') { kind = 'about'; backdrop = ''; main = `<main class="about notfound">
-		<h1>Nothing here.</h1>
-		<p>That page may have moved. Try the <a href="${url(site.homepage)}">home page</a>, <a href="${url(FIELD_SLUG)}">works in space</a> or <a href="${url('About')}">about</a>.</p>
-	</main>`; }
+	else if (page.slug === '404') { kind = 'home'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: true } }); main = notFoundMain(); }
 	else { kind = 'about'; backdrop = ''; main = aboutMain(page); }
 
 	return `<!DOCTYPE html>

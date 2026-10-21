@@ -45,7 +45,8 @@
    "original": "/img-original/333a790b-djheardthat.gif",
    "mp4": "/img/333a790b-djheardthat.mp4",
    "poster": "/img/333a790b-djheardthat-poster.jpg",
-   "thumb": "/img/333a790b-djheardthat-s.webp"
+   "thumb": "/img/333a790b-djheardthat-s.webp",
+   "alt": "A person playing the pad controller, the letters 'd' and 'j' on the laptop screen"
   },
   {
    "id": 137676070,
@@ -57,7 +58,8 @@
    "original": "/img-original/2a8e6682-djheardthat-functions.gif",
    "mp4": "/img/2a8e6682-djheardthat-functions.mp4",
    "poster": "/img/2a8e6682-djheardthat-functions-poster.jpg",
-   "thumb": "/img/2a8e6682-djheardthat-functions-s.webp"
+   "thumb": "/img/2a8e6682-djheardthat-functions-s.webp",
+   "alt": "Hands on the pad controller, the letter 'a' on the screen"
   },
   {
    "id": 137676200,
@@ -67,7 +69,8 @@
    "height": 1000,
    "exclude_from_backdrop": false,
    "original": "/img-original/a2b4d308-CiD_3_3-2_6.jpg",
-   "thumb": "/img/a2b4d308-CiD_3_3-2_6-s.webp"
+   "thumb": "/img/a2b4d308-CiD_3_3-2_6-s.webp",
+   "alt": "A visitor at the controller watching letters tumble across a wall screen"
   },
   {
    "id": 137676201,
@@ -77,7 +80,8 @@
    "height": 1000,
    "exclude_from_backdrop": false,
    "original": "/img-original/fc6d870f-CiD_3_3-2_8.jpg",
-   "thumb": "/img/fc6d870f-CiD_3_3-2_8-s.webp"
+   "thumb": "/img/fc6d870f-CiD_3_3-2_8-s.webp",
+   "alt": "A visitor in a hat facing a screen of overlapping letters"
   },
   {
    "id": 137676202,
@@ -87,7 +91,8 @@
    "height": 1000,
    "exclude_from_backdrop": false,
    "original": "/img-original/e00f5656-CiD_3_3-2_16.jpg",
-   "thumb": "/img/e00f5656-CiD_3_3-2_16-s.webp"
+   "thumb": "/img/e00f5656-CiD_3_3-2_16-s.webp",
+   "alt": "A visitor facing a screen filled with large layered letters"
   }
  ],
  "meta": {

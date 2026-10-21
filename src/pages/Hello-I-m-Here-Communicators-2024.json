@@ -43,7 +43,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/8a92384a-helloimherelightcommunicators.JPG",
-   "thumb": "/img/8a92384a-helloimherelightcommunicators-s.webp"
+   "thumb": "/img/8a92384a-helloimherelightcommunicators-s.webp",
+   "alt": "Two small cloud-shaped lamps on plinths in a dark room, one cyan and one green"
   },
   {
    "id": 229446765,
@@ -53,7 +54,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/cdfbcb55-helloimhere-lamp-1.JPG",
-   "thumb": "/img/cdfbcb55-helloimhere-lamp-1-s.webp"
+   "thumb": "/img/cdfbcb55-helloimhere-lamp-1-s.webp",
+   "alt": "A visitor's hand reaching for a cloud lamp glowing warm orange"
   },
   {
    "id": 229446766,
@@ -63,7 +65,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/a8e7e1dd-helloimhere-lamp-2.JPG",
-   "thumb": "/img/a8e7e1dd-helloimhere-lamp-2-s.webp"
+   "thumb": "/img/a8e7e1dd-helloimhere-lamp-2-s.webp",
+   "alt": "A cloud lamp glowing pink and blue against a dark wall"
   },
   {
    "id": 229446768,
@@ -73,7 +76,8 @@
    "height": 1081,
    "exclude_from_backdrop": false,
    "original": "/img-original/cb79eab5-helloimhere-lamp-4.jpg",
-   "thumb": "/img/cb79eab5-helloimhere-lamp-4-s.webp"
+   "thumb": "/img/cb79eab5-helloimhere-lamp-4-s.webp",
+   "alt": "Close view of a cloud lamp on its three-legged stand, lit in yellow"
   },
   {
    "id": 229446767,
@@ -83,7 +87,8 @@
    "height": 786,
    "exclude_from_backdrop": false,
    "original": "/img-original/3c3ed328-helloimhere-lamp-3.jpg",
-   "thumb": "/img/3c3ed328-helloimhere-lamp-3-s.webp"
+   "thumb": "/img/3c3ed328-helloimhere-lamp-3-s.webp",
+   "alt": "A cloud lamp glowing blue on a printed page describing the work"
   },
   {
    "id": 229446770,
@@ -93,7 +98,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/0e337cce-helloimhere-lamp-6.JPG",
-   "thumb": "/img/0e337cce-helloimhere-lamp-6-s.webp"
+   "thumb": "/img/0e337cce-helloimhere-lamp-6-s.webp",
+   "alt": "The lamp's circuit board: a cloud-shaped PCB with a wireless module and LEDs"
   }
  ],
  "meta": {

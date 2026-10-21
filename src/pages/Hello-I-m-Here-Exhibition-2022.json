@@ -43,7 +43,8 @@
    "height": 1200,
    "exclude_from_backdrop": false,
    "original": "/img-original/83e88415-matthew-helloImHere-1.jpg",
-   "thumb": "/img/83e88415-matthew-helloImHere-1-s.webp"
+   "thumb": "/img/83e88415-matthew-helloImHere-1-s.webp",
+   "alt": "A dark gallery with a glowing light panel at either end, a visitor at each"
   },
   {
    "id": 142192304,
@@ -53,7 +54,8 @@
    "height": 1200,
    "exclude_from_backdrop": false,
    "original": "/img-original/8a6268c6-matthew-helloImHere-2.jpg",
-   "thumb": "/img/8a6268c6-matthew-helloImHere-2-s.webp"
+   "thumb": "/img/8a6268c6-matthew-helloImHere-2-s.webp",
+   "alt": "A woman facing the camera in front of a panel of concentric cyan and red light, a silhouette behind her"
   },
   {
    "id": 142192305,
@@ -63,7 +65,8 @@
    "height": 1200,
    "exclude_from_backdrop": false,
    "original": "/img-original/678e3980-matthew-helloImHere-3.jpg",
-   "thumb": "/img/678e3980-matthew-helloImHere-3-s.webp"
+   "thumb": "/img/678e3980-matthew-helloImHere-3-s.webp",
+   "alt": "A man in front of the panel, a silhouette behind him"
   },
   {
    "id": 142192307,
@@ -73,7 +76,8 @@
    "height": 1200,
    "exclude_from_backdrop": false,
    "original": "/img-original/651338b9-matthew-helloImHere-4.jpg",
-   "thumb": "/img/651338b9-matthew-helloImHere-4-s.webp"
+   "thumb": "/img/651338b9-matthew-helloImHere-4-s.webp",
+   "alt": "The gallery with both panels glowing orange and yellow"
   },
   {
    "id": 142192309,
@@ -83,7 +87,8 @@
    "height": 1200,
    "exclude_from_backdrop": false,
    "original": "/img-original/e64444f3-matthew-helloImHere-5.jpg",
-   "thumb": "/img/e64444f3-matthew-helloImHere-5-s.webp"
+   "thumb": "/img/e64444f3-matthew-helloImHere-5-s.webp",
+   "alt": "The gallery with both panels glowing green"
   },
   {
    "id": 142192310,
@@ -93,7 +98,8 @@
    "height": 1200,
    "exclude_from_backdrop": false,
    "original": "/img-original/0436a820-matthew-helloImHere-6.jpg",
-   "thumb": "/img/0436a820-matthew-helloImHere-6-s.webp"
+   "thumb": "/img/0436a820-matthew-helloImHere-6-s.webp",
+   "alt": "A silhouette in front of a panel of red and cyan rings"
   },
   {
    "id": 142192311,
@@ -103,7 +109,8 @@
    "height": 1200,
    "exclude_from_backdrop": false,
    "original": "/img-original/df2f38b8-matthew-helloImHere-7.jpg",
-   "thumb": "/img/df2f38b8-matthew-helloImHere-7-s.webp"
+   "thumb": "/img/df2f38b8-matthew-helloImHere-7-s.webp",
+   "alt": "A single figure in the distance in front of the glowing panel"
   },
   {
    "id": 142192312,
@@ -113,7 +120,8 @@
    "height": 1200,
    "exclude_from_backdrop": false,
    "original": "/img-original/f7699910-matthew-helloImHere-8.jpg",
-   "thumb": "/img/f7699910-matthew-helloImHere-8-s.webp"
+   "thumb": "/img/f7699910-matthew-helloImHere-8-s.webp",
+   "alt": "A woman's profile lit by a purple panel"
   },
   {
    "id": 142192313,
@@ -123,7 +131,8 @@
    "height": 1200,
    "exclude_from_backdrop": false,
    "original": "/img-original/9683ccb4-matthew-helloImHere-9.jpg",
-   "thumb": "/img/9683ccb4-matthew-helloImHere-9-s.webp"
+   "thumb": "/img/9683ccb4-matthew-helloImHere-9-s.webp",
+   "alt": "A man's profile lit by an orange panel"
   }
  ],
  "meta": {

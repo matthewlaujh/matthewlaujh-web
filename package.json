@@ -6,6 +6,6 @@
   "scripts": {
     "build": "node build.js",
     "serve": "node scripts/serve.js",
-    "deploy": "node build.js && npx wrangler pages deploy public --project-name matthewlaujh --commit-dirty=true"
+    "deploy": "node build.js && npx wrangler deploy"
   }
 }

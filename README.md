@@ -1,7 +1,7 @@
 # matthewlaujh.com
 
 Static source for [matthewlaujh.com](https://matthewlaujh.com), migrated off Cargo (Cargo 2) to
-Cloudflare Pages. `build.js` turns the page data in `src/` into plain HTML in `public/`.
+Cloudflare Workers (static assets). `build.js` turns the page data in `src/` into plain HTML in `public/`.
 
 ## v3 — "Marquee"
 
@@ -40,7 +40,7 @@ node build.js
 node scripts/serve.js        # then open http://localhost:8000
 ```
 The site uses clean URLs (`/Reconstructed-Colours-2026`, no `.html`) exactly as
-Cloudflare Pages serves them, so a plain `python3 -m http.server` will 404 on
+Cloudflare serves them, so a plain `python3 -m http.server` will 404 on
 every link. `scripts/serve.js` resolves them the same way Cloudflare does.
 
 ```
@@ -59,7 +59,7 @@ src/
 build.js               src -> public
 scripts/fetch-assets.sh  downloads all 129 images from Cargo's CDN into src/img
 scripts/assets.json      CDN url -> local filename map used by that script
-public/                generated output, what Cloudflare serves (committed so Pages needs no build)
+public/                generated output, what Cloudflare serves (committed so no build step is needed)
 ```
 
 ## Build
@@ -69,7 +69,7 @@ node build.js            # regenerates public/
 node scripts/serve.js    # clean-URL dev server on :8000
 ```
 
-Each page becomes `public/<slug>.html`; Cloudflare Pages serves it at `/<slug>` (clean URLs), exactly
+Each page becomes `public/<slug>.html`; Cloudflare serves it at `/<slug>` (clean URLs), exactly
 the URLs Cargo used. `/Front-Page` 301s to `/` (`public/_redirects`).
 
 ## Images (one-time step)
@@ -85,24 +85,21 @@ node build.js
 Only `src/img/` needs the files; `build.js` copies them into `public/img/`. Run this before you
 take the Cargo site down — the script reads from `freight.cargo.site`.
 
-## Deploy to Cloudflare Pages
+## Deploy to Cloudflare
 
-### Quick: direct upload from this folder (good for testing)
+The site is a Cloudflare Worker that serves `public/` as static assets. `wrangler.jsonc` holds
+the configuration: `not_found_handling: "404-page"` so unknown URLs get `public/404.html`
+(without it Workers returns an empty 404), and `_redirects` / `_headers` in `public/` are honoured.
 
 ```
-npx wrangler login                                              # once: opens the browser
-npx wrangler pages project create matthewlaujh --production-branch main   # once
-npm run deploy                                                  # builds, then uploads public/
+npx wrangler login      # once: opens the browser
+npm run deploy          # builds, then `wrangler deploy`
 ```
-Each deploy prints a `*.pages.dev` URL. The project name is set in `package.json`.
 
-### Later: connect the repo so every push deploys
-
-1. Push to GitHub/GitLab.
-2. Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git.
-3. Build settings: Framework preset **None**, build command **`node build.js`** (or leave empty —
-   `public/` is committed), build output directory **`public`**.
-4. Add the custom domain `matthewlaujh.com`, then move DNS from Cargo to Cloudflare.
+With the repo connected in the dashboard (Workers & Pages → the worker → Settings → Build), every
+push to `main` deploys. Build command `node build.js`, and it reads `wrangler.jsonc` from the repo,
+so the 404 setting applies there too. Add the custom domain `matthewlaujh.com` under the worker's
+Domains & Routes, then move DNS from Cargo to Cloudflare.
 
 ## v2 — changes from the Cargo baseline
 

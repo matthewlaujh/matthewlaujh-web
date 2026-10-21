@@ -43,7 +43,8 @@
    "height": 1684,
    "exclude_from_backdrop": false,
    "original": "/img-original/41fb180f-breathingBytes-1.jpg",
-   "thumb": "/img/41fb180f-breathingBytes-1-s.webp"
+   "thumb": "/img/41fb180f-breathingBytes-1-s.webp",
+   "alt": "Rendering of the installation: visitors between screens, colourful blocks and yellow tape lines on black"
   },
   {
    "id": 137633462,
@@ -53,7 +54,8 @@
    "height": 1684,
    "exclude_from_backdrop": false,
    "original": "/img-original/8fb4c242-breathingBytes-2.jpg",
-   "thumb": "/img/8fb4c242-breathingBytes-2-s.webp"
+   "thumb": "/img/8fb4c242-breathingBytes-2-s.webp",
+   "alt": "Proposal board: written summary with problem, process and proposal, and the Breathing Bytes logo"
   },
   {
    "id": 137633463,
@@ -63,7 +65,8 @@
    "height": 1684,
    "exclude_from_backdrop": false,
    "original": "/img-original/7084ce21-breathingBytes-3.jpg",
-   "thumb": "/img/7084ce21-breathingBytes-3-s.webp"
+   "thumb": "/img/7084ce21-breathingBytes-3-s.webp",
+   "alt": "Proposal board: primary and secondary research on data habits and air quality"
   },
   {
    "id": 137633465,
@@ -73,7 +76,8 @@
    "height": 1684,
    "exclude_from_backdrop": false,
    "original": "/img-original/9e7b8c83-breathingBytes-4.jpg",
-   "thumb": "/img/9e7b8c83-breathingBytes-4-s.webp"
+   "thumb": "/img/9e7b8c83-breathingBytes-4-s.webp",
+   "alt": "Proposal board: isometric plan of the installation activities"
   },
   {
    "id": 137633466,
@@ -83,7 +87,8 @@
    "height": 1684,
    "exclude_from_backdrop": false,
    "original": "/img-original/7a7f46f0-breathingBytes-5.jpg",
-   "thumb": "/img/7a7f46f0-breathingBytes-5-s.webp"
+   "thumb": "/img/7a7f46f0-breathingBytes-5-s.webp",
+   "alt": "Proposal board: visitor journey with coloured tape wayfinding"
   },
   {
    "id": 137633467,
@@ -93,7 +98,8 @@
    "height": 1684,
    "exclude_from_backdrop": false,
    "original": "/img-original/fd145173-breathingBytes-6.jpg",
-   "thumb": "/img/fd145173-breathingBytes-6-s.webp"
+   "thumb": "/img/fd145173-breathingBytes-6-s.webp",
+   "alt": "Proposal board: mood impressions and conclusion"
   }
  ],
  "meta": {

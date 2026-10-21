@@ -46,7 +46,8 @@
    "mp4": "/img/287eb366-sourceofhappiness.mp4",
    "poster": "/img/287eb366-sourceofhappiness-poster.jpg",
    "thumb": "/img/287eb366-sourceofhappiness-s.webp",
-   "poster_time": 1.2
+   "poster_time": 1.2,
+   "alt": "Concentric wavy rings in red, blue, green and yellow on a mustard background"
   },
   {
    "id": 137675640,
@@ -58,7 +59,8 @@
    "original": "/img-original/a738a09f-sourceOfHappiness_dataVisualizationGraphs.gif",
    "mp4": "/img/a738a09f-sourceOfHappiness_dataVisualizationGraphs.mp4",
    "poster": "/img/a738a09f-sourceOfHappiness_dataVisualizationGraphs-poster.jpg",
-   "thumb": "/img/a738a09f-sourceOfHappiness_dataVisualizationGraphs-s.webp"
+   "thumb": "/img/a738a09f-sourceOfHappiness_dataVisualizationGraphs-s.webp",
+   "alt": "Two data visualisation posters ranking world happiness by region"
   }
  ],
  "meta": {

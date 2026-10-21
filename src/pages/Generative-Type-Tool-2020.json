@@ -46,7 +46,8 @@
    "mp4": "/img/dd55cb3b-generativeTypeTool-shape.mp4",
    "poster": "/img/dd55cb3b-generativeTypeTool-shape-poster.jpg",
    "thumb": "/img/dd55cb3b-generativeTypeTool-shape-s.webp",
-   "poster_time": 16.5
+   "poster_time": 16.5,
+   "alt": "The word 'shape' in cyan outline on orange, with the tool's controls at the left"
   },
   {
    "id": 137675442,
@@ -58,7 +59,8 @@
    "original": "/img-original/1b5f6554-generativeTypeTool-AZ.gif",
    "mp4": "/img/1b5f6554-generativeTypeTool-AZ.mp4",
    "poster": "/img/1b5f6554-generativeTypeTool-AZ-poster.jpg",
-   "thumb": "/img/1b5f6554-generativeTypeTool-AZ-s.webp"
+   "thumb": "/img/1b5f6554-generativeTypeTool-AZ-s.webp",
+   "alt": "The letter 'a' drawn in red circles on black"
   },
   {
    "id": 137675444,
@@ -70,7 +72,8 @@
    "original": "/img-original/3bc8039e-generativeTypeTool-formShape.gif",
    "mp4": "/img/3bc8039e-generativeTypeTool-formShape.mp4",
    "poster": "/img/3bc8039e-generativeTypeTool-formShape-poster.jpg",
-   "thumb": "/img/3bc8039e-generativeTypeTool-formShape-s.webp"
+   "thumb": "/img/3bc8039e-generativeTypeTool-formShape-s.webp",
+   "alt": "A thin green line on magenta, the letter collapsing to a shape"
   },
   {
    "id": 137675445,
@@ -82,7 +85,8 @@
    "original": "/img-original/2fdc8dcd-generativeTypeTool-scaleShape.gif",
    "mp4": "/img/2fdc8dcd-generativeTypeTool-scaleShape.mp4",
    "poster": "/img/2fdc8dcd-generativeTypeTool-scaleShape-poster.jpg",
-   "thumb": "/img/2fdc8dcd-generativeTypeTool-scaleShape-s.webp"
+   "thumb": "/img/2fdc8dcd-generativeTypeTool-scaleShape-s.webp",
+   "alt": "The word 'scale' in orange outline on blue"
   },
   {
    "id": 137675447,
@@ -94,7 +98,8 @@
    "original": "/img-original/e3901d61-generativeTypeTool-axis.gif",
    "mp4": "/img/e3901d61-generativeTypeTool-axis.mp4",
    "poster": "/img/e3901d61-generativeTypeTool-axis-poster.jpg",
-   "thumb": "/img/e3901d61-generativeTypeTool-axis-s.webp"
+   "thumb": "/img/e3901d61-generativeTypeTool-axis-s.webp",
+   "alt": "The word 'axis' in pink outline on beige, the letters leaning"
   },
   {
    "id": 137675448,
@@ -106,7 +111,8 @@
    "original": "/img-original/ea3dcf64-generativeTypeTool-bgColour.gif",
    "mp4": "/img/ea3dcf64-generativeTypeTool-bgColour.mp4",
    "poster": "/img/ea3dcf64-generativeTypeTool-bgColour-poster.jpg",
-   "thumb": "/img/ea3dcf64-generativeTypeTool-bgColour-s.webp"
+   "thumb": "/img/ea3dcf64-generativeTypeTool-bgColour-s.webp",
+   "alt": "The tool's controls on a black background, the background colour changing"
   },
   {
    "id": 137675449,
@@ -118,7 +124,8 @@
    "original": "/img-original/7ecca510-generativeTypeTool-colour.gif",
    "mp4": "/img/7ecca510-generativeTypeTool-colour.mp4",
    "poster": "/img/7ecca510-generativeTypeTool-colour-poster.jpg",
-   "thumb": "/img/7ecca510-generativeTypeTool-colour-s.webp"
+   "thumb": "/img/7ecca510-generativeTypeTool-colour-s.webp",
+   "alt": "The word 'colour' drawn in white circles on black"
   }
  ],
  "meta": {

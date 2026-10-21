@@ -43,7 +43,8 @@
    "height": 666,
    "exclude_from_backdrop": false,
    "original": "/img-original/2aacf718-generative3DFormFindingTool-1.jpg",
-   "thumb": "/img/2aacf718-generative3DFormFindingTool-1-s.webp"
+   "thumb": "/img/2aacf718-generative3DFormFindingTool-1-s.webp",
+   "alt": "The tool's interface with a cyan star-shaped wireframe form"
   },
   {
    "id": 173874753,
@@ -53,7 +54,8 @@
    "height": 666,
    "exclude_from_backdrop": false,
    "original": "/img-original/492a3ee6-generative3DFormFindingTool-2.jpg",
-   "thumb": "/img/492a3ee6-generative3DFormFindingTool-2-s.webp"
+   "thumb": "/img/492a3ee6-generative3DFormFindingTool-2-s.webp",
+   "alt": "A purple spiked disc form in the tool"
   },
   {
    "id": 173874754,
@@ -63,7 +65,8 @@
    "height": 666,
    "exclude_from_backdrop": false,
    "original": "/img-original/85ea5b27-generative3DFormFindingTool-3.jpg",
-   "thumb": "/img/85ea5b27-generative3DFormFindingTool-3-s.webp"
+   "thumb": "/img/85ea5b27-generative3DFormFindingTool-3-s.webp",
+   "alt": "A gold angular form in the tool"
   },
   {
    "id": 173874755,
@@ -73,7 +76,8 @@
    "height": 666,
    "exclude_from_backdrop": false,
    "original": "/img-original/b4136ed2-generative3DFormFindingTool-4.jpg",
-   "thumb": "/img/b4136ed2-generative3DFormFindingTool-4-s.webp"
+   "thumb": "/img/b4136ed2-generative3DFormFindingTool-4-s.webp",
+   "alt": "A green twisted ribbon form in the tool"
   },
   {
    "id": 173874756,
@@ -83,7 +87,8 @@
    "height": 666,
    "exclude_from_backdrop": false,
    "original": "/img-original/575af902-generative3DFormFindingTool-5.jpg",
-   "thumb": "/img/575af902-generative3DFormFindingTool-5-s.webp"
+   "thumb": "/img/575af902-generative3DFormFindingTool-5-s.webp",
+   "alt": "A blue hourglass form in the tool"
   },
   {
    "id": 173874757,
@@ -93,7 +98,8 @@
    "height": 666,
    "exclude_from_backdrop": false,
    "original": "/img-original/482d7839-generative3DFormFindingTool-6.jpg",
-   "thumb": "/img/482d7839-generative3DFormFindingTool-6-s.webp"
+   "thumb": "/img/482d7839-generative3DFormFindingTool-6-s.webp",
+   "alt": "A red gear-like form in the tool"
   }
  ],
  "meta": {

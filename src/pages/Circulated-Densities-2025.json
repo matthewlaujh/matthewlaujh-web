@@ -43,7 +43,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/ea1d5ae9-IMG_0144.JPG",
-   "thumb": "/img/ea1d5ae9-IMG_0144-s.webp"
+   "thumb": "/img/ea1d5ae9-IMG_0144-s.webp",
+   "alt": "A round wooden frame on a plinth, its surface glowing in soft pink and blue"
   },
   {
    "id": 238731242,
@@ -55,7 +56,8 @@
    "original": "/img-original/f19dbcc5-Sep-27-2025-18-45-39.gif",
    "mp4": "/img/f19dbcc5-Sep-27-2025-18-45-39.mp4",
    "poster": "/img/f19dbcc5-Sep-27-2025-18-45-39-poster.jpg",
-   "thumb": "/img/f19dbcc5-Sep-27-2025-18-45-39-s.webp"
+   "thumb": "/img/f19dbcc5-Sep-27-2025-18-45-39-s.webp",
+   "alt": "The disc from above, red light pooling in the dense areas"
   },
   {
    "id": 238786540,
@@ -65,7 +67,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/ec72dd52-IMG_0057.JPG",
-   "thumb": "/img/ec72dd52-IMG_0057-s.webp"
+   "thumb": "/img/ec72dd52-IMG_0057-s.webp",
+   "alt": "Detail of the circuit board: a field of small LEDs on a pale board"
   },
   {
    "id": 238786539,
@@ -75,7 +78,8 @@
    "height": 1600,
    "exclude_from_backdrop": false,
    "original": "/img-original/50d75dc4-IMG_0069.JPG",
-   "thumb": "/img/50d75dc4-IMG_0069-s.webp"
+   "thumb": "/img/50d75dc4-IMG_0069-s.webp",
+   "alt": "The circuit board from above with its controller and the title 'Circulated Densities (2025) Matthew Lau'"
   }
  ],
  "meta": {

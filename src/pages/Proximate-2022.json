@@ -43,7 +43,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/ca885736-theLasalleShowFacultyOfDesignBaHonsGraduateExhibitionFrontage-1.jpg",
-   "thumb": "/img/ca885736-theLasalleShowFacultyOfDesignBaHonsGraduateExhibitionFrontage-1-s.webp"
+   "thumb": "/img/ca885736-theLasalleShowFacultyOfDesignBaHonsGraduateExhibitionFrontage-1-s.webp",
+   "alt": "The glass frontage with blurred green, red and blue light moving behind it, a visitor walking past"
   },
   {
    "id": 173874917,
@@ -53,7 +54,8 @@
    "height": 667,
    "exclude_from_backdrop": false,
    "original": "/img-original/d380717b-theLasalleShowFacultyOfDesignBaHonsGraduateExhibitionFrontage-3.jpg",
-   "thumb": "/img/d380717b-theLasalleShowFacultyOfDesignBaHonsGraduateExhibitionFrontage-3-s.webp"
+   "thumb": "/img/d380717b-theLasalleShowFacultyOfDesignBaHonsGraduateExhibitionFrontage-3-s.webp",
+   "alt": "The exhibition text on the glass, revealed by light passing behind it"
   },
   {
    "id": 152131776,
@@ -65,7 +67,8 @@
    "original": "/img-original/b0debc1e-TLS-FOD-Frontage_Wide.gif",
    "mp4": "/img/b0debc1e-TLS-FOD-Frontage_Wide.mp4",
    "poster": "/img/b0debc1e-TLS-FOD-Frontage_Wide-poster.jpg",
-   "thumb": "/img/b0debc1e-TLS-FOD-Frontage_Wide-s.webp"
+   "thumb": "/img/b0debc1e-TLS-FOD-Frontage_Wide-s.webp",
+   "alt": "The frontage from the lobby, soft colours glowing through the glass"
   }
  ],
  "meta": {

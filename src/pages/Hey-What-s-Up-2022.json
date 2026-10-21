@@ -45,7 +45,8 @@
    "original": "/img-original/04d8862c-hwu-full.gif",
    "mp4": "/img/04d8862c-hwu-full.mp4",
    "poster": "/img/04d8862c-hwu-full-poster.jpg",
-   "thumb": "/img/04d8862c-hwu-full-s.webp"
+   "thumb": "/img/04d8862c-hwu-full-s.webp",
+   "alt": "A visitor facing the installation: an Arduino, a screen and a strip of printed paper hanging on a white wall"
   },
   {
    "id": 160613821,
@@ -57,7 +58,8 @@
    "original": "/img-original/c59fc6e6-hwu-screen.gif",
    "mp4": "/img/c59fc6e6-hwu-screen.mp4",
    "poster": "/img/c59fc6e6-hwu-screen-poster.jpg",
-   "thumb": "/img/c59fc6e6-hwu-screen-s.webp"
+   "thumb": "/img/c59fc6e6-hwu-screen-s.webp",
+   "alt": "The screen, Arduino and camera module wired together on the wall"
   },
   {
    "id": 160613823,
@@ -69,7 +71,8 @@
    "original": "/img-original/792b1349-hwu-print.gif",
    "mp4": "/img/792b1349-hwu-print.mp4",
    "poster": "/img/792b1349-hwu-print-poster.jpg",
-   "thumb": "/img/792b1349-hwu-print-s.webp"
+   "thumb": "/img/792b1349-hwu-print-s.webp",
+   "alt": "A Raspberry Pi beside a strip of paper printed with overlapping lines of text"
   }
  ],
  "meta": {

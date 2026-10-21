@@ -14,6 +14,7 @@
 
 	/* listeners that belong to the current page: dropped on every swap */
 	var pageAC = null;
+	var popSeq = 0;   // bumped on every Back/Forward, so a delayed click never overtakes one
 	function on(target, ev, fn, opts) {
 		opts = Object.assign({}, opts || {}, pageAC ? { signal: pageAC.signal } : {});
 		target.addEventListener(ev, fn, opts);
@@ -131,7 +132,8 @@
 				if (bd && bd.show && a.hasAttribute('data-i')) bd.show(+a.getAttribute('data-i'));
 				setBackdropSpeed(2);
 				document.documentElement.classList.add('leaving');
-				setTimeout(function () { navigate(href); }, 650);
+				var seq = popSeq;
+				setTimeout(function () { if (popSeq === seq) navigate(href); }, 650);
 			}
 			a.addEventListener('click', go);
 			var more = item.querySelector('.more-in'); if (more) more.addEventListener('click', go);
@@ -155,18 +157,37 @@
 		}
 		var figs = document.querySelectorAll('.project figure');
 		if (!figs.length) return;
-		/* videos load and play only while near the viewport */
-		var vids = document.querySelectorAll('.plates video');
+		/* videos load and play only while near the viewport. Each has a pause pill,
+		   and a pause there sticks until the visitor plays it again. Under reduced
+		   motion nothing plays by itself: the poster waits with a play control. */
+		var vids = [].slice.call(document.querySelectorAll('.project figure video'));
+		function play(v) { if (v.getAttribute('data-stopped') || reduced) return; if (v.preload === 'none') v.preload = 'auto'; v.play && v.play().catch(function () {}); }
+		vids.forEach(function (v) {
+			var fig = v.closest('figure'), btn = fig && fig.querySelector('.vctl');
+			if (reduced) { v.removeAttribute('autoplay'); v.pause(); v.setAttribute('data-stopped', '1'); }
+			function reflect() {
+				var stopped = v.paused && !!v.getAttribute('data-stopped');
+				if (fig) fig.classList.toggle('stopped', stopped);
+				if (btn) { btn.setAttribute('aria-pressed', stopped ? 'true' : 'false'); btn.setAttribute('aria-label', stopped ? 'Play video' : 'Pause video'); }
+			}
+			v.addEventListener('play', reflect); v.addEventListener('pause', reflect);
+			if (btn) btn.addEventListener('click', function () {
+				if (v.getAttribute('data-stopped')) { v.removeAttribute('data-stopped'); if (v.preload === 'none') v.preload = 'auto'; v.play && v.play().catch(function () {}); }
+				else { v.setAttribute('data-stopped', '1'); v.pause(); }
+				reflect();
+			});
+			reflect();
+		});
 		if ('IntersectionObserver' in window) {
 			var vo = new IntersectionObserver(function (es) {
 				es.forEach(function (e) {
 					var v = e.target;
-					if (e.isIntersecting) { if (v.preload === 'none') v.preload = 'auto'; v.play && v.play().catch(function () {}); }
+					if (e.isIntersecting) play(v);
 					else if (!v.paused) v.pause();
 				});
 			}, { rootMargin: '40% 0px' });
-			for (var k = 0; k < vids.length; k++) vo.observe(vids[k]);
-		} else for (var m = 0; m < vids.length; m++) vids[m].play && vids[m].play().catch(function () {});
+			vids.forEach(function (v) { vo.observe(v); });
+		} else vids.forEach(play);
 		if ('IntersectionObserver' in window && !reduced) {
 			var io = new IntersectionObserver(function (es) {
 				es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } });
@@ -351,12 +372,13 @@
 			if (bd && bd.show) { bd.settings.fade = 0.7; bd.show(+el.getAttribute('data-i')); setBackdropSpeed(2.2); }
 			f.classList.add('leaving');
 			var sideEl = document.querySelector('.field-time'); if (sideEl) sideEl.classList.add('leaving');
+			var seq = popSeq;
 			if (d.animate) {
 				d.animate([
 					{ left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', opacity: 1, filter: 'blur(0px)' },
 					{ opacity: 1, filter: 'blur(0px)', offset: 0.35 },
 					{ left: '0px', top: '0px', width: innerWidth + 'px', height: innerHeight + 'px', opacity: 0, filter: 'blur(14px)' }
-				], { duration: 1100, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' }).onfinish = function () { navigate(href); };
+				], { duration: 1100, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' }).onfinish = function () { d.remove(); if (popSeq === seq) navigate(href); };
 			} else navigate(href);
 		}
 		tiles.forEach(function (t) { t.addEventListener('click', function (e) { go(e, t); }); });
@@ -446,18 +468,22 @@
 	   The diffusion canvas never reloads. A click fetches the next page, the current
 	   one plays its leave, then bar + main are swapped and the backdrop is pointed
 	   at the new page's images (a crossfade, not a restart). */
-	var navigating = false, queued = null;
+	/* one navigation at a time: a newer click, or Back, replaces whatever is in
+	   flight (its fetch is aborted and it never pushes a history entry) */
+	var current = null;
 	function kindOf(href) {
 		var m = href.replace(/[?#].*$/, '').replace(/\.html$/, '').split('/').pop();
-		return m === 'About' || m === '404' ? 'about' : m === 'All-Projects' ? 'field' : (m === '' || m === 'index' || m === 'Front-Page') ? 'home' : 'project';
+		return m === 'About' ? 'about' : m === 'All-Projects' ? 'field' : (m === '' || m === 'index' || m === 'Front-Page' || m === '404') ? 'home' : 'project';
 	}
 	function navigate(href, opts) {
 		opts = opts || {};
-		if (navigating) { queued = { href: href, opts: opts }; return; }   // the latest request wins once this one lands
-		navigating = true;
-		var to = kindOf(href), leaving = leave(to);
-		fetch(href, { credentials: 'same-origin' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+		if (current && current.ac) current.ac.abort();
+		var nav = { href: href, ac: typeof AbortController !== 'undefined' ? new AbortController() : null };
+		current = nav;
+		var to = kindOf(href), leaving = leave(to, href);
+		fetch(href, { credentials: 'same-origin', signal: nav.ac && nav.ac.signal }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
 			.then(function (text) {
+				if (current !== nav) return null;
 				var doc = new DOMParser().parseFromString(text, 'text/html');
 				if (!doc.documentElement.getAttribute('data-page') || !doc.body.querySelector('main')) throw new Error('not a site page');
 				/* the backdrop moves first: it is already the next page's by the time the text arrives */
@@ -465,15 +491,27 @@
 				return leaving.then(function () { return doc; });
 			})
 			.then(function (doc) {
+				if (!doc || current !== nav) return;
 				if (!opts.pop) { try { history.pushState({ ml: 1 }, '', href); } catch (x) {} }
+				current = null;
 				swap(doc);
-				navigating = false;
-				if (queued) { var q = queued; queued = null; navigate(q.href, q.opts); }
 			})
-			.catch(function () { location.href = href; });
+			.catch(function (e) {
+				if (e && e.name === 'AbortError') return;
+				if (current === nav) location.href = href;
+			});
+	}
+	/* the backdrop takes the project being opened, whether by a click or by the
+	   browser's Forward: the list page's own link to it knows the image index */
+	function preview(href) {
+		var bd = backdropInstance();
+		if (!bd || !bd.show) return;
+		var path; try { path = new URL(href, location.href).pathname; } catch (x) { return; }
+		var links = document.querySelectorAll('a[data-i][href]');
+		for (var k = 0; k < links.length; k++) if (links[k].pathname === path) { bd.show(+links[k].getAttribute('data-i')); setBackdropSpeed(2); return; }
 	}
 	/* the current page's exit, as a promise */
-	function leave(to) {
+	function leave(to, href) {
 		var ms = 0;
 		html.setAttribute('data-to', to);
 		var dd = document.getElementById('dropdown'), sc = document.getElementById('scrim');
@@ -483,12 +521,14 @@
 		if (page === 'home') { if (fresh) ms = 500; }
 		else if (page === 'project' || page === 'about') ms = to === 'project' ? 900 : 500;
 		else if (page === 'field') { var f = document.getElementById('field'); if (f && !f.classList.contains('leaving')) { f.classList.add('leaving'); ms = 500; } }
+		if (to === 'project' && (page === 'home' || page === 'field') && href) preview(href);
 		if (to === 'home' && page !== 'home') ms = Math.max(ms, 1250);   // the capsule folds away at the pace it arrived
 		/* to or from the white page: let the background cross over first */
 		if (to === 'about' || page === 'about') {
 			ms = Math.max(ms, 950);
 			var bd = document.querySelector('.backdrop'); if (bd && to === 'about') bd.classList.add('off');
 		}
+		if (reduced) ms = 0;   // nothing animates, so nothing to wait for
 		return new Promise(function (res) { setTimeout(res, ms); });
 	}
 	function swap(doc) {
@@ -551,7 +591,7 @@
 			e.preventDefault();
 			navigate(a.href);
 		});
-		addEventListener('popstate', function () { navigate(location.href, { pop: true }); });
+		addEventListener('popstate', function () { popSeq++; navigate(location.href, { pop: true }); });
 		try { history.replaceState({ ml: 1 }, '', location.href); } catch (x) {}
 	}
 

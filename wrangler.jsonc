@@ -1,0 +1,13 @@
+{
+	// Cloudflare Workers static assets. The Workers build (dashboard git integration
+	// or `npm run deploy`) reads this file: `public/404.html` is served for unknown
+	// URLs, and `_redirects` / `_headers` in public/ are honoured.
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "matthewlaujh-web",
+	"compatibility_date": "2026-10-01",
+	"assets": {
+		"directory": "./public",
+		"not_found_handling": "404-page",
+		"html_handling": "auto-trailing-slash"
+	}
+}

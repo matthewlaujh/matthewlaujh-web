@@ -45,7 +45,8 @@
    "original": "/img-original/67802daa-BADC6C_Lau-Jun-Hui-Matthew_2.gif",
    "mp4": "/img/67802daa-BADC6C_Lau-Jun-Hui-Matthew_2.mp4",
    "poster": "/img/67802daa-BADC6C_Lau-Jun-Hui-Matthew_2-poster.jpg",
-   "thumb": "/img/67802daa-BADC6C_Lau-Jun-Hui-Matthew_2-s.webp"
+   "thumb": "/img/67802daa-BADC6C_Lau-Jun-Hui-Matthew_2-s.webp",
+   "alt": "Webcam view of a face with tracking points, labelled 'Emotion: undefined', a dark light panel behind"
   },
   {
    "id": 137635701,
@@ -57,7 +58,8 @@
    "original": "/img-original/d82b357d-BADC6C_Lau-Jun-Hui-Matthew_3.gif",
    "mp4": "/img/d82b357d-BADC6C_Lau-Jun-Hui-Matthew_3.mp4",
    "poster": "/img/d82b357d-BADC6C_Lau-Jun-Hui-Matthew_3-poster.jpg",
-   "thumb": "/img/d82b357d-BADC6C_Lau-Jun-Hui-Matthew_3-s.webp"
+   "thumb": "/img/d82b357d-BADC6C_Lau-Jun-Hui-Matthew_3-s.webp",
+   "alt": "Webcam view of a face with tracking points, the panel behind still dark"
   },
   {
    "id": 137635702,
@@ -69,7 +71,8 @@
    "original": "/img-original/194b0b02-BADC6C_Lau-Jun-Hui-Matthew_4.gif",
    "mp4": "/img/194b0b02-BADC6C_Lau-Jun-Hui-Matthew_4.mp4",
    "poster": "/img/194b0b02-BADC6C_Lau-Jun-Hui-Matthew_4-poster.jpg",
-   "thumb": "/img/194b0b02-BADC6C_Lau-Jun-Hui-Matthew_4-s.webp"
+   "thumb": "/img/194b0b02-BADC6C_Lau-Jun-Hui-Matthew_4-s.webp",
+   "alt": "Webcam view of a neutral face with tracking points"
   },
   {
    "id": 137635703,
@@ -81,7 +84,8 @@
    "original": "/img-original/993bb6d7-BADC6C_Lau-Jun-Hui-Matthew_5.gif",
    "mp4": "/img/993bb6d7-BADC6C_Lau-Jun-Hui-Matthew_5.mp4",
    "poster": "/img/993bb6d7-BADC6C_Lau-Jun-Hui-Matthew_5-poster.jpg",
-   "thumb": "/img/993bb6d7-BADC6C_Lau-Jun-Hui-Matthew_5-s.webp"
+   "thumb": "/img/993bb6d7-BADC6C_Lau-Jun-Hui-Matthew_5-s.webp",
+   "alt": "Webcam view of a face with tracking points, the panel faintly lit"
   },
   {
    "id": 137635704,
@@ -93,7 +97,8 @@
    "original": "/img-original/5c089837-BADC6C_Lau-Jun-Hui-Matthew_6.gif",
    "mp4": "/img/5c089837-BADC6C_Lau-Jun-Hui-Matthew_6.mp4",
    "poster": "/img/5c089837-BADC6C_Lau-Jun-Hui-Matthew_6-poster.jpg",
-   "thumb": "/img/5c089837-BADC6C_Lau-Jun-Hui-Matthew_6-s.webp"
+   "thumb": "/img/5c089837-BADC6C_Lau-Jun-Hui-Matthew_6-s.webp",
+   "alt": "Webcam view of a face labelled 'Emotion: Disgust', the panel behind glowing purple"
   },
   {
    "id": 137635705,
@@ -105,7 +110,8 @@
    "original": "/img-original/c3a0e066-BADC6C_Lau-Jun-Hui-Matthew_7.gif",
    "mp4": "/img/c3a0e066-BADC6C_Lau-Jun-Hui-Matthew_7.mp4",
    "poster": "/img/c3a0e066-BADC6C_Lau-Jun-Hui-Matthew_7-poster.jpg",
-   "thumb": "/img/c3a0e066-BADC6C_Lau-Jun-Hui-Matthew_7-s.webp"
+   "thumb": "/img/c3a0e066-BADC6C_Lau-Jun-Hui-Matthew_7-s.webp",
+   "alt": "Webcam view of a face with green tracking points, hands over the mouth"
   }
  ],
  "meta": {
