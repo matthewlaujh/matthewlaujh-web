@@ -702,17 +702,72 @@
 		var robots = document.querySelector('meta[name="robots"]') || document.head.appendChild(document.createElement('meta'));
 		robots.setAttribute('name', 'robots'); robots.setAttribute('content', 'noindex, nofollow');
 	}
-	/* the tab icon is one of ten frames of the letter in the diffusion: a different
-	   one on each load, so the mark keeps moving the way the site does */
-	(function () {
+	/* ---------------- the tab icon: an M in the diffusion, drawn fresh on every load ----------------
+	   A small port of the backdrop's step shader on a 96px canvas: the letter is
+	   drawn in Austin, then advected along a curl-noise flow and softened for a
+	   few steps. Random seed each load, so no two tabs carry the same M, and the
+	   melt carries on slowly for as long as the page is open. */
+	function setupFavicon() {
 		var link = document.getElementById('icon_svg');
-		if (!link) return;
-		var n = Math.floor(Math.random() * 10);
-		link.href = link.href.replace(/m-\d\.svg/, 'm-' + n + '.svg');
-	})();
+		if (!link || !document.fonts || !document.fonts.load) return;
+		var N = 96, seed = Math.random() * 100;
+		var dark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
+		document.fonts.load('300 72px "Austin News Deck"').then(function () {
+			var c = document.createElement('canvas'); c.width = c.height = N;
+			var x = c.getContext('2d', { willReadFrequently: true });
+			x.fillStyle = '#fff'; x.fillRect(0, 0, N, N);
+			x.fillStyle = '#000'; x.strokeStyle = '#000'; x.lineWidth = 5; x.lineJoin = 'round';
+			x.font = '300 74px "Austin News Deck", Georgia, serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
+			x.strokeText('M', N / 2, N / 2 + 4); x.fillText('M', N / 2, N / 2 + 4);
+			var src = x.getImageData(0, 0, N, N).data;
+			var ink0 = new Float32Array(N * N);                 // 1 where the letter is
+			for (var i = 0; i < N * N; i++) ink0[i] = 1 - src[i * 4] / 255;
+			/* the flow field, once: curl of a small fbm, as in the shader */
+			function hash(px, py) { var q = Math.sin(px * 127.1 + py * 311.7 + seed) * 43758.5453; return q - Math.floor(q); }
+			function noise(px, py) {
+				var ix = Math.floor(px), iy = Math.floor(py), fx = px - ix, fy = py - iy;
+				var ux = fx * fx * (3 - 2 * fx), uy = fy * fy * (3 - 2 * fy);
+				var a = hash(ix, iy), b = hash(ix + 1, iy), cc = hash(ix, iy + 1), d = hash(ix + 1, iy + 1);
+				return a + (b - a) * ux + (cc - a) * uy + (a - b - cc + d) * ux * uy;
+			}
+			function fbm(px, py) { var v = 0, amp = 0.5; for (var o = 0; o < 4; o++) { v += amp * noise(px, py); px = px * 2.03 + 17.1; py = py * 2.03 + 17.1; amp *= 0.5; } return v; }
+			var flow = new Float32Array(N * N * 2), e = 0.02, S = 0.65;
+			for (var y = 0; y < N; y++) for (var xx = 0; xx < N; xx++) {
+				var px = xx / N * 1.1 + seed * 0.07, py = y / N * 1.1 + seed * 0.07;
+				var n1 = fbm(px, py + e), n2 = fbm(px, py - e), n3 = fbm(px + e, py), n4 = fbm(px - e, py);
+				flow[(y * N + xx) * 2] = (n1 - n2) / (2 * e) * S; flow[(y * N + xx) * 2 + 1] = -(n3 - n4) / (2 * e) * S;
+			}
+			var ink = ink0, next = new Float32Array(N * N);
+			function at(buf, px, py) {   // bilinear sample, clamped
+				px = Math.max(0, Math.min(N - 1.001, px)); py = Math.max(0, Math.min(N - 1.001, py));
+				var ix = px | 0, iy = py | 0, fx = px - ix, fy = py - iy, i = iy * N + ix;
+				return buf[i] * (1 - fx) * (1 - fy) + buf[i + 1] * fx * (1 - fy) + buf[i + N] * (1 - fx) * fy + buf[i + N + 1] * fx * fy;
+			}
+			function step() {
+				for (var y = 0; y < N; y++) for (var xx = 0; xx < N; xx++) {
+					var i = y * N + xx, qx = xx + flow[i * 2], qy = y + flow[i * 2 + 1];
+					var prev = at(ink, qx, qy) * 0.4 + at(ink, qx + 1, qy) * 0.15 + at(ink, qx - 1, qy) * 0.15 + at(ink, qx, qy + 1) * 0.15 + at(ink, qx, qy - 1) * 0.15;
+					next[i] = prev + (ink0[i] - prev) * 0.004;
+				}
+				var t = ink; ink = next; next = t;
+			}
+			var out = x.createImageData(N, N), od = out.data, col = dark ? 255 : 20;
+			function paint() {
+				/* a touch of contrast so the thin strokes keep their edge at 16px */
+				for (var i = 0; i < N * N; i++) { var a = Math.min(1, Math.max(0, (ink[i] - 0.08) / 0.7)); od[i * 4] = od[i * 4 + 1] = od[i * 4 + 2] = col; od[i * 4 + 3] = a * 255; }
+				x.clearRect(0, 0, N, N); x.putImageData(out, 0, 0);
+				link.type = 'image/png'; link.href = c.toDataURL('image/png');
+			}
+			for (var k = 0; k < 15; k++) step();
+			paint();
+			/* and on, slowly, while the tab is open (a few steps a minute) */
+			var steps = 15, tick = setInterval(function () { if (document.hidden) return; step(); steps++; paint(); if (steps > 48) clearInterval(tick); }, 4000);
+		}).catch(function () {});
+	}
 	function init() {
 		var live = document.createElement('div'); live.className = 'visually-hidden announce'; live.setAttribute('aria-live', 'polite'); document.body.appendChild(live);
 		randomiseBackdrop();
+		setupFavicon();
 		if (window.MLBackdrops) window.MLBackdrops.init(document);
 		setupCursor();
 		setupNav();
