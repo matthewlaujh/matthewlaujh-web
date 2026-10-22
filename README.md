@@ -106,7 +106,9 @@ so the 404 setting applies there too.
 `wrangler.jsonc`). The zone is already on Cloudflare, so a deploy with those routes creates the DNS
 records; if the dashboard reports that a record already exists (the old Cargo A/CNAME records),
 delete those two records under DNS → Records first and deploy again. `www` redirects to the apex
-through `_redirects`. Leave the MX and other records alone. Keep the Cargo site until the new one
+through a Redirect Rule in the dashboard (Rules → Redirect Rules → the "Redirect from WWW to root"
+template): Workers' `_redirects` and `_headers` accept relative URLs only, so host-based rules
+cannot live in the repo. Leave the MX and other records alone. Keep the Cargo site until the new one
 has been checked on the live domain, then cancel it.
 
 ## v2 — changes from the Cargo baseline
