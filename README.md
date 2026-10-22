@@ -98,8 +98,16 @@ npm run deploy          # builds, then `wrangler deploy`
 
 With the repo connected in the dashboard (Workers & Pages → the worker → Settings → Build), every
 push to `main` deploys. Build command `node build.js`, and it reads `wrangler.jsonc` from the repo,
-so the 404 setting applies there too. Add the custom domain `matthewlaujh.com` under the worker's
-Domains & Routes, then move DNS from Cargo to Cloudflare.
+so the 404 setting applies there too.
+
+### The live domain
+
+`matthewlaujh.com` and `www.matthewlaujh.com` are custom domains of the worker (`routes` in
+`wrangler.jsonc`). The zone is already on Cloudflare, so a deploy with those routes creates the DNS
+records; if the dashboard reports that a record already exists (the old Cargo A/CNAME records),
+delete those two records under DNS → Records first and deploy again. `www` redirects to the apex
+through `_redirects`. Leave the MX and other records alone. Keep the Cargo site until the new one
+has been checked on the live domain, then cancel it.
 
 ## v2 — changes from the Cargo baseline
 

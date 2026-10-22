@@ -5,6 +5,11 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "matthewlaujh-web",
 	"compatibility_date": "2026-10-01",
+	// the live domain: Cloudflare creates the DNS records for these when the worker deploys
+	"routes": [
+		{ "pattern": "matthewlaujh.com", "custom_domain": true },
+		{ "pattern": "www.matthewlaujh.com", "custom_domain": true }
+	],
 	"assets": {
 		"directory": "./public",
 		"not_found_handling": "404-page",

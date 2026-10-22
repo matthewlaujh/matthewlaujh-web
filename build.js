@@ -464,7 +464,7 @@ if (!RELATIVE) {
 	const urls = all.filter(p => p.slug !== '404').map(p => p.slug === site.homepage ? `${site.url}/` : `${site.url}/${p.slug}`);
 	fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `\t<url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 	fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
-	fs.writeFileSync(path.join(OUT, '_redirects'), `/${site.homepage}  /  301\n/Archifest-2021-Sea-of-Debris-2021  /NewWave-2021  301\n/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition  /Proximate-2022  301\n`);
+	fs.writeFileSync(path.join(OUT, '_redirects'), `https://www.matthewlaujh.com/*  https://matthewlaujh.com/:splat  301\n/${site.homepage}  /  301\n/Archifest-2021-Sea-of-Debris-2021  /NewWave-2021  301\n/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition  /Proximate-2022  301\n`);
 	fs.writeFileSync(path.join(OUT, '_headers'), `/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=31536000, immutable\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\nhttps://matthewlaujh-web.organisedmess-studio.workers.dev/*\n  X-Robots-Tag: noindex, nofollow\n`);
 }
 
