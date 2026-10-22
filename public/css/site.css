@@ -297,11 +297,6 @@ html[data-page="field"], html[data-page="field"] body { height: 100%; overflow: 
 html[data-page="field"].field-tall { height: auto; overflow: auto; overflow-x: clip; }
 html[data-page="field"].field-tall body { height: auto; overflow: visible; }
 html.field-tall .field { position: relative; inset: auto; margin-top: calc(-1 * var(--bar-h)); }
-@media (min-width: 1101px) and (max-height: 960px) {
-	.field-time { font-size: var(--t-s); }
-	.field-time .lane { padding: 5px 0 4px; }
-	.field-time .axis { padding-bottom: 4px; }
-}
 .field-page { position: relative; z-index: 1; }
 .field { position: fixed; inset: 0; z-index: 1; overflow: hidden; }
 .field a {
@@ -312,7 +307,7 @@ html.field-tall .field { position: relative; inset: auto; margin-top: calc(-1 * 
 }
 .field.ready a { opacity: 1; transition: filter .5s, opacity .9s; }
 .field a img { width: 100%; outline: 1px solid rgba(255, 255, 255, .06); outline-offset: -1px; }
-.field a .label { position: absolute; left: 0; top: 100%; margin-top: 8px; white-space: nowrap; opacity: 0; transform: translateY(-4px); transition: .25s; }
+.field a .label { position: absolute; left: 0; top: 100%; margin-top: 8px; white-space: nowrap; opacity: 0; transform: translateY(-4px); transition: .25s; pointer-events: none; }   /* the hidden caption must not catch the pointer meant for the tile below */
 .field.focus a { filter: brightness(.25) blur(2px); }
 .field.focus a.on { filter: none; z-index: 20 !important; }
 .field a.on .label, .field a:hover .label { opacity: 1; transform: none; }
@@ -470,7 +465,7 @@ html[data-glass="light"] .rights { opacity: 1; color: rgba(0, 0, 0, .7); }
 	html[data-page="field"], html[data-page="field"] body { height: auto; overflow: auto; }
 	.field { position: relative; inset: auto; padding: 20px var(--pad) 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 16px; }
 	.field a { position: static; transform: none !important; width: auto !important; opacity: 1; }
-	.field a .label { position: static; opacity: 1; transform: none; white-space: normal; margin-top: 6px; }
+	.field a .label { position: static; opacity: 1; transform: none; white-space: normal; margin-top: 6px; pointer-events: auto; }
 	.field a img { aspect-ratio: 4 / 3; object-fit: cover; }
 	.field-time, .field-page .hint, .field .cluster, .field .links { display: none; }
 	.field-page .count { position: static; padding: 0 var(--pad) 24px; }

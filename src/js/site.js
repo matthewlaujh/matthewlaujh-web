@@ -229,7 +229,10 @@
 		var marks = [].slice.call(f.querySelectorAll('.cluster'));
 		var side = [].slice.call(document.querySelectorAll('.field-time a'));
 		var mobile = window.matchMedia('(max-width: 1100px)');
-		var short = window.matchMedia('(max-height: 900px)');   // the lanes fold away and the map takes the height
+		/* the full timeline only where it fits with no cut-off titles and no scrolling:
+		   full HD and up, or 1680 wide with 1100 of height. Everywhere else the lanes
+		   fold under the axis and the map takes the height. */
+		var full = window.matchMedia('(min-width: 1920px) and (min-height: 1080px), (min-width: 1680px) and (min-height: 1100px)');
 		var timeEl = document.querySelector('.field-time'), yrsBtn = timeEl && timeEl.querySelector('.yrs');
 		var px = 0, py = 0, tx = 0, ty = 0, raf = null;
 		var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -252,7 +255,7 @@
 			if (mobile.matches) { tiles.forEach(function (t) { t.style.cssText = ''; }); html.classList.remove('field-tall'); html.classList.remove('field-collapsed'); f.style.height = ''; return; }
 			var seed = 11; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
 			var pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 28;
-			var collapsed = short.matches;
+			var collapsed = !full.matches;
 			html.classList.toggle('field-collapsed', collapsed);
 			if (!collapsed && timeEl) { timeEl.classList.remove('open'); if (yrsBtn) yrsBtn.setAttribute('aria-expanded', 'false'); }
 			var timeB = timeEl ? (collapsed ? timeEl.querySelector('.axis') : timeEl).getBoundingClientRect().bottom : 80;
@@ -273,20 +276,26 @@
 				var ang = j * 2.39996 + rnd() * 0.6, rad = (0.05 + Math.sqrt(j + 1) * 0.07) * Math.min(W, H * 1.3);
 				var rec = ymax > ymin ? ((+t.getAttribute('data-year') || ymin) - ymin) / (ymax - ymin) : 1;   // 0 oldest .. 1 newest
 				var w = tw * (0.7 + rec * 0.6 + rnd() * 0.15), img = t.querySelector('img');
-				var h = w * (img.height && img.width ? img.height / img.width : 0.66);
+				// the cover's true shape comes from its width/height attributes: the image itself may not have loaded yet
+				var iw = +img.getAttribute('width') || img.naturalWidth, ih = +img.getAttribute('height') || img.naturalHeight;
+				var h = w * (iw && ih ? ih / iw : 0.66);
 				return { el: t, ci: ci, rec: rec, cx: x0 + c[0] * W, cy: y0 + c[1] * H,
 					x: x0 + c[0] * W + Math.cos(ang) * rad * 1.3 + d[0] * W * 0.03 + (rnd() - 0.5) * 24,
 					y: y0 + c[1] * H + Math.sin(ang) * rad * 0.9 + d[1] * H * 0.05 + (rnd() - 0.5) * 24,
 					w: w, h: h, z: 0.4 + rnd() * 1.2 };
 			});
-			/* tiles may overlap, but never by more than ~40% of the smaller one:
-			   along one axis they keep at least 60% of its size clear */
-			var allow = 0.4;
-			for (var it = 0; it < 160; it++) {
+			/* tiles may overlap, but never by more than ~25% of the smaller one:
+			   along one axis they keep at least 75% of its size clear, so every
+			   tile shows enough of itself to be seen and clicked */
+			var allow = 0.25;
+			/* two phases: clusters pull together while overlaps are pushed apart, then
+			   a settling pass with no pull, so the overlap rule actually holds at the end */
+			for (var it = 0; it < 320; it++) {
+				var pull = it < 200 ? 0.004 : 0;
 				for (var a = 0; a < nodes.length; a++) {
 					var A = nodes[a];
 					// a soft pull home keeps each cluster together
-					A.x += (A.cx - A.x) * 0.004; A.y += (A.cy - A.y) * 0.004;
+					A.x += (A.cx - A.x) * pull; A.y += (A.cy - A.y) * pull;
 					for (var b = a + 1; b < nodes.length; b++) {
 						var B = nodes[b];
 						var dx = B.x - A.x, dy = B.y - A.y;
@@ -370,7 +379,7 @@
 		})();
 		var rt; on(window, 'resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
 		on(mobile, 'change', function () { clearTimeout(rt); layout(); });   // across the grid/field line: no debounce, no empty field
-		on(short, 'change', function () { clearTimeout(rt); layout(); });
+		on(full, 'change', function () { clearTimeout(rt); layout(); });
 		/* the folded lanes: open from the pill (click, keyboard) or by resting on the axis */
 		if (timeEl && yrsBtn) {
 			function setOpen(o) { timeEl.classList.toggle('open', o); yrsBtn.setAttribute('aria-expanded', o ? 'true' : 'false'); }
