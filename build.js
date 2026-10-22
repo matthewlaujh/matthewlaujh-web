@@ -391,6 +391,10 @@ function render(page) {
 	/* link previews: a 1200×630 JPEG per project (some chat apps will not show WebP) */
 	const ogImage = w ? `${site.url}/img/og/${w.slug}.jpg` : `${site.url}${site.social_image}`;
 
+	const person = { '@type': 'Person', name: 'Matthew Lau', url: site.url, jobTitle: 'Creative technologist and artist', address: { '@type': 'PostalAddress', addressLocality: 'Singapore', addressCountry: 'SG' }, email: `mailto:${email}`, alumniOf: ['New York University, Tisch School of the Arts', 'LASALLE College of the Arts'] };
+	const ld = w
+		? { '@context': 'https://schema.org', '@type': 'CreativeWork', name: `${w.title} (${w.year})`, url: canonical, description: desc, image: ogImage, dateCreated: String(w.year).slice(0, 4), creator: person, genre: w.category }
+		: { '@context': 'https://schema.org', '@type': isHome ? 'WebSite' : 'WebPage', name: isHome ? site.title : title, url: canonical, description: desc, author: person, ...(isHome ? { publisher: person } : {}) };
 	let kind, backdrop, main;
 	if (isHome) { kind = 'home'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: true } }); main = homeMain(); }
 	else if (w) { kind = 'project'; backdrop = diffuseHTML([{ src: w.cover.video ? w.cover.poster : w.cover.thumb, width: w.cover.width, height: w.cover.height }], { light: true, poster: w.cover.video ? w.cover.poster : w.cover.thumb, settings: { strength: 0.55 } }); main = projectMain(w); }
@@ -422,9 +426,14 @@ function render(page) {
 		<meta property="og:image:height" content="630">
 		<meta property="og:image:alt" content="${esc(w ? (w.cover.alt || w.title) : site.title)}">
 		<meta property="og:type" content="website">
+		<meta property="og:site_name" content="${esc(site.title)}">
 		<meta name="theme-color" content="${kind === 'about' ? '#ffffff' : '#111111'}">
+		<script type="application/ld+json">${json(ld)}</script>
 
-		<link rel="icon" href="${asset(site.favicon)}">
+		<link rel="icon" href="${asset('/icons/icon.svg')}" type="image/svg+xml">
+		<link rel="icon" href="${asset(site.favicon)}" sizes="32x32">
+		<link rel="apple-touch-icon" href="${asset('/icons/apple-touch-icon.png')}">
+		<link rel="manifest" href="${asset('/icons/site.webmanifest')}">
 		<link rel="preload" href="${asset('/fonts/AustinNewsDeck-Light.woff2')}" as="font" type="font/woff2" crossorigin>
 		<link rel="preload" href="${asset('/fonts/AtlasGrotesk-Light.woff2')}" as="font" type="font/woff2" crossorigin>
 		<meta name="build" content="${BUILD}">
@@ -446,7 +455,7 @@ ${typo(`		${barHTML(page)}
 /* ------------------------------------------------------------------ build */
 rmrf(OUT);
 fs.mkdirSync(OUT, { recursive: true });
-for (const dir of ['css', 'js', 'fonts', 'img']) {
+for (const dir of ['css', 'js', 'fonts', 'img', 'icons']) {
 	if (fs.existsSync(path.join(SRC, dir))) copyDir(path.join(SRC, dir), path.join(OUT, dir));
 }
 fs.copyFileSync(path.join(SRC, 'favicon.ico'), path.join(OUT, 'favicon.ico'));

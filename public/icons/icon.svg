@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .k { fill: none; stroke: #141414; stroke-width: 5; }
+    .h { fill: #141414; }
+    @media (prefers-color-scheme: dark) { .k { stroke: #ffffff; } .h { fill: #ffffff; } }
+  </style>
+  <!-- the site's category mark: a circle, filled on one side for design, open on the other for art -->
+  <path class="h" d="M32 6 A26 26 0 0 0 32 58 Z"/>
+  <circle class="k" cx="32" cy="32" r="26"/>
+</svg>
