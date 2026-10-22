@@ -702,6 +702,14 @@
 		var robots = document.querySelector('meta[name="robots"]') || document.head.appendChild(document.createElement('meta'));
 		robots.setAttribute('name', 'robots'); robots.setAttribute('content', 'noindex, nofollow');
 	}
+	/* the tab icon is one of ten frames of the letter in the diffusion: a different
+	   one on each load, so the mark keeps moving the way the site does */
+	(function () {
+		var link = document.getElementById('icon_svg');
+		if (!link) return;
+		var n = Math.floor(Math.random() * 10);
+		link.href = link.href.replace(/m-\d\.svg/, 'm-' + n + '.svg');
+	})();
 	function init() {
 		var live = document.createElement('div'); live.className = 'visually-hidden announce'; live.setAttribute('aria-live', 'polite'); document.body.appendChild(live);
 		randomiseBackdrop();

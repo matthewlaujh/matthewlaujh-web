@@ -430,7 +430,7 @@ function render(page) {
 		<meta name="theme-color" content="${kind === 'about' ? '#ffffff' : '#111111'}">
 		<script type="application/ld+json">${json(ld)}</script>
 
-		<link rel="icon" href="${asset('/icons/icon.svg')}" type="image/svg+xml">
+		<link rel="icon" id="icon_svg" href="${asset('/icons/m-0.svg')}" type="image/svg+xml">
 		<link rel="icon" href="${asset(site.favicon)}" sizes="32x32">
 		<link rel="apple-touch-icon" href="${asset('/icons/apple-touch-icon.png')}">
 		<link rel="manifest" href="${asset('/icons/site.webmanifest')}">
