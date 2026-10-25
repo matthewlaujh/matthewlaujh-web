@@ -26,6 +26,7 @@ const OUT = RELATIVE ? path.join(ROOT, 'preview') : path.join(ROOT, 'public');
 
 const site = readJSON(path.join(SRC, 'site.json'));
 const navPage = readJSON(path.join(SRC, 'pinned', 'nav.json'));
+const palettes = readJSON(path.join(SRC, 'palettes.json'));   // three colours per cover (scripts/palettes.py), for the tab icon
 const infoPage = readJSON(path.join(SRC, 'pinned', 'info.json'));
 const pages = fs.readdirSync(path.join(SRC, 'pages'))
 	.filter(f => f.endsWith('.json'))
@@ -428,9 +429,10 @@ function render(page) {
 		<meta property="og:type" content="website">
 		<meta property="og:site_name" content="${esc(site.title)}">
 		<meta name="theme-color" content="${kind === 'about' ? '#ffffff' : '#111111'}">
+		<script type="application/json" id="palettes">${json(Object.values(palettes))}</script>
 		<script type="application/ld+json">${json(ld)}</script>
 
-		<link rel="icon" id="icon_svg" href="${asset('/icons/m-0.svg')}" type="image/svg+xml">
+		<link rel="icon" id="icon_svg" href="${asset('/icons/icon-32.png')}" type="image/png" sizes="32x32">
 		<link rel="icon" href="${asset(site.favicon)}" sizes="32x32">
 		<link rel="apple-touch-icon" href="${asset('/icons/apple-touch-icon.png')}">
 		<link rel="manifest" href="${asset('/icons/site.webmanifest')}">

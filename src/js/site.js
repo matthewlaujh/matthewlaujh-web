@@ -702,67 +702,45 @@
 		var robots = document.querySelector('meta[name="robots"]') || document.head.appendChild(document.createElement('meta'));
 		robots.setAttribute('name', 'robots'); robots.setAttribute('content', 'noindex, nofollow');
 	}
-	/* ---------------- the tab icon: an M in the diffusion, drawn fresh on every load ----------------
-	   A small port of the backdrop's step shader on a 96px canvas: the letter is
-	   drawn in Austin, then advected along a curl-noise flow and softened for a
-	   few steps. Random seed each load, so no two tabs carry the same M, and the
-	   melt carries on slowly for as long as the page is open. */
+	/* ---------------- the tab icon: a gradient in a project's colours, new on every load ----------------
+	   Each cover contributed three colours at build time. A load picks a project,
+	   takes two of its colours, lifts them into a soft range so the tile stays
+	   light and legible at 16px, and draws a rounded square with a gradient
+	   between them at a random angle. It drifts slowly while the tab is open. */
 	function setupFavicon() {
-		var link = document.getElementById('icon_svg');
-		if (!link || !document.fonts || !document.fonts.load) return;
-		var N = 96, seed = Math.random() * 100;
-		var dark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
-		document.fonts.load('300 72px "Austin News Deck"').then(function () {
-			var c = document.createElement('canvas'); c.width = c.height = N;
-			var x = c.getContext('2d', { willReadFrequently: true });
-			x.fillStyle = '#fff'; x.fillRect(0, 0, N, N);
-			x.fillStyle = '#000'; x.strokeStyle = '#000'; x.lineWidth = 5; x.lineJoin = 'round';
-			x.font = '300 74px "Austin News Deck", Georgia, serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
-			x.strokeText('M', N / 2, N / 2 + 4); x.fillText('M', N / 2, N / 2 + 4);
-			var src = x.getImageData(0, 0, N, N).data;
-			var ink0 = new Float32Array(N * N);                 // 1 where the letter is
-			for (var i = 0; i < N * N; i++) ink0[i] = 1 - src[i * 4] / 255;
-			/* the flow field, once: curl of a small fbm, as in the shader */
-			function hash(px, py) { var q = Math.sin(px * 127.1 + py * 311.7 + seed) * 43758.5453; return q - Math.floor(q); }
-			function noise(px, py) {
-				var ix = Math.floor(px), iy = Math.floor(py), fx = px - ix, fy = py - iy;
-				var ux = fx * fx * (3 - 2 * fx), uy = fy * fy * (3 - 2 * fy);
-				var a = hash(ix, iy), b = hash(ix + 1, iy), cc = hash(ix, iy + 1), d = hash(ix + 1, iy + 1);
-				return a + (b - a) * ux + (cc - a) * uy + (a - b - cc + d) * ux * uy;
-			}
-			function fbm(px, py) { var v = 0, amp = 0.5; for (var o = 0; o < 4; o++) { v += amp * noise(px, py); px = px * 2.03 + 17.1; py = py * 2.03 + 17.1; amp *= 0.5; } return v; }
-			var flow = new Float32Array(N * N * 2), e = 0.02, S = 0.65;
-			for (var y = 0; y < N; y++) for (var xx = 0; xx < N; xx++) {
-				var px = xx / N * 1.1 + seed * 0.07, py = y / N * 1.1 + seed * 0.07;
-				var n1 = fbm(px, py + e), n2 = fbm(px, py - e), n3 = fbm(px + e, py), n4 = fbm(px - e, py);
-				flow[(y * N + xx) * 2] = (n1 - n2) / (2 * e) * S; flow[(y * N + xx) * 2 + 1] = -(n3 - n4) / (2 * e) * S;
-			}
-			var ink = ink0, next = new Float32Array(N * N);
-			function at(buf, px, py) {   // bilinear sample, clamped
-				px = Math.max(0, Math.min(N - 1.001, px)); py = Math.max(0, Math.min(N - 1.001, py));
-				var ix = px | 0, iy = py | 0, fx = px - ix, fy = py - iy, i = iy * N + ix;
-				return buf[i] * (1 - fx) * (1 - fy) + buf[i + 1] * fx * (1 - fy) + buf[i + N] * (1 - fx) * fy + buf[i + N + 1] * fx * fy;
-			}
-			function step() {
-				for (var y = 0; y < N; y++) for (var xx = 0; xx < N; xx++) {
-					var i = y * N + xx, qx = xx + flow[i * 2], qy = y + flow[i * 2 + 1];
-					var prev = at(ink, qx, qy) * 0.4 + at(ink, qx + 1, qy) * 0.15 + at(ink, qx - 1, qy) * 0.15 + at(ink, qx, qy + 1) * 0.15 + at(ink, qx, qy - 1) * 0.15;
-					next[i] = prev + (ink0[i] - prev) * 0.004;
-				}
-				var t = ink; ink = next; next = t;
-			}
-			var out = x.createImageData(N, N), od = out.data, col = dark ? 255 : 20;
-			function paint() {
-				/* a touch of contrast so the thin strokes keep their edge at 16px */
-				for (var i = 0; i < N * N; i++) { var a = Math.min(1, Math.max(0, (ink[i] - 0.08) / 0.7)); od[i * 4] = od[i * 4 + 1] = od[i * 4 + 2] = col; od[i * 4 + 3] = a * 255; }
-				x.clearRect(0, 0, N, N); x.putImageData(out, 0, 0);
-				link.type = 'image/png'; link.href = c.toDataURL('image/png');
-			}
-			for (var k = 0; k < 15; k++) step();
-			paint();
-			/* and on, slowly, while the tab is open (a few steps a minute) */
-			var steps = 15, tick = setInterval(function () { if (document.hidden) return; step(); steps++; paint(); if (steps > 48) clearInterval(tick); }, 4000);
-		}).catch(function () {});
+		var link = document.getElementById('icon_svg'), data = document.getElementById('palettes');
+		if (!link || !data) return;
+		var sets; try { sets = JSON.parse(data.textContent); } catch (e) { return; }
+		if (!sets || !sets.length) return;
+		var N = 96, c = document.createElement('canvas'); c.width = c.height = N;
+		var x = c.getContext('2d');
+		function hsl(hex) {   // #rrggbb -> [h, s, l]
+			var r = parseInt(hex.slice(1, 3), 16) / 255, g = parseInt(hex.slice(3, 5), 16) / 255, b = parseInt(hex.slice(5, 7), 16) / 255;
+			var mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, h = 0, s = 0;
+			if (mx !== mn) { var d = mx - mn; s = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn);
+				h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h /= 6; }
+			return [h, s, l];
+		}
+		function soft(hex, k) {   // the project's hue, in the tile's light, slightly milky range
+			var v = hsl(hex), s = Math.min(0.55, Math.max(0.18, v[1] * 0.9)), l = 0.58 + k * 0.22;
+			if (v[1] < 0.08) s = 0.04;                                   // a grey cover stays grey
+			return 'hsl(' + Math.round(v[0] * 360) + ',' + Math.round(s * 100) + '%,' + Math.round(l * 100) + '%)';
+		}
+		var pal = sets[Math.floor(Math.random() * sets.length)].slice();
+		var a = pal.splice(Math.floor(Math.random() * pal.length), 1)[0], b = pal[Math.floor(Math.random() * pal.length)];
+		var ang = Math.random() * Math.PI * 2, drift = 0;
+		function paint() {
+			var cx = N / 2, cy = N / 2, dx = Math.cos(ang + drift) * N * 0.6, dy = Math.sin(ang + drift) * N * 0.6;
+			var g = x.createLinearGradient(cx - dx, cy - dy, cx + dx, cy + dy);
+			g.addColorStop(0, soft(a, 1)); g.addColorStop(1, soft(b, 0));
+			x.clearRect(0, 0, N, N);
+			var r = N * 0.22; x.beginPath();
+			x.moveTo(r, 0); x.arcTo(N, 0, N, N, r); x.arcTo(N, N, 0, N, r); x.arcTo(0, N, 0, 0, r); x.arcTo(0, 0, N, 0, r); x.closePath();
+			x.fillStyle = g; x.fill();
+			link.href = c.toDataURL('image/png');
+		}
+		paint();
+		var tick = setInterval(function () { if (document.hidden) return; drift += 0.06; paint(); if (drift > Math.PI) clearInterval(tick); }, 4000);
 	}
 	function init() {
 		var live = document.createElement('div'); live.className = 'visually-hidden announce'; live.setAttribute('aria-live', 'polite'); document.body.appendChild(live);
