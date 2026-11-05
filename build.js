@@ -344,7 +344,7 @@ function aboutMain(page) {
 		const sec = a.sections.find(s => s.title === name);
 		return sec ? `			<section style="--i:${seq()}">\n				<h2>${esc(sec.title)}</h2>\n${sec.entries.map(entry).join('\n')}\n			</section>` : '';
 	};
-	const skills = a.skills ? `<section class="skills" style="--i:${seq()}"><h2>Skills</h2><dl>${a.skills.map(([k, v], j) => `<div style="--j:${j}"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : '';
+	const skills = () => a.skills ? `<section class="skills" style="--i:${seq()}"><h2>Skills</h2><dl>${a.skills.map(([k, v], j) => `<div style="--j:${j}"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : '';
 	return `<main id="main" tabindex="-1" class="about">
 		<h1 class="visually-hidden">${esc(page.title_no_html)}</h1>
 		<p class="legend" style="--i:0"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
@@ -365,7 +365,7 @@ ${section('Experience')}
 ${section('Education')}
 			</div>
 ${section('Group exhibitions')}
-			${skills}
+			${skills()}
 		</div>
 	</main>`;
 }

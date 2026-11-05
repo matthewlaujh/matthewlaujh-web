@@ -83,9 +83,11 @@ html[data-page="about"][data-to]:not([data-to="about"]), html[data-page="about"]
 /* about arrives in parts once the page has gone white: legend and contact first,
    the ledes word by word, then the cv blocks and their rows one beat apart */
 html[data-page="about"] main { animation: none; }
-.about .legend, .about .contact, .about .lede h2, .about .cv section { animation: cascade .8s calc(.1s + var(--i, 0) * 90ms) var(--ease) both; }
-.about .lede .w { display: inline-block; animation: wordin .7s calc(.3s + min(var(--w, 0) * 16ms, 1.5s)) var(--ease) both; }
-.about .cv .entry, .about .skills dl > div { animation: cascade .7s calc(.3s + var(--i, 0) * 90ms + var(--j, 0) * 60ms) var(--ease) both; }
+.about .legend, .about .contact, .about .lede h2 { animation: cascade .8s calc(.1s + var(--i, 0) * 90ms) var(--ease) both; }
+.about .lede .w { display: inline-block; animation: wordin .7s calc(.3s + min(var(--w, 0) * 16ms, 1.4s)) var(--ease) both; }
+/* the cv waits for the last words of the ledes (.3s + 1.4s cap), then flows top to bottom */
+.about .cv section { animation: cascade .8s calc(1.8s + (var(--i, 3) - 3) * 120ms) var(--ease) both; }
+.about .cv .entry, .about .skills dl > div { animation: cascade .7s calc(1.9s + (var(--i, 3) - 3) * 120ms + var(--j, 0) * 50ms) var(--ease) both; }
 @keyframes wordin { from { opacity: 0; transform: translateY(.3em); } }
 html.leaving .home { opacity: 0; transform: translateY(-10px); transition: opacity .55s var(--ease), transform .6s var(--ease); }
 html.leaving .project, html.leaving .about { opacity: 0; transition: opacity .4s var(--ease); }
