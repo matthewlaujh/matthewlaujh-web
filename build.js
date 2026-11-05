@@ -350,7 +350,7 @@ function aboutMain(page) {
 		<p class="legend" style="--i:0"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
 		<div class="contact" style="--i:1">
 			<a href="mailto:${a.contact.email}">${a.contact.email}</a>
-			<a href="${a.contact.resume}" target="_blank" rel="noopener">Resume (PDF)</a>
+			<a href="${url('CV')}" target="_blank" rel="noopener">CV</a>
 			${a.contact.github ? `<a href="${a.contact.github}" target="_blank" rel="noopener">GitHub</a>` : ''}
 			${a.contact.linkedin ? `<a href="${a.contact.linkedin}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
 			<span>${esc(a.contact.location)}</span>
@@ -464,6 +464,91 @@ ${typo(`		${barHTML(page)}
 `;
 }
 
+/* --------------------------------------------------------------------- CV
+   A standalone document (not under the renderer) in the About page's
+   language. Links point at the live site so they survive in the PDF, which
+   scripts/cv-pdf.js prints from this page. */
+const CV_PDF = 'Matthew-Lau-CV.pdf';
+function cvHTML() {
+	const a = readJSON(path.join(SRC, 'about.json'));
+	const abs = h => fixLinks(h, 'CV').replace(/href="\/([^"]*)"/g, `href="${site.url}/$1"`).replace(/href="([A-Za-z0-9-]+)\.html"/g, `href="${site.url}/$1"`);
+	const entry = e => `			<div class="entry${e.kind === 'art' ? ' art' : ''}">
+				<div class="dates">${e.dates}</div>
+				<div class="main">
+					<div class="role">${kdot(e.kind)}<span>${abs(e.role)}</span></div>
+					${e.org ? `<div class="org">${e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)}${e.place ? `, ${esc(e.place)}` : ''}</div>` : e.place ? `<div class="org">${esc(e.place)}</div>` : ''}
+					${e.note ? `<div class="note">${abs(e.note)}</div>` : ''}
+					${e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${abs(b)}</li>`).join('')}</ul>` : ''}
+				</div>
+			</div>`;
+	const show = e => `			<div class="entry">
+				<div class="dates">${e.dates}</div>
+				<div class="main">
+					<div class="role">${kdot(e.kind)}<span>${abs(e.role)}</span></div>
+					<div class="org">${e.org ? esc(e.org) : ''}${e.org && e.place ? ' — ' : ''}${e.place ? esc(e.place) : ''}</div>
+				</div>
+			</div>`;
+	const sec = (name, fn, cls) => {
+		const s = a.sections.find(s => s.title === name);
+		return s ? `		<section${cls ? ` class="${cls}"` : ''}>\n			<h2>${esc(name)}</h2>\n${s.entries.map(fn).join('\n')}\n		</section>` : '';
+	};
+	const skills = a.skills ? `		<section class="skills"><h2>Skills</h2><dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : '';
+	const host = site.url.replace(/^https?:\/\//, '');
+	const title = `Matthew Lau – CV`;
+	const desc = 'Curriculum vitae of Matthew Lau, creative technologist and artist in Singapore: experience, education, exhibitions and skills.';
+	return typo(`<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="robots" content="index,follow">
+		<title>${esc(title)}</title>
+		<meta name="description" content="${esc(desc)}">
+		<link rel="canonical" href="${site.url}/CV">
+		<meta property="og:title" content="${esc(title)}">
+		<meta property="og:description" content="${esc(desc)}">
+		<meta property="og:url" content="${site.url}/CV">
+		<meta property="og:image" content="${site.url}${site.social_image}">
+		<meta property="og:type" content="profile">
+		<meta property="og:site_name" content="${esc(site.title)}">
+		<meta name="theme-color" content="#ececec">
+		<link rel="icon" href="${asset(site.favicon)}" sizes="32x32">
+		<link rel="apple-touch-icon" href="${asset('/icons/apple-touch-icon.png')}">
+		<link rel="preload" href="${asset('/fonts/AustinNewsDeck-Light.woff2')}" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="${asset('/fonts/AtlasGrotesk-Light.woff2')}" as="font" type="font/woff2" crossorigin>
+		<link rel="stylesheet" href="${asset('/css/cv.css')}?v=${BUILD}">
+	</head>
+	<body>
+		<nav class="bar" aria-label="CV">
+			<a href="${url('About')}"><span aria-hidden="true">←</span> ${host}</a>
+			<a class="dl" href="${asset('/' + CV_PDF)}" download><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1v7M3 5.5L6 8.5 9 5.5M1.5 10.5h9"/></svg> Download PDF</a>
+		</nav>
+		<main class="sheet">
+			<header class="head">
+				<div>
+					<h1>Matthew Lau</h1>
+					<p class="what">Creative technologist and artist, ${esc(a.contact.location)}</p>
+				</div>
+				<p class="reach">
+					<a href="mailto:${a.contact.email}">${a.contact.email}</a><br>
+					<a href="${site.url}">${host}</a><br>
+					${a.contact.github ? `<a href="${a.contact.github}">${a.contact.github.replace(/^https?:\/\/(www\.)?/, '')}</a><br>` : ''}
+					${a.contact.linkedin ? `<a href="${a.contact.linkedin}">${a.contact.linkedin.replace(/^https?:\/\/(www\.)?/, '')}</a>` : ''}
+				</p>
+			</header>
+			<p class="lede">${abs(a.lede[0])}</p>
+			<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
+${sec('Experience', entry)}
+${sec('Education', entry)}
+${sec('Group exhibitions', show, 'shows')}
+${skills}
+			<p class="foot"><span>Projects and documentation at <a href="${site.url}">${host}</a>.</span><span>${new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}</span></p>
+		</main>
+	</body>
+</html>
+`);
+}
+
 /* ------------------------------------------------------------------ build */
 rmrf(OUT);
 fs.mkdirSync(OUT, { recursive: true });
@@ -471,6 +556,9 @@ for (const dir of ['css', 'js', 'fonts', 'img', 'icons']) {
 	if (fs.existsSync(path.join(SRC, dir))) copyDir(path.join(SRC, dir), path.join(OUT, dir));
 }
 fs.copyFileSync(path.join(SRC, 'favicon.ico'), path.join(OUT, 'favicon.ico'));
+/* downloadable files live at the root: the CV's PDF (printed by scripts/cv-pdf.js) */
+if (fs.existsSync(path.join(SRC, 'files'))) for (const f of fs.readdirSync(path.join(SRC, 'files'))) fs.copyFileSync(path.join(SRC, 'files', f), path.join(OUT, f));
+fs.writeFileSync(path.join(OUT, 'CV.html'), cvHTML());
 
 let count = 0;
 const all = pages.concat([{ slug: FIELD_SLUG, title_no_html: 'Works in space', content: '' }, { slug: '404', title_no_html: 'Not found', content: '' }]);
@@ -482,7 +570,7 @@ for (const page of all) {
 }
 
 if (!RELATIVE) {
-	const urls = all.filter(p => p.slug !== '404').map(p => p.slug === site.homepage ? `${site.url}/` : `${site.url}/${p.slug}`);
+	const urls = all.filter(p => p.slug !== '404').map(p => p.slug === site.homepage ? `${site.url}/` : `${site.url}/${p.slug}`).concat([`${site.url}/CV`]);
 	fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `\t<url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 	fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
 	fs.writeFileSync(path.join(OUT, '_redirects'), `/${site.homepage}  /  301\n/Archifest-2021-Sea-of-Debris-2021  /NewWave-2021  301\n/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition  /Proximate-2022  301\n`);
