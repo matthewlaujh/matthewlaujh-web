@@ -483,7 +483,10 @@ function docHTML(d) {
 	const a = readJSON(path.join(SRC, 'about.json'));
 	const abs = h => fixLinks(h, d.slug).replace(/href="\/([^"]*)"/g, `href="${site.url}/$1"`).replace(/href="([A-Za-z0-9-]+)\.html"/g, `href="${site.url}/$1"`);
 	/* keep names and slashed pairs whole across a line end */
-	const keep = h => h.replace(/(Lim-Schlegel|Neuewave\/MDRN|HTTP\/HTTPS|TCP\/UDP|HTML\/CSS|Max\/MSP|real-time|Real-time)/g, '<span class="nb">$1</span>');
+	const MON = '(?:January|February|March|April|May|June|July|August|September|October|November|December)';
+	const keep = h => h.replace(/(Lim-Schlegel|Neuewave\/MDRN|HTTP\/HTTPS|TCP\/UDP|HTML\/CSS|Max\/MSP|real-time|Real-time)/g, '<span class="nb">$1</span>')
+		/* a date range never splits at its dash: "May – September 2017" */
+		.replace(new RegExp(`(${MON}(?: \\d{4})? [\u2013-] (?:${MON}(?: \\d{4})?|present))`, 'g'), '<span class="nb">$1</span>');
 	const where = e => [e.org ? (e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)) : '', esc(e.place || '')].filter(Boolean).join(', ');
 	const entry = e => `				<div class="entry rule${e.kind === 'art' ? ' art' : ''}">
 					<p class="role">${keep(abs(e.role))}</p>
