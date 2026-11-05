@@ -1,9 +1,10 @@
 /* ==========================================================================
-   matthewlaujh.com — CV
-   The layout of the old CV (a narrow column of who, contact and skills; a
-   wide column of education, experience and exhibitions; an em dash closing
-   each block) set in the site's faces and in ink only. Reads as a sheet on
-   screen and prints to A4 (scripts/cv-pdf.js renders this page to the PDF).
+   matthewlaujh.com — Resume and Artist CV
+   The old CV's layout (a narrow column of who, contact and skills; a wide
+   column of experience, education and exhibitions) set the way the About
+   page is: serif for the intro and the roles, sans for everything else, a
+   black rule under each heading and a faint rule between rows. Ink only.
+   Reads as a sheet on screen and prints to A4 (scripts/cv-pdf.js).
    ========================================================================== */
 
 @font-face { font-family: "Austin News Deck"; font-weight: 300; font-style: normal; src: url(../fonts/AustinNewsDeck-Light.woff2) format("woff2"); }
@@ -15,18 +16,25 @@
 	--serif: "Austin News Deck", Georgia, "Times New Roman", serif;
 	--sans: "Atlas Grotesk", Helvetica, Arial, sans-serif;
 	--ink: #141414;
-	--dim: rgba(0, 0, 0, .55);
+	--dim: rgba(0, 0, 0, .62);    /* headings, labels, dates */
+	--mid: rgba(0, 0, 0, .75);    /* org, notes */
+	--soft: rgba(0, 0, 0, .7);    /* bullets */
+	--rule: rgba(0, 0, 0, .1);
 	--paper: #ffffff;
 	--ease: cubic-bezier(.2, .6, .2, 1);
-	--body: 16px;
-	--label: 13px;
+	/* sizes in step with the About page */
+	--base: 15px;
+	--lede: 19px;
+	--role: 20px;
+	--name: 22px;
 	--gap: 64px;
+	--row: 14px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { background: #ececec; -webkit-text-size-adjust: none; }
-body { margin: 0; color: var(--ink); font: 300 var(--body)/1.45 var(--serif); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-a { color: inherit; text-decoration: underline; text-decoration-color: rgba(0, 0, 0, .3); text-underline-offset: 2px; text-decoration-thickness: 1px; }
+body { margin: 0; color: var(--ink); font: 300 var(--base)/1.5 var(--sans); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+a { color: inherit; text-decoration: underline; text-decoration-color: rgba(0, 0, 0, .3); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 a:hover { text-decoration-color: currentColor; }
 p, ul, dl, dd { margin: 0; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -43,62 +51,64 @@ p, ul, dl, dd { margin: 0; }
 /* ----------------------------------------------------------------- sheet */
 .sheet { max-width: 1120px; margin: 84px auto 64px; padding: 64px 72px 72px; background: var(--paper); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.15fr); gap: 0 var(--gap); align-items: start; }
 
-/* labels: section heads and the small names above values, in the sans */
-h1, h2, .lab { font: 300 var(--label)/1.4 var(--sans); color: var(--dim); margin: 0; letter-spacing: .01em; }
-h1 { color: var(--ink); font: 300 26px/1.1 var(--serif); letter-spacing: 0; margin-bottom: 18px; }
-h2 { margin-bottom: 10px; }
-.what { font: 300 var(--label)/1.4 var(--sans); color: var(--dim); margin: -12px 0 18px; }
-.end { margin: .5em 0 1.4em; color: var(--dim); }
-.end:last-child { margin-bottom: 0; }
+h1 { margin: 0; font: 300 var(--name)/1.2 var(--serif); }
+.what { color: var(--dim); margin: 2px 0 20px; }
+h2 { margin: 0; padding-bottom: 8px; border-bottom: 1px solid var(--ink); font: 300 var(--base)/1.4 var(--sans); color: var(--dim); }
+section + section, .who + section { margin-top: 40px; }
 
 /* the narrow column */
-.who p + p { margin-top: .8em; }
-.contact .lab { margin-top: 8px; }
-.contact .lab:first-of-type { margin-top: 0; }
-.skills dl > div + div { margin-top: 10px; }
-.skills dt { font: 300 var(--label)/1.4 var(--sans); color: var(--dim); }
+.who { font: 300 var(--lede)/1.45 var(--serif); }
+.who p + p { margin-top: .6em; }
+.side dl > div { padding: 9px 0; border-bottom: 1px solid var(--rule); }
+.side dl > div:last-child { border-bottom: 0; }
+.side dt { color: var(--dim); }
+.side dd { color: var(--mid); }
+.contact dd { color: var(--ink); }
 
 /* the wide column */
-.entry { break-inside: auto; }
-.entry .role { font-size: calc(var(--body) * 1.15); line-height: 1.3; }
+.entry { padding: var(--row) 0; border-bottom: 1px solid var(--rule); }
+.entry:last-child { border-bottom: 0; }
+.entry .role { font: 300 var(--role)/1.3 var(--serif); }
 .entry.art .role { font-style: italic; }
-.entry .org { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; font-style: italic; }
-.entry .org .d { font: 300 var(--label)/1.4 var(--sans); font-style: normal; color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.entry .note { margin-top: 2px; }
-.entry ul { list-style: none; padding: 0; margin-top: 4px; }
-.entry li { padding-left: 1em; text-indent: -1em; }
-.entry li::before { content: "\2022\00a0\00a0"; }
-.entry li + li { margin-top: 2px; }
+.entry .org { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; color: var(--mid); margin-top: 2px; }
+.entry .org a { text-decoration: none; }
+.entry .org a:hover { text-decoration: underline; }
+.d { color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.entry .note { color: var(--mid); margin-top: 6px; }
+.entry ul { margin: 8px 0 0; padding-left: 1em; list-style: disc; color: var(--soft); }
+.entry li + li { margin-top: 4px; }
 .entry .role, .entry .org, .entry .note { break-after: avoid; }
 
-.shows .show { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 24px; break-inside: avoid; }
-.shows .show + .show { margin-top: 8px; }
-.shows .show .d { font: 300 var(--label)/1.6 var(--sans); color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.shows .show .at { font-style: italic; }
-.shows .show .at + .at { font-style: normal; color: var(--dim); }
+.shows .show { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 24px; padding: 10px 0; border-bottom: 1px solid var(--rule); break-inside: avoid; }
+.shows .show:last-child { border-bottom: 0; }
+.shows .show .at { color: var(--mid); }
 
 /* ---------------------------------------------------------------- mobile */
-@media (max-width: 820px) {
+@media screen and (max-width: 820px) {
+	:root { --role: 19px; --lede: 18px; }
 	.sheet { grid-template-columns: 1fr; margin: 70px 0 0; padding: 40px 20px 56px; }
-	.side { margin-bottom: 1.4em; }
+	.side { margin-bottom: 40px; }
+	.entry .org { flex-direction: column; gap: 0; }
 	.bar { padding: 12px 16px; }
 }
 
 /* ----------------------------------------------------------------- print */
-@page { size: A4; margin: 12mm 13mm 11mm; }
+@page { size: A4; margin: 13mm 13mm 12mm; }
 @media print {
-	:root { --body: 8.6pt; --label: 7.2pt; --gap: 8mm; }
+	:root { --base: 8.4pt; --lede: 10.5pt; --role: 11pt; --name: 12.5pt; --gap: 8mm; --row: 6pt; }
 	html, body { background: #fff; }
-	body { line-height: 1.34; }
+	body { line-height: 1.38; }
 	.bar { display: none; }
 	.sheet { max-width: none; margin: 0; padding: 0; grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr); }
-	h1 { font-size: 16pt; margin-bottom: 8pt; }
-	.what { margin: -6pt 0 10pt; }
+	.what { margin: 1pt 0 12pt; }
+	h2 { padding-bottom: 4pt; break-after: avoid; }
+	section + section, .who + section { margin-top: 16pt; }
+	.side dl > div { padding: 4pt 0; }
+	.entry .note { margin-top: 2pt; }
+	.entry ul { margin-top: 3pt; }
+	.entry li + li { margin-top: 1.5pt; }
+	.shows .show { padding: 4pt 0; }
+	.entry { break-inside: avoid; }
 	/* skills open the second page of the left column, whole */
-	.skills { break-before: page; break-inside: avoid; }
-	h2 { margin-bottom: 4pt; }
-	.end { margin: 0 0 .5em; }
-	.skills dl > div + div { margin-top: 5pt; }
-	.shows .show + .show { margin-top: 2.5pt; }
-	a { text-decoration-color: rgba(0, 0, 0, .3) !important; }
+	.skills { break-before: page; break-inside: avoid; margin-top: 0; }
 }

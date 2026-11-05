@@ -478,25 +478,23 @@ const DOCS = [
 		desc: 'Artist CV of Matthew Lau, an artist in Singapore making interactive light installations: statement, exhibitions and education.',
 		intro: a => a.statement, body: ['Group exhibitions', 'Education'], brief: true },
 ];
-const SEC_LABEL = { Experience: 'Work experience', Education: 'Education', 'Group exhibitions': 'Group exhibitions' };
+const SEC_LABEL = { Experience: 'Experience', Education: 'Education', 'Group exhibitions': 'Group exhibitions' };
 function docHTML(d) {
 	const a = readJSON(path.join(SRC, 'about.json'));
 	const abs = h => fixLinks(h, d.slug).replace(/href="\/([^"]*)"/g, `href="${site.url}/$1"`).replace(/href="([A-Za-z0-9-]+)\.html"/g, `href="${site.url}/$1"`);
-	const dash = '<p class="end" aria-hidden="true">—</p>';
-	const where = e => e.org ? (e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)) + (e.place ? ` (${esc(e.place.replace(/ · /g, ' | '))})` : '') : esc((e.place || '').replace(/ · /g, ' | '));
+	const where = e => [e.org ? (e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)) : '', esc(e.place || '')].filter(Boolean).join(', ');
 	const entry = e => `				<div class="entry${e.kind === 'art' ? ' art' : ''}">
 					<p class="role">${abs(e.role)}</p>
 					<p class="org"><span>${where(e)}</span><span class="d">${e.dates}</span></p>
 					${e.note ? `<p class="note">${abs(e.note)}</p>` : ''}
 					${!d.brief && e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${abs(b)}</li>`).join('')}</ul>` : ''}
-					${dash}
 				</div>`;
 	const show = e => `				<div class="show"><p>${abs(e.role)}<br><span class="at">${esc(e.org || '')}</span>${e.place ? `, <span class="at">${esc(e.place)}</span>` : ''}</p><span class="d">${e.dates}</span></div>`;
 	const sec = name => {
 		const s = a.sections.find(s => s.title === name);
 		if (!s) return '';
 		const shows = name === 'Group exhibitions';
-		return `			<section${shows ? ' class="shows"' : ''}>\n				<h2>${SEC_LABEL[name]}</h2>\n${s.entries.map(shows ? show : entry).join('\n')}${shows ? '\n				' + dash : ''}\n			</section>`;
+		return `			<section${shows ? ' class="shows"' : ''}>\n				<h2>${SEC_LABEL[name]}</h2>\n${s.entries.map(shows ? show : entry).join('\n')}\n			</section>`;
 	};
 	const other = DOCS.find(o => o !== d);
 	const host = site.url.replace(/^https?:\/\//, '');
@@ -537,19 +535,18 @@ function docHTML(d) {
 				<h1>Matthew Lau</h1>
 				<p class="what">${d.role}, ${esc(a.contact.location)}</p>
 				<div class="who">${d.intro(a).map(p => `<p>${abs(p)}</p>`).join('')}</div>
-				${dash}
 				<section class="contact">
 					<h2>Contact</h2>
-					<p class="lab">Email</p><p><a href="mailto:${a.contact.email}">${a.contact.email}</a></p>
-					<p class="lab">Portfolio</p><p><a href="${site.url}">${host}</a></p>
-					${!d.brief && a.contact.github ? `<p class="lab">GitHub</p><p><a href="${a.contact.github}">${bare(a.contact.github)}</a></p>` : ''}
-					${a.contact.linkedin ? `<p class="lab">LinkedIn</p><p><a href="${a.contact.linkedin}">${bare(a.contact.linkedin)}</a></p>` : ''}
+					<dl>
+						<div><dt>Email</dt><dd><a href="mailto:${a.contact.email}">${a.contact.email}</a></dd></div>
+						<div><dt>Portfolio</dt><dd><a href="${site.url}">${host}</a></dd></div>
+						${!d.brief && a.contact.github ? `<div><dt>GitHub</dt><dd><a href="${a.contact.github}">${bare(a.contact.github)}</a></dd></div>` : ''}
+						${a.contact.linkedin ? `<div><dt>LinkedIn</dt><dd><a href="${a.contact.linkedin}">${bare(a.contact.linkedin)}</a></dd></div>` : ''}
+					</dl>
 				</section>
-				${dash}
 				${d.skills && a.skills ? `<section class="skills">
 					<h2>Skills</h2>
 					<dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
-					${dash}
 				</section>` : ''}
 			</aside>
 			<div class="body">
