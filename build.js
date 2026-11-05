@@ -472,30 +472,23 @@ const CV_PDF = 'Matthew-Lau-CV.pdf';
 function cvHTML() {
 	const a = readJSON(path.join(SRC, 'about.json'));
 	const abs = h => fixLinks(h, 'CV').replace(/href="\/([^"]*)"/g, `href="${site.url}/$1"`).replace(/href="([A-Za-z0-9-]+)\.html"/g, `href="${site.url}/$1"`);
-	const entry = e => `			<div class="entry${e.kind === 'art' ? ' art' : ''}">
-				<div class="dates">${e.dates}</div>
-				<div class="main">
-					<div class="role">${kdot(e.kind)}<span>${abs(e.role)}</span></div>
-					${e.org ? `<div class="org">${e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)}${e.place ? `, ${esc(e.place)}` : ''}</div>` : e.place ? `<div class="org">${esc(e.place)}</div>` : ''}
-					${e.note ? `<div class="note">${abs(e.note)}</div>` : ''}
+	const dash = '<p class="end" aria-hidden="true">—</p>';
+	const entry = e => `				<div class="entry${e.kind === 'art' ? ' art' : ''}">
+					<p class="role">${abs(e.role)}</p>
+					<p class="org"><span>${e.org ? (e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)) + (e.place ? ` (${esc(e.place.replace(/ · /g, ' | '))})` : '') : esc((e.place || '').replace(/ · /g, ' | '))}</span><span class="d">${e.dates}</span></p>
+					${e.note ? `<p class="note">${abs(e.note)}</p>` : ''}
 					${e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${abs(b)}</li>`).join('')}</ul>` : ''}
-				</div>
-			</div>`;
-	const show = e => `			<div class="entry">
-				<div class="dates">${e.dates}</div>
-				<div class="main">
-					<div class="role">${kdot(e.kind)}<span>${abs(e.role)}</span></div>
-					<div class="org">${e.org ? esc(e.org) : ''}${e.org && e.place ? ' — ' : ''}${e.place ? esc(e.place) : ''}</div>
-				</div>
-			</div>`;
-	const sec = (name, fn, cls) => {
+					${dash}
+				</div>`;
+	const show = e => `				<div class="show"><p>${abs(e.role)}<br><span class="at">${esc(e.org || '')}</span>${e.place ? `, <span class="at">${esc(e.place)}</span>` : ''}</p><span class="d">${e.dates}</span></div>`;
+	const sec = (name, label, fn, cls) => {
 		const s = a.sections.find(s => s.title === name);
-		return s ? `		<section${cls ? ` class="${cls}"` : ''}>\n			<h2>${esc(name)}</h2>\n${s.entries.map(fn).join('\n')}\n		</section>` : '';
+		return s ? `			<section${cls ? ` class="${cls}"` : ''}>\n				<h2>${label}</h2>\n${s.entries.map(fn).join('\n')}${cls ? '\n				' + dash : ''}\n			</section>` : '';
 	};
-	const skills = a.skills ? `		<section class="skills"><h2>Skills</h2><dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : '';
 	const host = site.url.replace(/^https?:\/\//, '');
+	const bare = u => u.replace(/^https?:\/\/(www\.)?/, '');
 	const title = `Matthew Lau – CV`;
-	const desc = 'Curriculum vitae of Matthew Lau, creative technologist and artist in Singapore: experience, education, exhibitions and skills.';
+	const desc = 'Curriculum vitae of Matthew Lau, creative technologist and artist in Singapore: education, experience, exhibitions and skills.';
 	return typo(`<!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -524,25 +517,30 @@ function cvHTML() {
 			<a class="dl" href="${asset('/' + CV_PDF)}" download><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1v7M3 5.5L6 8.5 9 5.5M1.5 10.5h9"/></svg> Download PDF</a>
 		</nav>
 		<main class="sheet">
-			<header class="head">
-				<div>
-					<h1>Matthew Lau</h1>
-					<p class="what">Creative technologist and artist, ${esc(a.contact.location)}</p>
-				</div>
-				<p class="reach">
-					<a href="mailto:${a.contact.email}">${a.contact.email}</a><br>
-					<a href="${site.url}">${host}</a><br>
-					${a.contact.github ? `<a href="${a.contact.github}">${a.contact.github.replace(/^https?:\/\/(www\.)?/, '')}</a><br>` : ''}
-					${a.contact.linkedin ? `<a href="${a.contact.linkedin}">${a.contact.linkedin.replace(/^https?:\/\/(www\.)?/, '')}</a>` : ''}
-				</p>
-			</header>
-			<p class="lede">${abs(a.lede[0])}</p>
-			<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
-${sec('Experience', entry)}
-${sec('Education', entry)}
-${sec('Group exhibitions', show, 'shows')}
-${skills}
-			<p class="foot"><span>Projects and documentation at <a href="${site.url}">${host}</a>.</span><span>${new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}</span></p>
+			<aside class="side">
+				<h1>Matthew Lau</h1>
+				<div class="who">${a.lede.map(p => `<p>${abs(p)}</p>`).join('')}</div>
+				${dash}
+				<section class="contact">
+					<h2>Contact</h2>
+					<p class="lab">Email</p><p><a href="mailto:${a.contact.email}">${a.contact.email}</a></p>
+					<p class="lab">Portfolio</p><p><a href="${site.url}">${host}</a></p>
+					${a.contact.github ? `<p class="lab">GitHub</p><p><a href="${a.contact.github}">${bare(a.contact.github)}</a></p>` : ''}
+					${a.contact.linkedin ? `<p class="lab">LinkedIn</p><p><a href="${a.contact.linkedin}">${bare(a.contact.linkedin)}</a></p>` : ''}
+					<p class="lab">Based in</p><p>${esc(a.contact.location)}</p>
+				</section>
+				${dash}
+				${a.skills ? `<section class="skills">
+					<h2>Skills</h2>
+					<dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+				</section>
+				${dash}` : ''}
+			</aside>
+			<div class="body">
+${sec('Education', 'Education', entry)}
+${sec('Experience', 'Work experience', entry)}
+${sec('Group exhibitions', 'Group exhibitions', show, 'shows')}
+			</div>
 		</main>
 	</body>
 </html>
