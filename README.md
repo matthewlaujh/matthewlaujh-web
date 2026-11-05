@@ -163,9 +163,9 @@ Edit the `content` HTML in a page JSON (it is the HTML Cargo stored), or add a n
 `slug`, `title`, `content`, `images`, `backdrop`, then `node build.js`. Add a link to it in
 `src/pinned/nav.json` and `src/pages/Front-Page.json`.
 
-## CV
+## Resume and Artist CV
 
-`/CV` is a standalone page (`cvHTML()` in `build.js`, styled by `src/css/cv.css`) built from the same `src/about.json` as the About page, with a Download PDF link to `/Matthew-Lau-CV.pdf`. The PDF is printed from that page by `scripts/cv-pdf.js` (needs Playwright: `npm i -D playwright && npx playwright install chromium`) and committed at `src/files/Matthew-Lau-CV.pdf`, which the build copies to the site root. After changing `about.json` or `cv.css`:
+`/Resume` (work) and `/Artist-CV` (statement, exhibitions, education) are standalone pages (`DOCS` and `docHTML()` in `build.js`, styled by `src/css/cv.css`) built from the same `src/about.json` as the About page, each with a Download PDF link. `/CV` redirects to `/Resume`. The PDFs are printed from those pages by `scripts/cv-pdf.js` (needs Playwright: `npm i -D playwright && npx playwright install chromium`) and committed in `src/files/`, which the build copies to the site root. After changing `about.json` or `cv.css`:
 
 ```
 node build.js --relative && node scripts/cv-pdf.js && node build.js

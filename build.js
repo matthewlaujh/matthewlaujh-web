@@ -350,7 +350,8 @@ function aboutMain(page) {
 		<p class="legend" style="--i:0"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
 		<div class="contact" style="--i:1">
 			<a href="mailto:${a.contact.email}">${a.contact.email}</a>
-			<a href="${url('CV')}" target="_blank" rel="noopener">CV</a>
+			<a href="${url('Resume')}" target="_blank" rel="noopener">Resume</a>
+			<a href="${url('Artist-CV')}" target="_blank" rel="noopener">Artist CV</a>
 			${a.contact.github ? `<a href="${a.contact.github}" target="_blank" rel="noopener">GitHub</a>` : ''}
 			${a.contact.linkedin ? `<a href="${a.contact.linkedin}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
 			<span>${esc(a.contact.location)}</span>
@@ -464,31 +465,43 @@ ${typo(`		${barHTML(page)}
 `;
 }
 
-/* --------------------------------------------------------------------- CV
-   A standalone document (not under the renderer) in the About page's
-   language. Links point at the live site so they survive in the PDF, which
-   scripts/cv-pdf.js prints from this page. */
-const CV_PDF = 'Matthew-Lau-CV.pdf';
-function cvHTML() {
+/* ------------------------------------------------------------ CV documents
+   Two standalone documents (not under the renderer) in the old CV's layout,
+   built from the same about.json as the About page: a resume for work and an
+   artist CV. Links point at the live site so they survive in the PDFs, which
+   scripts/cv-pdf.js prints from these pages. */
+const DOCS = [
+	{ slug: 'Resume', pdf: 'Matthew-Lau-Resume.pdf', name: 'Resume', role: 'Creative technologist',
+		desc: 'Resume of Matthew Lau, creative technologist in Singapore: work experience, education and skills.',
+		intro: a => a.lede, body: ['Experience', 'Education'], skills: true },
+	{ slug: 'Artist-CV', pdf: 'Matthew-Lau-Artist-CV.pdf', name: 'Artist CV', role: 'Artist',
+		desc: 'Artist CV of Matthew Lau, an artist in Singapore making interactive light installations: statement, exhibitions and education.',
+		intro: a => a.statement, body: ['Group exhibitions', 'Education'], brief: true },
+];
+const SEC_LABEL = { Experience: 'Work experience', Education: 'Education', 'Group exhibitions': 'Group exhibitions' };
+function docHTML(d) {
 	const a = readJSON(path.join(SRC, 'about.json'));
-	const abs = h => fixLinks(h, 'CV').replace(/href="\/([^"]*)"/g, `href="${site.url}/$1"`).replace(/href="([A-Za-z0-9-]+)\.html"/g, `href="${site.url}/$1"`);
+	const abs = h => fixLinks(h, d.slug).replace(/href="\/([^"]*)"/g, `href="${site.url}/$1"`).replace(/href="([A-Za-z0-9-]+)\.html"/g, `href="${site.url}/$1"`);
 	const dash = '<p class="end" aria-hidden="true">—</p>';
+	const where = e => e.org ? (e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)) + (e.place ? ` (${esc(e.place.replace(/ · /g, ' | '))})` : '') : esc((e.place || '').replace(/ · /g, ' | '));
 	const entry = e => `				<div class="entry${e.kind === 'art' ? ' art' : ''}">
 					<p class="role">${abs(e.role)}</p>
-					<p class="org"><span>${e.org ? (e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)) + (e.place ? ` (${esc(e.place.replace(/ · /g, ' | '))})` : '') : esc((e.place || '').replace(/ · /g, ' | '))}</span><span class="d">${e.dates}</span></p>
+					<p class="org"><span>${where(e)}</span><span class="d">${e.dates}</span></p>
 					${e.note ? `<p class="note">${abs(e.note)}</p>` : ''}
-					${e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${abs(b)}</li>`).join('')}</ul>` : ''}
+					${!d.brief && e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${abs(b)}</li>`).join('')}</ul>` : ''}
 					${dash}
 				</div>`;
 	const show = e => `				<div class="show"><p>${abs(e.role)}<br><span class="at">${esc(e.org || '')}</span>${e.place ? `, <span class="at">${esc(e.place)}</span>` : ''}</p><span class="d">${e.dates}</span></div>`;
-	const sec = (name, label, fn, cls) => {
+	const sec = name => {
 		const s = a.sections.find(s => s.title === name);
-		return s ? `			<section${cls ? ` class="${cls}"` : ''}>\n				<h2>${label}</h2>\n${s.entries.map(fn).join('\n')}${cls ? '\n				' + dash : ''}\n			</section>` : '';
+		if (!s) return '';
+		const shows = name === 'Group exhibitions';
+		return `			<section${shows ? ' class="shows"' : ''}>\n				<h2>${SEC_LABEL[name]}</h2>\n${s.entries.map(shows ? show : entry).join('\n')}${shows ? '\n				' + dash : ''}\n			</section>`;
 	};
+	const other = DOCS.find(o => o !== d);
 	const host = site.url.replace(/^https?:\/\//, '');
 	const bare = u => u.replace(/^https?:\/\/(www\.)?/, '');
-	const title = `Matthew Lau – CV`;
-	const desc = 'Curriculum vitae of Matthew Lau, creative technologist and artist in Singapore: education, experience, exhibitions and skills.';
+	const title = `Matthew Lau – ${d.name}`;
 	return typo(`<!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -496,11 +509,11 @@ function cvHTML() {
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="index,follow">
 		<title>${esc(title)}</title>
-		<meta name="description" content="${esc(desc)}">
-		<link rel="canonical" href="${site.url}/CV">
+		<meta name="description" content="${esc(d.desc)}">
+		<link rel="canonical" href="${site.url}/${d.slug}">
 		<meta property="og:title" content="${esc(title)}">
-		<meta property="og:description" content="${esc(desc)}">
-		<meta property="og:url" content="${site.url}/CV">
+		<meta property="og:description" content="${esc(d.desc)}">
+		<meta property="og:url" content="${site.url}/${d.slug}">
 		<meta property="og:image" content="${site.url}${site.social_image}">
 		<meta property="og:type" content="profile">
 		<meta property="og:site_name" content="${esc(site.title)}">
@@ -512,34 +525,35 @@ function cvHTML() {
 		<link rel="stylesheet" href="${asset('/css/cv.css')}?v=${BUILD}">
 	</head>
 	<body>
-		<nav class="bar" aria-label="CV">
+		<nav class="bar" aria-label="${esc(d.name)}">
 			<a href="${url('About')}"><span aria-hidden="true">←</span> ${host}</a>
-			<a class="dl" href="${asset('/' + CV_PDF)}" download><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1v7M3 5.5L6 8.5 9 5.5M1.5 10.5h9"/></svg> Download PDF</a>
+			<span class="r">
+				<a href="${url(other.slug)}">${other.name}</a>
+				<a class="dl" href="${asset('/' + d.pdf)}" download><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1v7M3 5.5L6 8.5 9 5.5M1.5 10.5h9"/></svg> Download PDF</a>
+			</span>
 		</nav>
 		<main class="sheet">
 			<aside class="side">
 				<h1>Matthew Lau</h1>
-				<div class="who">${a.lede.map(p => `<p>${abs(p)}</p>`).join('')}</div>
+				<p class="what">${d.role}, ${esc(a.contact.location)}</p>
+				<div class="who">${d.intro(a).map(p => `<p>${abs(p)}</p>`).join('')}</div>
 				${dash}
 				<section class="contact">
 					<h2>Contact</h2>
 					<p class="lab">Email</p><p><a href="mailto:${a.contact.email}">${a.contact.email}</a></p>
 					<p class="lab">Portfolio</p><p><a href="${site.url}">${host}</a></p>
-					${a.contact.github ? `<p class="lab">GitHub</p><p><a href="${a.contact.github}">${bare(a.contact.github)}</a></p>` : ''}
+					${!d.brief && a.contact.github ? `<p class="lab">GitHub</p><p><a href="${a.contact.github}">${bare(a.contact.github)}</a></p>` : ''}
 					${a.contact.linkedin ? `<p class="lab">LinkedIn</p><p><a href="${a.contact.linkedin}">${bare(a.contact.linkedin)}</a></p>` : ''}
-					<p class="lab">Based in</p><p>${esc(a.contact.location)}</p>
 				</section>
 				${dash}
-				${a.skills ? `<section class="skills">
+				${d.skills && a.skills ? `<section class="skills">
 					<h2>Skills</h2>
 					<dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
-				</section>
-				${dash}` : ''}
+					${dash}
+				</section>` : ''}
 			</aside>
 			<div class="body">
-${sec('Education', 'Education', entry)}
-${sec('Experience', 'Work experience', entry)}
-${sec('Group exhibitions', 'Group exhibitions', show, 'shows')}
+${d.body.map(sec).join('\n')}
 			</div>
 		</main>
 	</body>
@@ -556,7 +570,7 @@ for (const dir of ['css', 'js', 'fonts', 'img', 'icons']) {
 fs.copyFileSync(path.join(SRC, 'favicon.ico'), path.join(OUT, 'favicon.ico'));
 /* downloadable files live at the root: the CV's PDF (printed by scripts/cv-pdf.js) */
 if (fs.existsSync(path.join(SRC, 'files'))) for (const f of fs.readdirSync(path.join(SRC, 'files'))) fs.copyFileSync(path.join(SRC, 'files', f), path.join(OUT, f));
-fs.writeFileSync(path.join(OUT, 'CV.html'), cvHTML());
+for (const d of DOCS) fs.writeFileSync(path.join(OUT, d.slug + '.html'), docHTML(d));
 
 let count = 0;
 const all = pages.concat([{ slug: FIELD_SLUG, title_no_html: 'Works in space', content: '' }, { slug: '404', title_no_html: 'Not found', content: '' }]);
@@ -568,10 +582,10 @@ for (const page of all) {
 }
 
 if (!RELATIVE) {
-	const urls = all.filter(p => p.slug !== '404').map(p => p.slug === site.homepage ? `${site.url}/` : `${site.url}/${p.slug}`).concat([`${site.url}/CV`]);
+	const urls = all.filter(p => p.slug !== '404').map(p => p.slug === site.homepage ? `${site.url}/` : `${site.url}/${p.slug}`).concat(DOCS.map(d => `${site.url}/${d.slug}`));
 	fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `\t<url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 	fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
-	fs.writeFileSync(path.join(OUT, '_redirects'), `/${site.homepage}  /  301\n/Archifest-2021-Sea-of-Debris-2021  /NewWave-2021  301\n/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition  /Proximate-2022  301\n`);
+	fs.writeFileSync(path.join(OUT, '_redirects'), `/${site.homepage}  /  301\n/Archifest-2021-Sea-of-Debris-2021  /NewWave-2021  301\n/The-LASALLE-Show-Faculty-of-Design-BA-Hons-Graduate-Exhibition  /Proximate-2022  301\n/CV  /Resume  301\n/Matthew-Lau-CV.pdf  /Matthew-Lau-Resume.pdf  301\n`);
 	fs.writeFileSync(path.join(OUT, '_headers'), `/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=31536000, immutable\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n`);
 }
 
