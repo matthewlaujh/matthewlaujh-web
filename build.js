@@ -499,8 +499,17 @@ const DOCS = [
 		intro: a => a.statement, body: ['Group exhibitions', 'Education'], brief: true },
 ];
 const SEC_LABEL = { Experience: 'Experience', Education: 'Education', 'Group exhibitions': 'Group exhibitions' };
+/* the month the documents were last printed: scripts/cv-pdf.js writes it
+   when it reprints the PDFs, so the page and the PDF always say the same */
+function cvUpdated() {
+	const f = path.join(SRC, 'files', 'updated.json');
+	const ym = fs.existsSync(f) ? readJSON(f).month : new Date().toISOString().slice(0, 7);
+	const [y, m] = ym.split('-').map(Number);
+	return { iso: ym, label: new Date(Date.UTC(y, m - 1, 1)).toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' }) };
+}
 function docHTML(d) {
 	const a = readJSON(path.join(SRC, 'about.json'));
+	const updated = cvUpdated();
 	const abs = h => fixLinks(h, d.slug).replace(/href="\/([^"]*)"/g, `href="${site.url}/$1"`).replace(/href="([A-Za-z0-9-]+)\.html"/g, `href="${site.url}/$1"`);
 	/* keep names and slashed pairs whole across a line end */
 	const keep = keepWhole;
@@ -549,13 +558,13 @@ function docHTML(d) {
 			<a href="${url('About')}"><span aria-hidden="true">←</span> ${host}</a>
 			<span class="r">
 				<a href="${url(other.slug)}">${other.name}</a>
-				<a class="dl" href="${asset('/' + d.pdf)}" download><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1v7M3 5.5L6 8.5 9 5.5M1.5 10.5h9"/></svg> Download PDF</a>
+				<a class="dl" href="${asset('/' + d.pdf)}" download="${d.pdf}" data-stem="${d.pdf.replace(/\.pdf$/, '')}"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1v7M3 5.5L6 8.5 9 5.5M1.5 10.5h9"/></svg> Download PDF</a>
 			</span>
 		</nav>
 		<main class="sheet">
 			<aside class="side">
 				<h1>Matthew Lau</h1>
-				<p class="what">${d.role}, ${esc(a.contact.location)}</p>
+				<p class="what">${d.role}, ${esc(a.contact.location)}<br>Updated <time datetime="${updated.iso}">${updated.label}</time></p>
 				<div class="who">${d.intro(a).map(p => `<p>${keep(abs(p))}</p>`).join('')}</div>
 				<section class="contact">
 					<h2>Contact</h2>
@@ -576,6 +585,16 @@ ${(d.side || []).map(sec).join('\n')}
 ${d.body.map(sec).join('\n')}
 			</div>
 		</main>
+		<script>
+			/* the downloaded file carries the day it was taken:
+			   Matthew-Lau-Resume-6-November-2026.pdf */
+			document.querySelectorAll('a[data-stem]').forEach(function (a) {
+				a.addEventListener('click', function () {
+					var d = new Date(), m = d.toLocaleDateString('en-GB', { month: 'long' });
+					a.setAttribute('download', a.getAttribute('data-stem') + '-' + d.getDate() + '-' + m + '-' + d.getFullYear() + '.pdf');
+				});
+			});
+		</script>
 	</body>
 </html>
 `);
@@ -589,7 +608,7 @@ for (const dir of ['css', 'js', 'fonts', 'img', 'icons']) {
 }
 fs.copyFileSync(path.join(SRC, 'favicon.ico'), path.join(OUT, 'favicon.ico'));
 /* downloadable files live at the root: the CV's PDF (printed by scripts/cv-pdf.js) */
-if (fs.existsSync(path.join(SRC, 'files'))) for (const f of fs.readdirSync(path.join(SRC, 'files'))) fs.copyFileSync(path.join(SRC, 'files', f), path.join(OUT, f));
+if (fs.existsSync(path.join(SRC, 'files'))) for (const f of fs.readdirSync(path.join(SRC, 'files')).filter(f => f.endsWith('.pdf'))) fs.copyFileSync(path.join(SRC, 'files', f), path.join(OUT, f));
 for (const d of DOCS) fs.writeFileSync(path.join(OUT, d.slug + '.html'), docHTML(d));
 
 let count = 0;

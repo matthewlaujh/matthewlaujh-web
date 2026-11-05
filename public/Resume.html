@@ -25,13 +25,13 @@
 			<a href="/About"><span aria-hidden="true">←</span> matthewlaujh.com</a>
 			<span class="r">
 				<a href="/Artist-CV">Artist CV</a>
-				<a class="dl" href="/Matthew-Lau-Resume.pdf" download><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1v7M3 5.5L6 8.5 9 5.5M1.5 10.5h9"/></svg> Download PDF</a>
+				<a class="dl" href="/Matthew-Lau-Resume.pdf" download="Matthew-Lau-Resume.pdf" data-stem="Matthew-Lau-Resume"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1v7M3 5.5L6 8.5 9 5.5M1.5 10.5h9"/></svg> Download PDF</a>
 			</span>
 		</nav>
 		<main class="sheet">
 			<aside class="side">
 				<h1>Matthew Lau</h1>
-				<p class="what">Creative Technologist, Singapore</p>
+				<p class="what">Creative Technologist, Singapore<br>Updated <time datetime="2026-11">November 2026</time></p>
 				<div class="who"><p>I am a creative technologist and artist working at the intersection of computational design, emerging technology and light. My experience spans building <span class="nb">AI-driven</span> tools and interactive media for global brands, at Accenture Song and through my studio Organised Mess, to creating installations that translate computational systems into <span class="nb">human-centred</span> experiences. In my own practice, shown in Singapore and New York, I use machine learning and custom hardware to make the processes inside a system visible as light in a room.</p><p>Whether prototyping for clients or developing my own practice, I combine technical experimentation with <span class="nb">design-led</span> thinking to deliver outcomes that are both innovative and tangible.</p></div>
 				<section class="contact">
 					<h2>Contact</h2>
@@ -123,5 +123,15 @@
 			</section>
 			</div>
 		</main>
+		<script>
+			/* the downloaded file carries the day it was taken:
+			   Matthew-Lau-Resume-6-November-2026.pdf */
+			document.querySelectorAll('a[data-stem]').forEach(function (a) {
+				a.addEventListener('click', function () {
+					var d = new Date(), m = d.toLocaleDateString('en-GB', { month: 'long' });
+					a.setAttribute('download', a.getAttribute('data-stem') + '-' + d.getDate() + '-' + m + '-' + d.getFullYear() + '.pdf');
+				});
+			});
+		</script>
 	</body>
 </html>

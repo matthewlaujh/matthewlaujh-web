@@ -25,13 +25,13 @@
 			<a href="/About"><span aria-hidden="true">←</span> matthewlaujh.com</a>
 			<span class="r">
 				<a href="/Resume">Resume</a>
-				<a class="dl" href="/Matthew-Lau-Artist-CV.pdf" download><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1v7M3 5.5L6 8.5 9 5.5M1.5 10.5h9"/></svg> Download PDF</a>
+				<a class="dl" href="/Matthew-Lau-Artist-CV.pdf" download="Matthew-Lau-Artist-CV.pdf" data-stem="Matthew-Lau-Artist-CV"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1v7M3 5.5L6 8.5 9 5.5M1.5 10.5h9"/></svg> Download PDF</a>
 			</span>
 		</nav>
 		<main class="sheet">
 			<aside class="side">
 				<h1>Matthew Lau</h1>
-				<p class="what">Artist, Singapore</p>
+				<p class="what">Artist, Singapore<br>Updated <time datetime="2026-11">November 2026</time></p>
 				<div class="who"><p>My work explores the relationship between people and machines through interactive light. Light is a medium that connects across different kinds of understanding, and through responsive lighting environments I turn abstract computational ideas into sensory experiences that can be felt before they are explained.</p><p>By making visible what usually stays hidden — the algorithms, processes and <span class="nb">machine-learning</span> principles that increasingly shape our world — the work pushes back on the idea of artificial intelligence as an inscrutable black box. Earlier pieces made latent spaces legible as colour and light. The newer ones ask what such a system does when it is left alone with itself, learning from its own output until its range collapses.</p><p>Underneath this is a belief that technology should deepen human connection rather than thin it out. The installations treat the machine as a collaborator rather than a tool, setting up a dialogue in which human intention and computational process both shape what is finally seen.</p></div>
 				<section class="contact">
 					<h2>Contact</h2>
@@ -84,5 +84,15 @@
 			</section>
 			</div>
 		</main>
+		<script>
+			/* the downloaded file carries the day it was taken:
+			   Matthew-Lau-Resume-6-November-2026.pdf */
+			document.querySelectorAll('a[data-stem]').forEach(function (a) {
+				a.addEventListener('click', function () {
+					var d = new Date(), m = d.toLocaleDateString('en-GB', { month: 'long' });
+					a.setAttribute('download', a.getAttribute('data-stem') + '-' + d.getDate() + '-' + m + '-' + d.getFullYear() + '.pdf');
+				});
+			});
+		</script>
 	</body>
 </html>

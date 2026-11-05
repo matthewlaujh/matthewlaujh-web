@@ -168,5 +168,5 @@ Edit the `content` HTML in a page JSON (it is the HTML Cargo stored), or add a n
 `/Resume` (work) and `/Artist-CV` (statement, exhibitions, education) are standalone pages (`DOCS` and `docHTML()` in `build.js`, styled by `src/css/cv.css`) built from the same `src/about.json` as the About page, each with a Download PDF link. `/CV` redirects to `/Resume`. The PDFs are printed from those pages by `scripts/cv-pdf.js` (needs Playwright: `npm i -D playwright && npx playwright install chromium`) and committed in `src/files/`, which the build copies to the site root. After changing `about.json` or `cv.css`:
 
 ```
-node build.js --relative && node scripts/cv-pdf.js && node build.js
+node scripts/cv-pdf.js && node build.js
 ```
