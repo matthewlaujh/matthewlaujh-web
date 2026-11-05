@@ -34,6 +34,7 @@
 	--hair: 1px;                   /* rule under a heading */
 	--thin: 1px;                   /* rule between rows */
 	--faint: rgba(0, 0, 0, .1);
+	--track: 0;                    /* sans tracking; opened slightly in print */
 
 	/* one size and one line for everything, so every line in both columns
 	   sits on the same 4u baseline. Hierarchy comes from the face (serif for
@@ -55,7 +56,12 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { background: #ececec; -webkit-text-size-adjust: none; }
-body { margin: 0; color: var(--ink); font: 300 var(--s-body)/var(--l-body) var(--sans); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { margin: 0; color: var(--ink); font: 300 var(--s-body)/var(--l-body) var(--sans); letter-spacing: var(--track); font-kerning: normal; font-variant-ligatures: common-ligatures; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+/* ragged right, never justified or hyphenated; text-wrap: pretty evens the
+   rag and keeps a single word off the last line */
+p, li, dd { text-wrap: pretty; hyphens: manual; }
+/* names and compounds that should not break at their hyphen or slash */
+.nb { white-space: nowrap; }
 a { color: inherit; text-decoration: underline; text-decoration-color: rgba(0, 0, 0, .3); text-underline-offset: .2em; text-decoration-thickness: from-font; }
 a:hover { text-decoration-color: currentColor; }
 p, ul, dl, dd, h1, h2 { margin: 0; }
@@ -73,7 +79,7 @@ p, ul, dl, dd, h1, h2 { margin: 0; }
 /* ----------------------------------------------------------------- sheet */
 .sheet { max-width: 1120px; margin: 84px auto 64px; padding: calc(var(--u) * 11) calc(var(--u) * 12); background: var(--paper); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.15fr); gap: 0 var(--col-gap); align-items: start; }
 
-h1 { font: 300 var(--s-name)/var(--l-name) var(--serif); }
+h1 { font: 300 var(--s-name)/var(--l-name) var(--serif); letter-spacing: 0; }
 .what { color: var(--dim); margin-bottom: var(--L); }
 /* every block is a whole number of lines tall, so both columns keep the
    same baselines: a heading is its line plus one blank line, a row is its
@@ -90,7 +96,7 @@ h2::after, .rule::after { content: ""; position: absolute; left: 0; right: 0; bo
 section + section, .who + section { margin-top: var(--sec); }
 
 /* the narrow column */
-.who { font: 300 var(--s-lede)/var(--l-lede) var(--serif); }
+.who { font: 300 var(--s-lede)/var(--l-lede) var(--serif); letter-spacing: 0; }
 .who p + p { margin-top: var(--L); }
 .side dl > div { break-inside: avoid; }
 .side dt { color: var(--dim); }
@@ -99,7 +105,7 @@ section + section, .who + section { margin-top: var(--sec); }
 
 /* the wide column */
 .entry { break-inside: avoid; }
-.entry .role { font: 300 var(--s-role)/var(--l-role) var(--serif); }
+.entry .role { font: 300 var(--s-role)/var(--l-role) var(--serif); letter-spacing: 0; }
 .entry.art .role { font-style: italic; }
 .entry .org { display: flex; justify-content: space-between; align-items: baseline; gap: calc(var(--u) * 4); color: var(--mid); }
 .entry .org a { text-decoration: none; }
@@ -130,11 +136,14 @@ section + section, .who + section { margin-top: var(--sec); }
 		--hair: .5pt;
 		--thin: .3pt;
 		--faint: rgba(0, 0, 0, .22);
+		--track: .01em;              /* light sans at 8.5pt reads better a touch open */
 		--col-gap: calc(var(--u) * 9);
 	}
 	html, body { background: #fff; }
 	.bar { display: none; }
-	.sheet { max-width: none; margin: 0; padding: 0; grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr); }
+	/* columns sized for the measure: about 42 characters a line on the left,
+	   about 75 on the right */
+	.sheet { max-width: none; margin: 0; padding: 0; grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr); }
 	/* skills open the second page of the left column, whole */
 	.skills { break-before: page; break-inside: avoid; margin-top: 0; }
 }

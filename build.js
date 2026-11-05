@@ -482,14 +482,16 @@ const SEC_LABEL = { Experience: 'Experience', Education: 'Education', 'Group exh
 function docHTML(d) {
 	const a = readJSON(path.join(SRC, 'about.json'));
 	const abs = h => fixLinks(h, d.slug).replace(/href="\/([^"]*)"/g, `href="${site.url}/$1"`).replace(/href="([A-Za-z0-9-]+)\.html"/g, `href="${site.url}/$1"`);
+	/* keep names and slashed pairs whole across a line end */
+	const keep = h => h.replace(/(Lim-Schlegel|Neuewave\/MDRN|HTTP\/HTTPS|TCP\/UDP|HTML\/CSS|Max\/MSP|real-time|Real-time)/g, '<span class="nb">$1</span>');
 	const where = e => [e.org ? (e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)) : '', esc(e.place || '')].filter(Boolean).join(', ');
 	const entry = e => `				<div class="entry rule${e.kind === 'art' ? ' art' : ''}">
-					<p class="role">${abs(e.role)}</p>
+					<p class="role">${keep(abs(e.role))}</p>
 					<p class="org"><span>${where(e)}</span><span class="d">${e.dates}</span></p>
-					${e.note ? `<p class="note">${abs(e.note)}</p>` : ''}
-					${!d.brief && e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${abs(b)}</li>`).join('')}</ul>` : ''}
+					${e.note && !d.brief ? `<p class="note">${keep(abs(e.note))}</p>` : ''}
+					${!d.brief && e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${keep(abs(b))}</li>`).join('')}</ul>` : ''}
 				</div>`;
-	const show = e => `				<div class="show rule"><p>${abs(e.role)}<br><span class="at">${esc(e.org || '')}</span>${e.place ? `, <span class="at">${esc(e.place)}</span>` : ''}</p><span class="d">${e.dates}</span></div>`;
+	const show = e => `				<div class="show rule"><p>${keep(abs(e.role))}<br><span class="at">${esc(e.org || '')}</span>${e.place ? `, <span class="at">${esc(e.place)}</span>` : ''}</p><span class="d">${e.dates}</span></div>`;
 	const sec = name => {
 		const s = a.sections.find(s => s.title === name);
 		if (!s) return '';
@@ -546,8 +548,9 @@ function docHTML(d) {
 				</section>
 				${d.skills && a.skills ? `<section class="skills">
 					<h2>Skills</h2>
-					<dl>${a.skills.map(([k, v]) => `<div class="rule"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+					<dl>${a.skills.map(([k, v]) => `<div class="rule"><dt>${esc(k)}</dt><dd>${keep(esc(v))}</dd></div>`).join('')}</dl>
 				</section>` : ''}
+${(d.side || []).map(sec).join('\n')}
 			</aside>
 			<div class="body">
 ${d.body.map(sec).join('\n')}
