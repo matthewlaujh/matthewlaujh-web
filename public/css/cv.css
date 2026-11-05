@@ -41,10 +41,12 @@
 	   the name, the intro and the roles), from ink against grey, and from
 	   the rules and the space between sections, never from size. */
 	--s-body: var(--b);                      --l-body: calc(var(--u) * 4);
-	/* Austin News Deck draws smaller than Atlas Grotesk at the same size
-	   (x-height .47 against .53 of the em, caps .68 against .77), so it is
-	   set 1.13 times larger to look the same size on the same line */
-	--s-serif: calc(var(--b) * 1.13);        --l-serif: var(--l-body);
+	/* Austin News Deck draws smaller than Atlas Grotesk at the same size.
+	   Measured from the rendered glyphs, its x-height is .46 of the em
+	   against .52, and its capitals .665 against .76, so it is set 1.14
+	   times larger: x-heights and capitals then land within 1% of each
+	   other and the two faces read as one size on the same baseline */
+	--s-serif: calc(var(--b) * 1.14);        --l-serif: var(--l-body);
 	--s-lede: var(--s-serif);                --l-lede: var(--l-serif);
 	--s-role: var(--s-serif);                --l-role: var(--l-serif);
 	--s-name: var(--s-serif);                --l-name: var(--l-serif);

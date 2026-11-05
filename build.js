@@ -471,7 +471,7 @@ ${typo(`		${barHTML(page)}
    artist CV. Links point at the live site so they survive in the PDFs, which
    scripts/cv-pdf.js prints from these pages. */
 const DOCS = [
-	{ slug: 'Resume', pdf: 'Matthew-Lau-Resume.pdf', name: 'Resume', role: 'Creative technologist',
+	{ slug: 'Resume', pdf: 'Matthew-Lau-Resume.pdf', name: 'Resume', role: 'Creative Technologist',
 		desc: 'Resume of Matthew Lau, creative technologist in Singapore: work experience, education and skills.',
 		intro: a => a.lede, body: ['Experience', 'Education'], skills: true },
 	{ slug: 'Artist-CV', pdf: 'Matthew-Lau-Artist-CV.pdf', name: 'Artist CV', role: 'Artist',
