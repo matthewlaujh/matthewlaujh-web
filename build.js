@@ -483,13 +483,13 @@ function docHTML(d) {
 	const a = readJSON(path.join(SRC, 'about.json'));
 	const abs = h => fixLinks(h, d.slug).replace(/href="\/([^"]*)"/g, `href="${site.url}/$1"`).replace(/href="([A-Za-z0-9-]+)\.html"/g, `href="${site.url}/$1"`);
 	const where = e => [e.org ? (e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)) : '', esc(e.place || '')].filter(Boolean).join(', ');
-	const entry = e => `				<div class="entry${e.kind === 'art' ? ' art' : ''}">
+	const entry = e => `				<div class="entry rule${e.kind === 'art' ? ' art' : ''}">
 					<p class="role">${abs(e.role)}</p>
 					<p class="org"><span>${where(e)}</span><span class="d">${e.dates}</span></p>
 					${e.note ? `<p class="note">${abs(e.note)}</p>` : ''}
 					${!d.brief && e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${abs(b)}</li>`).join('')}</ul>` : ''}
 				</div>`;
-	const show = e => `				<div class="show"><p>${abs(e.role)}<br><span class="at">${esc(e.org || '')}</span>${e.place ? `, <span class="at">${esc(e.place)}</span>` : ''}</p><span class="d">${e.dates}</span></div>`;
+	const show = e => `				<div class="show rule"><p>${abs(e.role)}<br><span class="at">${esc(e.org || '')}</span>${e.place ? `, <span class="at">${esc(e.place)}</span>` : ''}</p><span class="d">${e.dates}</span></div>`;
 	const sec = name => {
 		const s = a.sections.find(s => s.title === name);
 		if (!s) return '';
@@ -538,15 +538,15 @@ function docHTML(d) {
 				<section class="contact">
 					<h2>Contact</h2>
 					<dl>
-						<div><dt>Email</dt><dd><a href="mailto:${a.contact.email}">${a.contact.email}</a></dd></div>
-						<div><dt>Portfolio</dt><dd><a href="${site.url}">${host}</a></dd></div>
-						${!d.brief && a.contact.github ? `<div><dt>GitHub</dt><dd><a href="${a.contact.github}">${bare(a.contact.github)}</a></dd></div>` : ''}
-						${a.contact.linkedin ? `<div><dt>LinkedIn</dt><dd><a href="${a.contact.linkedin}">${bare(a.contact.linkedin)}</a></dd></div>` : ''}
+						<div class="rule"><dt>Email</dt><dd><a href="mailto:${a.contact.email}">${a.contact.email}</a></dd></div>
+						<div class="rule"><dt>Portfolio</dt><dd><a href="${site.url}">${host}</a></dd></div>
+						${!d.brief && a.contact.github ? `<div class="rule"><dt>GitHub</dt><dd><a href="${a.contact.github}">${bare(a.contact.github)}</a></dd></div>` : ''}
+						${a.contact.linkedin ? `<div class="rule"><dt>LinkedIn</dt><dd><a href="${a.contact.linkedin}">${bare(a.contact.linkedin)}</a></dd></div>` : ''}
 					</dl>
 				</section>
 				${d.skills && a.skills ? `<section class="skills">
 					<h2>Skills</h2>
-					<dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+					<dl>${a.skills.map(([k, v]) => `<div class="rule"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
 				</section>` : ''}
 			</aside>
 			<div class="body">
