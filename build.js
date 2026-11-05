@@ -387,9 +387,18 @@ function typo(html) {
 			.replace(/"/g, '\u201d')
 			.replace(/\b(\d+)-(\d+)\b/g, '$1\u2013$2')             // 2021–2022, ages 18–30
 			.replace(/ - /g, ' \u2013 ')                          // spaced hyphen -> en dash
-			.replace(/\.\.\./g, '\u2026');
+			.replace(/\.\.\./g, '\u2026')
+			/* no short word left hanging at a line end: one- and two-letter
+			   words, articles, short conjunctions and prepositions are tied to
+			   the word after them ("at\u00a0the", "from\u00a0briefs"), and a
+			   spaced dash is tied to the word before it so a line never opens
+			   with one */
+			.replace(SHORT_WORD, '$1$2\u00a0')
+			.replace(SHORT_WORD, '$1$2\u00a0')
+			.replace(/ ([\u2013\u2014]) /g, '\u00a0$1 ');
 	}).join('');
 }
+const SHORT_WORD = /(^|[\s(\u00a0])([A-Za-z]{1,2}|the|and|for|but|nor|its|our|via|from|with|into|onto)[ \t]+(?=\S|$)/g;
 
 function render(page) {
 	const isHome = page.slug === site.homepage;
@@ -484,9 +493,13 @@ function docHTML(d) {
 	const abs = h => fixLinks(h, d.slug).replace(/href="\/([^"]*)"/g, `href="${site.url}/$1"`).replace(/href="([A-Za-z0-9-]+)\.html"/g, `href="${site.url}/$1"`);
 	/* keep names and slashed pairs whole across a line end */
 	const MON = '(?:January|February|March|April|May|June|July|August|September|October|November|December)';
-	const keep = h => h.replace(/(Lim-Schlegel|Neuewave\/MDRN|HTTP\/HTTPS|TCP\/UDP|HTML\/CSS|Max\/MSP|real-time|Real-time)/g, '<span class="nb">$1</span>')
-		/* a date range never splits at its dash: "May – September 2017" */
-		.replace(new RegExp(`(${MON}(?: \\d{4})? [\u2013-] (?:${MON}(?: \\d{4})?|present))`, 'g'), '<span class="nb">$1</span>');
+	const RANGE = new RegExp(`(${MON}(?: \\d{4})? [\u2013-] (?:${MON}(?: \\d{4})?|present))`, 'g');
+	/* in text only (never inside a tag): keep hyphenated compounds
+	   ("design-led", "Lim-Schlegel"), slashed pairs ("TCP/UDP") and date
+	   ranges ("May – September 2017") whole across a line end */
+	const keep = h => h.split(/(<[^>]+>)/g).map((part, i) => i % 2 ? part : part
+		.replace(/([A-Za-z0-9.]+(?:[-/][A-Za-z0-9.]+)+)/g, '<span class="nb">$1</span>')
+		.replace(RANGE, '<span class="nb">$1</span>')).join('');
 	const where = e => [e.org ? (e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)) : '', esc(e.place || '')].filter(Boolean).join(', ');
 	const entry = e => `				<div class="entry rule${e.kind === 'art' ? ' art' : ''}">
 					<p class="role">${keep(abs(e.role))}</p>
@@ -539,7 +552,7 @@ function docHTML(d) {
 			<aside class="side">
 				<h1>Matthew Lau</h1>
 				<p class="what">${d.role}, ${esc(a.contact.location)}</p>
-				<div class="who">${d.intro(a).map(p => `<p>${abs(p)}</p>`).join('')}</div>
+				<div class="who">${d.intro(a).map(p => `<p>${keep(abs(p))}</p>`).join('')}</div>
 				<section class="contact">
 					<h2>Contact</h2>
 					<dl>
