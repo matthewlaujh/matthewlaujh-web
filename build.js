@@ -317,10 +317,18 @@ ${lanes}
 	</main>`;
 }
 
+/* each word of the ledes in its own span, so the text can arrive word by word
+   (--w is the word's index: the delay grows along the paragraph) */
+function words(html) {
+	let w = 0;
+	return html.split(/(<[^>]+>)/g).map((part, i) => i % 2 ? part
+		: part.replace(/\S+/g, m => `<span class="w" style="--w:${w++}">${m}</span>`)).join('');
+}
+
 function aboutMain(page) {
 	const a = readJSON(path.join(SRC, 'about.json'));
 	const L = h => fixLinks(h, page.slug);
-	const entry = e => `				<div class="entry${e.kind === 'art' ? ' art' : ''}">
+	const entry = (e, j) => `				<div class="entry${e.kind === 'art' ? ' art' : ''}" style="--j:${j}">
 					<div class="dates">${e.dates}</div>
 					<div class="main">
 						<div class="role">${kdot(e.kind)}<span>${L(e.role)}</span></div>
@@ -330,15 +338,17 @@ function aboutMain(page) {
 						${e.bullets && e.bullets.length ? `<ul>${e.bullets.map(b => `<li>${L(b)}</li>`).join('')}</ul>` : ''}
 					</div>
 				</div>`;
+	let n = 2;
+	const seq = () => ++n;   // arrival order of the cv blocks (legend 0, contact 1, ledes 2)
 	const section = name => {
 		const sec = a.sections.find(s => s.title === name);
-		return sec ? `			<section>\n				<h2>${esc(sec.title)}</h2>\n${sec.entries.map(entry).join('\n')}\n			</section>` : '';
+		return sec ? `			<section style="--i:${seq()}">\n				<h2>${esc(sec.title)}</h2>\n${sec.entries.map(entry).join('\n')}\n			</section>` : '';
 	};
-	const skills = a.skills ? `<section class="skills"><h2>Skills</h2><dl>${a.skills.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : '';
+	const skills = a.skills ? `<section class="skills" style="--i:${seq()}"><h2>Skills</h2><dl>${a.skills.map(([k, v], j) => `<div style="--j:${j}"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : '';
 	return `<main id="main" tabindex="-1" class="about">
 		<h1 class="visually-hidden">${esc(page.title_no_html)}</h1>
-		<p class="legend"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
-		<div class="contact">
+		<p class="legend" style="--i:0"><span><i class="k" aria-hidden="true"></i>Design and Technology</span><span><i class="k k--art" aria-hidden="true"></i>Art Practice</span><span><i class="k k--both" aria-hidden="true"></i>Both</span></p>
+		<div class="contact" style="--i:1">
 			<a href="mailto:${a.contact.email}">${a.contact.email}</a>
 			<a href="${a.contact.resume}" target="_blank" rel="noopener">Resume (PDF)</a>
 			${a.contact.github ? `<a href="${a.contact.github}" target="_blank" rel="noopener">GitHub</a>` : ''}
@@ -346,8 +356,8 @@ function aboutMain(page) {
 			<span>${esc(a.contact.location)}</span>
 		</div>
 		<div class="heads">
-			<div class="lede"><h2><i class="k" aria-hidden="true"></i>${esc(a.lede_title)}</h2>${a.lede.map(p => `<p>${p}</p>`).join('')}<p class="end" aria-hidden="true">\u2014</p></div>
-			<div class="lede"><h2><i class="k k--art" aria-hidden="true"></i>${esc(a.statement_title)}</h2>${a.statement.map(p => `<p>${p}</p>`).join('')}<p class="end" aria-hidden="true">\u2014</p></div>
+			<div class="lede" style="--i:2"><h2><i class="k" aria-hidden="true"></i>${esc(a.lede_title)}</h2>${words(a.lede.map(p => `<p>${p}</p>`).join('') + '<p class="end" aria-hidden="true">\u2014</p>')}</div>
+			<div class="lede" style="--i:2"><h2><i class="k k--art" aria-hidden="true"></i>${esc(a.statement_title)}</h2>${words(a.statement.map(p => `<p>${p}</p>`).join('') + '<p class="end" aria-hidden="true">\u2014</p>')}</div>
 		</div>
 		<div class="cv">
 			<div class="pair">

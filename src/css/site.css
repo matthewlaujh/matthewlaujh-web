@@ -80,7 +80,13 @@ html, body { transition: background-color .9s ease; }
 html[data-to="about"], html[data-to="about"] body { background: var(--paper); }
 html[data-to="about"] .veil, html[data-page="about"] .veil { background: transparent !important; }
 html[data-page="about"][data-to]:not([data-to="about"]), html[data-page="about"][data-to]:not([data-to="about"]) body { background: var(--dark); }
-html[data-page="about"] main { animation: pagein .7s .15s var(--ease) both; }
+/* about arrives in parts once the page has gone white: legend and contact first,
+   the ledes word by word, then the cv blocks and their rows one beat apart */
+html[data-page="about"] main { animation: none; }
+.about .legend, .about .contact, .about .lede h2, .about .cv section { animation: cascade .8s calc(.1s + var(--i, 0) * 90ms) var(--ease) both; }
+.about .lede .w { display: inline-block; animation: wordin .7s calc(.3s + min(var(--w, 0) * 16ms, 1.5s)) var(--ease) both; }
+.about .cv .entry, .about .skills dl > div { animation: cascade .7s calc(.3s + var(--i, 0) * 90ms + var(--j, 0) * 60ms) var(--ease) both; }
+@keyframes wordin { from { opacity: 0; transform: translateY(.3em); } }
 html.leaving .home { opacity: 0; transform: translateY(-10px); transition: opacity .55s var(--ease), transform .6s var(--ease); }
 html.leaving .project, html.leaving .about { opacity: 0; transition: opacity .4s var(--ease); }
 html.leaving[data-to][data-page] .bar-title { animation: barout .6s var(--ease) both; pointer-events: none; }
