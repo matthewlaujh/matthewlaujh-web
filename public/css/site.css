@@ -53,7 +53,14 @@ main:focus { outline: none; }
 .skip { position: fixed; left: var(--pad); top: 12px; z-index: 30; padding: 0 15px; height: 38px; display: inline-flex; align-items: center; border-radius: 999px; background: #fff; color: #111; border: 1px solid rgba(0, 0, 0, .2); transform: translateY(-80px); transition: transform .25s var(--ease); }
 .skip:focus { transform: none; outline: none; }
 
-body { text-wrap: pretty; }
+/* typesetting rules, the same as the Resume and Artist CV: ragged right,
+   never justified or hyphenated, the rag evened by text-wrap: pretty (which
+   also keeps a single word off a paragraph's last line), real kerning and
+   ligatures. build.js ties short words to the next word and keeps compounds
+   and date ranges whole (.nb); figures in dates are tabular. */
+body { text-wrap: pretty; hyphens: manual; font-kerning: normal; font-variant-ligatures: common-ligatures; }
+.nb { white-space: nowrap; }
+.dates, .about .entry .dates, small, .bar-title b, .field-time .axis { font-variant-numeric: tabular-nums; }
 .about .lede h2, .about .cv h2, .field-time .lane-label { text-wrap: nowrap; }
 .prose p + p, .prose ul + p, .prose p + ul, .prose h2 + p { margin-top: .6em; }
 .prose h2 { font: inherit; font-family: var(--sans); font-size: var(--t-base); color: var(--ink-dim); margin: 1.6em 0 .4em; }
@@ -270,6 +277,9 @@ main.home { animation: none; }
 	display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 48px; align-items: start;
 	padding: 60px var(--pad) 90px;
 }
+/* the text column scrolls with the page until its end is in view, then holds
+   while the plates carry on (setupProject sets top from its height); when it
+   is shorter than the window it simply holds under the bar */
 .project .text { position: sticky; top: calc(var(--bar-h) + 8px); }
 .project dl { display: grid; grid-template-columns: 7em 1fr; gap: 4px 12px; color: var(--ink-dim); border-top: 1px solid var(--ink-rule); padding-top: 10px; margin-bottom: 24px; }
 .project dd { color: var(--ink); }

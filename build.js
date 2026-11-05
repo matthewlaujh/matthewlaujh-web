@@ -398,6 +398,17 @@ function typo(html) {
 			.replace(/ ([\u2013\u2014]) /g, '\u00a0$1 ');
 	}).join('');
 }
+/* in text only (never inside a tag or a script): keep hyphenated compounds
+   ("design-led", "Lim-Schlegel"), slashed pairs ("TCP/UDP") and date ranges
+   ("May – September 2017") whole across a line end. Used on page bodies,
+   never on <title> or attributes, since it adds spans. */
+const MON = '(?:January|February|March|April|May|June|July|August|September|October|November|December)';
+const RANGE = new RegExp(`(${MON}(?: \\d{1,2})?(?: \\d{4})? [\u2013-] (?:\\d{1,2} )?(?:${MON}(?: \\d{4})?|present))`, 'g');
+function keepWhole(html) {
+	return html.split(/(<script[\s\S]*?<\/script>|<[^>]+>)/g).map((part, i) => i % 2 ? part : part
+		.replace(/([A-Za-z0-9.]+(?:[-/][A-Za-z0-9.]+)+)/g, '<span class="nb">$1</span>')
+		.replace(RANGE, '<span class="nb">$1</span>')).join('');
+}
 const SHORT_WORD = /(^|[\s(\u00a0])([A-Za-z]{1,2}|the|and|for|but|nor|its|our|via|from|with|into|onto)[ \t]+(?=\S|$)/g;
 
 function render(page) {
@@ -467,7 +478,7 @@ function render(page) {
 		<a class="skip" href="#main">Skip to content</a>
 		${backdrop}
 ${typo(`		${barHTML(page)}
-		${main}
+		${keepWhole(main)}
 		${footerHTML()}`)}
 	</body>
 </html>
@@ -492,14 +503,7 @@ function docHTML(d) {
 	const a = readJSON(path.join(SRC, 'about.json'));
 	const abs = h => fixLinks(h, d.slug).replace(/href="\/([^"]*)"/g, `href="${site.url}/$1"`).replace(/href="([A-Za-z0-9-]+)\.html"/g, `href="${site.url}/$1"`);
 	/* keep names and slashed pairs whole across a line end */
-	const MON = '(?:January|February|March|April|May|June|July|August|September|October|November|December)';
-	const RANGE = new RegExp(`(${MON}(?: \\d{4})? [\u2013-] (?:${MON}(?: \\d{4})?|present))`, 'g');
-	/* in text only (never inside a tag): keep hyphenated compounds
-	   ("design-led", "Lim-Schlegel"), slashed pairs ("TCP/UDP") and date
-	   ranges ("May – September 2017") whole across a line end */
-	const keep = h => h.split(/(<[^>]+>)/g).map((part, i) => i % 2 ? part : part
-		.replace(/([A-Za-z0-9.]+(?:[-/][A-Za-z0-9.]+)+)/g, '<span class="nb">$1</span>')
-		.replace(RANGE, '<span class="nb">$1</span>')).join('');
+	const keep = keepWhole;
 	const where = e => [e.org ? (e.org_url ? `<a href="${e.org_url}">${esc(e.org)}</a>` : esc(e.org)) : '', esc(e.place || '')].filter(Boolean).join(', ');
 	const entry = e => `				<div class="entry rule${e.kind === 'art' ? ' art' : ''}">
 					<p class="role">${keep(abs(e.role))}</p>

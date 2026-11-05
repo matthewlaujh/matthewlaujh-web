@@ -168,6 +168,21 @@
 		}
 		reflow();
 		on(narrow, 'change', reflow);
+		/* text first, then plates: a text column taller than the window would
+		   stick by its top and hide its end until the plates ran out. Its top
+		   is set so it scrolls with the page until its last line is in view,
+		   then holds there while the plates carry on. */
+		function stick() {
+			if (!text || !document.contains(text)) { if (ro) ro.disconnect(); return; }
+			if (narrow.matches) { text.style.top = ''; return; }
+			var under = (parseFloat(getComputedStyle(html).getPropertyValue('--bar-h')) || 62) + 8;
+			text.style.top = Math.min(under, window.innerHeight - text.offsetHeight - 32) + 'px';
+		}
+		var ro = 'ResizeObserver' in window ? new ResizeObserver(stick) : null;
+		if (ro && text) ro.observe(text);
+		stick();
+		on(window, 'resize', stick);
+		on(narrow, 'change', stick);
 		var figs = document.querySelectorAll('.project figure');
 		if (!figs.length) return;
 		/* videos load and play only while near the viewport. Each has a pause pill,
