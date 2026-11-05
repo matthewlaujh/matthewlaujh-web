@@ -6,11 +6,9 @@
    rule under each heading and a faint rule between rows. Ink only.
 
    Type and space come from two numbers:
-     --b  the body size; the one serif size is a step of the website's
-          scale above it (16 : 20, so 1.25 × --b), and both columns use
-          only these two
-     --u  the grid unit; body text sits on a 4u baseline, larger text on
-          multiples of u, and every gap is a whole number of u. Rules
+     --b  the one type size, in both faces and both columns
+     --u  the grid unit; every line sits on a 4u baseline and every gap is
+          a whole number of u, so the two columns share one grid. Rules
           are painted over the padding, so they take no space.
    On screen --b is 16px and --u 6px (the site's 16/24); in print 8.5pt and
    3pt, the same proportions at half size. scripts/cv-pdf.js prints to A4.
@@ -37,18 +35,22 @@
 	--thin: 1px;                   /* rule between rows */
 	--faint: rgba(0, 0, 0, .1);
 
-	/* two sizes, shared by both columns: the sans for everything that is
-	   read as information, and one serif step (the site's 20 to 16) for the
-	   name, the intro and the roles */
+	/* one size and one line for everything, so every line in both columns
+	   sits on the same 4u baseline. Hierarchy comes from the face (serif for
+	   the name, the intro and the roles), from ink against grey, and from
+	   the rules and the space between sections, never from size. */
 	--s-body: var(--b);                      --l-body: calc(var(--u) * 4);
-	--s-serif: calc(var(--b) * 1.25);        --l-serif: calc(var(--u) * 5);
+	/* Austin News Deck draws smaller than Atlas Grotesk at the same size
+	   (x-height .47 against .53 of the em, caps .68 against .77), so it is
+	   set 1.13 times larger to look the same size on the same line */
+	--s-serif: calc(var(--b) * 1.13);        --l-serif: var(--l-body);
 	--s-lede: var(--s-serif);                --l-lede: var(--l-serif);
 	--s-role: var(--s-serif);                --l-role: var(--l-serif);
 	--s-name: var(--s-serif);                --l-name: var(--l-serif);
 
 	--col-gap: calc(var(--u) * 11);
-	--row: calc(var(--u) * 2);               /* padding above and below a row */
-	--sec: calc(var(--u) * 6);               /* space between sections */
+	--L: var(--l-body);                      /* one line */
+	--sec: calc(var(--L) * 2);               /* space between sections */
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -72,37 +74,42 @@ p, ul, dl, dd, h1, h2 { margin: 0; }
 .sheet { max-width: 1120px; margin: 84px auto 64px; padding: calc(var(--u) * 11) calc(var(--u) * 12); background: var(--paper); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.15fr); gap: 0 var(--col-gap); align-items: start; }
 
 h1 { font: 300 var(--s-name)/var(--l-name) var(--serif); }
-.what { color: var(--dim); margin-bottom: calc(var(--u) * 4); }
-h2 { position: relative; font: 300 var(--s-body)/var(--l-body) var(--sans); color: var(--dim); padding-bottom: var(--u); break-after: avoid; }
+.what { color: var(--dim); margin-bottom: var(--L); }
+/* every block is a whole number of lines tall, so both columns keep the
+   same baselines: a heading is its line plus one blank line, a row is its
+   lines plus one blank line, and the rules sit halfway down the blank line */
+h2 { position: relative; font: 300 var(--s-body)/var(--l-body) var(--sans); color: var(--dim); padding-bottom: var(--L); break-after: avoid; }
 /* rules are drawn, not bordered: a border takes layout space and is rounded
    up to a whole pixel, which both thickens it and knocks text off the grid */
-h2::after, .rule::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--hair); background: var(--ink); }
+h2::after, .rule::after { content: ""; position: absolute; left: 0; right: 0; bottom: calc(var(--L) / 2); height: var(--hair); background: var(--ink); }
 .rule { position: relative; }
 .rule::after { height: var(--thin); background: var(--faint); }
 .rule:last-child::after { display: none; }
+.rule { padding-bottom: var(--L); }
+.rule:last-child { padding-bottom: 0; }
 section + section, .who + section { margin-top: var(--sec); }
 
 /* the narrow column */
 .who { font: 300 var(--s-lede)/var(--l-lede) var(--serif); }
-.who p + p { margin-top: var(--l-body); }
-.side dl > div { padding: var(--u) 0; break-inside: avoid; }
+.who p + p { margin-top: var(--L); }
+.side dl > div { break-inside: avoid; }
 .side dt { color: var(--dim); }
 .side dd { color: var(--mid); }
 .contact dd { color: var(--ink); }
 
 /* the wide column */
-.entry { padding: var(--row) 0; break-inside: avoid; }
+.entry { break-inside: avoid; }
 .entry .role { font: 300 var(--s-role)/var(--l-role) var(--serif); }
 .entry.art .role { font-style: italic; }
 .entry .org { display: flex; justify-content: space-between; align-items: baseline; gap: calc(var(--u) * 4); color: var(--mid); }
 .entry .org a { text-decoration: none; }
 .entry .org a:hover { text-decoration: underline; }
 .d { color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.entry .note { color: var(--mid); margin-top: var(--u); }
-.entry ul { margin-top: var(--u); padding-left: 1em; list-style: disc; color: var(--soft); }
+.entry .note { color: var(--mid); }
+.entry ul { padding-left: 1em; list-style: disc; color: var(--soft); }
 .entry li + li { margin-top: 0; }
 
-.shows .show { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 calc(var(--u) * 4); padding: var(--u) 0; break-inside: avoid; }
+.shows .show { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 calc(var(--u) * 4); break-inside: avoid; }
 .shows .show .at { color: var(--mid); }
 
 /* ---------------------------------------------------------------- mobile */
@@ -124,7 +131,6 @@ section + section, .who + section { margin-top: var(--sec); }
 		--thin: .3pt;
 		--faint: rgba(0, 0, 0, .22);
 		--col-gap: calc(var(--u) * 9);
-		--sec: calc(var(--u) * 6);
 	}
 	html, body { background: #fff; }
 	.bar { display: none; }
