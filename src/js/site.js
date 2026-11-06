@@ -489,6 +489,52 @@
 		on(window, 'hashchange', function () { show(location.hash === '#art' ? 'art' : 'design'); });
 	}
 
+	/* ---------------- about: a project's image beside the cursor ----------------
+	   Hovering any link to a project (a role, a show, a line in the CV) brings
+	   up that project's image, the way the home list does: it eases after the
+	   pointer, sits below and to the right of it (left near the right edge,
+	   above near the bottom), and fades when the pointer leaves the link.
+	   Pointer devices only, and still (no easing) under reduced motion. */
+	function setupPeek() {
+		var root = document.querySelector('main.about');
+		if (!root || !window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+		var box = document.createElement('div'); box.className = 'peek'; box.setAttribute('aria-hidden', 'true');
+		var img = document.createElement('img'); img.alt = ''; img.decoding = 'async'; box.appendChild(img);
+		root.appendChild(box);
+		var W = 260, cur = null, x = 0, y = 0, tx = 0, ty = 0, raf = 0, shown = false;
+		function target(e) {
+			var bw = box.offsetWidth || W, bh = box.offsetHeight || W * .66, gap = 22;
+			tx = e.clientX + gap; ty = e.clientY + gap;
+			if (tx + bw > innerWidth - 12) tx = e.clientX - gap - bw;
+			if (ty + bh > innerHeight - 12) ty = e.clientY - gap - bh;
+		}
+		function tick() {
+			var k = reduced ? 1 : .22;
+			x += (tx - x) * k; y += (ty - y) * k;
+			box.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+			raf = (Math.abs(tx - x) > .3 || Math.abs(ty - y) > .3) ? requestAnimationFrame(tick) : 0;
+		}
+		function show(a, e) {
+			cur = a;
+			var src = a.getAttribute('data-peek'), w = +a.getAttribute('data-peek-w') || 4, h = +a.getAttribute('data-peek-h') || 3;
+			box.style.width = W + 'px'; box.style.height = Math.round(W * Math.min(h / w, 1.25)) + 'px';
+			if (img.getAttribute('src') !== src) img.src = src;
+			target(e);
+			if (!shown) { x = tx; y = ty; box.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)'; }
+			shown = true; box.classList.add('on');
+			if (!raf) raf = requestAnimationFrame(tick);
+		}
+		function hide() { cur = null; shown = false; box.classList.remove('on'); }
+		on(root, 'mouseover', function (e) {
+			var a = e.target.closest && e.target.closest('a[data-peek]');
+			if (a && a !== cur) show(a, e); else if (!a && cur) hide();
+		});
+		on(root, 'mousemove', function (e) { if (!cur) return; target(e); if (!raf) raf = requestAnimationFrame(tick); });
+		on(root, 'mouseleave', hide);
+		on(window, 'scroll', hide, { passive: true });
+		on(root, 'click', function (e) { if (e.target.closest && e.target.closest('a[data-peek]')) box.classList.add('go'); });
+	}
+
 	/* ---------------- custom cursor (pointer devices only) ---------------- */
 	function setupCursor() {
 		if (!window.matchMedia || !matchMedia('(pointer: fine)').matches || reduced) return;
@@ -563,7 +609,7 @@
 		if (page === 'home') setupHome();
 		if (page === 'project') setupProject();
 		if (page === 'field') setupField();
-		if (page === 'about') { html.setAttribute('data-glass', 'light'); setupAbout(); }
+		if (page === 'about') { html.setAttribute('data-glass', 'light'); setupAbout(); setupPeek(); }
 	}
 
 	/* ---------------- navigation: one renderer, pages swapped underneath ----------------

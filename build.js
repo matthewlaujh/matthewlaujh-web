@@ -105,6 +105,15 @@ function hoverImage(w) {
 	const still = w.images.find(im => !im.video);
 	return (still || w.cover).thumb;
 }
+/* About: every link to a project carries that project's image, which
+   setupPeek shows beside the cursor while the link is hovered */
+function peekLinks(html) {
+	for (const w of works) {
+		const href = `href="${url(w.slug)}"`, im = w.images.find(x => !x.video) || w.cover;
+		html = html.split(href).join(`${href} data-peek="${hoverImage(w)}" data-peek-w="${im.width || w.cover.width}" data-peek-h="${im.height || w.cover.height}"`);
+	}
+	return html;
+}
 /* a still for places that need one (slit-scan texture, og:image) */
 function stillOf(im) { return im.video ? im.poster : im.src; }
 /* <img> or a silent looping <video> for a plate */
@@ -432,7 +441,7 @@ function render(page) {
 	else if (w) { kind = 'project'; backdrop = diffuseHTML([{ src: w.cover.video ? w.cover.poster : w.cover.thumb, width: w.cover.width, height: w.cover.height }], { light: true, poster: w.cover.video ? w.cover.poster : w.cover.thumb, settings: { strength: 0.55 } }); main = projectMain(w); }
 	else if (page.slug === FIELD_SLUG) { kind = 'field'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: false, strength: 0.5 } }); main = fieldMain(); }
 	else if (page.slug === '404') { kind = 'home'; backdrop = diffuseHTML(coverStills(), { settings: { random: true, scroll: true } }); main = notFoundMain(); }
-	else { kind = 'about'; backdrop = ''; main = aboutMain(page); }
+	else { kind = 'about'; backdrop = ''; main = peekLinks(aboutMain(page)); }
 
 	return `<!DOCTYPE html>
 <html lang="en" data-page="${kind}">
